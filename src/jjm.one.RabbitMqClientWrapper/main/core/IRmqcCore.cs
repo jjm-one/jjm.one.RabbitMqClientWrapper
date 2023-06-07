@@ -1,12 +1,11 @@
 ﻿using System;
-using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
 
-namespace jjm.one.RabbitMqClientWrapper.main
+namespace jjm.one.RabbitMqClientWrapper.main.core
 {
-    public interface IRMQCWrapper
+    public interface IRmqcCore
     {
-        #region public memberss
+        #region public members
 
         public Settings Settings { get; set; }
         public bool Connected { get; }
@@ -20,7 +19,6 @@ namespace jjm.one.RabbitMqClientWrapper.main
 
         public bool Connect(out Exception? exception);
         public void Disconnect();
-        public bool ReConnect(out Exception? exception);
 
         public bool WriteMsg(Message message, out Exception? exception);
         public bool ReadMsg(out Message? message, bool autoAck, out Exception? exception);

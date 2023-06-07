@@ -1,18 +1,19 @@
 ﻿using jjm.one.Microsoft.Extensions.Logging.Helpers;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
+using jjm.one.RabbitMqClientWrapper.types.di;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Reflection;
 
 namespace jjm.one.RabbitMqClientWrapper.main
 {
-    public class RMQCWrapper : IRMQCWrapper
+    public class RmqcWrapper : IRmqcWrapper
     {
         #region private members
 
-        private readonly IRMQCCore _core;
-        private readonly ILogger<RMQCWrapper> _logger;
+        private readonly IRmqcCore _core;
+        private readonly ILogger<RmqcWrapper> _logger;
         private readonly bool _enableLogging;
 
         #endregion
@@ -52,7 +53,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
 
         #region ctor's
 
-        public RMQCWrapper(IRMQCCore core, ILogger<RMQCWrapper> logger, DiSimpleTypeWrappersEnableWrapperLogging? enableLoggin = null)
+        public RmqcWrapper(IRmqcCore core, ILogger<RmqcWrapper> logger, DiSimpleTypeWrappersEnableWrapperLogging? enableLoggin = null)
         {
             _core = core;
             _logger = logger;
@@ -62,11 +63,11 @@ namespace jjm.one.RabbitMqClientWrapper.main
             if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
         }
 
-        public RMQCWrapper(Settings settings)
+        public RmqcWrapper(Settings settings, bool enableWrapperLogging = false, bool enableCoreLogging = false)
         {
-            _core = new RMQCCore(settings, new Logger<RMQCCore>(new LoggerFactory()), new DiSimpleTypeWrappersEnableCoreLogging(false));
-            _logger = new Logger<RMQCWrapper>(new LoggerFactory());
-            _enableLogging = false;
+            _core = new RmqcCore(settings, new Logger<RmqcCore>(new LoggerFactory()), new DiSimpleTypeWrappersEnableCoreLogging(enableCoreLogging));
+            _logger = new Logger<RmqcWrapper>(new LoggerFactory());
+            _enableLogging = enableWrapperLogging;
 
             // log fct call
             if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);

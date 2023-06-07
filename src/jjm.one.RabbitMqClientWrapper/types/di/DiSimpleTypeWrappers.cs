@@ -2,7 +2,7 @@
 using jjm.one.RabbitMqClientWrapper.main.core;
 using System;
 
-namespace jjm.one.RabbitMqClientWrapper.types
+namespace jjm.one.RabbitMqClientWrapper.types.di
 {
     /// <summary>
     /// This is a wrapper clas for the <see cref="bool"/> value for enabeling logging in the <see cref="RMQCCore"/> class.

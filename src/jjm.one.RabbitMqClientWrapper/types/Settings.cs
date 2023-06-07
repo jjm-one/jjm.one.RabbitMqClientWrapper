@@ -3,7 +3,9 @@
     /// <summary>
     /// This class defines the settings for a client connection to a RabbitMQ server.
     /// </summary>
+#pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public class Settings
+#pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     {
         #region private mebers
 
@@ -101,14 +103,6 @@
         #region ctor
 
         /// <summary>
-        /// Default constructor of the <see cref="Settings"/> class.
-        /// </summary>
-        public Settings()
-        {
-            ;
-        }
-
-        /// <summary>
         /// Additional parameterised constructor of the <see cref="Settings"/> class.
         /// </summary>
         /// <param name="hostname">The hostname of the RabbitMQ server.</param>
@@ -118,8 +112,8 @@
         /// <param name="vHost">The vhost at the RabbitMQ server.</param>
         /// <param name="exchange">The exchange at the RabbitMQ server.</param>
         /// <param name="queue">The queue at the RabbitMQ server.</param>
-        public Settings(string? hostname, int? port, string? username, string? password,
-            string? vHost, string? exchange, string? queue)
+        public Settings(string? hostname = null , int? port = null, string? username = null, string? password = null,
+            string? vHost = null, string? exchange = null, string? queue = null)
         {
             _hostname = hostname;
             _port = port;
@@ -159,18 +153,9 @@
                 res &= VHost.Equals(s.VHost);
                 res &= Exchange.Equals(s.Exchange);
                 res &= Queue.Equals(s.Queue);
-                base.Equals(obj);
+                
                 return res;
             }
-        }
-
-        /// <summary>
-        /// Serves as the default hash function for the <see cref="Settings"/> class.
-        /// </summary>
-        /// <returns>A hash code for the current <see cref="Settings"/> object.</returns>
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
         }
 
         #endregion

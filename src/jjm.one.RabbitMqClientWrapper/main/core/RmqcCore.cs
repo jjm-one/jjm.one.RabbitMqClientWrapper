@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Reflection;
 using jjm.one.Microsoft.Extensions.Logging.Helpers;
+using jjm.one.RabbitMqClientWrapper.di.core;
 using jjm.one.RabbitMqClientWrapper.types;
+using jjm.one.RabbitMqClientWrapper.types.di;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
 namespace jjm.one.RabbitMqClientWrapper.main.core
 {
-    public class RMQCCore : IRMQCCore
+    public class RmqcCore : IRmqcCore
     {
         #region private members
 
         private Settings settings;
-        private readonly ILogger<RMQCCore> _logger;
+        private readonly ILogger<RmqcCore> _logger;
         private readonly bool _enableLogging;
 
         private IConnectionFactory? connectionFactory;
@@ -78,7 +80,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
 
         #region ctor's
 
-        public RMQCCore(Settings settings, ILogger<RMQCCore> logger, DiSimpleTypeWrappersEnableCoreLogging? enableLogging = null)
+        public RmqcCore(Settings settings, ILogger<RmqcCore> logger, DiSimpleTypeWrappersEnableCoreLogging? enableLogging = null)
         {
             // init global vars
             this.settings = settings;
@@ -89,7 +91,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
             if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
         }
 
-        public RMQCCore(IOptions<Settings> options, ILogger<RMQCCore> logger, DiSimpleTypeWrappersEnableCoreLogging? enableLogging = null)
+        public RmqcCore(IOptions<Settings> options, ILogger<RmqcCore> logger, DiSimpleTypeWrappersEnableCoreLogging? enableLogging = null)
         {
             // init global vars
             settings = options.Value;
@@ -143,7 +145,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                 {
                     throw new NullReferenceException(
                         $"The {nameof(IConnectionFactory)} is null! " +
-                        $"Maybe the {nameof(RMQCCore)} was not initialized properly.");
+                        $"Maybe the {nameof(RmqcCore)} was not initialized properly.");
                 }
 
                 // create the connection
@@ -154,7 +156,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                 {
                     throw new NullReferenceException(
                         $"The {nameof(IConnection)} is null! " +
-                        $"Maybe the {nameof(RMQCCore)} was not initialized properly.");
+                        $"Maybe the {nameof(RmqcCore)} was not initialized properly.");
                 }
 
                 // chreate the channel
@@ -165,7 +167,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                 {
                     throw new NullReferenceException(
                         $"The {nameof(IModel)} ({nameof(channel)}) is null! " +
-                        $"Maybe the {nameof(RMQCCore)} was not initialized properly.");
+                        $"Maybe the {nameof(RmqcCore)} was not initialized properly.");
                 }
             }
             catch(Exception exc)

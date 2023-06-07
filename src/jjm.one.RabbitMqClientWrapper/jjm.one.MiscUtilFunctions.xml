@@ -4,37 +4,37 @@
         <name>jjm.one.RabbitMqClientWrapper</name>
     </assembly>
     <members>
-        <member name="T:jjm.one.RabbitMqClientWrapper.types.DiSimpleTypeWrappersEnableCoreLogging">
+        <member name="T:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging">
             <summary>
-            This is a wrapper clas for the <see cref="T:System.Boolean"/> value for enabeling logging in the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RMQCCore"/> class.
+            This is a wrapper clas for the <see cref="T:System.Boolean"/> value for enabeling logging in the <see cref="!:RMQCCore"/> class.
             </summary>
         </member>
-        <member name="F:jjm.one.RabbitMqClientWrapper.types.DiSimpleTypeWrappersEnableCoreLogging.EnableLogging">
+        <member name="F:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging.EnableLogging">
             <summary>
-            The flag to enable or disable logging i the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RMQCCore"/> class.
+            The flag to enable or disable logging i the <see cref="!:RMQCCore"/> class.
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.types.DiSimpleTypeWrappersEnableCoreLogging.#ctor(System.Boolean)">
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging.#ctor(System.Boolean)">
             <summary>
-            Default constructor for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.DiSimpleTypeWrappersEnableCoreLogging"/> class.
+            Default constructor for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging"/> class.
             </summary>
-            <param name="enableLogging">The flag to enable or disable logging i the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RMQCCore"/> class.</param>
+            <param name="enableLogging">The flag to enable or disable logging i the <see cref="!:RMQCCore"/> class.</param>
         </member>
-        <member name="T:jjm.one.RabbitMqClientWrapper.types.DiSimpleTypeWrappersEnableWrapperLogging">
+        <member name="T:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableWrapperLogging">
             <summary>
-            This is a wrapper clas for the <see cref="T:System.Boolean"/> value for enabeling logging in the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RMQCWrapper"/> class.
-            </summary>
-        </member>
-        <member name="F:jjm.one.RabbitMqClientWrapper.types.DiSimpleTypeWrappersEnableWrapperLogging.EnableLogging">
-            <summary>
-            The flag to enable or disable logging i the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RMQCWrapper"/> class.
+            This is a wrapper clas for the <see cref="T:System.Boolean"/> value for enabeling logging in the <see cref="!:RMQCWrapper"/> class.
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.types.DiSimpleTypeWrappersEnableWrapperLogging.#ctor(System.Boolean)">
+        <member name="F:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableWrapperLogging.EnableLogging">
+            <summary>
+            The flag to enable or disable logging i the <see cref="!:RMQCWrapper"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableWrapperLogging.#ctor(System.Boolean)">
             <summary>
             
             </summary>
-            <param name="enableLogging">The flag to enable or disable logging i the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RMQCWrapper"/> class.</param>
+            <param name="enableLogging">The flag to enable or disable logging i the <see cref="!:RMQCWrapper"/> class.</param>
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.types.Settings">
             <summary>
@@ -90,11 +90,6 @@
             default value: ""
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.types.Settings.#ctor">
-            <summary>
-            Default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
-            </summary>
-        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.types.Settings.#ctor(System.String,System.Nullable{System.Int32},System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Additional parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
@@ -113,12 +108,6 @@
             </summary>
             <param name="obj">The specified object.</param>
             <returns><see langword="true"/> if the spcified object is equal to the current object, otherwise, <see langword="false"/>.</returns>
-        </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.types.Settings.GetHashCode">
-            <summary>
-            Serves as the default hash function for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
-            </summary>
-            <returns>A hash code for the current <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> object.</returns>
         </member>
     </members>
 </doc>

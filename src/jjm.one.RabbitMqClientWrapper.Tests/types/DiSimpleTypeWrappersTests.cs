@@ -1,5 +1,5 @@
 ﻿using System;
-using jjm.one.RabbitMqClientWrapper.types;
+using jjm.one.RabbitMqClientWrapper.types.di;
 
 namespace jjm.one.RabbitMqClientWrapper.Tests.types
 {
