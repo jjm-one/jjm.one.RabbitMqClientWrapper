@@ -1,9 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net6;net7.0</TargetFrameworks>
+    <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Version>1.0.0-alpha.1</Version>
+    <Authors>Jonas Merkle [JJM] </Authors>
+    <Copyright>© by Jonas Merkle [JJM], 2023.</Copyright>
+	  <RootNamespace>jjm.one.RabbitMqClientWrapper</RootNamespace>
+    <PackageId>jjm.one.RabbitMqClientWrapper</PackageId>
+    <Title>jjm.one.RabbitMqClientWrapper</Title>
+    <Description>A C# wrapper for a RabbitMQ client.</Description>
+	  <PackageTags>utility, helper, wrapper, rabbitmq, client, csharp</PackageTags>
+    <PackageProjectUrl>https://github.com/jjm-one/jjm.one.RabbitMqClientWrapper</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/jjm-one/jjm.one.RabbitMqClientWrapper.git</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>jjm.one.RabbitMqClientWrapper.SignKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,12 +29,23 @@
     <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
   </ItemGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <LangVersion>latestmajor</LangVersion>
+    <DocumentationFile>./jjm.one.MiscUtilFunctions.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <LangVersion>latestmajor</LangVersion>
+    <DocumentationFile>./jjm.one.MiscUtilFunctions.xml</DocumentationFile>
+  </PropertyGroup>
+  
   <ItemGroup>
-    <None Remove="di\" />
-    <None Remove="di\core\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="di\" />
-    <Folder Include="di\core\" />
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 </Project>

@@ -2,11 +2,31 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
+    <Version>1.0.0-alpha.1</Version>
+    <Authors>Jonas Merkle [JJM] </Authors>
+    <Copyright>© by Jonas Merkle [JJM], 2023.</Copyright>
+    <RootNamespace>jjm.one.RabbitMqClientWrapper.Tests</RootNamespace>
+    <Title>jjm.one.RabbitMqClientWrapper.Tests</Title>
+    <Description>A C# wrapper for a RabbitMQ client. (Unit-Tests)</Description>
+	  <PackageTags>utility, helper, wrapper, rabbitmq, client, csharp</PackageTags>
+    <PackageProjectUrl>https://github.com/jjm-one/jjm.one.RabbitMqClientWrapper</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/jjm-one/jjm.one.RabbitMqClientWrapper.git</RepositoryUrl>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>jjm.one.RabbitMqClientWrapper.Tests.SignKey.snk</AssemblyOriginatorKeyFile>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <LangVersion>latestmajor</LangVersion>
+    <DocumentationFile>./jjm.one.MiscUtilFunctions.Tests.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <LangVersion>latestmajor</LangVersion>
+    <DocumentationFile>./jjm.one.MiscUtilFunctions.Tests.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,12 +44,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\jjm.one.RabbitMqClientWrapper\jjm.one.RabbitMqClientWrapper.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="types\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="types\" />
   </ItemGroup>
 </Project>
