@@ -4,6 +4,38 @@
         <name>jjm.one.RabbitMqClientWrapper</name>
     </assembly>
     <members>
+        <member name="T:jjm.one.RabbitMqClientWrapper.types.DiSimpleTypeWrappersEnableCoreLogging">
+            <summary>
+            This is a wrapper clas for the <see cref="T:System.Boolean"/> value for enabeling logging in the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RMQCCore"/> class.
+            </summary>
+        </member>
+        <member name="F:jjm.one.RabbitMqClientWrapper.types.DiSimpleTypeWrappersEnableCoreLogging.EnableLogging">
+            <summary>
+            The flag to enable or disable logging i the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RMQCCore"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.DiSimpleTypeWrappersEnableCoreLogging.#ctor(System.Boolean)">
+            <summary>
+            Default constructor for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.DiSimpleTypeWrappersEnableCoreLogging"/> class.
+            </summary>
+            <param name="enableLogging">The flag to enable or disable logging i the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RMQCCore"/> class.</param>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.types.DiSimpleTypeWrappersEnableWrapperLogging">
+            <summary>
+            This is a wrapper clas for the <see cref="T:System.Boolean"/> value for enabeling logging in the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RMQCWrapper"/> class.
+            </summary>
+        </member>
+        <member name="F:jjm.one.RabbitMqClientWrapper.types.DiSimpleTypeWrappersEnableWrapperLogging.EnableLogging">
+            <summary>
+            The flag to enable or disable logging i the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RMQCWrapper"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.DiSimpleTypeWrappersEnableWrapperLogging.#ctor(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="enableLogging">The flag to enable or disable logging i the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RMQCWrapper"/> class.</param>
+        </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.types.Settings">
             <summary>
             This class defines the settings for a client connection to a RabbitMQ server.
