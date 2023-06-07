@@ -2,6 +2,7 @@
 using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Reflection;
 
 namespace jjm.one.RabbitMqClientWrapper.main

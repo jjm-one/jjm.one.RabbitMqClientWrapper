@@ -138,7 +138,7 @@
         /// Determins whether the specified object is equal to the current <see cref="Settings"/> object.
         /// </summary>
         /// <param name="obj">The specified object.</param>
-        /// <returns><see cref="true"/> if the spcified object is equal to the current object, otherwise, <see cref="false"/>./returns>
+        /// <returns><see langword="true"/> if the spcified object is equal to the current object, otherwise, <see langword="false"/>.</returns>
         public override bool Equals(object? obj)
         {
             //Check for null and compare run-time types.
@@ -159,7 +159,7 @@
                 res &= VHost.Equals(s.VHost);
                 res &= Exchange.Equals(s.Exchange);
                 res &= Queue.Equals(s.Queue);
-
+                base.Equals(obj);
                 return res;
             }
         }

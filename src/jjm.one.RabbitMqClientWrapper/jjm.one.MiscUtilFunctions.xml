@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>jjm.one.RabbitMqClientWrapper</name>
+    </assembly>
+    <members>
+        <member name="T:jjm.one.RabbitMqClientWrapper.types.Settings">
+            <summary>
+            This class defines the settings for a client connection to a RabbitMQ server.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.Settings.Hostname">
+             <summary>
+             The hostname of the RabbitMQ server.
+            
+             default value: localhost
+             </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.Settings.Port">
+             <summary>
+             The port of the RabbitMQ server.
+            
+             default value: 5672
+             </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.Settings.Username">
+             <summary>
+             The username of a RabbitMQ server user.
+            
+             default value: guest
+             </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.Settings.Password">
+             <summary>
+             The password of a RabbitMQ server user.
+            
+             default value: guest
+             </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.Settings.VHost">
+             <summary>
+             The vhost at the RabbitMQ server.
+            
+             default value: /
+             </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.Settings.Exchange">
+             <summary>
+             The exchange at the RabbitMQ server.
+            
+             default value: amq.direct
+             </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.Settings.Queue">
+            <summary>
+            The queue at the RabbitMQ server.
+            
+            default value: ""
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.Settings.#ctor">
+            <summary>
+            Default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.Settings.#ctor(System.String,System.Nullable{System.Int32},System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Additional parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
+            </summary>
+            <param name="hostname">The hostname of the RabbitMQ server.</param>
+            <param name="port">The port of the RabbitMQ server.</param>
+            <param name="username">The username of a RabbitMQ server user.</param>
+            <param name="password">The password of a RabbitMQ server user.</param>
+            <param name="vHost">The vhost at the RabbitMQ server.</param>
+            <param name="exchange">The exchange at the RabbitMQ server.</param>
+            <param name="queue">The queue at the RabbitMQ server.</param>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.Settings.Equals(System.Object)">
+            <summary>
+            Determins whether the specified object is equal to the current <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> object.
+            </summary>
+            <param name="obj">The specified object.</param>
+            <returns><see langword="true"/> if the spcified object is equal to the current object, otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.Settings.GetHashCode">
+            <summary>
+            Serves as the default hash function for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
+            </summary>
+            <returns>A hash code for the current <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> object.</returns>
+        </member>
+    </members>
+</doc>

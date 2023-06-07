@@ -1,4 +1,5 @@
-﻿using jjm.one.RabbitMqClientWrapper.main.core;
+﻿using System;
+using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
 
 namespace jjm.one.RabbitMqClientWrapper.main

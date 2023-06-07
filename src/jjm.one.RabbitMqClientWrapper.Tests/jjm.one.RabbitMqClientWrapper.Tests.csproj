@@ -9,8 +9,8 @@
     <Copyright>© by Jonas Merkle [JJM], 2023.</Copyright>
     <RootNamespace>jjm.one.RabbitMqClientWrapper.Tests</RootNamespace>
     <Title>jjm.one.RabbitMqClientWrapper.Tests</Title>
-    <Description>A C# wrapper for a RabbitMQ client. (Unit-Tests)</Description>
-	  <PackageTags>utility, helper, wrapper, rabbitmq, client, csharp</PackageTags>
+    <Description>A csharp wrapper for a RabbitMQ client. (Unit-Tests)</Description>
+    <PackageTags>utility, helper, wrapper, rabbitmq, client, csharp</PackageTags>
     <PackageProjectUrl>https://github.com/jjm-one/jjm.one.RabbitMqClientWrapper</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/jjm-one/jjm.one.RabbitMqClientWrapper.git</RepositoryUrl>
