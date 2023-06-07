@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gethashcode_31',['GetHashCode',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Settings.html#a6c6e340301fc1c24202f50c06355899e',1,'jjm::one::RabbitMqClientWrapper::types::Settings']]]
+  ['hostname_29',['Hostname',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Settings.html#ade4ce3a2b8573d3144e567290c5236e6',1,'jjm::one::RabbitMqClientWrapper::types::Settings']]]
 ];
