@@ -12,4 +12,12 @@
     <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="di\" />
+    <None Remove="di\core\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="di\" />
+    <Folder Include="di\core\" />
+  </ItemGroup>
 </Project>
