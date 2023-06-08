@@ -15,7 +15,6 @@ namespace jjm.one.RabbitMqClientWrapper.di.core
 
 			return services;
 		}
-
     }
 }
 
