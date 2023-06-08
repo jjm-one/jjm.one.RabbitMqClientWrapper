@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['channel_129',['channel',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1core_1_1RmqcCore.html#add9f44374b5d0d33e7069aac2be8701c',1,'jjm::one::RabbitMqClientWrapper::main::core::RmqcCore']]],
-  ['connection_130',['connection',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1core_1_1RmqcCore.html#a80ec4de09747cca5e84ce98da0438000',1,'jjm::one::RabbitMqClientWrapper::main::core::RmqcCore']]],
-  ['connectionfactory_131',['connectionFactory',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1core_1_1RmqcCore.html#ab20c06f80742720bf3bc531f58441959',1,'jjm::one::RabbitMqClientWrapper::main::core::RmqcCore']]]
+  ['enablelogging_134',['EnableLogging',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1di_1_1DiSimpleTypeWrappersEnableCoreLogging.html#a1050ff1ea60b2c04b86f921905c02aac',1,'jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging.EnableLogging()'],['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1di_1_1DiSimpleTypeWrappersEnableWrapperLogging.html#a9907ba3d947e446654267c5dc609a6ee',1,'jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableWrapperLogging.EnableLogging()']]]
 ];
