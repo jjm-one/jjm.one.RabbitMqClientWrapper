@@ -39,9 +39,6 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <None Remove="types\di\" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
@@ -50,8 +47,5 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="types\di\" />
   </ItemGroup>
 </Project>

@@ -45,4 +45,12 @@
   <ItemGroup>
     <ProjectReference Include="..\jjm.one.RabbitMqClientWrapper\jjm.one.RabbitMqClientWrapper.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="test-tools\" />
+    <None Remove="main\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="testtools\" />
+    <Folder Include="main\" />
+  </ItemGroup>
 </Project>

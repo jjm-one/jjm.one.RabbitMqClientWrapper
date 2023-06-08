@@ -109,5 +109,11 @@
             <param name="obj">The specified object.</param>
             <returns><see langword="true"/> if the spcified object is equal to the current object, otherwise, <see langword="false"/>.</returns>
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.Settings.GetHashCode">
+            <summary>
+            Serves as the default hash function for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
+            </summary>
+            <returns>A hash code for the current <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> object.</returns>
+        </member>
     </members>
 </doc>

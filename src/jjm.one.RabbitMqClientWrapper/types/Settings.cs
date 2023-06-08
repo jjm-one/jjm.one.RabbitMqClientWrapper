@@ -1,11 +1,11 @@
-﻿namespace jjm.one.RabbitMqClientWrapper.types
+﻿using System.Collections.Generic;
+
+namespace jjm.one.RabbitMqClientWrapper.types
 {
     /// <summary>
     /// This class defines the settings for a client connection to a RabbitMQ server.
     /// </summary>
-#pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public class Settings
-#pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     {
         #region private mebers
 
@@ -156,6 +156,23 @@
                 
                 return res;
             }
+        }
+
+        /// <summary>
+        /// Serves as the default hash function for the <see cref="Settings"/> class.
+        /// </summary>
+        /// <returns>A hash code for the current <see cref="Settings"/> object.</returns>
+        public override int GetHashCode()
+        {
+            int hashCode = 655511358;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Hostname);
+            hashCode = hashCode * -1521134295 + Port.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Username);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Password);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(VHost);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Exchange);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Queue);
+            return hashCode;
         }
 
         #endregion
