@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using jjm.one.Microsoft.Extensions.Logging.Helpers;
-using jjm.one.RabbitMqClientWrapper.di.core;
 using jjm.one.RabbitMqClientWrapper.types;
 using jjm.one.RabbitMqClientWrapper.types.di;
 using Microsoft.Extensions.Logging;
@@ -10,22 +9,30 @@ using RabbitMQ.Client;
 
 namespace jjm.one.RabbitMqClientWrapper.main.core
 {
+    /// <summary>
+    /// This class implements the <see cref="IRmqcCore"/> interface for a RabbitMQ server.
+    /// </summary>
     public class RmqcCore : IRmqcCore
     {
         #region private members
 
-        private Settings settings;
+        private Settings _settings;
         private readonly ILogger<RmqcCore> _logger;
         private readonly bool _enableLogging;
 
-        private IConnectionFactory? connectionFactory;
-        private IConnection? connection;
-        private IModel? channel;
+        private IConnectionFactory? _connectionFactory;
+        private IConnection? _connection;
+        private IModel? _channel;
 
         #endregion
 
         #region public members
 
+        /// <summary>
+        /// This object contains the settings for the RabbitMQ client.
+        /// Note:
+        /// Changing the <see cref="Settings"/> object of a connected client will result in the disconnection from the server.
+        /// </summary>
         public Settings Settings
         {
             get
@@ -33,40 +40,45 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                 // log fct call
                 if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
-                return settings;
+                return _settings;
             }
             set
             {
                 // log fct call
                 if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
-                if (!settings.Equals(value))
+                // check im nothing changed
+                if (_settings.Equals(value))
                 {
-                    this.Disconnect();
-                    settings = value;
-                    this.Init();
+                    return;
                 }
+                
+                // disconnect & re-init the connection
+                Disconnect();
+                _settings = value;
+                Init();
             }
         }
 
+        /// <inheritdoc />
         public bool Connected
         {
             get
             {
                 // check connection factory
-                if (connectionFactory is null)
+                if (_connectionFactory is null)
                 {
                     return false;
                 }
 
-                // check connecction
-                if (connection is null || !connection.IsOpen)
+                // check connection
+                if (_connection is null || !_connection.IsOpen)
                 {
                     return false;
                 }
 
                 // check channel
-                if (channel is null || !channel.IsOpen)
+                if (_channel is null || !_channel.IsOpen)
                 {
                     return false;
                 }
@@ -80,10 +92,16 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
 
         #region ctor's
 
+        /// <summary>
+        /// This is a parameterised constructor for the <see cref="RmqcCore"/> class.
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <param name="logger"></param>
+        /// <param name="enableLogging"></param>
         public RmqcCore(Settings settings, ILogger<RmqcCore> logger, DiSimpleTypeWrappersEnableCoreLogging? enableLogging = null)
         {
             // init global vars
-            this.settings = settings;
+            _settings = settings;
             _logger = logger;
             _enableLogging = enableLogging?.EnableLogging ?? false;
 
@@ -91,10 +109,16 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
             if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
         }
 
+        /// <summary>
+        /// This is a parameterised constructor for the <see cref="RmqcCore"/> class.
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="logger"></param>
+        /// <param name="enableLogging"></param>
         public RmqcCore(IOptions<Settings> options, ILogger<RmqcCore> logger, DiSimpleTypeWrappersEnableCoreLogging? enableLogging = null)
         {
             // init global vars
-            settings = options.Value;
+            _settings = options.Value;
             _logger = logger;
             _enableLogging = enableLogging?.EnableLogging ?? false;
 
@@ -104,13 +128,14 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
 
         #endregion
 
+        /// <inheritdoc />
         public void Init()
         {
             // log fct call
             if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
             // create the new connection factory
-            connectionFactory = new ConnectionFactory
+            _connectionFactory = new ConnectionFactory
             {
                 HostName = Settings.Hostname,
                 Port = Settings.Port,
@@ -120,15 +145,17 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
             };
         }
 
+        /// <inheritdoc />
         public void DeInit()
         {
             // log fct call
             if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
             // create the new connection factory
-            connectionFactory = null;
+            _connectionFactory = null;
         }
 
+        /// <inheritdoc />
         public bool Connect(out Exception? exception)
         {
             // log fct call
@@ -141,7 +168,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
             try
             {
                 // check connection factory
-                if (connectionFactory is null)
+                if (_connectionFactory is null)
                 {
                     throw new NullReferenceException(
                         $"The {nameof(IConnectionFactory)} is null! " +
@@ -149,24 +176,24 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                 }
 
                 // create the connection
-                connection = connectionFactory.CreateConnection();
+                _connection = _connectionFactory.CreateConnection();
 
                 // check connection
-                if (connection is null)
+                if (_connection is null)
                 {
                     throw new NullReferenceException(
                         $"The {nameof(IConnection)} is null! " +
                         $"Maybe the {nameof(RmqcCore)} was not initialized properly.");
                 }
 
-                // chreate the channel
-                channel = connection.CreateModel();
+                // create the channel
+                _channel = _connection.CreateModel();
 
                 // check channel
-                if (channel is null)
+                if (_channel is null)
                 {
                     throw new NullReferenceException(
-                        $"The {nameof(IModel)} ({nameof(channel)}) is null! " +
+                        $"The {nameof(IModel)} ({nameof(_channel)}) is null! " +
                         $"Maybe the {nameof(RmqcCore)} was not initialized properly.");
                 }
             }
@@ -186,6 +213,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
             return res;
         }
 
+        /// <inheritdoc />
         public void Disconnect()
         {
             // log fct call
@@ -194,27 +222,27 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
             try
             {
                 // disconnect channel
-                if (channel is not null)
+                if (_channel is not null)
                 {
-                    if (channel.IsOpen)
+                    if (_channel.IsOpen)
                     {
-                        channel.Close();
+                        _channel.Close();
                     }
 
-                    channel.Dispose();
-                    channel = null;
+                    _channel.Dispose();
+                    _channel = null;
                 }
 
                 // disconnect connection
-                if (connection is not null)
+                if (_connection is not null)
                 {
-                    if (connection.IsOpen)
+                    if (_connection.IsOpen)
                     {
-                        connection.Close();
+                        _connection.Close();
                     }
 
-                    connection.Dispose();
-                    connection = null;
+                    _connection.Dispose();
+                    _connection = null;
                 }
             }
             catch (Exception exc)
@@ -227,6 +255,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
             }
         }
 
+        /// <inheritdoc />
         public bool WriteMsg(Message message, out Exception? exception)
         {
             // log fct call
@@ -245,7 +274,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                 }
 
                 // write message
-                channel?.BasicPublish(Settings.Exchange, message.RoutingKey, message.BasicProperties ?? null, message.Body ?? null);
+                _channel?.BasicPublish(Settings.Exchange, message.RoutingKey, message.BasicProperties ?? null, message.Body ?? null);
             }
             catch (Exception exc)
             {
@@ -260,6 +289,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
             return res;
         }
 
+        /// <inheritdoc />
         public bool ReadMsg(out Message? message, bool autoAck, out Exception? exception)
         {
             // log fct call
@@ -279,12 +309,12 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                 }
 
                 // read message
-                var msg = channel?.BasicGet(Settings.Queue, autoAck);
+                var msg = _channel?.BasicGet(Settings.Queue, autoAck);
 
                 // check message
                 if (msg is null)
                 {
-                    res &= false;
+                    res = false;
                 }
                 else
                 {
@@ -304,6 +334,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
             return res;
         }
 
+        /// <inheritdoc />
         public bool AckMsg(Message message, out Exception? exception)
         {
             // log fct call
@@ -322,7 +353,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                 }
 
                 // send ack
-                channel?.BasicAck(message.DeliveryTag, false);
+                _channel?.BasicAck(message.DeliveryTag, false);
             }
             catch (Exception exc)
             {
@@ -337,6 +368,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
             return res;
         }
 
+        /// <inheritdoc />
         public bool NackMsg(Message message, bool requeue, out Exception? exception)
         {
             // log fct call
@@ -355,7 +387,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                 }
 
                 // send unack
-                channel?.BasicNack(message.DeliveryTag, false, requeue);
+                _channel?.BasicNack(message.DeliveryTag, false, requeue);
             }
             catch (Exception exc)
             {
@@ -370,6 +402,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
             return res;
         }
 
+        /// <inheritdoc />
         public bool WaitForWriteConfirm(TimeSpan timeout, out Exception? exception)
         {
             // log fct call
@@ -388,7 +421,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                 }
 
                 // send unack
-                res &= channel?.WaitForConfirms(timeout) ?? false;
+                res &= _channel?.WaitForConfirms(timeout) ?? false;
             }
             catch (Exception exc)
             {
@@ -403,6 +436,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
             return res;
         }
 
+        /// <inheritdoc />
         public bool QueuedMsgs(out uint? amount, out Exception? exception)
         {
             // log fct call
@@ -422,7 +456,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                 }
 
                 // get number of messages in queue
-                amount = channel?.MessageCount(Settings.Queue);
+                amount = _channel?.MessageCount(Settings.Queue);
             }
             catch (Exception exc)
             {

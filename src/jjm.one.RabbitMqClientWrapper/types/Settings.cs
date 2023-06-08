@@ -129,14 +129,14 @@ namespace jjm.one.RabbitMqClientWrapper.types
         #region public overide
 
         /// <summary>
-        /// Determins whether the specified object is equal to the current <see cref="Settings"/> object.
+        /// Determines whether the specified object is equal to the current <see cref="Settings"/> object.
         /// </summary>
         /// <param name="obj">The specified object.</param>
-        /// <returns><see langword="true"/> if the spcified object is equal to the current object, otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the specified object is equal to the current object, otherwise, <see langword="false"/>.</returns>
         public override bool Equals(object? obj)
         {
             //Check for null and compare run-time types.
-            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }

@@ -7,31 +7,22 @@ namespace jjm.one.RabbitMqClientWrapper.types
     {
         #region private members
 
-        private BasicGetResult? rawBasicGetResult;
+        private BasicGetResult? _rawBasicGetResult;
 
         #endregion
 
         #region public members
 
-        public ulong DeliveryTag
-        {
-            get
-            {
-                return rawBasicGetResult is not null ? rawBasicGetResult.DeliveryTag : 0;
-            }
-        }
+        public ulong DeliveryTag => _rawBasicGetResult?.DeliveryTag ?? 0;
 
         public string RoutingKey
         {
-            get
-            {
-                return rawBasicGetResult is not null ? rawBasicGetResult.RoutingKey : string.Empty;
-            }
+            get => _rawBasicGetResult is not null ? _rawBasicGetResult.RoutingKey : string.Empty;
             set
             {
-                if (rawBasicGetResult is null)
+                if (_rawBasicGetResult is null)
                 {
-                    rawBasicGetResult = new BasicGetResult(
+                    _rawBasicGetResult = new BasicGetResult(
                         deliveryTag: 0,
                         redelivered: false,
                         exchange: string.Empty,
@@ -43,14 +34,14 @@ namespace jjm.one.RabbitMqClientWrapper.types
                 }
                 else
                 {
-                    rawBasicGetResult = new BasicGetResult(
-                        deliveryTag: rawBasicGetResult.DeliveryTag,
-                        redelivered: rawBasicGetResult.Redelivered,
-                        exchange: rawBasicGetResult.Exchange,
+                    _rawBasicGetResult = new BasicGetResult(
+                        deliveryTag: _rawBasicGetResult.DeliveryTag,
+                        redelivered: _rawBasicGetResult.Redelivered,
+                        exchange: _rawBasicGetResult.Exchange,
                         routingKey: value,
-                        messageCount: rawBasicGetResult.MessageCount,
-                        basicProperties: rawBasicGetResult.BasicProperties,
-                        body: rawBasicGetResult.Body
+                        messageCount: _rawBasicGetResult.MessageCount,
+                        basicProperties: _rawBasicGetResult.BasicProperties,
+                        body: _rawBasicGetResult.Body
                     );
                 }
             }
@@ -58,15 +49,12 @@ namespace jjm.one.RabbitMqClientWrapper.types
 
         public IBasicProperties? BasicProperties
         {
-            get
-            {
-                return rawBasicGetResult is not null ? rawBasicGetResult.BasicProperties : null;
-            }
+            get => _rawBasicGetResult?.BasicProperties;
             set
             {
-                if (rawBasicGetResult is null)
+                if (_rawBasicGetResult is null)
                 {
-                    rawBasicGetResult = new BasicGetResult(
+                    _rawBasicGetResult = new BasicGetResult(
                         deliveryTag: 0,
                         redelivered: false,
                         exchange: string.Empty,
@@ -78,14 +66,14 @@ namespace jjm.one.RabbitMqClientWrapper.types
                 }
                 else
                 {
-                    rawBasicGetResult = new BasicGetResult(
-                        deliveryTag: rawBasicGetResult.DeliveryTag,
-                        redelivered: rawBasicGetResult.Redelivered,
-                        exchange: rawBasicGetResult.Exchange,
-                        routingKey: rawBasicGetResult.RoutingKey,
-                        messageCount: rawBasicGetResult.MessageCount,
+                    _rawBasicGetResult = new BasicGetResult(
+                        deliveryTag: _rawBasicGetResult.DeliveryTag,
+                        redelivered: _rawBasicGetResult.Redelivered,
+                        exchange: _rawBasicGetResult.Exchange,
+                        routingKey: _rawBasicGetResult.RoutingKey,
+                        messageCount: _rawBasicGetResult.MessageCount,
                         basicProperties: value,
-                        body: rawBasicGetResult.Body
+                        body: _rawBasicGetResult.Body
                     );
                 }
             }
@@ -93,15 +81,12 @@ namespace jjm.one.RabbitMqClientWrapper.types
 
         public ReadOnlyMemory<byte>? Body
         {
-            get
-            {
-                return rawBasicGetResult is not null ? rawBasicGetResult.Body : null;
-            }
+            get => _rawBasicGetResult?.Body;
             set
             {
-                if (rawBasicGetResult is null)
+                if (_rawBasicGetResult is null)
                 {
-                    rawBasicGetResult = new BasicGetResult(
+                    _rawBasicGetResult = new BasicGetResult(
                         deliveryTag: 0,
                         redelivered: false,
                         exchange: string.Empty,
@@ -113,13 +98,13 @@ namespace jjm.one.RabbitMqClientWrapper.types
                 }
                 else
                 {
-                    rawBasicGetResult = new BasicGetResult(
-                        deliveryTag: rawBasicGetResult.DeliveryTag,
-                        redelivered: rawBasicGetResult.Redelivered,
-                        exchange: rawBasicGetResult.Exchange,
-                        routingKey: rawBasicGetResult.RoutingKey,
-                        messageCount: rawBasicGetResult.MessageCount,
-                        basicProperties: rawBasicGetResult.BasicProperties,
+                    _rawBasicGetResult = new BasicGetResult(
+                        deliveryTag: _rawBasicGetResult.DeliveryTag,
+                        redelivered: _rawBasicGetResult.Redelivered,
+                        exchange: _rawBasicGetResult.Exchange,
+                        routingKey: _rawBasicGetResult.RoutingKey,
+                        messageCount: _rawBasicGetResult.MessageCount,
+                        basicProperties: _rawBasicGetResult.BasicProperties,
                         body: value ?? null
                     );
                 }
@@ -136,7 +121,7 @@ namespace jjm.one.RabbitMqClientWrapper.types
 
         public Message(BasicGetResult? rawMessage)
         {
-            rawBasicGetResult = rawMessage;
+            _rawBasicGetResult = rawMessage;
         }
 
         #endregion

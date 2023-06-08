@@ -8,6 +8,9 @@ using System.Reflection;
 
 namespace jjm.one.RabbitMqClientWrapper.main
 {
+    /// <summary>
+    /// This class implements the <see cref="IRmqcWrapper"/> interface for a RabbitMQ server.
+    /// </summary>
     public class RmqcWrapper : IRmqcWrapper
     {
         #region private members
@@ -20,6 +23,11 @@ namespace jjm.one.RabbitMqClientWrapper.main
 
         #region public members
 
+        /// <summary>
+        /// This object contains the settings for the RabbitMQ client.
+        /// Note:
+        /// Changing the <see cref="Settings"/> object of a connected client will result in the disconnection from the server.
+        /// </summary>
         public Settings Settings
         {
             get
@@ -38,6 +46,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             }
         }
 
+        /// <inheritdoc />
         public bool Connected
         {
             get
@@ -53,11 +62,11 @@ namespace jjm.one.RabbitMqClientWrapper.main
 
         #region ctor's
 
-        public RmqcWrapper(IRmqcCore core, ILogger<RmqcWrapper> logger, DiSimpleTypeWrappersEnableWrapperLogging? enableLoggin = null)
+        public RmqcWrapper(IRmqcCore core, ILogger<RmqcWrapper> logger, DiSimpleTypeWrappersEnableWrapperLogging? enableLogging = null)
         {
             _core = core;
             _logger = logger;
-            _enableLogging = enableLoggin?.EnableLogging ?? false;
+            _enableLogging = enableLogging?.EnableLogging ?? false;
 
             // log fct call
             if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
@@ -77,6 +86,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
 
         #region public methods
 
+        /// <inheritdoc />
         public void Init()
         {
             // log fct call
@@ -85,6 +95,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             _core.Init();
         }
 
+        /// <inheritdoc />
         public void DeInit()
         {
             // log fct call
@@ -93,6 +104,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             _core.DeInit();
         }
 
+        /// <inheritdoc />
         public bool Connect()
         {
             // log fct call
@@ -101,6 +113,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             return Connect(out _);
         }
 
+        /// <inheritdoc />
         public bool Connect(out Exception? exception)
         {
             // log fct call
@@ -109,6 +122,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             return _core.Connect(out exception);
         }
 
+        /// <inheritdoc />
         public void Disconnect()
         {
             // log fct call
@@ -117,6 +131,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             _core.Disconnect();
         }
 
+        /// <inheritdoc />
         public bool ReConnect()
         {
             // log fct call
@@ -125,6 +140,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             return ReConnect(out _);
         }
 
+        /// <inheritdoc />
         public bool ReConnect(out Exception? exception)
         {
             // log fct call
@@ -134,6 +150,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             return _core.Connect(out exception);
         }
 
+        /// <inheritdoc />
         public bool WriteMsg(Message message)
         {
             // log fct call
@@ -142,6 +159,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             return WriteMsg(message, out _);
         }
 
+        /// <inheritdoc />
         public bool WriteMsg(Message message, out Exception? exception)
         {
             // log fct call
@@ -150,6 +168,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             return _core.WriteMsg(message, out exception);
         }
 
+        /// <inheritdoc />
         public bool ReadMsg(out Message? message, bool autoAck)
         {
             // log fct call
@@ -158,6 +177,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             return ReadMsg(out message, autoAck, out _);
         }
 
+        /// <inheritdoc />
         public bool ReadMsg(out Message? message, bool autoAck, out Exception? exception)
         {
             // log fct call
@@ -166,6 +186,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             return _core.ReadMsg(out message, autoAck, out exception);
         }
 
+        /// <inheritdoc />
         public bool AckMsg(Message message)
         {
             // log fct call
@@ -174,6 +195,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             return AckMsg(message, out _);
         }
 
+        /// <inheritdoc />
         public bool AckMsg(Message message, out Exception? exception)
         {
             // log fct call
@@ -182,6 +204,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             return _core.AckMsg(message, out exception);
         }
 
+        /// <inheritdoc />
         public bool NackMsg(Message message, bool requeue)
         {
             // log fct call
@@ -190,6 +213,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             return NackMsg(message, requeue, out _);
         }
 
+        /// <inheritdoc />
         public bool NackMsg(Message message, bool requeue, out Exception? exception)
         {
             // log fct call
@@ -198,6 +222,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             return _core.NackMsg(message, requeue, out exception);
         }
 
+        /// <inheritdoc />
         public bool WaitForWriteConfirm(TimeSpan timeout)
         {
             // log fct call
@@ -206,6 +231,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             return WaitForWriteConfirm(timeout, out _);
         }
 
+        /// <inheritdoc />
         public bool WaitForWriteConfirm(TimeSpan timeout, out Exception? exception)
         {
             // log fct call
@@ -214,6 +240,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             return _core.WaitForWriteConfirm(timeout, out exception);
         }
 
+        /// <inheritdoc />
         public bool QueuedMsgs(out uint? amount)
         {
             // log fct call
@@ -222,6 +249,7 @@ namespace jjm.one.RabbitMqClientWrapper.main
             return QueuedMsgs(out amount, out _);
         }
 
+        /// <inheritdoc />
         public bool QueuedMsgs(out uint? amount, out Exception? exception)
         {
             // log fct call
