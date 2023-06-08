@@ -4,37 +4,436 @@
         <name>jjm.one.RabbitMqClientWrapper</name>
     </assembly>
     <members>
+        <member name="T:jjm.one.RabbitMqClientWrapper.di.core.RmqcCoreDi">
+            <summary>
+            This class contains function for dependency injection of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.di.core.RmqcCoreDi.AddRmqcCore(Microsoft.Extensions.DependencyInjection.IServiceCollection,jjm.one.RabbitMqClientWrapper.types.Settings,System.Boolean)">
+            <summary>
+            Adds all dependencies ot the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class to a <see cref="T:Microsoft.Extensions.DependencyInjection.ServiceCollection"/>.
+            </summary>
+            <param name="services"></param>
+            <param name="settings"></param>
+            <param name="enableCoreLogging">A </param>
+            <returns></returns>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.di.RmqcWrapperDi">
+            <summary>
+            This class contains function for dependency injection of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.di.RmqcWrapperDi.AddRmqcWrapper(Microsoft.Extensions.DependencyInjection.IServiceCollection,jjm.one.RabbitMqClientWrapper.types.Settings,System.Boolean,System.Boolean)">
+            <summary>
+            Adds all dependencies ot the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class to a <see cref="T:Microsoft.Extensions.DependencyInjection.ServiceCollection"/>.
+            </summary>
+            <param name="services"></param>
+            <param name="settings"></param>
+            <param name="enableWrapperLogging"></param>
+            <param name="enableCoreLogging"></param>
+            <returns></returns>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore">
+            <summary>
+            This interface defines the core functionality to connect and communicate with a RabbitMQ server.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore.Settings">
+            <summary>
+            This object contains the settings for the RabbitMQ client.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore.Connected">
+            <summary>
+            This flag indicates whether the client is connected the the RabbitMQ server or not.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore.Init">
+            <summary>
+            Init the connection to the RabbitMQ server.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore.DeInit">
+            <summary>
+            De-init the connection to the RabbitMQ server.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore.Connect(System.Exception@)">
+            <summary>
+            Connect to the RabbitMQ server.
+            </summary>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore.Disconnect">
+            <summary>
+            Disconnect form the RabbitMQ server.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore.WriteMsg(jjm.one.RabbitMqClientWrapper.types.Message,System.Exception@)">
+            <summary>
+            Write a <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> to the RabbitMQ server
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore.ReadMsg(jjm.one.RabbitMqClientWrapper.types.Message@,System.Boolean,System.Exception@)">
+            <summary>
+            Read a <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> to the RabbitMQ server.
+            </summary>
+            <param name="message"></param>
+            <param name="autoAck"></param>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore.AckMsg(jjm.one.RabbitMqClientWrapper.types.Message,System.Exception@)">
+            <summary>
+            Ack a received <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/>.
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore.NackMsg(jjm.one.RabbitMqClientWrapper.types.Message,System.Boolean,System.Exception@)">
+            <summary>
+            Nack a received <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/>.
+            </summary>
+            <param name="message"></param>
+            <param name="requeue"></param>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore.WaitForWriteConfirm(System.TimeSpan,System.Exception@)">
+            <summary>
+            Wait until the server confirms the written <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/>.
+            </summary>
+            <param name="timeout"></param>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore.QueuedMsgs(System.Nullable{System.UInt32}@,System.Exception@)">
+            <summary>
+            Get the amount of <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> stored in the RabbitMQ server queue which are ready get read.
+            </summary>
+            <param name="amount"></param>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore">
+            <summary>
+            This class implements the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore"/> interface for a RabbitMQ server.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.Settings">
+            <summary>
+            This object contains the settings for the RabbitMQ client.
+            Note:
+            Changing the <see cref="P:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.Settings"/> object of a connected client will result in the disconnection from the server.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.Connected">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.#ctor(jjm.one.RabbitMqClientWrapper.types.Settings,Microsoft.Extensions.Logging.ILogger{jjm.one.RabbitMqClientWrapper.main.core.RmqcCore},jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging)">
+            <summary>
+            This is a parameterised constructor for the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class.
+            </summary>
+            <param name="settings"></param>
+            <param name="logger"></param>
+            <param name="enableLogging"></param>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.#ctor(Microsoft.Extensions.Options.IOptions{jjm.one.RabbitMqClientWrapper.types.Settings},Microsoft.Extensions.Logging.ILogger{jjm.one.RabbitMqClientWrapper.main.core.RmqcCore},jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging)">
+            <summary>
+            This is a parameterised constructor for the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class.
+            </summary>
+            <param name="options"></param>
+            <param name="logger"></param>
+            <param name="enableLogging"></param>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.Init">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.DeInit">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.Connect(System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.Disconnect">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.WriteMsg(jjm.one.RabbitMqClientWrapper.types.Message,System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.ReadMsg(jjm.one.RabbitMqClientWrapper.types.Message@,System.Boolean,System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.AckMsg(jjm.one.RabbitMqClientWrapper.types.Message,System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.NackMsg(jjm.one.RabbitMqClientWrapper.types.Message,System.Boolean,System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.WaitForWriteConfirm(System.TimeSpan,System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.QueuedMsgs(System.Nullable{System.UInt32}@,System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper">
+            <summary>
+            This interface defines the core and additional functionality to connect and communicate with a RabbitMQ server.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.Settings">
+            <summary>
+            This object contains the settings for the RabbitMQ client.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.Connected">
+            <summary>
+            This flag indicates whether the client is connected the the RabbitMQ server or not.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.Init">
+            <summary>
+            Init the connection to the RabbitMQ server.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.DeInit">
+            <summary>
+            De-init the connection to the RabbitMQ server.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.Connect">
+            <summary>
+            Connect to the RabbitMQ server.
+            </summary>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.Connect(System.Exception@)">
+            <summary>
+            Connect to the RabbitMQ server.
+            </summary>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.Disconnect">
+            <summary>
+            Disconnect form the RabbitMQ server.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.ReConnect">
+            <summary>
+            Disconnect and connects form the RabbitMQ server.
+            </summary>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.ReConnect(System.Exception@)">
+            <summary>
+            Disconnect and connects form the RabbitMQ server.
+            </summary>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.WriteMsg(jjm.one.RabbitMqClientWrapper.types.Message)">
+            <summary>
+            Write a <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> to the RabbitMQ server
+            </summary>
+            <param name="message"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.WriteMsg(jjm.one.RabbitMqClientWrapper.types.Message,System.Exception@)">
+            <summary>
+            Write a <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> to the RabbitMQ server
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.ReadMsg(jjm.one.RabbitMqClientWrapper.types.Message@,System.Boolean)">
+            <summary>
+            Read a <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> to the RabbitMQ server.
+            </summary>
+            <param name="message"></param>
+            <param name="autoAck"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.ReadMsg(jjm.one.RabbitMqClientWrapper.types.Message@,System.Boolean,System.Exception@)">
+            <summary>
+            Read a <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> to the RabbitMQ server.
+            </summary>
+            <param name="message"></param>
+            <param name="autoAck"></param>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.AckMsg(jjm.one.RabbitMqClientWrapper.types.Message)">
+            <summary>
+            Ack a received <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/>.
+            </summary>
+            <param name="message"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.AckMsg(jjm.one.RabbitMqClientWrapper.types.Message,System.Exception@)">
+            <summary>
+            Ack a received <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/>.
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.NackMsg(jjm.one.RabbitMqClientWrapper.types.Message,System.Boolean)">
+            <summary>
+            Nack a received <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/>.
+            </summary>
+            <param name="message"></param>
+            <param name="requeue"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.NackMsg(jjm.one.RabbitMqClientWrapper.types.Message,System.Boolean,System.Exception@)">
+            <summary>
+            Nack a received <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/>.
+            </summary>
+            <param name="message"></param>
+            <param name="requeue"></param>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.WaitForWriteConfirm(System.TimeSpan)">
+            <summary>
+            Wait until the server confirms the written <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/>.
+            </summary>
+            <param name="timeout"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.WaitForWriteConfirm(System.TimeSpan,System.Exception@)">
+            <summary>
+            Wait until the server confirms the written <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/>.
+            </summary>
+            <param name="timeout"></param>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.QueuedMsgs(System.Nullable{System.UInt32}@)">
+            <summary>
+            Get the amount of <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> stored in the RabbitMQ server queue which are ready get read.
+            </summary>
+            <param name="amount"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.QueuedMsgs(System.Nullable{System.UInt32}@,System.Exception@)">
+            <summary>
+            Get the amount of <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> stored in the RabbitMQ server queue which are ready get read.
+            </summary>
+            <param name="amount"></param>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper">
+            <summary>
+            This class implements the <see cref="T:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper"/> interface for a RabbitMQ server.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.Settings">
+            <summary>
+            This object contains the settings for the RabbitMQ client.
+            Note:
+            Changing the <see cref="P:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.Settings"/> object of a connected client will result in the disconnection from the server.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.Connected">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.Init">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.DeInit">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.Connect">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.Connect(System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.Disconnect">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.ReConnect">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.ReConnect(System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.WriteMsg(jjm.one.RabbitMqClientWrapper.types.Message)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.WriteMsg(jjm.one.RabbitMqClientWrapper.types.Message,System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.ReadMsg(jjm.one.RabbitMqClientWrapper.types.Message@,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.ReadMsg(jjm.one.RabbitMqClientWrapper.types.Message@,System.Boolean,System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.AckMsg(jjm.one.RabbitMqClientWrapper.types.Message)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.AckMsg(jjm.one.RabbitMqClientWrapper.types.Message,System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.NackMsg(jjm.one.RabbitMqClientWrapper.types.Message,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.NackMsg(jjm.one.RabbitMqClientWrapper.types.Message,System.Boolean,System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.WaitForWriteConfirm(System.TimeSpan)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.WaitForWriteConfirm(System.TimeSpan,System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.QueuedMsgs(System.Nullable{System.UInt32}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.QueuedMsgs(System.Nullable{System.UInt32}@,System.Exception@)">
+            <inheritdoc />
+        </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging">
             <summary>
-            This is a wrapper clas for the <see cref="T:System.Boolean"/> value for enabeling logging in the <see cref="!:RMQCCore"/> class.
+            This is a wrapper clas for the <see cref="T:System.Boolean"/> value for enable logging in the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class.
             </summary>
         </member>
         <member name="F:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging.EnableLogging">
             <summary>
-            The flag to enable or disable logging i the <see cref="!:RMQCCore"/> class.
+            The flag to enable or disable logging i the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging.#ctor(System.Boolean)">
             <summary>
             Default constructor for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging"/> class.
             </summary>
-            <param name="enableLogging">The flag to enable or disable logging i the <see cref="!:RMQCCore"/> class.</param>
+            <param name="enableLogging">The flag to enable or disable logging i the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class.</param>
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableWrapperLogging">
             <summary>
-            This is a wrapper clas for the <see cref="T:System.Boolean"/> value for enabeling logging in the <see cref="!:RMQCWrapper"/> class.
+            This is a wrapper clas for the <see cref="T:System.Boolean"/> value for enable logging in the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class.
             </summary>
         </member>
         <member name="F:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableWrapperLogging.EnableLogging">
             <summary>
-            The flag to enable or disable logging i the <see cref="!:RMQCWrapper"/> class.
+            The flag to enable or disable logging i the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableWrapperLogging.#ctor(System.Boolean)">
             <summary>
             
             </summary>
-            <param name="enableLogging">The flag to enable or disable logging i the <see cref="!:RMQCWrapper"/> class.</param>
+            <param name="enableLogging">The flag to enable or disable logging i the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class.</param>
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.types.Settings">
             <summary>
@@ -104,10 +503,10 @@
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.types.Settings.Equals(System.Object)">
             <summary>
-            Determins whether the specified object is equal to the current <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> object.
+            Determines whether the specified object is equal to the current <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> object.
             </summary>
             <param name="obj">The specified object.</param>
-            <returns><see langword="true"/> if the spcified object is equal to the current object, otherwise, <see langword="false"/>.</returns>
+            <returns><see langword="true"/> if the specified object is equal to the current object, otherwise, <see langword="false"/>.</returns>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.types.Settings.GetHashCode">
             <summary>
