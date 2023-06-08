@@ -130,6 +130,10 @@ namespace jjm.one.RabbitMqClientWrapper.types
 
         #region ctos's
 
+        public Message()
+        {
+        }
+
         public Message(BasicGetResult? rawMessage)
         {
             rawBasicGetResult = rawMessage;
