@@ -12,7 +12,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
     /// <summary>
     /// This class implements the <see cref="IRmqcCore"/> interface for a RabbitMQ server.
     /// </summary>
-    public class RmqcCore : IRmqcCore
+    internal class RmqcCore : IRmqcCore
     {
         #region private members
 

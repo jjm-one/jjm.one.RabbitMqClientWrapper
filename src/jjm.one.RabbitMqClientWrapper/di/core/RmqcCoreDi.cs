@@ -8,7 +8,7 @@ namespace jjm.one.RabbitMqClientWrapper.di.core
 	/// <summary>
 	/// This class contains function for dependency injection of the <see cref="RmqcCore"/> class.
 	/// </summary>
-	public static class RmqcCoreDi
+	internal static class RmqcCoreDi
     {
 	    /// <summary>
 	    /// Adds all dependencies ot the <see cref="RmqcCore"/> class to a <see cref="ServiceCollection"/>.
