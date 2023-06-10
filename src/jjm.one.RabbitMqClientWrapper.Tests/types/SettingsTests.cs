@@ -14,7 +14,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.types
         /// Tests the default constructor of the <see cref="Settings"/> class.
         /// </summary>
         [Fact]
-        public void SettingsTest_DefaultCtor()
+        public void SettingsTest_DefaultCtorTest()
         {
             var s = new Settings();
 
@@ -31,7 +31,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.types
         /// Tests the constructor of the <see cref="Settings"/> class with <see langword="null"/> as inputs.
         /// </summary>
         [Fact]
-        public void SettingsTest_CtorNull()
+        public void SettingsTest_CtorNullTest()
         {
             var s = new Settings(null, null, null, null, null, null ,null);
 
@@ -48,7 +48,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.types
         /// Tests the constructor of the <see cref="Settings"/> class.
         /// </summary>
         [Fact]
-        public void SettingsTest_Ctor()
+        public void SettingsTest_CtorTest()
         {
             var s = new Settings("A", 42, "B", "C", "D", "E", "F");
 

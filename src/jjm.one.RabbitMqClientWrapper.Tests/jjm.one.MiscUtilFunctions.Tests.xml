@@ -11,14 +11,14 @@
             - <see cref="T:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableWrapperLogging"/>
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.DiSimpleTypeWrappersTests.DiSimpleTypeWrappersEnableCoreLoggingTest1">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.DiSimpleTypeWrappersTests.DiSimpleTypeWrappersEnableCoreLogging_CtorTest">
             <summary>
-            1. test of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging"/> class.
+            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging"/> class.
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.DiSimpleTypeWrappersTests.DiSimpleTypeWrappersEnableWrapperLogging1">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.DiSimpleTypeWrappersTests.DiSimpleTypeWrappersEnableWrapperLogging_CtorTest">
             <summary>
-            1. test of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableWrapperLogging"/> class.
+            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableWrapperLogging"/> class.
             </summary>
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests">
@@ -26,17 +26,17 @@
             This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests.SettingsTest_DefaultCtor">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests.SettingsTest_DefaultCtorTest">
             <summary>
             Tests the default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests.SettingsTest_CtorNull">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests.SettingsTest_CtorNullTest">
             <summary>
             Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class with <see langword="null"/> as inputs.
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests.SettingsTest_Ctor">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests.SettingsTest_CtorTest">
             <summary>
             Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
             </summary>

@@ -15,18 +15,16 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.types
         #region DiSimpleTypeWrappersEnableCoreLogging tests
 
         /// <summary>
-        /// 1. test of the <see cref="DiSimpleTypeWrappersEnableCoreLogging"/> class.
+        /// Tests the constructor of the <see cref="DiSimpleTypeWrappersEnableCoreLogging"/> class.
         /// </summary>
         [Fact]
-        public void DiSimpleTypeWrappersEnableCoreLoggingTest1()
+        public void DiSimpleTypeWrappersEnableCoreLogging_CtorTest()
         {
             var o1 = new DiSimpleTypeWrappersEnableCoreLogging();
-            var o2 = new DiSimpleTypeWrappersEnableCoreLogging(false);
-            var o3 = new DiSimpleTypeWrappersEnableCoreLogging(true);
+            var o2 = new DiSimpleTypeWrappersEnableCoreLogging(true);
 
             Assert.False(o1.EnableLogging);
-            Assert.False(o2.EnableLogging);
-            Assert.True(o3.EnableLogging);
+            Assert.True(o2.EnableLogging);
         }
 
         #endregion
@@ -34,18 +32,16 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.types
         #region DiSimpleTypeWrappersEnableWrapperLogging tests
 
         /// <summary>
-        /// 1. test of the <see cref="DiSimpleTypeWrappersEnableWrapperLogging"/> class.
+        /// Tests the constructor of the <see cref="DiSimpleTypeWrappersEnableWrapperLogging"/> class.
         /// </summary>
         [Fact]
-        public void DiSimpleTypeWrappersEnableWrapperLogging1()
+        public void DiSimpleTypeWrappersEnableWrapperLogging_CtorTest()
         {
             var o1 = new DiSimpleTypeWrappersEnableWrapperLogging();
-            var o2 = new DiSimpleTypeWrappersEnableWrapperLogging(false);
-            var o3 = new DiSimpleTypeWrappersEnableWrapperLogging(true);
+            var o2 = new DiSimpleTypeWrappersEnableWrapperLogging(true);
 
             Assert.False(o1.EnableLogging);
-            Assert.False(o2.EnableLogging);
-            Assert.True(o3.EnableLogging);
+            Assert.True(o2.EnableLogging);
         }
 
         #endregion

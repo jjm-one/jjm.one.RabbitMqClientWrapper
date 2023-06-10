@@ -9,13 +9,13 @@
             This class contains function for dependency injection of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class.
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.di.core.RmqcCoreDi.AddRmqcCore(Microsoft.Extensions.DependencyInjection.IServiceCollection,jjm.one.RabbitMqClientWrapper.types.Settings,System.Boolean)">
+        <member name="M:jjm.one.RabbitMqClientWrapper.di.core.RmqcCoreDi.AddRmqcCore(Microsoft.Extensions.DependencyInjection.IServiceCollection,jjm.one.RabbitMqClientWrapper.types.Settings,jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging)">
             <summary>
             Adds all dependencies ot the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class to a <see cref="T:Microsoft.Extensions.DependencyInjection.ServiceCollection"/>.
             </summary>
             <param name="services"></param>
             <param name="settings"></param>
-            <param name="enableCoreLogging">A </param>
+            <param name="enableCoreLogging"></param>
             <returns></returns>
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.di.RmqcWrapperDi">
@@ -23,7 +23,7 @@
             This class contains function for dependency injection of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class.
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.di.RmqcWrapperDi.AddRmqcWrapper(Microsoft.Extensions.DependencyInjection.IServiceCollection,jjm.one.RabbitMqClientWrapper.types.Settings,System.Boolean,System.Boolean)">
+        <member name="M:jjm.one.RabbitMqClientWrapper.di.RmqcWrapperDi.AddRmqcWrapper(Microsoft.Extensions.DependencyInjection.IServiceCollection,jjm.one.RabbitMqClientWrapper.types.Settings,jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableWrapperLogging,jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging)">
             <summary>
             Adds all dependencies ot the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class to a <see cref="T:Microsoft.Extensions.DependencyInjection.ServiceCollection"/>.
             </summary>

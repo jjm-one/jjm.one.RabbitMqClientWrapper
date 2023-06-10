@@ -19,10 +19,12 @@ namespace jjm.one.RabbitMqClientWrapper.di
         /// <param name="enableWrapperLogging"></param>
         /// <param name="enableCoreLogging"></param>
         /// <returns></returns>
-        public static IServiceCollection AddRmqcWrapper(this IServiceCollection services, Settings settings, bool enableWrapperLogging = false, bool enableCoreLogging = false)
+        public static IServiceCollection AddRmqcWrapper(this IServiceCollection services, Settings settings, 
+            DiSimpleTypeWrappersEnableWrapperLogging enableWrapperLogging, 
+            DiSimpleTypeWrappersEnableCoreLogging enableCoreLogging)
         {
             services.AddRmqcCore(settings, enableCoreLogging);
-            services.AddSingleton(new DiSimpleTypeWrappersEnableWrapperLogging(enableWrapperLogging));
+            services.AddSingleton(enableWrapperLogging);
             services.AddScoped<IRmqcWrapper, RmqcWrapper>();
 
             return services;

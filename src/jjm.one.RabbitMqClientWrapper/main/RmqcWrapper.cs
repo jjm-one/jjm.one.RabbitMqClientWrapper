@@ -62,7 +62,8 @@ namespace jjm.one.RabbitMqClientWrapper.main
 
         #region ctor's
 
-        public RmqcWrapper(IRmqcCore core, ILogger<RmqcWrapper> logger, DiSimpleTypeWrappersEnableWrapperLogging? enableLogging = null)
+        public RmqcWrapper(IRmqcCore core, ILogger<RmqcWrapper> logger,
+            DiSimpleTypeWrappersEnableWrapperLogging? enableLogging = null)
         {
             _core = core;
             _logger = logger;
