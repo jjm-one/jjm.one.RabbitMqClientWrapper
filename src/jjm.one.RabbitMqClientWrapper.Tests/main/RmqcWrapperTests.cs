@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using FluentAssertions;
 using jjm.one.RabbitMqClientWrapper.main;
 using jjm.one.RabbitMqClientWrapper.main.core;
@@ -10,6 +9,9 @@ using Moq;
 
 namespace jjm.one.RabbitMqClientWrapper.Tests.main
 {
+    /// <summary>
+    /// This class contains the unit tests for the <see cref="RmqcWrapper"/> class.
+    /// </summary>
     public class RmqcWrapperTests
     {
         #region private members
@@ -19,6 +21,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         private readonly Mock<ILogger<RmqcWrapper>> _rmqcWrapperLoggingMock;
 
         #endregion
+        /// <summary>
+        /// The default constructor of the <see cref="RmqcWrapperTests"/> class.
+        /// </summary>
         public RmqcWrapperTests()
         {
             _rmqcCoreMock = new Mock<IRmqcCore>();
@@ -31,6 +36,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
 
         #region public members tests
 
+        /// <summary>
+        /// Tests the getter of the Settings member.
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_SettingsGetTest()
         {
@@ -55,6 +63,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
             s.Should().Be(sTest);
         }
 
+        /// <summary>
+        /// Tests the getter of the Connected member.
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_ConnectedGetTest()
         {
@@ -82,6 +93,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         
         #region public methods tests
 
+        /// <summary>
+        /// Testes the Init method.
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_InitTest()
         {
@@ -103,6 +117,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
             _rmqcCoreMock.Verify(x => x.Init(), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the DeInit method.
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_DeInitTest()
         {
@@ -124,6 +141,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
             _rmqcCoreMock.Verify(x => x.DeInit(), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the Connect method. (Test 1)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_ConnectTest1()
         {
@@ -139,6 +159,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
             _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the Connect method. (Test 2)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_ConnectTest2()
         {
@@ -155,6 +178,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
             _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the Disconnect method.
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_DisconnectTest()
         {
@@ -176,6 +202,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
             _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the ReConnect method. (Test 1)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_ReConnectTest1()
         {
@@ -193,6 +222,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
             _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the ReConnect method. (Test 2)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_ReConnectTest2()
         {
@@ -211,6 +243,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
             _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the WriteMsg method. (Test 1)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_WriteMsgTest1()
         {
@@ -228,6 +263,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
                 x.WriteMsg(It.IsAny<Message>(), out It.Ref<Exception?>.IsAny), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the WriteMsg method. (Test 2)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_WriteMsgTest2()
         {
@@ -246,6 +284,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
                 x.WriteMsg(It.IsAny<Message>(), out It.Ref<Exception?>.IsAny), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the ReadMsg method. (Test 1)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_ReadMsgTest1()
         {
@@ -263,6 +304,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
                 x.ReadMsg(out It.Ref<Message?>.IsAny!, false, out It.Ref<Exception?>.IsAny), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the ReadMsg method. (Test 2)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_ReadMsgTest2()
         {
@@ -281,6 +325,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
                 x.ReadMsg(out It.Ref<Message?>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the AckMsg method. (Test 1)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_AckMsgTest1()
         {
@@ -298,6 +345,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
                 x.AckMsg(It.IsAny<Message>(), out It.Ref<Exception?>.IsAny), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the AckMsg method. (Test 2)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_AckMsgTest2()
         {
@@ -316,6 +366,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
                 x.AckMsg(It.IsAny<Message>(), out It.Ref<Exception?>.IsAny), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the NackMsg method. (Test 1)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_NackMsgTest1()
         {
@@ -333,6 +386,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
                 x.NackMsg(It.IsAny<Message>(), false, out It.Ref<Exception?>.IsAny), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the NackMsg method. (Test 2)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_NackMsgTest2()
         {
@@ -351,6 +407,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
                 x.NackMsg(It.IsAny<Message>(), false, out It.Ref<Exception?>.IsAny), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the WaitForWriteConfirm method. (Test 1)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_WaitForWriteConfirmTest1()
         {
@@ -368,6 +427,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
                 x.WaitForWriteConfirm(It.IsAny<TimeSpan>(), out It.Ref<Exception?>.IsAny), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the WaitForWriteConfirm method. (Test 2)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_WaitForWriteConfirmTest2()
         {
@@ -386,6 +448,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
                 x.WaitForWriteConfirm(It.IsAny<TimeSpan>(), out It.Ref<Exception?>.IsAny), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the QueuedMsgs method. (Test 1)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_QueuedMsgsTest1()
         {
@@ -403,6 +468,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
                 x.QueuedMsgs(out It.Ref<uint?>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
         }
         
+        /// <summary>
+        /// Testes the QueuedMsgs method. (Test 2)
+        /// </summary>
         [Fact]
         public void RmqcWrapperTest_QueuedMsgsTest2()
         {
@@ -420,7 +488,6 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
             _rmqcCoreMock.Verify(x => 
                 x.QueuedMsgs(out It.Ref<uint?>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
         }
-
 
         #endregion
         
