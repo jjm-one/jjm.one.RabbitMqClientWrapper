@@ -3,6 +3,7 @@ using System.Reflection;
 using jjm.one.Microsoft.Extensions.Logging.Helpers;
 using jjm.one.RabbitMqClientWrapper.types;
 using jjm.one.RabbitMqClientWrapper.types.di;
+using jjm.one.RabbitMqClientWrapper.types.exceptions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
@@ -170,9 +171,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                 // check connection factory
                 if (_connectionFactory is null)
                 {
-                    throw new NullReferenceException(
-                        $"The {nameof(IConnectionFactory)} is null! " +
-                        $"Maybe the {nameof(RmqcCore)} was not initialized properly.");
+                    throw new NoConnectionFactoryException();
                 }
 
                 // create the connection
@@ -181,9 +180,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                 // check connection
                 if (_connection is null)
                 {
-                    throw new NullReferenceException(
-                        $"The {nameof(IConnection)} is null! " +
-                        $"Maybe the {nameof(RmqcCore)} was not initialized properly.");
+                    throw new NoConnectionException();
                 }
 
                 // create the channel
@@ -192,9 +189,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                 // check channel
                 if (_channel is null)
                 {
-                    throw new NullReferenceException(
-                        $"The {nameof(IModel)} ({nameof(_channel)}) is null! " +
-                        $"Maybe the {nameof(RmqcCore)} was not initialized properly.");
+                    throw new NoChannelException();
                 }
             }
             catch(Exception exc)
