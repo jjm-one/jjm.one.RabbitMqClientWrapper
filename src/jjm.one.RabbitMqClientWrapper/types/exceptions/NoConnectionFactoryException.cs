@@ -7,6 +7,7 @@ namespace jjm.one.RabbitMqClientWrapper.types.exceptions;
 /// <summary>
 /// This class represents an exception which gets thrown if the <see cref="IConnectionFactory"/> in a <see cref="RmqcCore"/> object is null or not initialized.
 /// </summary>
+[Serializable]
 public class NoConnectionFactoryException : Exception
 {
     #region ctors

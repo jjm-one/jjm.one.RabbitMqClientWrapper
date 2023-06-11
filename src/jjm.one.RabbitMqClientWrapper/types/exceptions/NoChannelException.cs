@@ -7,6 +7,7 @@ namespace jjm.one.RabbitMqClientWrapper.types.exceptions;
 /// <summary>
 /// This class represents an exception which gets thrown if the <see cref="IModel"/> in a <see cref="RmqcCore"/> object is null or not initialized.
 /// </summary>
+[Serializable]
 public class NoChannelException : Exception
 {
     #region ctors
