@@ -70,7 +70,7 @@ public class MessageTests
     {
         // arrange
         Message m = null!;
-        BasicGetResult r = 
+        var r = 
             new BasicGetResult(0, false, "", "", 0, null, null);
         
         try
@@ -99,8 +99,8 @@ public class MessageTests
     public void MessageTest_DeliveryTagGetTest()
     {
         // arrange
-        ReadOnlyMemory<byte> b = new ReadOnlyMemory<byte>();
-        Message m = new Message(
+        var b = new ReadOnlyMemory<byte>();
+        var m = new Message(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, b));
         ulong res = 0;
@@ -127,11 +127,11 @@ public class MessageTests
     public void MessageTest_RoutingKeyGetTest()
     {
         // arrange
-        ReadOnlyMemory<byte> b = new ReadOnlyMemory<byte>();
-        Message m = new Message(
+        var b = new ReadOnlyMemory<byte>();
+        var m = new Message(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, b));
-        string res = string.Empty;
+        var res = string.Empty;
         
         try
         {
@@ -147,6 +147,35 @@ public class MessageTests
         // assert 2
         res.Should().Be("TEST-RK");
     }
+
+    /// <summary>
+    /// Tests the setter of the RoutingKey member.
+    /// </summary>
+    [Fact]
+    public void MessageTest_RoutingKeySetTest()
+    {
+        // arrange
+        var b = new ReadOnlyMemory<byte>();
+        var m = new Message(
+            new BasicGetResult(42, true, "TEST-EX",string.Empty, 69,
+                null, b));
+        var res = string.Empty;
+        
+        try
+        {
+            // act
+            m.RoutingKey = "TEST-RK";
+            res = m.RoutingKey;
+        }
+        catch (Exception exc)
+        {
+            // assert 1
+            Assert.Fail(exc.Message);
+        }
+        
+        // assert 2
+        res.Should().Be("TEST-RK");
+    }
     
     /// <summary>
     /// Tests the getter of the BasicProperties member.
@@ -155,8 +184,8 @@ public class MessageTests
     public void MessageTest_BasicPropertiesGetTest()
     {
         // arrange
-        ReadOnlyMemory<byte> b = new ReadOnlyMemory<byte>();
-        Message m = new Message(
+        var b = new ReadOnlyMemory<byte>();
+        var m = new Message(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, b));
         IBasicProperties? res = null!;
@@ -180,18 +209,47 @@ public class MessageTests
     /// Tests the getter of the Body member.
     /// </summary>
     [Fact]
-    public void MessageTest_BodyGetTest()
+    public void MessageTest_BodyGetSetTest()
     {
         // arrange
-        ReadOnlyMemory<byte> b = new ReadOnlyMemory<byte>();
-        Message m = new Message(
+        var b = new ReadOnlyMemory<byte>();
+        var m = new Message(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, b));
         ReadOnlyMemory<byte>? res = null;
         
         try
         {
+            // act 1
+            res = m.Body;
+        }
+        catch (Exception exc)
+        {
+            // assert 1
+            Assert.Fail(exc.Message);
+        }
+            
+        // assert 2
+        res.Should().Be(b);
+    }
+    
+    /// <summary>
+    /// Tests the setter of the Body member.
+    /// </summary>
+    [Fact]
+    public void MessageTest_BodySetTest()
+    {
+        // arrange
+        var b = new ReadOnlyMemory<byte>();
+        var m = new Message(
+            new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
+                null, null));
+        ReadOnlyMemory<byte>? res = null;
+        
+        try
+        {
             // act
+            m.Body = b;
             res = m.Body;
         }
         catch (Exception exc)

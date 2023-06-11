@@ -164,7 +164,7 @@ namespace jjm.one.RabbitMqClientWrapper.types
         /// <returns>A hash code for the current <see cref="Settings"/> object.</returns>
         public override int GetHashCode()
         {
-            int hashCode = 655511358;
+            var hashCode = 655511358;
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Hostname);
             hashCode = hashCode * -1521134295 + Port.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Username);

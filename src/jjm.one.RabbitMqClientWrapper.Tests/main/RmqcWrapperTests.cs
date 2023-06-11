@@ -43,7 +43,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         public void RmqcWrapperTest_SettingsGetTest()
         {
             // arrange
-            Settings sTest = new Settings("test");
+            var sTest = new Settings("test");
             _rmqcCoreMock.Setup(x => x.Settings).Returns(sTest);
             Settings s = null!;
 
@@ -71,7 +71,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         {
             // arrange
             _rmqcCoreMock.Setup(x => x.Connected).Returns(true);
-            bool b = false;
+            var b = false;
 
             try
             {
@@ -251,7 +251,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         {
             // arrange
             Exception? e;
-            Message m = new Message();
+            var m = new Message();
             _rmqcCoreMock.Setup(x => x.WriteMsg(m,out e)).Returns(true);
 
             // act
@@ -271,7 +271,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         {
             // arrange
             Exception? e;
-            Message m = new Message();
+            var m = new Message();
             _rmqcCoreMock.Setup(x => x.WriteMsg(m,out e)).Returns(true);
 
             // act
@@ -292,7 +292,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         {
             // arrange
             Exception? e;
-            Message? m = new Message();
+            var m = new Message();
             _rmqcCoreMock.Setup(x => x.ReadMsg(out m, false, out e)).Returns(true);
 
             // act
@@ -312,7 +312,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         {
             // arrange
             Exception? e;
-            Message? m = new Message();
+            var m = new Message();
             _rmqcCoreMock.Setup(x => x.ReadMsg(out m, false, out e)).Returns(true);
 
             // act
@@ -333,7 +333,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         {
             // arrange
             Exception? e;
-            Message? m = new Message();
+            var m = new Message();
             _rmqcCoreMock.Setup(x => x.AckMsg(m, out e)).Returns(true);
 
             // act
@@ -353,7 +353,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         {
             // arrange
             Exception? e;
-            Message? m = new Message();
+            var m = new Message();
             _rmqcCoreMock.Setup(x => x.AckMsg(m, out e)).Returns(true);
 
             // act
@@ -374,7 +374,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         {
             // arrange
             Exception? e;
-            Message? m = new Message();
+            var m = new Message();
             _rmqcCoreMock.Setup(x => x.NackMsg(m, false, out e)).Returns(true);
 
             // act
@@ -394,7 +394,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         {
             // arrange
             Exception? e;
-            Message? m = new Message();
+            var m = new Message();
             _rmqcCoreMock.Setup(x => x.NackMsg(m, false, out e)).Returns(true);
 
             // act
@@ -415,7 +415,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         {
             // arrange
             Exception? e;
-            TimeSpan t = new TimeSpan();
+            var t = new TimeSpan();
             _rmqcCoreMock.Setup(x => x.WaitForWriteConfirm(t, out e)).Returns(true);
 
             // act
@@ -435,7 +435,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         {
             // arrange
             Exception? e;
-            TimeSpan t = new TimeSpan();
+            var t = new TimeSpan();
             _rmqcCoreMock.Setup(x => x.WaitForWriteConfirm(t, out e)).Returns(true);
 
             // act
