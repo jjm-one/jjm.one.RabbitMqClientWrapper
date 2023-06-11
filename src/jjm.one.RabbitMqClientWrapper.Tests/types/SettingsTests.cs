@@ -10,6 +10,8 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.types
 	{
         #region tests
 
+        #region ctor tests
+
         /// <summary>
         /// Tests the default constructor of the <see cref="Settings"/> class.
         /// </summary>
@@ -61,6 +63,10 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.types
             Assert.Equal("F", s.Queue);
         }
 
+        #endregion
+
+        #region public override tests
+        
         /// <summary>
         /// Tests the Equals method of the <see cref="Settings"/> class.
         /// </summary>
@@ -93,6 +99,8 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.types
             Assert.False(h1.Equals(h3));
 
         }
+        
+        #endregion
 
         #endregion
     }
