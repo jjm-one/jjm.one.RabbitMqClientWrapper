@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Serialization;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using RabbitMQ.Client;
 
@@ -21,5 +22,15 @@ public class NoChannelException : Exception
     {
     }
     
+    /// <summary>
+    /// <see cref="ISerializable"/> compliant constructor for the <see cref="NoChannelException"/> class.
+    /// </summary>
+    /// <param name="info"></param>
+    /// <param name="context"></param>
+    private NoChannelException(SerializationInfo info, StreamingContext context)
+        : base(info, context)
+    {
+    }
+
     #endregion
 }

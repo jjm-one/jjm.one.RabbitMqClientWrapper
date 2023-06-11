@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Serialization;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using RabbitMQ.Client;
 
@@ -18,6 +19,16 @@ public class NoConnectionException : Exception
     public NoConnectionException() : 
         base($"The {nameof(IConnection)} is null! " +
              $"Maybe the {nameof(RmqcCore)} was not initialized properly.")
+    {
+    }
+    
+    /// <summary>
+    /// <see cref="ISerializable"/> compliant constructor for the <see cref="NoConnectionException"/> class.
+    /// </summary>
+    /// <param name="info"></param>
+    /// <param name="context"></param>
+    private NoConnectionException(SerializationInfo info, StreamingContext context)
+        : base(info, context)
     {
     }
 
