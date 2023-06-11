@@ -34,6 +34,23 @@ public class RmqcWrapperTests
 
     #region tests
 
+    #region ctor tests
+
+    /// <summary>
+    /// Tests the constructor of the <see cref="RmqcWrapper"/> class.
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_CtorTest()
+    {
+        // arrange + act
+        var res = new RmqcWrapper(new Settings("Test"));
+        
+        // assert
+        res.Settings.Hostname.Should().Be("Test");
+    }
+
+    #endregion
+    
     #region public members tests
 
     /// <summary>
