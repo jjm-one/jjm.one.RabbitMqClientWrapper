@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using RabbitMQ.Client;
@@ -27,6 +28,7 @@ public class NoConnectionFactoryException : Exception
     /// </summary>
     /// <param name="info"></param>
     /// <param name="context"></param>
+    [ExcludeFromCodeCoverage]
     private NoConnectionFactoryException(SerializationInfo info, StreamingContext context)
         : base(info, context)
     {
