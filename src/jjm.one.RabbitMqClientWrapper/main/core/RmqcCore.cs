@@ -381,7 +381,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                     throw new InvalidOperationException("Client must be initialized and connected to perform this operation!");
                 }
 
-                // send unack
+                // send nack
                 _channel?.BasicNack(message.DeliveryTag, false, requeue);
             }
             catch (Exception exc)
@@ -415,7 +415,7 @@ namespace jjm.one.RabbitMqClientWrapper.main.core
                     throw new InvalidOperationException("Client must be initialized and connected to perform this operation!");
                 }
 
-                // send unack
+                // send nack
                 res &= _channel?.WaitForConfirms(timeout) ?? false;
             }
             catch (Exception exc)
