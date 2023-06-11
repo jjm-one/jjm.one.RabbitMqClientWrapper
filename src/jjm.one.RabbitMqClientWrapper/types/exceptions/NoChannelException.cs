@@ -29,7 +29,7 @@ public class NoChannelException : Exception
     /// <param name="info"></param>
     /// <param name="context"></param>
     [ExcludeFromCodeCoverage]
-    private NoChannelException(SerializationInfo info, StreamingContext context)
+    protected NoChannelException(SerializationInfo info, StreamingContext context)
         : base(info, context)
     {
     }

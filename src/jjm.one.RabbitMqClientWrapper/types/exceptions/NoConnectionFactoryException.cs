@@ -29,7 +29,7 @@ public class NoConnectionFactoryException : Exception
     /// <param name="info"></param>
     /// <param name="context"></param>
     [ExcludeFromCodeCoverage]
-    private NoConnectionFactoryException(SerializationInfo info, StreamingContext context)
+    protected NoConnectionFactoryException(SerializationInfo info, StreamingContext context)
         : base(info, context)
     {
     }
