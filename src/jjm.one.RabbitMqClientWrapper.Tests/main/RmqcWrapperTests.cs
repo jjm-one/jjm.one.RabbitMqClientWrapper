@@ -64,6 +64,31 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
 
         /// <summary>
+        /// Tests the setter of the Settings member.
+        /// </summary>
+        [Fact]
+        public void RmqcWrapperTest_SettingsSetTest()
+        {
+            // arrange
+            var sTest = new Settings("test");
+            _rmqcCoreMock.SetupSet(x => x.Settings=It.IsAny<Settings>()).Verifiable();
+
+            try
+            {
+                // act
+                _sut.Settings = sTest;
+            }
+            catch (Exception exc)
+            {
+                // assert 1
+                Assert.Fail(exc.Message);
+            }
+            
+            // assert 2
+            _rmqcCoreMock.VerifySet(x => x.Settings=It.IsAny<Settings>(), Times.Once);
+        }
+        
+        /// <summary>
         /// Tests the getter of the Connected member.
         /// </summary>
         [Fact]
