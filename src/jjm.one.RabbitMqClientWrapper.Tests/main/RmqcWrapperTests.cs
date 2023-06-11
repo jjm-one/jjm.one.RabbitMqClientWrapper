@@ -7,7 +7,6 @@ using jjm.one.RabbitMqClientWrapper.types;
 using jjm.one.RabbitMqClientWrapper.types.di;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Xunit.Sdk;
 
 namespace jjm.one.RabbitMqClientWrapper.Tests.main
 {
@@ -30,8 +29,61 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
 
         #region tests
 
+        #region public members tests
+
         [Fact]
-        public void Init_Test()
+        public void RmqcWrapperTest_SettingsGetTest()
+        {
+            // arrange
+            Settings sTest = new Settings("test");
+            _rmqcCoreMock.Setup(x => x.Settings).Returns(sTest);
+            Settings s = null!;
+
+            try
+            {
+                // act
+                s = _sut.Settings;
+            }
+            catch (Exception exc)
+            {
+                // assert 1
+                Assert.Fail(exc.Message);
+            }
+            
+            // assert 2
+            _rmqcCoreMock.Verify(x => x.Settings, Times.Once);
+            s.Should().Be(sTest);
+        }
+
+        [Fact]
+        public void RmqcWrapperTest_ConnectedGetTest()
+        {
+            // arrange
+            _rmqcCoreMock.Setup(x => x.Connected).Returns(true);
+            bool b = false;
+
+            try
+            {
+                // act
+                b = _sut.Connected;
+            }
+            catch (Exception exc)
+            {
+                // assert 1
+                Assert.Fail(exc.Message);
+            }
+            
+            // assert 2
+            _rmqcCoreMock.Verify(x => x.Connected, Times.Once);
+            b.Should().BeTrue();
+        }
+
+        #endregion
+        
+        #region public methods tests
+
+        [Fact]
+        public void RmqcWrapperTest_InitTest()
         {
             // arrange
             _rmqcCoreMock.Setup(x => x.Init());
@@ -52,7 +104,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void DeInit_Test()
+        public void RmqcWrapperTest_DeInitTest()
         {
             // arrange
             _rmqcCoreMock.Setup(x => x.DeInit());
@@ -73,7 +125,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void Connect_Test1()
+        public void RmqcWrapperTest_ConnectTest1()
         {
             // arrange
             Exception? e;
@@ -88,7 +140,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void Connect_Test2()
+        public void RmqcWrapperTest_ConnectTest2()
         {
             // arrange
             Exception? e = null;
@@ -104,7 +156,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void Disconnect_Test()
+        public void RmqcWrapperTest_DisconnectTest()
         {
             // arrange
             _rmqcCoreMock.Setup(x => x.Disconnect());
@@ -125,7 +177,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void ReConnect_Test1()
+        public void RmqcWrapperTest_ReConnectTest1()
         {
             // arrange
             Exception? e;
@@ -142,7 +194,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void ReConnect_Test2()
+        public void RmqcWrapperTest_ReConnectTest2()
         {
             // arrange
             Exception? e;
@@ -160,7 +212,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void WriteMsg_Test1()
+        public void RmqcWrapperTest_WriteMsgTest1()
         {
             // arrange
             Exception? e;
@@ -177,7 +229,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void WriteMsg_Test2()
+        public void RmqcWrapperTest_WriteMsgTest2()
         {
             // arrange
             Exception? e;
@@ -195,7 +247,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void ReadMsg_Test1()
+        public void RmqcWrapperTest_ReadMsgTest1()
         {
             // arrange
             Exception? e;
@@ -212,7 +264,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void ReadMsg_Test2()
+        public void RmqcWrapperTest_ReadMsgTest2()
         {
             // arrange
             Exception? e;
@@ -230,7 +282,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void AckMsg_Test1()
+        public void RmqcWrapperTest_AckMsgTest1()
         {
             // arrange
             Exception? e;
@@ -247,7 +299,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void AckMsg_Test2()
+        public void RmqcWrapperTest_AckMsgTest2()
         {
             // arrange
             Exception? e;
@@ -265,7 +317,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void NackMsg_Test1()
+        public void RmqcWrapperTest_NackMsgTest1()
         {
             // arrange
             Exception? e;
@@ -282,7 +334,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void NackMsg_Test2()
+        public void RmqcWrapperTest_NackMsgTest2()
         {
             // arrange
             Exception? e;
@@ -300,7 +352,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void WaitForWriteConfirm_Test1()
+        public void RmqcWrapperTest_WaitForWriteConfirmTest1()
         {
             // arrange
             Exception? e;
@@ -317,7 +369,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void WaitForWriteConfirm_Test2()
+        public void RmqcWrapperTest_WaitForWriteConfirmTest2()
         {
             // arrange
             Exception? e;
@@ -335,7 +387,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void QueuedMsgs_Test1()
+        public void RmqcWrapperTest_QueuedMsgsTest1()
         {
             // arrange
             Exception? e;
@@ -352,7 +404,7 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
         }
         
         [Fact]
-        public void QueuedMsgs_Test2()
+        public void RmqcWrapperTest_QueuedMsgsTest2()
         {
             // arrange
             Exception? e;
@@ -369,6 +421,9 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.main
                 x.QueuedMsgs(out It.Ref<uint?>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
         }
 
+
+        #endregion
+        
         #endregion
     }
 }
