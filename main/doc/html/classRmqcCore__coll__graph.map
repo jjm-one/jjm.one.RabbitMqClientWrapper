@@ -1,0 +1,5 @@
+<map id="RmqcCore" name="RmqcCore">
+<area shape="rect" id="node1" title="This class implements the IRmqcCore interface for a RabbitMQ server." alt="" coords="61,95,150,121"/>
+<area shape="rect" id="node2" href="$interfaceIRmqcCore.html" title="This interface defines the core functionality to connect and communicate with a RabbitMQ server." alt="" coords="5,5,99,32"/>
+<area shape="rect" id="node3" href="$classSettings.html" title="This class defines the settings for a client connection to a RabbitMQ server." alt="" coords="123,5,197,32"/>
+</map>

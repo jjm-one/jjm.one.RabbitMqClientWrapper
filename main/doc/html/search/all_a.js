@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['message_46',['Message',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Message.html',1,'jjm.one.RabbitMqClientWrapper.types.Message'],['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Message.html#a3d9157b789c1748fd3a185de7b8505aa',1,'jjm.one.RabbitMqClientWrapper.types.Message.Message()'],['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Message.html#a820b5e65067d19f0229ab52fe25535bf',1,'jjm.one.RabbitMqClientWrapper.types.Message.Message(BasicGetResult? rawMessage)']]],
-  ['message_2ecs_47',['Message.cs',['../Message_8cs.html',1,'']]]
+  ['message_39',['Message',['../classMessage.html',1,'Message'],['../classMessage.html#abfb2d56ed99ae3284804b791952b0ad6',1,'Message.Message()'],['../classMessage.html#ac04370914d7ca7e1fa3065fa6e354c27',1,'Message.Message(BasicGetResult? rawMessage)']]],
+  ['message_2ecs_40',['Message.cs',['../Message_8cs.html',1,'']]]
 ];

@@ -1,0 +1,5 @@
+<map id="RmqcWrapper" name="RmqcWrapper">
+<area shape="rect" id="node1" title="This class implements the IRmqcWrapper interface for a RabbitMQ server." alt="" coords="73,95,187,121"/>
+<area shape="rect" id="node2" href="$interfaceIRmqcWrapper.html" title="This interface defines the core and additional functionality to connect and communicate with a Rabbit..." alt="" coords="5,5,124,32"/>
+<area shape="rect" id="node3" href="$interfaceIRmqcCore.html" title="This interface defines the core functionality to connect and communicate with a RabbitMQ server." alt="" coords="149,5,242,32"/>
+</map>

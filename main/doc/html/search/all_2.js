@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['basicproperties_13',['BasicProperties',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Message.html#a1167e13ff1b03e1fc303d68db409183f',1,'jjm::one::RabbitMqClientWrapper::types::Message']]],
-  ['body_14',['Body',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Message.html#af027c4be03560db0f1f0d38b849d5fcc',1,'jjm::one::RabbitMqClientWrapper::types::Message']]]
+  ['basicproperties_18',['BasicProperties',['../classMessage.html#a082cd91a6525ac430ad6b8bda22abe55',1,'Message']]],
+  ['body_19',['Body',['../classMessage.html#a0cbd96962d2ee35111036425b9a840db',1,'Message']]]
 ];

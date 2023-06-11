@@ -1,0 +1,4 @@
+<map id="NoChannelException" name="NoChannelException">
+<area shape="rect" id="node1" title="This class represents an exception which gets thrown if the IModel in a RmqcCore object is null or no..." alt="" coords="5,80,163,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="41,5,127,32"/>
+</map>
