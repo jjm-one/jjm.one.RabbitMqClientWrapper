@@ -435,6 +435,36 @@
             </summary>
             <param name="enableLogging">The flag to enable or disable logging i the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class.</param>
         </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.types.exceptions.NoChannelException">
+            <summary>
+            This class represents an exception which gets thrown if the <see cref="T:RabbitMQ.Client.IModel"/> in a <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> object is null or not initialized.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.exceptions.NoChannelException.#ctor">
+            <summary>
+            The default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.exceptions.NoChannelException"/> class.
+            </summary>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.types.exceptions.NoConnectionException">
+            <summary>
+            This class represents an exception which gets thrown if the <see cref="T:RabbitMQ.Client.IConnection"/> in a <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> object is null or not initialized.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.exceptions.NoConnectionException.#ctor">
+            <summary>
+            The default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.exceptions.NoConnectionException"/> class.
+            </summary>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.types.exceptions.NoConnectionFactoryException">
+            <summary>
+            This class represents an exception which gets thrown if the <see cref="T:RabbitMQ.Client.IConnectionFactory"/> in a <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> object is null or not initialized.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.exceptions.NoConnectionFactoryException.#ctor">
+            <summary>
+            The default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.exceptions.NoConnectionFactoryException"/> class.
+            </summary>
+        </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.types.Settings">
             <summary>
             This class defines the settings for a client connection to a RabbitMQ server.
