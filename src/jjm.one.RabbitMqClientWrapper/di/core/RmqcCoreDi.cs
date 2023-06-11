@@ -22,7 +22,7 @@ internal static class RmqcCoreDi
 	{
 		services.AddSingleton(settings);
 		services.AddSingleton(enableCoreLogging);
-		services.AddScoped<IRmqcCore, RmqcCore>();
+		services.AddScoped<IRmqcCore>(sp => ActivatorUtilities.CreateInstance<RmqcCore>(sp));
 
 		return services;
 	}

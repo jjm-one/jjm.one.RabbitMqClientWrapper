@@ -25,7 +25,7 @@ public static class RmqcWrapperDi
     {
         services.AddRmqcCore(settings, enableCoreLogging);
         services.AddSingleton(enableWrapperLogging);
-        services.AddScoped<IRmqcWrapper, RmqcWrapper>();
+        services.AddScoped<IRmqcWrapper>(sp => ActivatorUtilities.CreateInstance<RmqcWrapper>(sp));
 
         return services;
     }

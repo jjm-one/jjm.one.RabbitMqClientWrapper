@@ -4,6 +4,7 @@ using jjm.one.Microsoft.Extensions.Logging.Helpers;
 using jjm.one.RabbitMqClientWrapper.types;
 using jjm.one.RabbitMqClientWrapper.types.di;
 using jjm.one.RabbitMqClientWrapper.types.exceptions;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
@@ -99,6 +100,7 @@ internal class RmqcCore : IRmqcCore
     /// <param name="settings"></param>
     /// <param name="logger"></param>
     /// <param name="enableLogging"></param>
+    [ActivatorUtilitiesConstructor]
     public RmqcCore(Settings settings, ILogger<RmqcCore> logger, DiSimpleTypeWrappersEnableCoreLogging? enableLogging = null)
     {
         // init global vars

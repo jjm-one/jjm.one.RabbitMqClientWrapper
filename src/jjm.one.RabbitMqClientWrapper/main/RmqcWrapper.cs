@@ -5,6 +5,7 @@ using jjm.one.RabbitMqClientWrapper.types.di;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace jjm.one.RabbitMqClientWrapper.main;
 
@@ -68,6 +69,7 @@ public class RmqcWrapper : IRmqcWrapper
     /// <param name="core"></param>
     /// <param name="logger"></param>
     /// <param name="enableLogging"></param>
+    [ActivatorUtilitiesConstructor]
     public RmqcWrapper(IRmqcCore core, ILogger<RmqcWrapper> logger,
         DiSimpleTypeWrappersEnableWrapperLogging? enableLogging = null)
     {
