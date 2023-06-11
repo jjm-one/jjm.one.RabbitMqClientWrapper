@@ -1,7 +1,6 @@
-﻿using System;
-using jjm.one.RabbitMqClientWrapper.types.di;
+﻿using jjm.one.RabbitMqClientWrapper.types.di;
 
-namespace jjm.one.RabbitMqClientWrapper.Tests.types
+namespace jjm.one.RabbitMqClientWrapper.Tests.types.di
 {
     /// <summary>
     /// This class contains the unit tests for the following classes:
