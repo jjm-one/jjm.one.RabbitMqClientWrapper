@@ -465,6 +465,47 @@
             The default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.exceptions.NoConnectionFactoryException"/> class.
             </summary>
         </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.types.Message">
+            <summary>
+            This class represents a message which gets send an received to or from the RabbitMQ server.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.Message.RawBasicGetResult">
+            <summary>
+            The raw <see cref="T:RabbitMQ.Client.BasicGetResult"/> contained in this <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> object.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.Message.DeliveryTag">
+            <summary>
+            The delivery tag of this message.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.Message.RoutingKey">
+            <summary>
+            The routing key of this message.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.Message.BasicProperties">
+            <summary>
+            The basic properties of the message.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.Message.Body">
+            <summary>
+            The body containing the payload of the message. 
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.Message.#ctor">
+            <summary>
+            The default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.Message.#ctor(RabbitMQ.Client.BasicGetResult)">
+            <summary>
+            The additional parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> class.
+            </summary>
+            <param name="rawMessage"></param>
+        </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.types.Settings">
             <summary>
             This class defines the settings for a client connection to a RabbitMQ server.
@@ -521,7 +562,7 @@
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.types.Settings.#ctor(System.String,System.Nullable{System.Int32},System.String,System.String,System.String,System.String,System.String)">
             <summary>
-            Additional parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
+            The parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
             </summary>
             <param name="hostname">The hostname of the RabbitMQ server.</param>
             <param name="port">The port of the RabbitMQ server.</param>

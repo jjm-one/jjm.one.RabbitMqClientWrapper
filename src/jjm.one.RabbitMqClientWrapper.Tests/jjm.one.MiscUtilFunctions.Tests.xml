@@ -201,9 +201,14 @@
             Tests the getter of the RoutingKey member.
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_RoutingKeySetTest">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_RoutingKeySetTest1">
             <summary>
-            Tests the setter of the RoutingKey member.
+            Tests the setter of the RoutingKey member. (Test 1)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_RoutingKeySetTest2">
+            <summary>
+            Tests the setter of the RoutingKey member. (Testm2)
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_BasicPropertiesGetTest">
@@ -211,14 +216,24 @@
             Tests the getter of the BasicProperties member.
             </summary>
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_BasicPropertiesSetTest">
+            <summary>
+            Tests the setter of the BasicProperties member.
+            </summary>
+        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_BodyGetSetTest">
             <summary>
             Tests the getter of the Body member.
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_BodySetTest">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_BodySetTest1">
             <summary>
-            Tests the setter of the Body member.
+            Tests the setter of the Body member. (Test 1)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_BodySetTest2">
+            <summary>
+            Tests the setter of the Body member. (Test 2)
             </summary>
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests">

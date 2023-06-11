@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Intrinsics.Arm;
 using FluentAssertions;
 using jjm.one.RabbitMqClientWrapper.types;
 using RabbitMQ.Client;
@@ -99,10 +100,9 @@ public class MessageTests
     public void MessageTest_DeliveryTagGetTest()
     {
         // arrange
-        var b = new ReadOnlyMemory<byte>();
         var m = new Message(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
-                null, b));
+                null, new ReadOnlyMemory<byte>()));
         ulong res = 0;
         
         try
@@ -127,10 +127,9 @@ public class MessageTests
     public void MessageTest_RoutingKeyGetTest()
     {
         // arrange
-        var b = new ReadOnlyMemory<byte>();
         var m = new Message(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
-                null, b));
+                null, new ReadOnlyMemory<byte>()));
         var res = string.Empty;
         
         try
@@ -149,16 +148,41 @@ public class MessageTests
     }
 
     /// <summary>
-    /// Tests the setter of the RoutingKey member.
+    /// Tests the setter of the RoutingKey member. (Test 1)
     /// </summary>
     [Fact]
-    public void MessageTest_RoutingKeySetTest()
+    public void MessageTest_RoutingKeySetTest1()
     {
         // arrange
-        var b = new ReadOnlyMemory<byte>();
         var m = new Message(
             new BasicGetResult(42, true, "TEST-EX",string.Empty, 69,
-                null, b));
+                null, new ReadOnlyMemory<byte>()));
+        var res = string.Empty;
+        
+        try
+        {
+            // act
+            m.RoutingKey = "TEST-RK";
+            res = m.RoutingKey;
+        }
+        catch (Exception exc)
+        {
+            // assert 1
+            Assert.Fail(exc.Message);
+        }
+        
+        // assert 2
+        res.Should().Be("TEST-RK");
+    }
+    
+    /// <summary>
+    /// Tests the setter of the RoutingKey member. (Testm2)
+    /// </summary>
+    [Fact]
+    public void MessageTest_RoutingKeySetTest2()
+    {
+        // arrange
+        var m = new Message();
         var res = string.Empty;
         
         try
@@ -184,10 +208,9 @@ public class MessageTests
     public void MessageTest_BasicPropertiesGetTest()
     {
         // arrange
-        var b = new ReadOnlyMemory<byte>();
         var m = new Message(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
-                null, b));
+                null, new ReadOnlyMemory<byte>()));
         IBasicProperties? res = null!;
         
         try
@@ -203,6 +226,35 @@ public class MessageTests
             
         // assert 2
         res.Should().BeNull();
+    }
+    
+    /// <summary>
+    /// Tests the setter of the BasicProperties member.
+    /// </summary>
+    [Fact(Skip = "Not properly implemented Test.")]
+    public void MessageTest_BasicPropertiesSetTest()
+    {
+        // arrange
+        IBasicProperties? bP = null;
+        var m = new Message(
+            new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
+                null, new ReadOnlyMemory<byte>()));
+        IBasicProperties? res = null!;
+        
+        try
+        {
+            // act
+            m.BasicProperties = bP;
+            res = m.BasicProperties;
+        }
+        catch (Exception exc)
+        {
+            // assert 1
+            Assert.Fail(exc.Message);
+        }
+            
+        // assert 2
+        res.Should().Be(bP);
     }
     
     /// <summary>
@@ -234,10 +286,10 @@ public class MessageTests
     }
     
     /// <summary>
-    /// Tests the setter of the Body member.
+    /// Tests the setter of the Body member. (Test 1)
     /// </summary>
     [Fact]
-    public void MessageTest_BodySetTest()
+    public void MessageTest_BodySetTest1()
     {
         // arrange
         var b = new ReadOnlyMemory<byte>();
@@ -262,6 +314,33 @@ public class MessageTests
         res.Should().Be(b);
     }
 
+    /// <summary>
+    /// Tests the setter of the Body member. (Test 2)
+    /// </summary>
+    [Fact]
+    public void MessageTest_BodySetTest2()
+    {
+        // arrange
+        var b = new ReadOnlyMemory<byte>();
+        var m = new Message();
+        ReadOnlyMemory<byte>? res = null;
+        
+        try
+        {
+            // act
+            m.Body = b;
+            res = m.Body;
+        }
+        catch (Exception exc)
+        {
+            // assert 1
+            Assert.Fail(exc.Message);
+        }
+            
+        // assert 2
+        res.Should().Be(b);
+    }
+    
     #endregion
     
     #endregion
