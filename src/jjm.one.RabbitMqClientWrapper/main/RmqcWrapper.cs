@@ -62,6 +62,12 @@ namespace jjm.one.RabbitMqClientWrapper.main
 
         #region ctor's
 
+        /// <summary>
+        /// A additional parameterised constructor of the <see cref="RmqcWrapper"/> class.
+        /// </summary>
+        /// <param name="core"></param>
+        /// <param name="logger"></param>
+        /// <param name="enableLogging"></param>
         public RmqcWrapper(IRmqcCore core, ILogger<RmqcWrapper> logger,
             DiSimpleTypeWrappersEnableWrapperLogging? enableLogging = null)
         {
@@ -73,6 +79,12 @@ namespace jjm.one.RabbitMqClientWrapper.main
             if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
         }
 
+        /// <summary>
+        /// A additional parameterised constructor of the <see cref="RmqcWrapper"/> class.
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <param name="enableWrapperLogging"></param>
+        /// <param name="enableCoreLogging"></param>
         public RmqcWrapper(Settings settings, bool enableWrapperLogging = false, bool enableCoreLogging = false)
         {
             _core = new RmqcCore(settings, new Logger<RmqcCore>(new LoggerFactory()), new DiSimpleTypeWrappersEnableCoreLogging(enableCoreLogging));
