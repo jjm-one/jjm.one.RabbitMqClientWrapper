@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['settings_132',['Settings',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Settings.html#a9fef82a44f5cfdc726766113861408fd',1,'jjm::one::RabbitMqClientWrapper::types::Settings']]]
+  ['settings_118',['Settings',['../classSettings.html#aa6956f658fec493575cbb17a9997749d',1,'Settings']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['password_157',['Password',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Settings.html#a7317b2570b850209aa9f26b09e0541cc',1,'jjm::one::RabbitMqClientWrapper::types::Settings']]],
-  ['port_158',['Port',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Settings.html#abc59a99e25b73e8e82e2fa510e2e44a3',1,'jjm::one::RabbitMqClientWrapper::types::Settings']]]
+  ['password_143',['Password',['../classSettings.html#a62619748f181d68c6a92e894fb7a2c6d',1,'Settings']]],
+  ['port_144',['Port',['../classSettings.html#afde0fb2d25427daf075cd88f657bf99e',1,'Settings']]]
 ];

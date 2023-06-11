@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['disimpletypewrappers_2ecs_98',['DiSimpleTypeWrappers.cs',['../DiSimpleTypeWrappers_8cs.html',1,'']]]
+  ['disimpletypewrappers_2ecs_84',['DiSimpleTypeWrappers.cs',['../DiSimpleTypeWrappers_8cs.html',1,'']]]
 ];

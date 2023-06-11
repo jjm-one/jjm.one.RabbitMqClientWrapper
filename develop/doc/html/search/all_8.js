@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['init_33',['Init',['../interfacejjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1core_1_1IRmqcCore.html#a4a5788d9e493bc48c3c7b304e0311e4e',1,'jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore.Init()'],['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1core_1_1RmqcCore.html#a520661925749a997e0241a8cba05bef2',1,'jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.Init()'],['../interfacejjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1IRmqcWrapper.html#aeab3771538e7dff842d2f99d975d6130',1,'jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.Init()'],['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1RmqcWrapper.html#aac64b128751af0897d5e3cc372869d2b',1,'jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.Init()']]],
-  ['irmqccore_34',['IRmqcCore',['../interfacejjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1core_1_1IRmqcCore.html',1,'jjm::one::RabbitMqClientWrapper::main::core']]],
+  ['init_33',['Init',['../interfaceIRmqcCore.html#ac408abc37c3c8cfe6cac92d265c3be64',1,'IRmqcCore.Init()'],['../classRmqcCore.html#a3affe8dff88166121a6b8efb07969a4f',1,'RmqcCore.Init()'],['../interfaceIRmqcWrapper.html#acc2a46402d0ec9a17e65c4d984dcc910',1,'IRmqcWrapper.Init()'],['../classRmqcWrapper.html#a66714031c5df75290155630967746017',1,'RmqcWrapper.Init()']]],
+  ['irmqccore_34',['IRmqcCore',['../interfaceIRmqcCore.html',1,'']]],
   ['irmqccore_2ecs_35',['IRmqcCore.cs',['../IRmqcCore_8cs.html',1,'']]],
-  ['irmqcwrapper_36',['IRmqcWrapper',['../interfacejjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1IRmqcWrapper.html',1,'jjm::one::RabbitMqClientWrapper::main']]],
+  ['irmqcwrapper_36',['IRmqcWrapper',['../interfaceIRmqcWrapper.html',1,'']]],
   ['irmqcwrapper_2ecs_37',['IRmqcWrapper.cs',['../IRmqcWrapper_8cs.html',1,'']]]
 ];

@@ -1,4 +1,0 @@
-<map id="jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore" name="jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore">
-<area shape="rect" id="node1" title="This interface defines the core functionality to connect and communicate with a RabbitMQ server." alt="" coords="5,5,308,47"/>
-<area shape="rect" id="node2" href="$classjjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1core_1_1RmqcCore.html" title="This class implements the IRmqcCore interface for a RabbitMQ server." alt="" coords="5,95,308,136"/>
-</map>

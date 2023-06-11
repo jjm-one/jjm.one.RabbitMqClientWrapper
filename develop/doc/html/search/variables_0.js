@@ -1,18 +1,18 @@
 var searchData=
 [
-  ['_5fchannel_135',['_channel',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1core_1_1RmqcCore.html#a4c5e9fdf8148e183339eae6828da50ff',1,'jjm::one::RabbitMqClientWrapper::main::core::RmqcCore']]],
-  ['_5fconnection_136',['_connection',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1core_1_1RmqcCore.html#a5f6eccfe2e283f43dd069814b276c317',1,'jjm::one::RabbitMqClientWrapper::main::core::RmqcCore']]],
-  ['_5fconnectionfactory_137',['_connectionFactory',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1core_1_1RmqcCore.html#a7dfdf093fc2899baa5110c3c369e9925',1,'jjm::one::RabbitMqClientWrapper::main::core::RmqcCore']]],
-  ['_5fcore_138',['_core',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1RmqcWrapper.html#a283c661ebfffd893b6633c7be4938697',1,'jjm::one::RabbitMqClientWrapper::main::RmqcWrapper']]],
-  ['_5fenablelogging_139',['_enableLogging',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1core_1_1RmqcCore.html#a1d8db2cb637a578e050ff63cf7b7fc46',1,'jjm.one.RabbitMqClientWrapper.main.core.RmqcCore._enableLogging()'],['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1RmqcWrapper.html#acbb65e6412d13819a07f9991c9268419',1,'jjm.one.RabbitMqClientWrapper.main.RmqcWrapper._enableLogging()']]],
-  ['_5fexchange_140',['_exchange',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Settings.html#ac5c83bc2d7fc98cdfe4aaef1d7637209',1,'jjm::one::RabbitMqClientWrapper::types::Settings']]],
-  ['_5fhostname_141',['_hostname',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Settings.html#a67764636558c76a651fedede96b512e4',1,'jjm::one::RabbitMqClientWrapper::types::Settings']]],
-  ['_5flogger_142',['_logger',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1core_1_1RmqcCore.html#a79754127f3e5103cc273cede2ca58166',1,'jjm.one.RabbitMqClientWrapper.main.core.RmqcCore._logger()'],['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1RmqcWrapper.html#acb7ea7664d96b82095d56a9920fd3c2f',1,'jjm.one.RabbitMqClientWrapper.main.RmqcWrapper._logger()']]],
-  ['_5fpassword_143',['_password',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Settings.html#acd84922d67cb99d2b166c8cd81b2e87d',1,'jjm::one::RabbitMqClientWrapper::types::Settings']]],
-  ['_5fport_144',['_port',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Settings.html#a6600e3fa64dbe64fabb4c66a2794c90c',1,'jjm::one::RabbitMqClientWrapper::types::Settings']]],
-  ['_5fqueue_145',['_queue',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Settings.html#a44f857c78f29fc4d03e4b1f1ceadc2f0',1,'jjm::one::RabbitMqClientWrapper::types::Settings']]],
-  ['_5frawbasicgetresult_146',['_rawBasicGetResult',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Message.html#aef90e7fa928241fd524cde02e7992444',1,'jjm::one::RabbitMqClientWrapper::types::Message']]],
-  ['_5fsettings_147',['_settings',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1main_1_1core_1_1RmqcCore.html#a6c1a28bb8768ff037f144dd043ca1147',1,'jjm::one::RabbitMqClientWrapper::main::core::RmqcCore']]],
-  ['_5fusername_148',['_username',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Settings.html#a2c995b68be7df468554309f2e12c0dca',1,'jjm::one::RabbitMqClientWrapper::types::Settings']]],
-  ['_5fvhost_149',['_vHost',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Settings.html#a2ddd10785c9c05c3d60a97fa4543782d',1,'jjm::one::RabbitMqClientWrapper::types::Settings']]]
+  ['_5fchannel_121',['_channel',['../classRmqcCore.html#a7a8853a6f3341caf1df253006f4c7030',1,'RmqcCore']]],
+  ['_5fconnection_122',['_connection',['../classRmqcCore.html#a77957080b91f2fe146a56307ed6e61d2',1,'RmqcCore']]],
+  ['_5fconnectionfactory_123',['_connectionFactory',['../classRmqcCore.html#abfcd528ceab819d7e04602402fe616bc',1,'RmqcCore']]],
+  ['_5fcore_124',['_core',['../classRmqcWrapper.html#afac7e59b3b264186415cc5c2df684afc',1,'RmqcWrapper']]],
+  ['_5fenablelogging_125',['_enableLogging',['../classRmqcCore.html#a7d34c958a15acbf53cd2b6e31ad9fab4',1,'RmqcCore._enableLogging()'],['../classRmqcWrapper.html#abac70cb583384f58e93d347d610550cd',1,'RmqcWrapper._enableLogging()']]],
+  ['_5fexchange_126',['_exchange',['../classSettings.html#a7e7407f938e01575e587c0d80c5293ce',1,'Settings']]],
+  ['_5fhostname_127',['_hostname',['../classSettings.html#a4827b341289d4534739bd4550614a8dd',1,'Settings']]],
+  ['_5flogger_128',['_logger',['../classRmqcCore.html#ad486baed0c38ff704a032079639b230a',1,'RmqcCore._logger()'],['../classRmqcWrapper.html#ad32b9b3ab519c6991e5cd977f84b15f5',1,'RmqcWrapper._logger()']]],
+  ['_5fpassword_129',['_password',['../classSettings.html#a807ef69f38113a7d6240ad60b69731b0',1,'Settings']]],
+  ['_5fport_130',['_port',['../classSettings.html#a9e974850e535ef02af3105e64f00c47d',1,'Settings']]],
+  ['_5fqueue_131',['_queue',['../classSettings.html#a3a68020c12e7afbfcd11b1394c2e8c78',1,'Settings']]],
+  ['_5frawbasicgetresult_132',['_rawBasicGetResult',['../classMessage.html#aef5ef4da1cfc0e7cd0f3b8cafe4c6731',1,'Message']]],
+  ['_5fsettings_133',['_settings',['../classRmqcCore.html#ab222e75d71a5b19e0ff111b3f6dcb0b6',1,'RmqcCore']]],
+  ['_5fusername_134',['_username',['../classSettings.html#a1b8587500142f95a542b541d5c895fa6',1,'Settings']]],
+  ['_5fvhost_135',['_vHost',['../classSettings.html#a438d916e88361821f61d02f57268dd2e',1,'Settings']]]
 ];

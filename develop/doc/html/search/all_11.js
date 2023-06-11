@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vhost_75',['VHost',['../classjjm_1_1one_1_1RabbitMqClientWrapper_1_1types_1_1Settings.html#ac29128af4c5d7d4a925df58f8e251bf0',1,'jjm::one::RabbitMqClientWrapper::types::Settings']]]
+  ['vhost_68',['VHost',['../classSettings.html#a22b03e48cf5819aeacec87582f0a0220',1,'Settings']]]
 ];
