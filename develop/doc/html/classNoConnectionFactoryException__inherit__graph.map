@@ -1,0 +1,4 @@
+<map id="NoConnectionFactoryException" name="NoConnectionFactoryException">
+<area shape="rect" id="node1" title="This class represents an exception which gets thrown if the IConnectionFactory in a RmqcCore object i..." alt="" coords="5,80,229,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="74,5,161,32"/>
+</map>
