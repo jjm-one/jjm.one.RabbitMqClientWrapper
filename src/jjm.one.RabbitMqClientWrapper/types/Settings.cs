@@ -103,7 +103,7 @@ namespace jjm.one.RabbitMqClientWrapper.types
         #region ctor
 
         /// <summary>
-        /// Additional parameterised constructor of the <see cref="Settings"/> class.
+        /// The parameterised constructor of the <see cref="Settings"/> class.
         /// </summary>
         /// <param name="hostname">The hostname of the RabbitMQ server.</param>
         /// <param name="port">The port of the RabbitMQ server.</param>

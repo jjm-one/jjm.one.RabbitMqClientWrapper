@@ -3,6 +3,9 @@ using RabbitMQ.Client;
 
 namespace jjm.one.RabbitMqClientWrapper.types
 {
+    /// <summary>
+    /// This class represents a message which gets send an received to or from the RabbitMQ server.
+    /// </summary>
     public class Message
     {
         #region private members
@@ -13,8 +16,19 @@ namespace jjm.one.RabbitMqClientWrapper.types
 
         #region public members
 
+        /// <summary>
+        /// The raw <see cref="BasicGetResult"/> contained in this <see cref="Message"/> object.
+        /// </summary>
+        public BasicGetResult? RawBasicGetResult => _rawBasicGetResult;
+
+        /// <summary>
+        /// The delivery tag of this message.
+        /// </summary>
         public ulong DeliveryTag => _rawBasicGetResult?.DeliveryTag ?? 0;
 
+        /// <summary>
+        /// The routing key of this message.
+        /// </summary>
         public string RoutingKey
         {
             get => _rawBasicGetResult is not null ? _rawBasicGetResult.RoutingKey : string.Empty;
@@ -47,6 +61,9 @@ namespace jjm.one.RabbitMqClientWrapper.types
             }
         }
 
+        /// <summary>
+        /// The basic properties of the message.
+        /// </summary>
         public IBasicProperties? BasicProperties
         {
             get => _rawBasicGetResult?.BasicProperties;
@@ -79,6 +96,9 @@ namespace jjm.one.RabbitMqClientWrapper.types
             }
         }
 
+        /// <summary>
+        /// The body containing the payload of the message. 
+        /// </summary>
         public ReadOnlyMemory<byte>? Body
         {
             get => _rawBasicGetResult?.Body;
@@ -115,10 +135,17 @@ namespace jjm.one.RabbitMqClientWrapper.types
 
         #region ctos's
 
+        /// <summary>
+        /// The default constructor of the <see cref="Message"/> class.
+        /// </summary>
         public Message()
         {
         }
 
+        /// <summary>
+        /// The additional parameterised constructor of the <see cref="Message"/> class.
+        /// </summary>
+        /// <param name="rawMessage"></param>
         public Message(BasicGetResult? rawMessage)
         {
             _rawBasicGetResult = rawMessage;
