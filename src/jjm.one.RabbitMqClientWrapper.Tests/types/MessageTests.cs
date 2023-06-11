@@ -5,12 +5,18 @@ using RabbitMQ.Client;
 
 namespace jjm.one.RabbitMqClientWrapper.Tests.types;
 
+/// <summary>
+/// This class contains the unit tests for the <see cref="Message"/> class.
+/// </summary>
 public class MessageTests
 {
     #region tests
 
     #region ctor tests
 
+    /// <summary>
+    /// Tests the default constructor of the <see cref="Message"/> class.
+    /// </summary>
     [Fact]
     public void MessageTest_DefaultCtorTest()
     {
@@ -32,6 +38,9 @@ public class MessageTests
         m.Should().NotBeNull();
     }
     
+    /// <summary>
+    /// Tests the constructor of the <see cref="Message"/> class with <see langword="null"/> as inputs.
+    /// </summary>
     [Fact]
     public void MessageTest_CtorNullTest()
     {
@@ -53,6 +62,9 @@ public class MessageTests
         m.Should().NotBeNull();
     }
     
+    /// <summary>
+    /// Tests the constructor of the <see cref="Message"/> class.
+    /// </summary>
     [Fact]
     public void MessageTest_CtorTest()
     {
@@ -80,6 +92,9 @@ public class MessageTests
 
     #region public members tests
 
+    /// <summary>
+    /// Tests the getter of the DeliveryTag member.
+    /// </summary>
     [Fact]
     public void MessageTest_DeliveryTagGetTest()
     {
@@ -105,6 +120,9 @@ public class MessageTests
         res.Should().Be(42);
     }
     
+    /// <summary>
+    /// Tests the getter of the RoutingKey member.
+    /// </summary>
     [Fact]
     public void MessageTest_RoutingKeyGetTest()
     {
@@ -130,6 +148,9 @@ public class MessageTests
         res.Should().Be("TEST-RK");
     }
     
+    /// <summary>
+    /// Tests the getter of the BasicProperties member.
+    /// </summary>
     [Fact(Skip = "Not properly implemented Test.")]
     public void MessageTest_BasicPropertiesGetTest()
     {
@@ -155,6 +176,9 @@ public class MessageTests
         res.Should().BeNull();
     }
     
+    /// <summary>
+    /// Tests the getter of the Body member.
+    /// </summary>
     [Fact]
     public void MessageTest_BodyGetTest()
     {
