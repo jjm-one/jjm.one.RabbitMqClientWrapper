@@ -346,6 +346,22 @@
         <member name="P:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.Connected">
             <inheritdoc />
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.#ctor(jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore,Microsoft.Extensions.Logging.ILogger{jjm.one.RabbitMqClientWrapper.main.RmqcWrapper},jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableWrapperLogging)">
+            <summary>
+            A additional parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class.
+            </summary>
+            <param name="core"></param>
+            <param name="logger"></param>
+            <param name="enableLogging"></param>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.#ctor(jjm.one.RabbitMqClientWrapper.types.Settings,System.Boolean,System.Boolean)">
+            <summary>
+            A additional parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class.
+            </summary>
+            <param name="settings"></param>
+            <param name="enableWrapperLogging"></param>
+            <param name="enableCoreLogging"></param>
+        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.Init">
             <inheritdoc />
         </member>

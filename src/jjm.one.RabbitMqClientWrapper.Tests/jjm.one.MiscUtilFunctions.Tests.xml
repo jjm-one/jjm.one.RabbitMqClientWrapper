@@ -4,6 +4,36 @@
         <name>jjm.one.RabbitMqClientWrapper.Tests</name>
     </assembly>
     <members>
+        <member name="T:jjm.one.RabbitMqClientWrapper.Tests.di.core.RmqcCoreDiTests">
+            <summary>
+            This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.di.core.RmqcCoreDi"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.di.core.RmqcCoreDiTests.#ctor">
+            <summary>
+            The default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.Tests.di.core.RmqcCoreDiTests"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.di.core.RmqcCoreDiTests.RmqcCoreDiTest_AddRmqcCoreTest">
+            <summary>
+            Tests the static AddRmqcCore function.
+            </summary>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.Tests.di.RmqcWrapperDiTests">
+            <summary>
+            This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.di.RmqcWrapperDi"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.di.RmqcWrapperDiTests.#ctor">
+            <summary>
+            The default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.Tests.di.RmqcWrapperDiTests"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.di.RmqcWrapperDiTests.RmqcWrapperDiTest_AddRmqcWrapperTest">
+            <summary>
+            Tests the static AddRmqcCore function.
+            </summary>
+        </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests">
             <summary>
             This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class.
