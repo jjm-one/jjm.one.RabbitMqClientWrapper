@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['nochannelexception_82',['NoChannelException',['../classNoChannelException.html',1,'']]],
-  ['noconnectionexception_83',['NoConnectionException',['../classNoConnectionException.html',1,'']]],
-  ['noconnectionfactoryexception_84',['NoConnectionFactoryException',['../classNoConnectionFactoryException.html',1,'']]]
+  ['nochannelexception_83',['NoChannelException',['../classNoChannelException.html',1,'']]],
+  ['noconnectionexception_84',['NoConnectionException',['../classNoConnectionException.html',1,'']]],
+  ['noconnectionfactoryexception_85',['NoConnectionFactoryException',['../classNoConnectionFactoryException.html',1,'']]]
 ];
