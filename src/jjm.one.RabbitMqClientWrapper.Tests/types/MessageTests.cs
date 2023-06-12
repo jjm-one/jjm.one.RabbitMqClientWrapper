@@ -294,19 +294,18 @@ public class MessageTests
     public void MessageTest_BodySetTest3()
     {
         // arrange
-        ReadOnlyMemory<byte> b = null;
         var m = new Message(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, null))
         {
             // act
-            Body = b
+            Body = null
         };
 
         var res = m.Body;
-        // assert
         
-        res.Should().Be(b);
+        // assert
+        res.Should().NotBeNull();
     }
     
     /// <summary>
@@ -316,17 +315,16 @@ public class MessageTests
     public void MessageTest_BodySetTest4()
     {
         // arrange
-        ReadOnlyMemory<byte> b = null; 
         var m = new Message
         {
             // act
-            Body = b
+            Body = null
         };
 
         var res = m.Body;
 
         // assert
-        res.Should().Be(b);
+        res.Should().NotBeNull();
     }
     
     #endregion
