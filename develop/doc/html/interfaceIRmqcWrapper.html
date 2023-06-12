@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">jjm.one.RabbitMqClientWrapper
-   &#160;<span id="projectnumber">1.0.0-alpha.2</span>
+   &#160;<span id="projectnumber">1.0.0-alpha.3</span>
    </div>
    <div id="projectbrief">A C# wrapper for a RabbitMQ client.</div>
   </td>
@@ -65,6 +65,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#events">Events</a> &#124;
 <a href="interfaceIRmqcWrapper-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">IRmqcWrapper Interface Reference</div>  </div>
@@ -98,6 +99,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2a96ca276aca5c828a38de66e3b87fb8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcWrapper.html#a2a96ca276aca5c828a38de66e3b87fb8">Connect</a> ()</td></tr>
 <tr class="memdesc:a2a96ca276aca5c828a38de66e3b87fb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect to the RabbitMQ server.  <a href="interfaceIRmqcWrapper.html#a2a96ca276aca5c828a38de66e3b87fb8">More...</a><br /></td></tr>
 <tr class="separator:a2a96ca276aca5c828a38de66e3b87fb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8568ed0e1a67c99c5e56bed12e71531"><td class="memItemLeft" align="right" valign="top">new bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcWrapper.html#ab8568ed0e1a67c99c5e56bed12e71531">Disconnect</a> ()</td></tr>
+<tr class="memdesc:ab8568ed0e1a67c99c5e56bed12e71531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnect from the RabbitMQ server.  <a href="interfaceIRmqcWrapper.html#ab8568ed0e1a67c99c5e56bed12e71531">More...</a><br /></td></tr>
+<tr class="separator:ab8568ed0e1a67c99c5e56bed12e71531"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b59e28b33ea80416e4c984bf861b328"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcWrapper.html#a1b59e28b33ea80416e4c984bf861b328">Disconnect</a> (out Exception? exception)</td></tr>
+<tr class="memdesc:a1b59e28b33ea80416e4c984bf861b328"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnect from the RabbitMQ server.  <a href="interfaceIRmqcWrapper.html#a1b59e28b33ea80416e4c984bf861b328">More...</a><br /></td></tr>
+<tr class="separator:a1b59e28b33ea80416e4c984bf861b328"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4542bb164d2faf9e4c6aa8b4ce93f653"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcWrapper.html#a4542bb164d2faf9e4c6aa8b4ce93f653">ReConnect</a> ()</td></tr>
 <tr class="memdesc:a4542bb164d2faf9e4c6aa8b4ce93f653"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnect and connects form the RabbitMQ server.  <a href="interfaceIRmqcWrapper.html#a4542bb164d2faf9e4c6aa8b4ce93f653">More...</a><br /></td></tr>
 <tr class="separator:a4542bb164d2faf9e4c6aa8b4ce93f653"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,9 +139,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2aab677ea34abb07a3c16a3c25f94d44 inherit pub_methods_interfaceIRmqcCore"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a2aab677ea34abb07a3c16a3c25f94d44">Connect</a> (out Exception? exception)</td></tr>
 <tr class="memdesc:a2aab677ea34abb07a3c16a3c25f94d44 inherit pub_methods_interfaceIRmqcCore"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect to the RabbitMQ server.  <a href="interfaceIRmqcCore.html#a2aab677ea34abb07a3c16a3c25f94d44">More...</a><br /></td></tr>
 <tr class="separator:a2aab677ea34abb07a3c16a3c25f94d44 inherit pub_methods_interfaceIRmqcCore"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a722470d1d6b6cbc1ed65d521ccb65f4f inherit pub_methods_interfaceIRmqcCore"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a722470d1d6b6cbc1ed65d521ccb65f4f">Disconnect</a> ()</td></tr>
-<tr class="memdesc:a722470d1d6b6cbc1ed65d521ccb65f4f inherit pub_methods_interfaceIRmqcCore"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnect form the RabbitMQ server.  <a href="interfaceIRmqcCore.html#a722470d1d6b6cbc1ed65d521ccb65f4f">More...</a><br /></td></tr>
-<tr class="separator:a722470d1d6b6cbc1ed65d521ccb65f4f inherit pub_methods_interfaceIRmqcCore"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a018847e1171d30a77e99454f79b0802c inherit pub_methods_interfaceIRmqcCore"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a018847e1171d30a77e99454f79b0802c">WriteMsg</a> (<a class="el" href="classMessage.html">Message</a> message, out Exception? exception)</td></tr>
 <tr class="memdesc:a018847e1171d30a77e99454f79b0802c inherit pub_methods_interfaceIRmqcCore"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a <a class="el" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">Message</a> to the RabbitMQ server  <a href="interfaceIRmqcCore.html#a018847e1171d30a77e99454f79b0802c">More...</a><br /></td></tr>
 <tr class="separator:a018847e1171d30a77e99454f79b0802c inherit pub_methods_interfaceIRmqcCore"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,6 +157,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af74d3e6843f979ecf58f4518443fba55 inherit pub_methods_interfaceIRmqcCore"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#af74d3e6843f979ecf58f4518443fba55">QueuedMsgs</a> (out uint? amount, out Exception? exception)</td></tr>
 <tr class="memdesc:af74d3e6843f979ecf58f4518443fba55 inherit pub_methods_interfaceIRmqcCore"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the amount of <a class="el" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">Message</a> stored in the RabbitMQ server queue which are ready get read.  <a href="interfaceIRmqcCore.html#af74d3e6843f979ecf58f4518443fba55">More...</a><br /></td></tr>
 <tr class="separator:af74d3e6843f979ecf58f4518443fba55 inherit pub_methods_interfaceIRmqcCore"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="events"></a>
+Events</h2></td></tr>
+<tr class="memitem:a0989ca629b7bafa2578c24e967cc8c9c"><td class="memItemLeft" align="right" valign="top">EventHandler&lt; <a class="el" href="classConnectCompletedEventArgs.html">ConnectCompletedEventArgs</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcWrapper.html#a0989ca629b7bafa2578c24e967cc8c9c">ConnectCompleted</a></td></tr>
+<tr class="memdesc:a0989ca629b7bafa2578c24e967cc8c9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This events gets invoked when the connect function finishes.  <a href="interfaceIRmqcWrapper.html#a0989ca629b7bafa2578c24e967cc8c9c">More...</a><br /></td></tr>
+<tr class="separator:a0989ca629b7bafa2578c24e967cc8c9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96b6b317ccb22a83f6c2e23222476a03"><td class="memItemLeft" align="right" valign="top">EventHandler&lt; <a class="el" href="classDisconnectCompletedEventArgs.html">DisconnectCompletedEventArgs</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcWrapper.html#a96b6b317ccb22a83f6c2e23222476a03">DisconnectCompleted</a></td></tr>
+<tr class="memdesc:a96b6b317ccb22a83f6c2e23222476a03"><td class="mdescLeft">&#160;</td><td class="mdescRight">This events gets invoked when the disconnect function finishes.  <a href="interfaceIRmqcWrapper.html#a96b6b317ccb22a83f6c2e23222476a03">More...</a><br /></td></tr>
+<tr class="separator:a96b6b317ccb22a83f6c2e23222476a03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ca7536b3ab5086e1eda1844321d1dc3"><td class="memItemLeft" align="right" valign="top">EventHandler&lt; <a class="el" href="classReConnectCompletedEventArgs.html">ReConnectCompletedEventArgs</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcWrapper.html#a7ca7536b3ab5086e1eda1844321d1dc3">ReConnectCompleted</a></td></tr>
+<tr class="memdesc:a7ca7536b3ab5086e1eda1844321d1dc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This events gets invoked when the re-connect function finishes.  <a href="interfaceIRmqcWrapper.html#a7ca7536b3ab5086e1eda1844321d1dc3">More...</a><br /></td></tr>
+<tr class="separator:a7ca7536b3ab5086e1eda1844321d1dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -215,6 +231,59 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> on success, else <code>false</code>.</dd></dl>
 
 <p>Implemented in <a class="el" href="classRmqcWrapper.html#a37298a3be60fb32b24058ef639445a8b">RmqcWrapper</a>.</p>
+
+</div>
+</div>
+<a id="ab8568ed0e1a67c99c5e56bed12e71531"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8568ed0e1a67c99c5e56bed12e71531">&#9670;&nbsp;</a></span>Disconnect() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">new bool IRmqcWrapper.Disconnect </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Disconnect from the RabbitMQ server. </p>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> on success, else <code>false</code>.</dd></dl>
+
+<p>Implements <a class="el" href="interfaceIRmqcCore.html#a722470d1d6b6cbc1ed65d521ccb65f4f">IRmqcCore</a>.</p>
+
+<p>Implemented in <a class="el" href="classRmqcWrapper.html#a6924e23e3605d3e3b200952c4c708d7e">RmqcWrapper</a>, and <a class="el" href="classRmqcWrapper.html#a7129c11b9e4c0019603dcc0a9e8874bb">RmqcWrapper</a>.</p>
+
+</div>
+</div>
+<a id="a1b59e28b33ea80416e4c984bf861b328"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b59e28b33ea80416e4c984bf861b328">&#9670;&nbsp;</a></span>Disconnect() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IRmqcWrapper.Disconnect </td>
+          <td>(</td>
+          <td class="paramtype">out Exception?&#160;</td>
+          <td class="paramname"><em>exception</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Disconnect from the RabbitMQ server. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">exception</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> on success, else <code>false</code>.</dd></dl>
+
+<p>Implemented in <a class="el" href="classRmqcWrapper.html#ad47159ac7642dfb9754d661bac341042">RmqcWrapper</a>.</p>
 
 </div>
 </div>
@@ -433,6 +502,55 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> on success, else <code>false</code>.</dd></dl>
 
 <p>Implemented in <a class="el" href="classRmqcWrapper.html#a3170bbbe71d8c9f384bb08440b474ba9">RmqcWrapper</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Event Documentation</h2>
+<a id="a0989ca629b7bafa2578c24e967cc8c9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0989ca629b7bafa2578c24e967cc8c9c">&#9670;&nbsp;</a></span>ConnectCompleted</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventHandler&lt;<a class="el" href="classConnectCompletedEventArgs.html">ConnectCompletedEventArgs</a>&gt; IRmqcWrapper.ConnectCompleted</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This events gets invoked when the connect function finishes. </p>
+
+</div>
+</div>
+<a id="a96b6b317ccb22a83f6c2e23222476a03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96b6b317ccb22a83f6c2e23222476a03">&#9670;&nbsp;</a></span>DisconnectCompleted</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventHandler&lt;<a class="el" href="classDisconnectCompletedEventArgs.html">DisconnectCompletedEventArgs</a>&gt; IRmqcWrapper.DisconnectCompleted</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This events gets invoked when the disconnect function finishes. </p>
+
+</div>
+</div>
+<a id="a7ca7536b3ab5086e1eda1844321d1dc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ca7536b3ab5086e1eda1844321d1dc3">&#9670;&nbsp;</a></span>ReConnectCompleted</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventHandler&lt;<a class="el" href="classReConnectCompletedEventArgs.html">ReConnectCompletedEventArgs</a>&gt; IRmqcWrapper.ReConnectCompleted</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This events gets invoked when the re-connect function finishes. </p>
 
 </div>
 </div>

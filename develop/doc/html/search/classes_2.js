@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['nochannelexception_72',['NoChannelException',['../classNoChannelException.html',1,'']]],
-  ['noconnectionexception_73',['NoConnectionException',['../classNoConnectionException.html',1,'']]],
-  ['noconnectionfactoryexception_74',['NoConnectionFactoryException',['../classNoConnectionFactoryException.html',1,'']]]
+  ['irmqccore_89',['IRmqcCore',['../interfaceIRmqcCore.html',1,'']]],
+  ['irmqcwrapper_90',['IRmqcWrapper',['../interfaceIRmqcWrapper.html',1,'']]]
 ];

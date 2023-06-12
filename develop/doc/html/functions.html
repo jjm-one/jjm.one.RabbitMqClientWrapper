@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">jjm.one.RabbitMqClientWrapper
-   &#160;<span id="projectnumber">1.0.0-alpha.2</span>
+   &#160;<span id="projectnumber">1.0.0-alpha.3</span>
    </div>
    <div id="projectbrief">A C# wrapper for a RabbitMQ client.</div>
   </td>
@@ -139,11 +139,23 @@ $(function() {
 
 
 <h3><a id="index_c"></a>- c -</h3><ul>
+<li>CompletionTime
+: <a class="el" href="classConnectCompletedEventArgs.html#ae3e4eb88e7403e557de6bec22f19f0f3">ConnectCompletedEventArgs</a>
+, <a class="el" href="classDisconnectCompletedEventArgs.html#afdce91e3386e1af315e088cfb0ddac3d">DisconnectCompletedEventArgs</a>
+, <a class="el" href="classReConnectCompletedEventArgs.html#aa3eb0d37a42cb31b62cccb326f14924d">ReConnectCompletedEventArgs</a>
+</li>
 <li>Connect()
 : <a class="el" href="interfaceIRmqcCore.html#a2aab677ea34abb07a3c16a3c25f94d44">IRmqcCore</a>
 , <a class="el" href="interfaceIRmqcWrapper.html#a2a96ca276aca5c828a38de66e3b87fb8">IRmqcWrapper</a>
 , <a class="el" href="classRmqcCore.html#aa472101a1abf2f5d983daa47726ae66b">RmqcCore</a>
 , <a class="el" href="classRmqcWrapper.html#a37298a3be60fb32b24058ef639445a8b">RmqcWrapper</a>
+</li>
+<li>ConnectCompleted
+: <a class="el" href="interfaceIRmqcWrapper.html#a0989ca629b7bafa2578c24e967cc8c9c">IRmqcWrapper</a>
+, <a class="el" href="classRmqcWrapper.html#aa33d309d87e3021610892a04585161b8">RmqcWrapper</a>
+</li>
+<li>ConnectCompletedEventArgs()
+: <a class="el" href="classConnectCompletedEventArgs.html#a0cb26332bb371fbb7ee36b3b98542b25">ConnectCompletedEventArgs</a>
 </li>
 <li>Connected
 : <a class="el" href="interfaceIRmqcCore.html#abc07c6d24a6a53c8b83dd1800c486771">IRmqcCore</a>
@@ -164,8 +176,16 @@ $(function() {
 </li>
 <li>Disconnect()
 : <a class="el" href="interfaceIRmqcCore.html#a722470d1d6b6cbc1ed65d521ccb65f4f">IRmqcCore</a>
+, <a class="el" href="interfaceIRmqcWrapper.html#ab8568ed0e1a67c99c5e56bed12e71531">IRmqcWrapper</a>
 , <a class="el" href="classRmqcCore.html#aca9f6671c825660368c3e5cb419aa3ac">RmqcCore</a>
-, <a class="el" href="classRmqcWrapper.html#aaf04aa01426b05d10ba60b22993c443c">RmqcWrapper</a>
+, <a class="el" href="classRmqcWrapper.html#a7129c11b9e4c0019603dcc0a9e8874bb">RmqcWrapper</a>
+</li>
+<li>DisconnectCompleted
+: <a class="el" href="interfaceIRmqcWrapper.html#a96b6b317ccb22a83f6c2e23222476a03">IRmqcWrapper</a>
+, <a class="el" href="classRmqcWrapper.html#aa5a4f858141365dcab551cf40177cbd3">RmqcWrapper</a>
+</li>
+<li>DisconnectCompletedEventArgs()
+: <a class="el" href="classDisconnectCompletedEventArgs.html#af7ec5c5ea868284b07b41ff61e4b7f09">DisconnectCompletedEventArgs</a>
 </li>
 </ul>
 
@@ -173,6 +193,11 @@ $(function() {
 <h3><a id="index_e"></a>- e -</h3><ul>
 <li>Equals()
 : <a class="el" href="classSettings.html#a3722884647f6bb3470a80c7cdafb7df3">Settings</a>
+</li>
+<li>Exception
+: <a class="el" href="classConnectCompletedEventArgs.html#a0de43d7169af44da58b5fce9274b3514">ConnectCompletedEventArgs</a>
+, <a class="el" href="classDisconnectCompletedEventArgs.html#ad324a2a073901e6e66b9d3c4b8dda1fa">DisconnectCompletedEventArgs</a>
+, <a class="el" href="classReConnectCompletedEventArgs.html#a9cea120e8af81aa9a0237a25641ec264">ReConnectCompletedEventArgs</a>
 </li>
 <li>Exchange
 : <a class="el" href="classSettings.html#a1009bbf77eaebbac33f93ceff99bce07">Settings</a>
@@ -207,6 +232,9 @@ $(function() {
 <li>Message()
 : <a class="el" href="classMessage.html#abfb2d56ed99ae3284804b791952b0ad6">Message</a>
 </li>
+<li>MillisecondsToTimeSpan()
+: <a class="el" href="classTimeSpanConverter.html#a822e5979cc4674779330a76e24c81610">TimeSpanConverter</a>
+</li>
 </ul>
 
 
@@ -230,6 +258,15 @@ $(function() {
 
 
 <h3><a id="index_o"></a>- o -</h3><ul>
+<li>OnConnectCompleted()
+: <a class="el" href="classRmqcWrapper.html#a877a1a371135ddff355dfdebc3f62751">RmqcWrapper</a>
+</li>
+<li>OnDisconnectCompleted()
+: <a class="el" href="classRmqcWrapper.html#a3dd5a47f36ec3c0fc2652a14205dafa8">RmqcWrapper</a>
+</li>
+<li>OnReConnectCompleted()
+: <a class="el" href="classRmqcWrapper.html#a47eca6059bc809cd8e20f2958fb1241d">RmqcWrapper</a>
+</li>
 <li>Operation
 : <a class="el" href="classUnInitializedClientException.html#a01a327d581c3cc1cf7cb5cae68e9aa84">UnInitializedClientException</a>
 </li>
@@ -271,7 +308,14 @@ $(function() {
 </li>
 <li>ReConnect()
 : <a class="el" href="interfaceIRmqcWrapper.html#a4542bb164d2faf9e4c6aa8b4ce93f653">IRmqcWrapper</a>
-, <a class="el" href="classRmqcWrapper.html#a28cacba3c5d7cd3004d7c1775f3ddcf3">RmqcWrapper</a>
+, <a class="el" href="classRmqcWrapper.html#ae46073ceb7c313ff1e49b6c84b27dfc6">RmqcWrapper</a>
+</li>
+<li>ReConnectCompleted
+: <a class="el" href="interfaceIRmqcWrapper.html#a7ca7536b3ab5086e1eda1844321d1dc3">IRmqcWrapper</a>
+, <a class="el" href="classRmqcWrapper.html#a071d19bb76bfd1b6bf28e9aed0215a49">RmqcWrapper</a>
+</li>
+<li>ReConnectCompletedEventArgs()
+: <a class="el" href="classReConnectCompletedEventArgs.html#a45694deeb2e0bf959871f95c81d4ffd4">ReConnectCompletedEventArgs</a>
 </li>
 <li>RmqcCore()
 : <a class="el" href="classRmqcCore.html#a6772e1ceb6e916f4070ec602411ec7e8">RmqcCore</a>
@@ -291,6 +335,11 @@ $(function() {
 , <a class="el" href="classRmqcCore.html#a99fb6ea160391f72a5c8d210f282b58d">RmqcCore</a>
 , <a class="el" href="classRmqcWrapper.html#acc56d1592baff03d8883d2a511b2111e">RmqcWrapper</a>
 , <a class="el" href="classSettings.html#aa6956f658fec493575cbb17a9997749d">Settings</a>
+</li>
+<li>Successful
+: <a class="el" href="classConnectCompletedEventArgs.html#adfe0a016382aad51f7afc4c36f496b54">ConnectCompletedEventArgs</a>
+, <a class="el" href="classDisconnectCompletedEventArgs.html#a1a716ac6f4edef4efbcb54c518400bdd">DisconnectCompletedEventArgs</a>
+, <a class="el" href="classReConnectCompletedEventArgs.html#aff03ed34ffe06a04bb9f659890b7a107">ReConnectCompletedEventArgs</a>
 </li>
 </ul>
 
