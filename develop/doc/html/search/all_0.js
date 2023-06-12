@@ -7,11 +7,12 @@ var searchData=
   ['_5fexchange_4',['_exchange',['../classSettings.html#a7e7407f938e01575e587c0d80c5293ce',1,'Settings']]],
   ['_5fhostname_5',['_hostname',['../classSettings.html#a4827b341289d4534739bd4550614a8dd',1,'Settings']]],
   ['_5flogger_6',['_logger',['../classRmqcCore.html#adf2e46d11f04c1069525154624da8a8a',1,'RmqcCore._logger()'],['../classRmqcWrapper.html#ac5ba1209a33c607b523ca3f95cdd1545',1,'RmqcWrapper._logger()']]],
-  ['_5fpassword_7',['_password',['../classSettings.html#a807ef69f38113a7d6240ad60b69731b0',1,'Settings']]],
-  ['_5fport_8',['_port',['../classSettings.html#a9e974850e535ef02af3105e64f00c47d',1,'Settings']]],
-  ['_5fqueue_9',['_queue',['../classSettings.html#a3a68020c12e7afbfcd11b1394c2e8c78',1,'Settings']]],
-  ['_5frawbasicgetresult_10',['_rawBasicGetResult',['../classMessage.html#aef5ef4da1cfc0e7cd0f3b8cafe4c6731',1,'Message']]],
-  ['_5fsettings_11',['_settings',['../classRmqcCore.html#ab222e75d71a5b19e0ff111b3f6dcb0b6',1,'RmqcCore']]],
-  ['_5fusername_12',['_username',['../classSettings.html#a1b8587500142f95a542b541d5c895fa6',1,'Settings']]],
-  ['_5fvhost_13',['_vHost',['../classSettings.html#a438d916e88361821f61d02f57268dd2e',1,'Settings']]]
+  ['_5foperation_7',['_operation',['../classUnInitializedClientException.html#ac45c2c3c7b82cac80846c504b2e7e4f5',1,'UnInitializedClientException']]],
+  ['_5fpassword_8',['_password',['../classSettings.html#a807ef69f38113a7d6240ad60b69731b0',1,'Settings']]],
+  ['_5fport_9',['_port',['../classSettings.html#a9e974850e535ef02af3105e64f00c47d',1,'Settings']]],
+  ['_5fqueue_10',['_queue',['../classSettings.html#a3a68020c12e7afbfcd11b1394c2e8c78',1,'Settings']]],
+  ['_5frawbasicgetresult_11',['_rawBasicGetResult',['../classMessage.html#aef5ef4da1cfc0e7cd0f3b8cafe4c6731',1,'Message']]],
+  ['_5fsettings_12',['_settings',['../classRmqcCore.html#ab222e75d71a5b19e0ff111b3f6dcb0b6',1,'RmqcCore']]],
+  ['_5fusername_13',['_username',['../classSettings.html#a1b8587500142f95a542b541d5c895fa6',1,'Settings']]],
+  ['_5fvhost_14',['_vHost',['../classSettings.html#a438d916e88361821f61d02f57268dd2e',1,'Settings']]]
 ];

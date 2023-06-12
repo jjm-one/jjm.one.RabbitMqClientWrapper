@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['password_138',['Password',['../classSettings.html#a62619748f181d68c6a92e894fb7a2c6d',1,'Settings']]],
-  ['port_139',['Port',['../classSettings.html#afde0fb2d25427daf075cd88f657bf99e',1,'Settings']]]
+  ['operation_139',['Operation',['../classUnInitializedClientException.html#a01a327d581c3cc1cf7cb5cae68e9aa84',1,'UnInitializedClientException']]]
 ];
