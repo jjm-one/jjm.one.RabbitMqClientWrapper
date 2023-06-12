@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.Intrinsics.Arm;
 using FluentAssertions;
 using jjm.one.RabbitMqClientWrapper.types;
 using RabbitMQ.Client;
