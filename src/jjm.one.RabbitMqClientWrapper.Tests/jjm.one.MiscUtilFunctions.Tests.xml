@@ -334,6 +334,11 @@
             Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> class.
             </summary>
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_RawBasicGetResultGetTest">
+            <summary>
+            Tests the getter of the RawBasicGetResult member.
+            </summary>
+        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_DeliveryTagGetTest">
             <summary>
             Tests the getter of the DeliveryTag member.

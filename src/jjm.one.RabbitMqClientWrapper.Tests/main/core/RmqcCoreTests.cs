@@ -217,10 +217,16 @@ public class RmqcCoreTests
     {
         // arrange
 
-        // act
-        _sut.Init();
-
-        // assert
+        try
+        {
+            // act
+            _sut.Init();
+        }
+        catch (Exception exc)
+        {
+            // assert
+            Assert.Fail(exc.Message);
+        }
     }
     
     /// <summary>
@@ -231,10 +237,16 @@ public class RmqcCoreTests
     {
         // arrange
 
-        // act
-        _sut.DeInit();
-
-        // assert
+        try
+        {
+            // act
+            _sut.DeInit();
+        }
+        catch (Exception exc)
+        {
+            // assert
+            Assert.Fail(exc.Message);
+        }
     }
 
     /// <summary>
