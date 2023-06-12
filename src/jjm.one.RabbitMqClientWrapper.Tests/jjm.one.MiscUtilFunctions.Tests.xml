@@ -84,6 +84,11 @@
             Tests the getter of the Connected member. (Test 3)
             </summary>
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ConnectedGetTest4">
+            <summary>
+            Tests the getter of the Connected member. (Test 4)
+            </summary>
+        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_InitTest">
             <summary>
             Testes the Init method.
@@ -107,6 +112,11 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ConnectTest3">
             <summary>
             Testes the Connect method. (Test 3)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ConnectTest4">
+            <summary>
+            Testes the Connect method. (Test 4)
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_DisconnectTest">

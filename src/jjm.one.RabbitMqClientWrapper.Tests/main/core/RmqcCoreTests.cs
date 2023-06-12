@@ -16,7 +16,7 @@ public class RmqcCoreTests
 {
     #region private members
 
-    private readonly RmqcCore _sut;
+    private RmqcCore _sut;
     private readonly Mock<IConnectionFactory> _connectionFactoryMock;
     private readonly Mock<IConnection> _connectionMock;
     private readonly Mock<IModel> _channelMock;
@@ -205,6 +205,28 @@ public class RmqcCoreTests
         b.Should().BeFalse();
     }
 
+    /// <summary>
+    /// Tests the getter of the Connected member. (Test 4)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_ConnectedGetTest4()
+    {
+        // arrange
+        _sut = new RmqcCore(new Settings(), _rmqcCoreLoggingMock.Object,
+            null, _connectionMock.Object, _channelMock.Object);
+        _connectionMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.IsOpen).Returns(true);
+
+        // act
+        var b = _sut.Connected;
+
+        // assert
+        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        b.Should().BeFalse();
+    }
+
+    
     #endregion
     
     #region public methods tests
@@ -307,6 +329,28 @@ public class RmqcCoreTests
         _connectionMock.Verify(x => x.CreateModel(), Times.Once);
         res.Should().BeFalse();
         resExc.Should().BeOfType<NoChannelException>();
+    }
+    
+    /// <summary>
+    /// Testes the Connect method. (Test 4)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_ConnectTest4()
+    {
+        // arrange
+        _sut = new RmqcCore(new Settings(), _rmqcCoreLoggingMock.Object,
+            null, _connectionMock.Object, _channelMock.Object);
+        _connectionFactoryMock.Setup(x => x.CreateConnection()).Returns(_connectionMock.Object);
+        _connectionMock.Setup(x => x.CreateModel()).Returns(value: null!);
+
+        // act
+        var res = _sut.Connect(out var resExc);
+
+        // assert
+        _connectionFactoryMock.Verify(x => x.CreateConnection(), Times.AtMostOnce);
+        _connectionMock.Verify(x => x.CreateModel(), Times.AtMostOnce);
+        res.Should().BeFalse();
+        resExc.Should().BeOfType<NoConnectionFactoryException>();
     }
     
     /// <summary>
