@@ -59,7 +59,7 @@ public class RmqcWrapper : IRmqcWrapper
 
     #endregion
 
-    #region ctor's
+    #region ctors
 
     /// <summary>
     /// A parameterised constructor of the <see cref="RmqcWrapper"/> class.

@@ -164,7 +164,7 @@ public class Message
 
     #endregion
 
-    #region ctos's
+    #region ctors
 
     /// <summary>
     /// The default constructor of the <see cref="Message"/> class.

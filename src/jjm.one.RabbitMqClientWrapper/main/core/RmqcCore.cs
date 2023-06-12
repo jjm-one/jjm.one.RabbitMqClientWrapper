@@ -89,7 +89,7 @@ internal class RmqcCore : IRmqcCore
 
     #endregion
 
-    #region ctor's
+    #region ctors
 
     /// <summary>
     /// A parameterised constructor of the <see cref="RmqcCore"/> class.
@@ -131,6 +131,8 @@ internal class RmqcCore : IRmqcCore
     }
 
     #endregion
+
+    #region public methods
 
     /// <inheritdoc />
     public void Init()
@@ -468,4 +470,6 @@ internal class RmqcCore : IRmqcCore
 
         return res;
     }
+    
+    #endregion
 }
