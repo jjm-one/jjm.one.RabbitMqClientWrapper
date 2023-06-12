@@ -81,9 +81,10 @@ public class RmqcWrapper : IRmqcWrapper
     /// </summary>
     /// <param name="settings"></param>
     /// <param name="logger"></param>
-    public RmqcWrapper(Settings settings, ILogger<RmqcWrapper>? logger = null)
+    public RmqcWrapper(Settings settings, 
+        ILogger<RmqcWrapper>? logger = null)
     {
-        _core = new RmqcCore(settings, new Logger<RmqcCore>(new LoggerFactory()));
+        _core = new RmqcCore(settings);
         _logger = logger;
 
         // log fct call

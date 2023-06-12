@@ -97,7 +97,7 @@ internal class RmqcCore : IRmqcCore
     /// <param name="settings"></param>
     /// <param name="logger"></param>
     [ActivatorUtilitiesConstructor]
-    public RmqcCore(Settings settings, ILogger<RmqcCore>? logger)
+    public RmqcCore(Settings settings, ILogger<RmqcCore>? logger = null)
     {
         // init global vars
         _settings = settings;
@@ -116,7 +116,7 @@ internal class RmqcCore : IRmqcCore
     /// <param name="connectionFactory"></param>
     /// <param name="connection"></param>
     /// <param name="channel"></param>
-    internal RmqcCore(Settings settings, ILogger<RmqcCore>? logger,
+    internal RmqcCore(Settings settings, ILogger<RmqcCore> logger,
         IConnectionFactory? connectionFactory, IConnection? connection, IModel? channel)
     {
         // init global vars
