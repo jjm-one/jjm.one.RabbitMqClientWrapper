@@ -244,7 +244,6 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_ConnectTest1()
     {
         // arrange
-        Exception? e = null;
         _connectionFactoryMock.Setup(x => x.CreateConnection()).Returns(_connectionMock.Object);
         _connectionMock.Setup(x => x.CreateModel()).Returns(_channelMock.Object);
 
@@ -265,7 +264,6 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_ConnectTest2()
     {
         // arrange
-        Exception? e = null;
         _connectionFactoryMock.Setup(x => x.CreateConnection()).Returns(value: null!);
         _connectionMock.Setup(x => x.CreateModel()).Returns(_channelMock.Object);
 
@@ -286,7 +284,6 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_ConnectTest3()
     {
         // arrange
-        Exception? e = null;
         _connectionFactoryMock.Setup(x => x.CreateConnection()).Returns(_connectionMock.Object);
         _connectionMock.Setup(x => x.CreateModel()).Returns(value: null!);
 
@@ -300,7 +297,6 @@ public class RmqcCoreTests
         resExc.Should().BeOfType<NoChannelException>();
     }
     
-   /* 
     /// <summary>
     /// Testes the Disconnect method.
     /// </summary>
@@ -308,13 +304,23 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_DisconnectTest()
     {
         // arrange
-        _rmqcCoreMock.Setup(x => x.Disconnect());
+        _channelMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.Close());
+        _channelMock.Setup(x => x.Dispose());
+        _connectionMock.Setup(x => x.IsOpen).Returns(true);
+        _connectionMock.Setup(x => x.Close());
+        _connectionMock.Setup(x => x.Dispose());
 
         // act
         _sut.Disconnect();
             
         // assert
-        _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
+        _channelMock.Verify(x => x.IsOpen, Times.Once);
+        _channelMock.Verify(x => x.Close(), Times.Once);
+        _channelMock.Verify(x => x.Dispose(), Times.Once);
+        _connectionMock.Verify(x => x.IsOpen, Times.Once);
+        _connectionMock.Verify(x => x.Close(), Times.Once);
+        _connectionMock.Verify(x => x.Dispose(), Times.Once);
     }
 
     /// <summary>
@@ -324,18 +330,24 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_WriteMsgTest()
     {
         // arrange
-        Exception? e;
         var m = new Message();
-        _rmqcCoreMock.Setup(x => x.WriteMsg(m,out e)).Returns(true);
+        _connectionMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.BasicPublish(
+            It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(),
+            It.IsAny<IBasicProperties>(), It.IsAny<ReadOnlyMemory<byte>>()));
 
         // act
         var res = _sut.WriteMsg(m, out var resExc); 
         
         // assert
+        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.BasicPublish(
+            It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(),
+            It.IsAny<IBasicProperties>(), It.IsAny<ReadOnlyMemory<byte>>()), Times.Once);
         res.Should().BeTrue();
         resExc.Should().BeNull();
-        _rmqcCoreMock.Verify(x => 
-            x.WriteMsg(It.IsAny<Message>(), out It.Ref<Exception?>.IsAny), Times.Once);
     }
 
     /// <summary>
@@ -345,18 +357,22 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_ReadMsgTest()
     {
         // arrange
-        Exception? e;
-        var m = new Message();
-        _rmqcCoreMock.Setup(x => x.ReadMsg(out m, false, out e)).Returns(true);
+        var bgr = new BasicGetResult(42, false, "TEST-EX", "TEST-RK", 69, null, null);
+        var m = new Message(bgr);
+        _connectionMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.BasicGet(It.IsAny<string>(), It.IsAny<bool>())).Returns(bgr);
 
         // act
-        var res = _sut.ReadMsg(out m, false, out var resExc); 
+        var res = _sut.ReadMsg(out var resMsg, false, out var resExc); 
         
         // assert
+        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.BasicGet(It.IsAny<string>(), It.IsAny<bool>()), Times.Once());
         res.Should().BeTrue();
+        resMsg.Should().BeEquivalentTo(m);
         resExc.Should().BeNull();
-        _rmqcCoreMock.Verify(x => 
-            x.ReadMsg(out It.Ref<Message?>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
     }
 
     /// <summary>
@@ -366,18 +382,20 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_AckMsgTest()
     {
         // arrange
-        Exception? e;
         var m = new Message();
-        _rmqcCoreMock.Setup(x => x.AckMsg(m, out e)).Returns(true);
+        _connectionMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.BasicAck(It.IsAny<ulong>(), It.IsAny<bool>()));
 
         // act
         var res = _sut.AckMsg(m, out var resExc); 
         
         // assert
+        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.BasicAck(It.IsAny<ulong>(), It.IsAny<bool>()), Times.Once());
         res.Should().BeTrue();
         resExc.Should().BeNull();
-        _rmqcCoreMock.Verify(x => 
-            x.AckMsg(It.IsAny<Message>(), out It.Ref<Exception?>.IsAny), Times.Once);
     }
 
     /// <summary>
@@ -387,18 +405,20 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_NackMsgTest()
     {
         // arrange
-        Exception? e;
         var m = new Message();
-        _rmqcCoreMock.Setup(x => x.NackMsg(m, false, out e)).Returns(true);
+        _connectionMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.BasicNack(It.IsAny<ulong>(), It.IsAny<bool>(),It.IsAny<bool>()));
 
         // act
         var res = _sut.NackMsg(m, false, out var resExc); 
         
         // assert
+        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.BasicNack(It.IsAny<ulong>(), It.IsAny<bool>(),It.IsAny<bool>()), Times.Once());
         res.Should().BeTrue();
         resExc.Should().BeNull();
-        _rmqcCoreMock.Verify(x => 
-            x.NackMsg(It.IsAny<Message>(), false, out It.Ref<Exception?>.IsAny), Times.Once);
     }
 
     /// <summary>
@@ -408,18 +428,20 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_WaitForWriteConfirmTest()
     {
         // arrange
-        Exception? e;
         var t = new TimeSpan();
-        _rmqcCoreMock.Setup(x => x.WaitForWriteConfirm(t, out e)).Returns(true);
+        _connectionMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.WaitForConfirms(It.IsAny<TimeSpan>())).Returns(true);
 
         // act
         var res = _sut.WaitForWriteConfirm(t, out var resExc); 
         
         // assert
+        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.WaitForConfirms(It.IsAny<TimeSpan>()), Times.Once());
         res.Should().BeTrue();
         resExc.Should().BeNull();
-        _rmqcCoreMock.Verify(x => 
-            x.WaitForWriteConfirm(It.IsAny<TimeSpan>(), out It.Ref<Exception?>.IsAny), Times.Once);
     }
 
     /// <summary>
@@ -429,20 +451,23 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_QueuedMsgsTest()
     {
         // arrange
-        Exception? e;
-       uint? a = 0;
-        _rmqcCoreMock.Setup(x => x.QueuedMsgs(out a, out e)).Returns(true);
+        uint? a = 0;
+        _connectionMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.MessageCount(It.IsAny<string>())).Returns(42);
 
         // act
         var res = _sut.QueuedMsgs(out a, out var resExc); 
         
         // assert
+        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.MessageCount(It.IsAny<string>()), Times.Once());
         res.Should().BeTrue();
+        a.Should().Be(42);
         resExc.Should().BeNull();
-        _rmqcCoreMock.Verify(x => 
-            x.QueuedMsgs(out It.Ref<uint?>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    */
+    
     #endregion
     
     #endregion

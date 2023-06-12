@@ -109,6 +109,41 @@
             Testes the Connect method. (Test 3)
             </summary>
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_DisconnectTest">
+            <summary>
+            Testes the Disconnect method.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_WriteMsgTest">
+            <summary>
+            Testes the WriteMsg method. 
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ReadMsgTest">
+            <summary>
+            Testes the ReadMsg method. 
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_AckMsgTest">
+            <summary>
+            Testes the AckMsg method. 
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_NackMsgTest">
+            <summary>
+            Testes the NackMsg method. 
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_WaitForWriteConfirmTest">
+            <summary>
+            Testes the WaitForWriteConfirm method. 
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_QueuedMsgsTest">
+            <summary>
+            Testes the QueuedMsgs method. 
+            </summary>
+        </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests">
             <summary>
             This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class.
