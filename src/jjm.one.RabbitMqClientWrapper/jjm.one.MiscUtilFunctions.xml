@@ -390,7 +390,7 @@
             This class represents an exception which gets thrown if the client is not initialized properly before performing an action.
             </summary>
         </member>
-        <member name="F:jjm.one.RabbitMqClientWrapper.types.exceptions.UnInitializedClientException.Operation">
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.exceptions.UnInitializedClientException.Operation">
             <summary>
             The name of the operation which causes the exception.
             </summary>

@@ -10,12 +10,21 @@ namespace jjm.one.RabbitMqClientWrapper.types.exceptions;
 [Serializable]
 public class UnInitializedClientException : Exception
 {
+    #region private members
+
+    private string? _operation = string.Empty;
+
+    #endregion
+    
     #region public members
 
     /// <summary>
     /// The name of the operation which causes the exception.
     /// </summary>
-    public string? Operation = string.Empty;
+    public string? Operation {
+        get => _operation;
+        set => _operation = value;
+    }
 
     #endregion
     
