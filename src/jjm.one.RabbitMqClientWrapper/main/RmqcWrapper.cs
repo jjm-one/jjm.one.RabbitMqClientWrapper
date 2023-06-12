@@ -1,10 +1,13 @@
-﻿using jjm.one.Microsoft.Extensions.Logging.Helpers;
+﻿using System;
+using System.Diagnostics;
+using System.Reflection;
+using jjm.one.Microsoft.Extensions.Logging.Helpers;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Reflection;
+using jjm.one.RabbitMqClientWrapper.types.events;
+using jjm.one.RabbitMqClientWrapper.util;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace jjm.one.RabbitMqClientWrapper.main;
 
@@ -93,6 +96,19 @@ public class RmqcWrapper : IRmqcWrapper
 
     #endregion
 
+    #region public events
+
+    /// <inheritdoc />
+    public event EventHandler<ConnectCompletedEventArgs>? ConnectCompleted;
+
+    /// <inheritdoc />
+    public event EventHandler<DisconnectCompletedEventArgs>? DisconnectCompleted;
+
+    /// <inheritdoc />
+    public event EventHandler<ReConnectCompletedEventArgs>? ReConnectCompleted;
+
+    #endregion
+    
     #region public methods
 
     /// <inheritdoc />
@@ -127,17 +143,79 @@ public class RmqcWrapper : IRmqcWrapper
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        
+        // init measure completion time
+        var sw = new Stopwatch();
+        sw.Start();
 
-        return _core.Connect(out exception);
+        // call the core functions
+        var res = _core.Connect(out exception);
+
+        // measure completion time
+        sw.Stop();
+
+        // invoke events
+        OnConnectCompleted(new ConnectCompletedEventArgs(res, exception, 
+            ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
+        
+        return res;
     }
 
     /// <inheritdoc />
-    public void Disconnect()
+    void IRmqcCore.Disconnect()
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
-        _core.Disconnect();
+        Disconnect(out _);
+    }
+
+    /// <inheritdoc />
+    public bool Disconnect()
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        return Disconnect(out _);
+    }
+    
+    /// <inheritdoc />
+    public bool Disconnect(out Exception? exception)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // init measure completion time
+        var sw = new Stopwatch();
+        sw.Start();
+
+        // init local vars
+        exception = null;
+        var res = true;
+
+        try
+        {
+            // call the core functions
+            _core.Disconnect();
+        }
+        catch (Exception exc)
+        {
+            // log exception
+            _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
+
+            
+            exception = exc;
+            res = false;
+        }
+        
+        // measure completion time
+        sw.Stop();
+
+        // invoke events
+        OnDisconnectCompleted(new DisconnectCompletedEventArgs(res, exception, 
+            ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
+        
+        return res;
     }
 
     /// <inheritdoc />
@@ -155,8 +233,22 @@ public class RmqcWrapper : IRmqcWrapper
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
-        _core.Disconnect();
-        return _core.Connect(out exception);
+        // init measure completion time
+        var sw = new Stopwatch();
+        sw.Start();
+
+        // call the core functions
+        Disconnect();
+        var res = Connect(out exception);
+
+        // measure completion time
+        sw.Stop();
+
+        // invoke events
+        OnReConnectCompleted(new ReConnectCompletedEventArgs(res, exception, 
+            ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
+        
+        return res;
     }
 
     /// <inheritdoc />
@@ -265,6 +357,49 @@ public class RmqcWrapper : IRmqcWrapper
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return _core.QueuedMsgs(out amount, out exception);
+    }
+
+    #endregion
+
+    #region protected event invokation
+
+    /// <summary>
+    /// This method invokes the <see cref="ConnectCompleted"/> envent handlers.
+    /// </summary>
+    /// <param name="e"></param>
+    protected virtual void OnConnectCompleted(ConnectCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        
+        // invoke event handlers
+        ConnectCompleted?.Invoke(this, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="DisconnectCompleted"/> envent handlers.
+    /// </summary>
+    /// <param name="e"></param>
+    protected virtual void OnDisconnectCompleted(DisconnectCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        
+        // invoke event handlers
+        DisconnectCompleted?.Invoke(this, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="ReConnectCompleted"/> envent handlers.
+    /// </summary>
+    /// <param name="e"></param>
+    protected virtual void OnReConnectCompleted(ReConnectCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        
+        // invoke event handlers
+        ReConnectCompleted?.Invoke(this, e);
     }
 
     #endregion

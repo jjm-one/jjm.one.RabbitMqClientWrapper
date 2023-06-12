@@ -1,6 +1,7 @@
 ﻿using System;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
+using jjm.one.RabbitMqClientWrapper.types.events;
 
 namespace jjm.one.RabbitMqClientWrapper.main;
 
@@ -16,6 +17,19 @@ public interface IRmqcWrapper : IRmqcCore
     /// </summary>
     /// <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
     public bool Connect();
+    
+    /// <summary>
+    /// Disconnect from the RabbitMQ server.
+    /// </summary>
+    /// <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+    public new bool Disconnect();
+    
+    /// <summary>
+    /// Disconnect from the RabbitMQ server.
+    /// </summary>
+    /// <param name="exception"></param>
+    /// <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+    public bool Disconnect(out Exception? exception);
     
     /// <summary>
     /// Disconnect and connects form the RabbitMQ server.
@@ -73,6 +87,25 @@ public interface IRmqcWrapper : IRmqcCore
     /// <param name="amount"></param>
     /// <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
     public bool QueuedMsgs(out uint? amount);
+
+    #endregion
+
+    #region public events
+
+    /// <summary>
+    /// This events gets invoked when the connect function finishes.
+    /// </summary>
+    public event EventHandler<ConnectCompletedEventArgs> ConnectCompleted;
+    
+    /// <summary>
+    /// This events gets invoked when the disconnect function finishes.
+    /// </summary>
+    public event EventHandler<DisconnectCompletedEventArgs> DisconnectCompleted;
+    
+    /// <summary>
+    /// This events gets invoked when the re-connect function finishes.
+    /// </summary>
+    public event EventHandler<ReConnectCompletedEventArgs> ReConnectCompleted;
 
     #endregion
 }

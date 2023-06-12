@@ -3,6 +3,7 @@ using FluentAssertions;
 using jjm.one.RabbitMqClientWrapper.main;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
+using jjm.one.RabbitMqClientWrapper.types.events;
 using Microsoft.Extensions.Logging;
 using Moq;
 
@@ -174,6 +175,30 @@ public class RmqcWrapperTests
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
+        _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
+    }
+    
+    /// <summary>
+    /// Testes the Connect method. (Test 3)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_ConnectTest3()
+    {
+        // arrange
+        _rmqcCoreMock.Setup(x => x.Connect(out It.Ref<Exception?>.IsAny)).Returns(true);
+
+        // act
+        var evt = Assert.Raises<ConnectCompletedEventArgs>(
+            h => _sut.ConnectCompleted += h,
+            h => _sut.ConnectCompleted -= h,
+            () => _sut.Connect(out var resExc));
+
+        // assert
+        evt.Should().NotBeNull();
+        evt.Arguments.Should().NotBeNull();
+        evt.Arguments.Successful.Should().BeTrue();
+        evt.Arguments.Exception.Should().BeNull();
+        evt.Arguments.CompletionTime.Should().NotBeNull();
         _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
     

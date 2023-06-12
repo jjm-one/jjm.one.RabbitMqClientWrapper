@@ -191,6 +191,19 @@
             </summary>
             <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.Disconnect">
+            <summary>
+            Disconnect from the RabbitMQ server.
+            </summary>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.Disconnect(System.Exception@)">
+            <summary>
+            Disconnect from the RabbitMQ server.
+            </summary>
+            <param name="exception"></param>
+            <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
+        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.ReConnect">
             <summary>
             Disconnect and connects form the RabbitMQ server.
@@ -248,6 +261,21 @@
             <param name="amount"></param>
             <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
         </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.ConnectCompleted">
+            <summary>
+            This events gets invoked when the connect function finishes.
+            </summary>
+        </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.DisconnectCompleted">
+            <summary>
+            This events gets invoked when the disconnect function finishes.
+            </summary>
+        </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.ReConnectCompleted">
+            <summary>
+            This events gets invoked when the re-connect function finishes.
+            </summary>
+        </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper">
             <summary>
             This class implements the <see cref="T:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper"/> interface for a RabbitMQ server.
@@ -277,6 +305,15 @@
             <param name="settings"></param>
             <param name="logger"></param>
         </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.ConnectCompleted">
+            <inheritdoc />
+        </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.DisconnectCompleted">
+            <inheritdoc />
+        </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.ReConnectCompleted">
+            <inheritdoc />
+        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.Init">
             <inheritdoc />
         </member>
@@ -289,7 +326,13 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.Connect(System.Exception@)">
             <inheritdoc />
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.jjm#one#RabbitMqClientWrapper#main#core#IRmqcCore#Disconnect">
+            <inheritdoc />
+        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.Disconnect">
+            <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.Disconnect(System.Exception@)">
             <inheritdoc />
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.ReConnect">
@@ -333,6 +376,108 @@
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.QueuedMsgs(System.Nullable{System.UInt32}@,System.Exception@)">
             <inheritdoc />
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.OnConnectCompleted(jjm.one.RabbitMqClientWrapper.types.events.ConnectCompletedEventArgs)">
+            <summary>
+            This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.ConnectCompleted"/> envent handlers.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.OnDisconnectCompleted(jjm.one.RabbitMqClientWrapper.types.events.DisconnectCompletedEventArgs)">
+            <summary>
+            This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.DisconnectCompleted"/> envent handlers.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.OnReConnectCompleted(jjm.one.RabbitMqClientWrapper.types.events.ReConnectCompletedEventArgs)">
+            <summary>
+            This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.ReConnectCompleted"/> envent handlers.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.types.events.ConnectCompletedEventArgs">
+            <summary>
+            This class represents the event args for a connection completed event.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.events.ConnectCompletedEventArgs.Successful">
+            <summary>
+            The flag indicates whether connecting to the RabbitMQ server was successfully completed or not.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.events.ConnectCompletedEventArgs.Exception">
+            <summary>
+            The exception which may have occured during connecting to the RabbitMQ server.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.events.ConnectCompletedEventArgs.CompletionTime">
+            <summary>
+            The amount of time it took to connect to the RabbitMQ server.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.events.ConnectCompletedEventArgs.#ctor(System.Boolean,System.Exception,System.Nullable{System.TimeSpan})">
+            <summary>
+            The default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.events.ConnectCompletedEventArgs"/> class.
+            </summary>
+            <param name="successful"></param>
+            <param name="exception"></param>
+            <param name="completionTime"></param>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.types.events.DisconnectCompletedEventArgs">
+            <summary>
+            This class represents the event args for a disconnection completed event.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.events.DisconnectCompletedEventArgs.Successful">
+            <summary>
+            The flag indicates whether disconnecting from the RabbitMQ server was successfully completed or not.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.events.DisconnectCompletedEventArgs.Exception">
+            <summary>
+            The exception which may have occured during disconnecting from the RabbitMQ server.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.events.DisconnectCompletedEventArgs.CompletionTime">
+            <summary>
+            The amount of time it took to disconnect from the RabbitMQ server.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.events.DisconnectCompletedEventArgs.#ctor(System.Boolean,System.Exception,System.Nullable{System.TimeSpan})">
+            <summary>
+            The default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.events.DisconnectCompletedEventArgs"/> class.
+            </summary>
+            <param name="successful"></param>
+            <param name="exception"></param>
+            <param name="completionTime"></param>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.types.events.ReConnectCompletedEventArgs">
+            <summary>
+            This class represents the event args for a re-connection completed event.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.events.ReConnectCompletedEventArgs.Successful">
+            <summary>
+            The flag indicates whether re-connecting to the RabbitMQ server was successfully completed or not.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.events.ReConnectCompletedEventArgs.Exception">
+            <summary>
+            The exception which may have occured during re-connecting to the RabbitMQ server.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.events.ReConnectCompletedEventArgs.CompletionTime">
+            <summary>
+            The amount of time it took to re-connect to the RabbitMQ server.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.events.ReConnectCompletedEventArgs.#ctor(System.Boolean,System.Exception,System.Nullable{System.TimeSpan})">
+            <summary>
+            The default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.events.ReConnectCompletedEventArgs"/> class.
+            </summary>
+            <param name="successful"></param>
+            <param name="exception"></param>
+            <param name="completionTime"></param>
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.types.exceptions.NoChannelException">
             <summary>
@@ -531,6 +676,18 @@
             Serves as the default hash function for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
             </summary>
             <returns>A hash code for the current <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> object.</returns>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.util.TimeSpanConverter">
+            <summary>
+            This class contains some functions to convert from/to a <see cref="T:System.TimeSpan"/> object.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.util.TimeSpanConverter.MillisecondsToTimeSpan(System.Int32)">
+            <summary>
+            Converts an <see cref="T:System.Int32"/> object to a <see cref="T:System.TimeSpan"/>.
+            </summary>
+            <param name="milliseconds"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

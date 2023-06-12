@@ -244,6 +244,11 @@
             Testes the Connect method. (Test 2)
             </summary>
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_ConnectTest3">
+            <summary>
+            Testes the Connect method. (Test 3)
+            </summary>
+        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_DisconnectTest">
             <summary>
             Testes the Disconnect method.
