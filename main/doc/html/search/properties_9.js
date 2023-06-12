@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['username_149',['Username',['../classSettings.html#a1db355b409499948044520bdf197163b',1,'Settings']]]
+  ['settings_143',['Settings',['../interfaceIRmqcCore.html#a3414fc41cd8609bf9b4bd6a010a30647',1,'IRmqcCore.Settings()'],['../classRmqcCore.html#a99fb6ea160391f72a5c8d210f282b58d',1,'RmqcCore.Settings()'],['../classRmqcWrapper.html#acc56d1592baff03d8883d2a511b2111e',1,'RmqcWrapper.Settings()']]]
 ];

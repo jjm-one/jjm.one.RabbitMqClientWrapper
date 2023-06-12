@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">jjm.one.RabbitMqClientWrapper
-   &#160;<span id="projectnumber">1.0.0-alpha.1</span>
+   &#160;<span id="projectnumber">1.0.0-alpha.2</span>
    </div>
    <div id="projectbrief">A C# wrapper for a RabbitMQ client.</div>
   </td>
@@ -70,52 +70,39 @@ $(function() {
 <div class="textblock">
 <p><a href="hierarchy.html">Go to the textual class hierarchy</a></p>
 </div><table border="0" cellspacing="10" cellpadding="0">
-<tr><td><img src="inherit_graph_0.png" border="0" usemap="#aDiSimpleTypeWrappersEnableCoreLogging" alt=""/>
-<map name="aDiSimpleTypeWrappersEnableCoreLogging" id="aDiSimpleTypeWrappersEnableCoreLogging">
-<area shape="rect" href="classDiSimpleTypeWrappersEnableCoreLogging.html" title="This is a wrapper clas for the bool value for enable logging in the RmqcCore class." alt="" coords="5,5,223,47"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_1.png" border="0" usemap="#aDiSimpleTypeWrappersEnableWrapperLogging" alt=""/>
-<map name="aDiSimpleTypeWrappersEnableWrapperLogging" id="aDiSimpleTypeWrappersEnableWrapperLogging">
-<area shape="rect" href="classDiSimpleTypeWrappersEnableWrapperLogging.html" title="This is a wrapper clas for the bool value for enable logging in the RmqcWrapper class." alt="" coords="5,5,223,47"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_2.png" border="0" usemap="#aIRmqcCore" alt=""/>
+<tr><td><img src="inherit_graph_0.png" border="0" usemap="#aIRmqcCore" alt=""/>
 <map name="aIRmqcCore" id="aIRmqcCore">
-<area shape="rect" href="interfaceIRmqcCore.html" title="This interface defines the core functionality to connect and communicate with a RabbitMQ server." alt="" coords="5,5,99,32"/>
-<area shape="rect" href="classRmqcCore.html" title="This class implements the IRmqcCore interface for a RabbitMQ server." alt="" coords="147,5,236,32"/>
+<area shape="rect" href="interfaceIRmqcCore.html" title="This interface defines the core functionality to connect and communicate with a RabbitMQ server." alt="" coords="5,31,99,57"/>
+<area shape="rect" href="interfaceIRmqcWrapper.html" title="This interface defines the core and additional functionality to connect and communicate with a Rabbit..." alt="" coords="147,5,265,32"/>
+<area shape="rect" href="classRmqcCore.html" title="This class implements the IRmqcCore interface for a RabbitMQ server." alt="" coords="161,56,251,83"/>
+<area shape="rect" href="classRmqcWrapper.html" title="This class implements the IRmqcWrapper interface for a RabbitMQ server." alt="" coords="313,5,428,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_3.png" border="0" usemap="#aIRmqcWrapper" alt=""/>
-<map name="aIRmqcWrapper" id="aIRmqcWrapper">
-<area shape="rect" href="interfaceIRmqcWrapper.html" title="This interface defines the core and additional functionality to connect and communicate with a Rabbit..." alt="" coords="5,5,124,32"/>
-<area shape="rect" href="classRmqcWrapper.html" title="This class implements the IRmqcWrapper interface for a RabbitMQ server." alt="" coords="172,5,287,32"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_4.png" border="0" usemap="#aMessage" alt=""/>
+<tr><td><img src="inherit_graph_1.png" border="0" usemap="#aMessage" alt=""/>
 <map name="aMessage" id="aMessage">
 <area shape="rect" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server." alt="" coords="5,5,85,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_5.png" border="0" usemap="#aNoChannelException" alt=""/>
+<tr><td><img src="inherit_graph_2.png" border="0" usemap="#aNoChannelException" alt=""/>
 <map name="aNoChannelException" id="aNoChannelException">
-<area shape="rect" title=" " alt="" coords="5,56,92,83"/>
+<area shape="rect" title=" " alt="" coords="5,81,92,108"/>
 <area shape="rect" href="classNoChannelException.html" title="This class represents an exception which gets thrown if the IModel in a RmqcCore object is null or no..." alt="" coords="173,5,331,32"/>
 <area shape="rect" href="classNoConnectionException.html" title="This class represents an exception which gets thrown if the IConnection in a RmqcCore object is null ..." alt="" coords="163,56,341,83"/>
 <area shape="rect" href="classNoConnectionFactoryException.html" title="This class represents an exception which gets thrown if the IConnectionFactory in a RmqcCore object i..." alt="" coords="140,107,364,133"/>
+<area shape="rect" href="classUnInitializedClientException.html" title="This class represents an exception which gets thrown if the client is not initialized properly before..." alt="" coords="149,157,355,184"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_6.png" border="0" usemap="#aRmqcCoreDi" alt=""/>
+<tr><td><img src="inherit_graph_3.png" border="0" usemap="#aRmqcCoreDi" alt=""/>
 <map name="aRmqcCoreDi" id="aRmqcCoreDi">
 <area shape="rect" href="classRmqcCoreDi.html" title="This class contains function for dependency injection of the RmqcCore class." alt="" coords="5,5,108,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_7.png" border="0" usemap="#aRmqcWrapperDi" alt=""/>
+<tr><td><img src="inherit_graph_4.png" border="0" usemap="#aRmqcWrapperDi" alt=""/>
 <map name="aRmqcWrapperDi" id="aRmqcWrapperDi">
 <area shape="rect" href="classRmqcWrapperDi.html" title="This class contains function for dependency injection of the RmqcWrapper class." alt="" coords="5,5,133,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_8.png" border="0" usemap="#aSettings" alt=""/>
+<tr><td><img src="inherit_graph_5.png" border="0" usemap="#aSettings" alt=""/>
 <map name="aSettings" id="aSettings">
 <area shape="rect" href="classSettings.html" title="This class defines the settings for a client connection to a RabbitMQ server." alt="" coords="5,5,80,32"/>
 </map>

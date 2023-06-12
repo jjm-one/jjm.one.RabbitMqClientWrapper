@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['rawbasicgetresult_146',['RawBasicGetResult',['../classMessage.html#a3cacae77caaae3593f95ef628af3142e',1,'Message']]],
-  ['routingkey_147',['RoutingKey',['../classMessage.html#ae2931f48cc2d33e45202660cfcfdbfcb',1,'Message']]]
+  ['queue_140',['Queue',['../classSettings.html#ad30acff0cedd4c08f841beb066d9265e',1,'Settings']]]
 ];

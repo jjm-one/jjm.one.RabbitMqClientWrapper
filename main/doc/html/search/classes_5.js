@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['settings_83',['Settings',['../classSettings.html',1,'']]]
+  ['uninitializedclientexception_80',['UnInitializedClientException',['../classUnInitializedClientException.html',1,'']]]
 ];
