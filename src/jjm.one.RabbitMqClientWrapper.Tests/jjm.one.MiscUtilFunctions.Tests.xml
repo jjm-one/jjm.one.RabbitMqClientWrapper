@@ -119,9 +119,14 @@
             Testes the Connect method. (Test 4)
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_DisconnectTest">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_DisconnectTest1">
             <summary>
-            Testes the Disconnect method.
+            Testes the Disconnect method. (Test 1)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_DisconnectTest2">
+            <summary>
+            Testes the Disconnect method. (Test 2)
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_WriteMsgTest1">
@@ -142,6 +147,11 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ReadMsgTest2">
             <summary>
             Testes the ReadMsg method. (Test 2)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ReadMsgTest3">
+            <summary>
+            Testes the ReadMsg method. (Test 3)
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_AckMsgTest1">
