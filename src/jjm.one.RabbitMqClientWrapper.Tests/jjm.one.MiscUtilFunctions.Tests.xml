@@ -434,6 +434,16 @@
             Tests the setter of the Body member. (Test 2)
             </summary>
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_BodySetTest3">
+            <summary>
+            Tests the setter of the Body member. (Test 3)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_BodySetTest4">
+            <summary>
+            Tests the setter of the Body member. (Test 4)
+            </summary>
+        </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests">
             <summary>
             This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.

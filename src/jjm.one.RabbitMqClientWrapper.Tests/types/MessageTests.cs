@@ -287,6 +287,48 @@ public class MessageTests
         res.Should().Be(b);
     }
     
+    /// <summary>
+    /// Tests the setter of the Body member. (Test 3)
+    /// </summary>
+    [Fact]
+    public void MessageTest_BodySetTest3()
+    {
+        // arrange
+        ReadOnlyMemory<byte> b = null;
+        var m = new Message(
+            new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
+                null, null))
+        {
+            // act
+            Body = b
+        };
+
+        var res = m.Body;
+        // assert
+        
+        res.Should().Be(b);
+    }
+    
+    /// <summary>
+    /// Tests the setter of the Body member. (Test 4)
+    /// </summary>
+    [Fact]
+    public void MessageTest_BodySetTest4()
+    {
+        // arrange
+        ReadOnlyMemory<byte> b = null; 
+        var m = new Message
+        {
+            // act
+            Body = b
+        };
+
+        var res = m.Body;
+
+        // assert
+        res.Should().Be(b);
+    }
+    
     #endregion
     
     #endregion

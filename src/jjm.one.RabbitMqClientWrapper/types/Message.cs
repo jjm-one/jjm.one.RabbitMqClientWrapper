@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using RabbitMQ.Client;
 
 namespace jjm.one.RabbitMqClientWrapper.types;
@@ -64,6 +65,7 @@ public class Message
     /// <summary>
     /// The basic properties of the message.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public IBasicProperties? BasicProperties
     {
         get => _rawBasicGetResult?.BasicProperties;
