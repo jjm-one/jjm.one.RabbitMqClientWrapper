@@ -106,27 +106,58 @@ public class Message
         {
             if (_rawBasicGetResult is null)
             {
-                _rawBasicGetResult = new BasicGetResult(
-                    deliveryTag: 0,
-                    redelivered: false,
-                    exchange: string.Empty,
-                    routingKey: string.Empty,
-                    messageCount: 0,
-                    basicProperties: null,
-                    body: value ?? null
-                );
+                if (value != null)
+                {
+                    _rawBasicGetResult = new BasicGetResult(
+                        deliveryTag: 0,
+                        redelivered: false,
+                        exchange: string.Empty,
+                        routingKey: string.Empty,
+                        messageCount: 0,
+                        basicProperties: null,
+                        body: (ReadOnlyMemory<byte>)value
+                    ); 
+                }
+                else
+                {
+                    _rawBasicGetResult = new BasicGetResult(
+                        deliveryTag: 0,
+                        redelivered: false,
+                        exchange: string.Empty,
+                        routingKey: string.Empty,
+                        messageCount: 0,
+                        basicProperties: null,
+                        body: null
+                    );
+                }
+                    
             }
             else
             {
-                _rawBasicGetResult = new BasicGetResult(
-                    deliveryTag: _rawBasicGetResult.DeliveryTag,
-                    redelivered: _rawBasicGetResult.Redelivered,
-                    exchange: _rawBasicGetResult.Exchange,
-                    routingKey: _rawBasicGetResult.RoutingKey,
-                    messageCount: _rawBasicGetResult.MessageCount,
-                    basicProperties: _rawBasicGetResult.BasicProperties,
-                    body: value ?? null
-                );
+                if (value != null)
+                {
+                    _rawBasicGetResult = new BasicGetResult(
+                        deliveryTag: _rawBasicGetResult.DeliveryTag,
+                        redelivered: _rawBasicGetResult.Redelivered,
+                        exchange: _rawBasicGetResult.Exchange,
+                        routingKey: _rawBasicGetResult.RoutingKey,
+                        messageCount: _rawBasicGetResult.MessageCount,
+                        basicProperties: _rawBasicGetResult.BasicProperties,
+                        body: (ReadOnlyMemory<byte>)value
+                    );
+                }
+                else
+                {
+                    _rawBasicGetResult = new BasicGetResult(
+                        deliveryTag: _rawBasicGetResult.DeliveryTag,
+                        redelivered: _rawBasicGetResult.Redelivered,
+                        exchange: _rawBasicGetResult.Exchange,
+                        routingKey: _rawBasicGetResult.RoutingKey,
+                        messageCount: _rawBasicGetResult.MessageCount,
+                        basicProperties: _rawBasicGetResult.BasicProperties,
+                        body: null
+                    );
+                }
             }
         }
     }
