@@ -1,6 +1,5 @@
 ﻿using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
-using jjm.one.RabbitMqClientWrapper.types.di;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace jjm.one.RabbitMqClientWrapper.di.core;
@@ -15,13 +14,10 @@ internal static class RmqcCoreDi
     /// </summary>
     /// <param name="services"></param>
     /// <param name="settings"></param>
-    /// <param name="enableCoreLogging"></param>
     /// <returns></returns>
-	public static IServiceCollection AddRmqcCore(this IServiceCollection services, Settings settings,
-	    DiSimpleTypeWrappersEnableCoreLogging enableCoreLogging)
+	public static IServiceCollection AddRmqcCore(this IServiceCollection services, Settings settings)
 	{
 		services.AddSingleton(settings);
-		services.AddSingleton(enableCoreLogging);
 		services.AddScoped<IRmqcCore>(sp => ActivatorUtilities.CreateInstance<RmqcCore>(sp));
 
 		return services;

@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.Intrinsics.Arm;
 using FluentAssertions;
 using jjm.one.RabbitMqClientWrapper.types;
 using RabbitMQ.Client;
@@ -94,6 +93,24 @@ public class MessageTests
     #region public members tests
 
     /// <summary>
+    /// Tests the getter of the RawBasicGetResult member.
+    /// </summary>
+    [Fact]
+    public void MessageTest_RawBasicGetResultGetTest()
+    {
+        // arrange
+        var bgr = new BasicGetResult(42, true, "TEST-EX", "TEST-RK", 69,
+            null, new ReadOnlyMemory<byte>());
+        var m = new Message(bgr);
+
+        // act
+        var res = m.RawBasicGetResult;
+
+        // assert
+        res.Should().BeEquivalentTo(bgr);
+    }
+    
+    /// <summary>
     /// Tests the getter of the DeliveryTag member.
     /// </summary>
     [Fact]
@@ -103,20 +120,11 @@ public class MessageTests
         var m = new Message(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, new ReadOnlyMemory<byte>()));
-        ulong res = 0;
-        
-        try
-        {
-            // act
-            res = m.DeliveryTag;
-        }
-        catch (Exception exc)
-        {
-            // assert 1
-            Assert.Fail(exc.Message);
-        }
-            
-        // assert 2
+
+        // act
+        var res = m.DeliveryTag;
+
+        // assert
         res.Should().Be(42);
     }
     
@@ -130,20 +138,11 @@ public class MessageTests
         var m = new Message(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, new ReadOnlyMemory<byte>()));
-        var res = string.Empty;
-        
-        try
-        {
-            // act
-            res = m.RoutingKey;
-        }
-        catch (Exception exc)
-        {
-            // assert 1
-            Assert.Fail(exc.Message);
-        }
-            
-        // assert 2
+
+        // act
+        var res = m.RoutingKey;
+
+        // assert
         res.Should().Be("TEST-RK");
     }
 
@@ -156,22 +155,15 @@ public class MessageTests
         // arrange
         var m = new Message(
             new BasicGetResult(42, true, "TEST-EX",string.Empty, 69,
-                null, new ReadOnlyMemory<byte>()));
-        var res = string.Empty;
-        
-        try
+                null, new ReadOnlyMemory<byte>()))
         {
             // act
-            m.RoutingKey = "TEST-RK";
-            res = m.RoutingKey;
-        }
-        catch (Exception exc)
-        {
-            // assert 1
-            Assert.Fail(exc.Message);
-        }
-        
-        // assert 2
+            RoutingKey = "TEST-RK"
+        };
+
+        var res = m.RoutingKey;
+
+        // assert
         res.Should().Be("TEST-RK");
     }
     
@@ -182,22 +174,15 @@ public class MessageTests
     public void MessageTest_RoutingKeySetTest2()
     {
         // arrange
-        var m = new Message();
-        var res = string.Empty;
-        
-        try
+        var m = new Message
         {
             // act
-            m.RoutingKey = "TEST-RK";
-            res = m.RoutingKey;
-        }
-        catch (Exception exc)
-        {
-            // assert 1
-            Assert.Fail(exc.Message);
-        }
-        
-        // assert 2
+            RoutingKey = "TEST-RK"
+        };
+
+        var res = m.RoutingKey;
+
+        // assert
         res.Should().Be("TEST-RK");
     }
     
@@ -211,20 +196,11 @@ public class MessageTests
         var m = new Message(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, new ReadOnlyMemory<byte>()));
-        IBasicProperties? res = null!;
-        
-        try
-        {
-            // act
-            res = m.BasicProperties;
-        }
-        catch (Exception exc)
-        {
-            // assert 1
-            Assert.Fail(exc.Message);
-        }
-            
-        // assert 2
+
+        // act
+        var res = m.BasicProperties;
+
+        // assert
         res.Should().BeNull();
     }
     
@@ -238,22 +214,15 @@ public class MessageTests
         IBasicProperties? bP = null;
         var m = new Message(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
-                null, new ReadOnlyMemory<byte>()));
-        IBasicProperties? res = null!;
-        
-        try
+                null, new ReadOnlyMemory<byte>()))
         {
             // act
-            m.BasicProperties = bP;
-            res = m.BasicProperties;
-        }
-        catch (Exception exc)
-        {
-            // assert 1
-            Assert.Fail(exc.Message);
-        }
-            
-        // assert 2
+            BasicProperties = bP
+        };
+
+        var res = m.BasicProperties;
+
+        // assert
         res.Should().Be(bP);
     }
     
@@ -268,20 +237,10 @@ public class MessageTests
         var m = new Message(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, b));
-        ReadOnlyMemory<byte>? res = null;
+        // act
+        var res = m.Body;
         
-        try
-        {
-            // act 1
-            res = m.Body;
-        }
-        catch (Exception exc)
-        {
-            // assert 1
-            Assert.Fail(exc.Message);
-        }
-            
-        // assert 2
+        // assert
         res.Should().Be(b);
     }
     
@@ -295,22 +254,15 @@ public class MessageTests
         var b = new ReadOnlyMemory<byte>();
         var m = new Message(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
-                null, null));
-        ReadOnlyMemory<byte>? res = null;
-        
-        try
+                null, null))
         {
             // act
-            m.Body = b;
-            res = m.Body;
-        }
-        catch (Exception exc)
-        {
-            // assert 1
-            Assert.Fail(exc.Message);
-        }
-            
-        // assert 2
+            Body = b
+        };
+
+        var res = m.Body;
+        // assert
+        
         res.Should().Be(b);
     }
 
@@ -322,23 +274,56 @@ public class MessageTests
     {
         // arrange
         var b = new ReadOnlyMemory<byte>();
-        var m = new Message();
-        ReadOnlyMemory<byte>? res = null;
-        
-        try
+        var m = new Message
         {
             // act
-            m.Body = b;
-            res = m.Body;
-        }
-        catch (Exception exc)
-        {
-            // assert 1
-            Assert.Fail(exc.Message);
-        }
-            
-        // assert 2
+            Body = b
+        };
+
+        var res = m.Body;
+
+        // assert
         res.Should().Be(b);
+    }
+    
+    /// <summary>
+    /// Tests the setter of the Body member. (Test 3)
+    /// </summary>
+    [Fact]
+    public void MessageTest_BodySetTest3()
+    {
+        // arrange
+        var m = new Message(
+            new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
+                null, null))
+        {
+            // act
+            Body = null
+        };
+
+        var res = m.Body;
+        
+        // assert
+        res.Should().NotBeNull();
+    }
+    
+    /// <summary>
+    /// Tests the setter of the Body member. (Test 4)
+    /// </summary>
+    [Fact]
+    public void MessageTest_BodySetTest4()
+    {
+        // arrange
+        var m = new Message
+        {
+            // act
+            Body = null
+        };
+
+        var res = m.Body;
+
+        // assert
+        res.Should().NotBeNull();
     }
     
     #endregion

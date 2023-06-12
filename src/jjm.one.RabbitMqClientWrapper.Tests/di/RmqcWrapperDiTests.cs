@@ -2,7 +2,6 @@ using FluentAssertions;
 using jjm.one.RabbitMqClientWrapper.di;
 using jjm.one.RabbitMqClientWrapper.main;
 using jjm.one.RabbitMqClientWrapper.types;
-using jjm.one.RabbitMqClientWrapper.types.di;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -41,8 +40,7 @@ public class RmqcWrapperDiTests
     {
         // arrange + act
         _hostBuilder.ConfigureServices(services =>
-            services.AddRmqcWrapper(new Settings(), 
-                new DiSimpleTypeWrappersEnableWrapperLogging(), new DiSimpleTypeWrappersEnableCoreLogging()));
+            services.AddRmqcWrapper(new Settings()));
         var host = _hostBuilder.Build();
 
         host.Services.GetService<IRmqcWrapper>().Should().NotBeNull();

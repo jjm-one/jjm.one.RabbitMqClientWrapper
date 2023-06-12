@@ -1,7 +1,6 @@
 ﻿using jjm.one.Microsoft.Extensions.Logging.Helpers;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
-using jjm.one.RabbitMqClientWrapper.types.di;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Reflection;
@@ -17,8 +16,7 @@ public class RmqcWrapper : IRmqcWrapper
     #region private members
 
     private readonly IRmqcCore _core;
-    private readonly ILogger<RmqcWrapper> _logger;
-    private readonly bool _enableLogging;
+    private readonly ILogger<RmqcWrapper>? _logger;
 
     #endregion
 
@@ -34,14 +32,14 @@ public class RmqcWrapper : IRmqcWrapper
         get
         {
             // log fct call
-            if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+            _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
             return _core.Settings;
         }
         set
         {
             // log fct call
-            if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+            _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
             _core.Settings = value;
         }
@@ -53,7 +51,7 @@ public class RmqcWrapper : IRmqcWrapper
         get
         {
             // log fct call
-            if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+            _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
             return _core.Connected;
         }
@@ -61,40 +59,36 @@ public class RmqcWrapper : IRmqcWrapper
 
     #endregion
 
-    #region ctor's
+    #region ctors
 
     /// <summary>
-    /// A additional parameterised constructor of the <see cref="RmqcWrapper"/> class.
+    /// A parameterised constructor of the <see cref="RmqcWrapper"/> class.
     /// </summary>
     /// <param name="core"></param>
     /// <param name="logger"></param>
-    /// <param name="enableLogging"></param>
     [ActivatorUtilitiesConstructor]
-    public RmqcWrapper(IRmqcCore core, ILogger<RmqcWrapper> logger,
-        DiSimpleTypeWrappersEnableWrapperLogging? enableLogging = null)
+    public RmqcWrapper(IRmqcCore core, ILogger<RmqcWrapper>? logger)
     {
         _core = core;
         _logger = logger;
-        _enableLogging = enableLogging?.EnableLogging ?? false;
 
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
     }
 
     /// <summary>
-    /// A additional parameterised constructor of the <see cref="RmqcWrapper"/> class.
+    /// A parameterised constructor of the <see cref="RmqcWrapper"/> class.
     /// </summary>
     /// <param name="settings"></param>
-    /// <param name="enableWrapperLogging"></param>
-    /// <param name="enableCoreLogging"></param>
-    public RmqcWrapper(Settings settings, bool enableWrapperLogging = false, bool enableCoreLogging = false)
+    /// <param name="logger"></param>
+    public RmqcWrapper(Settings settings, 
+        ILogger<RmqcWrapper>? logger = null)
     {
-        _core = new RmqcCore(settings, new Logger<RmqcCore>(new LoggerFactory()), new DiSimpleTypeWrappersEnableCoreLogging(enableCoreLogging));
-        _logger = new Logger<RmqcWrapper>(new LoggerFactory());
-        _enableLogging = enableWrapperLogging;
+        _core = new RmqcCore(settings);
+        _logger = logger;
 
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
     }
 
     #endregion
@@ -105,7 +99,7 @@ public class RmqcWrapper : IRmqcWrapper
     public void Init()
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         _core.Init();
     }
@@ -114,7 +108,7 @@ public class RmqcWrapper : IRmqcWrapper
     public void DeInit()
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         _core.DeInit();
     }
@@ -123,7 +117,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool Connect()
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return Connect(out _);
     }
@@ -132,7 +126,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool Connect(out Exception? exception)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return _core.Connect(out exception);
     }
@@ -141,7 +135,7 @@ public class RmqcWrapper : IRmqcWrapper
     public void Disconnect()
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         _core.Disconnect();
     }
@@ -150,7 +144,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool ReConnect()
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return ReConnect(out _);
     }
@@ -159,7 +153,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool ReConnect(out Exception? exception)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         _core.Disconnect();
         return _core.Connect(out exception);
@@ -169,7 +163,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool WriteMsg(Message message)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return WriteMsg(message, out _);
     }
@@ -178,7 +172,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool WriteMsg(Message message, out Exception? exception)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return _core.WriteMsg(message, out exception);
     }
@@ -187,7 +181,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool ReadMsg(out Message? message, bool autoAck)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return ReadMsg(out message, autoAck, out _);
     }
@@ -196,7 +190,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool ReadMsg(out Message? message, bool autoAck, out Exception? exception)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return _core.ReadMsg(out message, autoAck, out exception);
     }
@@ -205,7 +199,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool AckMsg(Message message)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return AckMsg(message, out _);
     }
@@ -214,7 +208,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool AckMsg(Message message, out Exception? exception)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return _core.AckMsg(message, out exception);
     }
@@ -223,7 +217,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool NackMsg(Message message, bool requeue)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return NackMsg(message, requeue, out _);
     }
@@ -232,7 +226,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool NackMsg(Message message, bool requeue, out Exception? exception)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return _core.NackMsg(message, requeue, out exception);
     }
@@ -241,7 +235,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool WaitForWriteConfirm(TimeSpan timeout)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return WaitForWriteConfirm(timeout, out _);
     }
@@ -250,7 +244,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool WaitForWriteConfirm(TimeSpan timeout, out Exception? exception)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return _core.WaitForWriteConfirm(timeout, out exception);
     }
@@ -259,7 +253,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool QueuedMsgs(out uint? amount)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return QueuedMsgs(out amount, out _);
     }
@@ -268,7 +262,7 @@ public class RmqcWrapper : IRmqcWrapper
     public bool QueuedMsgs(out uint? amount, out Exception? exception)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         return _core.QueuedMsgs(out amount, out exception);
     }

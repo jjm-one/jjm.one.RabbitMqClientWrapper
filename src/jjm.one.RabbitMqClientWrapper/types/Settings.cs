@@ -7,7 +7,7 @@ namespace jjm.one.RabbitMqClientWrapper.types;
 /// </summary>
 public class Settings
 {
-    #region private mebers
+    #region private members
 
     private string? _hostname;
     private int? _port;

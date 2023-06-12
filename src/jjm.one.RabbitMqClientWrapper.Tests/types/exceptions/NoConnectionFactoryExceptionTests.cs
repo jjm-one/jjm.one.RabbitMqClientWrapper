@@ -10,6 +10,10 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.types.exceptions;
 /// </summary>
 public class NoConnectionFactoryExceptionTests
 {
+    #region tests
+
+    #region ctor tests
+    
     /// <summary>
     /// Tests the default constructor of the <see cref="NoConnectionFactoryException"/> class.
     /// </summary>
@@ -23,4 +27,8 @@ public class NoConnectionFactoryExceptionTests
         e.Message.Should().Be($"The {nameof(IConnectionFactory)} is null! " +
                               $"Maybe the {nameof(RmqcCore)} was not initialized properly.");
     }
+    
+    #endregion
+
+    #endregion
 }

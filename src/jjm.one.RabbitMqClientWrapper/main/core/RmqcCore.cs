@@ -2,11 +2,9 @@
 using System.Reflection;
 using jjm.one.Microsoft.Extensions.Logging.Helpers;
 using jjm.one.RabbitMqClientWrapper.types;
-using jjm.one.RabbitMqClientWrapper.types.di;
 using jjm.one.RabbitMqClientWrapper.types.exceptions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
 namespace jjm.one.RabbitMqClientWrapper.main.core;
@@ -19,8 +17,7 @@ internal class RmqcCore : IRmqcCore
     #region private members
 
     private Settings _settings;
-    private readonly ILogger<RmqcCore> _logger;
-    private readonly bool _enableLogging;
+    private readonly ILogger<RmqcCore>? _logger;
 
     private IConnectionFactory? _connectionFactory;
     private IConnection? _connection;
@@ -40,14 +37,14 @@ internal class RmqcCore : IRmqcCore
         get
         {
             // log fct call
-            if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+            _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
             return _settings;
         }
         set
         {
             // log fct call
-            if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+            _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
             // check im nothing changed
             if (_settings.Equals(value))
@@ -92,50 +89,56 @@ internal class RmqcCore : IRmqcCore
 
     #endregion
 
-    #region ctor's
+    #region ctors
 
     /// <summary>
-    /// This is a parameterised constructor for the <see cref="RmqcCore"/> class.
+    /// A parameterised constructor of the <see cref="RmqcCore"/> class.
     /// </summary>
     /// <param name="settings"></param>
     /// <param name="logger"></param>
-    /// <param name="enableLogging"></param>
     [ActivatorUtilitiesConstructor]
-    public RmqcCore(Settings settings, ILogger<RmqcCore> logger, DiSimpleTypeWrappersEnableCoreLogging? enableLogging = null)
+    public RmqcCore(Settings settings, ILogger<RmqcCore>? logger = null)
     {
         // init global vars
         _settings = settings;
         _logger = logger;
-        _enableLogging = enableLogging?.EnableLogging ?? false;
 
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
     }
 
     /// <summary>
-    /// This is a parameterised constructor for the <see cref="RmqcCore"/> class.
+    /// A parameterised constructor of the <see cref="RmqcCore"/> class.
+    /// For unit-tests only!
     /// </summary>
-    /// <param name="options"></param>
+    /// <param name="settings"></param>
     /// <param name="logger"></param>
-    /// <param name="enableLogging"></param>
-    public RmqcCore(IOptions<Settings> options, ILogger<RmqcCore> logger, DiSimpleTypeWrappersEnableCoreLogging? enableLogging = null)
+    /// <param name="connectionFactory"></param>
+    /// <param name="connection"></param>
+    /// <param name="channel"></param>
+    internal RmqcCore(Settings settings, ILogger<RmqcCore> logger,
+        IConnectionFactory? connectionFactory, IConnection? connection, IModel? channel)
     {
         // init global vars
-        _settings = options.Value;
+        _settings = settings;
         _logger = logger;
-        _enableLogging = enableLogging?.EnableLogging ?? false;
+        _connectionFactory = connectionFactory;
+        _connection = connection;
+        _channel = channel;
 
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
     }
 
     #endregion
+
+    #region public methods
 
     /// <inheritdoc />
     public void Init()
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         // create the new connection factory
         _connectionFactory = new ConnectionFactory
@@ -152,7 +155,7 @@ internal class RmqcCore : IRmqcCore
     public void DeInit()
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         // create the new connection factory
         _connectionFactory = null;
@@ -162,7 +165,7 @@ internal class RmqcCore : IRmqcCore
     public bool Connect(out Exception? exception)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         // init output
         var res = true;
@@ -197,7 +200,7 @@ internal class RmqcCore : IRmqcCore
         catch(Exception exc)
         {
             // log exception
-            if (_enableLogging) _logger.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
+            _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
             // disconnect
             Disconnect();
@@ -214,7 +217,7 @@ internal class RmqcCore : IRmqcCore
     public void Disconnect()
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         try
         {
@@ -245,7 +248,7 @@ internal class RmqcCore : IRmqcCore
         catch (Exception exc)
         {
             // log exception
-            if (_enableLogging) _logger.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
+            _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
             // re-throw exception
             throw;
@@ -256,7 +259,7 @@ internal class RmqcCore : IRmqcCore
     public bool WriteMsg(Message message, out Exception? exception)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         // init output
         var res = true;
@@ -267,7 +270,7 @@ internal class RmqcCore : IRmqcCore
             // check connection to server
             if (!Connected)
             {
-                throw new InvalidOperationException("Client must be initialized and connected to perform this operation!");
+                throw new InvalidOperationException(nameof(WriteMsg));
             }
 
             // write message
@@ -276,7 +279,7 @@ internal class RmqcCore : IRmqcCore
         catch (Exception exc)
         {
             // log exception
-            if (_enableLogging) _logger.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
+            _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
             // set output 
             exception = exc;
@@ -290,7 +293,7 @@ internal class RmqcCore : IRmqcCore
     public bool ReadMsg(out Message? message, bool autoAck, out Exception? exception)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         // init output
         var res = true;
@@ -302,7 +305,7 @@ internal class RmqcCore : IRmqcCore
             // check connection to server
             if (!Connected)
             {
-                throw new InvalidOperationException("Client must be initialized and connected to perform this operation!");
+                throw new InvalidOperationException(nameof(ReadMsg));
             }
 
             // read message
@@ -321,7 +324,7 @@ internal class RmqcCore : IRmqcCore
         catch (Exception exc)
         {
             // log exception
-            if (_enableLogging) _logger.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
+            _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
             // set output 
             exception = exc;
@@ -335,7 +338,7 @@ internal class RmqcCore : IRmqcCore
     public bool AckMsg(Message message, out Exception? exception)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         // init output
         var res = true;
@@ -346,7 +349,7 @@ internal class RmqcCore : IRmqcCore
             // check connection to server
             if (!Connected)
             {
-                throw new InvalidOperationException("Client must be initialized and connected to perform this operation!");
+                throw new InvalidOperationException(nameof(AckMsg));
             }
 
             // send ack
@@ -355,7 +358,7 @@ internal class RmqcCore : IRmqcCore
         catch (Exception exc)
         {
             // log exception
-            if (_enableLogging) _logger.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
+            _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
             // set output 
             exception = exc;
@@ -369,7 +372,7 @@ internal class RmqcCore : IRmqcCore
     public bool NackMsg(Message message, bool requeue, out Exception? exception)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         // init output
         var res = true;
@@ -380,7 +383,7 @@ internal class RmqcCore : IRmqcCore
             // check connection to server
             if (!Connected)
             {
-                throw new InvalidOperationException("Client must be initialized and connected to perform this operation!");
+                throw new InvalidOperationException(nameof(NackMsg));
             }
 
             // send nack
@@ -389,7 +392,7 @@ internal class RmqcCore : IRmqcCore
         catch (Exception exc)
         {
             // log exception
-            if (_enableLogging) _logger.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
+            _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
             // set output 
             exception = exc;
@@ -403,7 +406,7 @@ internal class RmqcCore : IRmqcCore
     public bool WaitForWriteConfirm(TimeSpan timeout, out Exception? exception)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         // init output
         var res = true;
@@ -414,7 +417,7 @@ internal class RmqcCore : IRmqcCore
             // check connection to server
             if (!Connected)
             {
-                throw new InvalidOperationException("Client must be initialized and connected to perform this operation!");
+                throw new InvalidOperationException(nameof(WaitForWriteConfirm));
             }
 
             // send nack
@@ -423,7 +426,7 @@ internal class RmqcCore : IRmqcCore
         catch (Exception exc)
         {
             // log exception
-            if (_enableLogging) _logger.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
+            _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
             // set output 
             exception = exc;
@@ -437,7 +440,7 @@ internal class RmqcCore : IRmqcCore
     public bool QueuedMsgs(out uint? amount, out Exception? exception)
     {
         // log fct call
-        if (_enableLogging) _logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         // init output
         var res = true;
@@ -449,7 +452,7 @@ internal class RmqcCore : IRmqcCore
             // check connection to server
             if (!Connected)
             {
-                throw new InvalidOperationException("Client must be initialized and connected to perform this operation!");
+                throw new InvalidOperationException(nameof(QueuedMsgs));
             }
 
             // get number of messages in queue
@@ -458,7 +461,7 @@ internal class RmqcCore : IRmqcCore
         catch (Exception exc)
         {
             // log exception
-            if (_enableLogging) _logger.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
+            _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
             // set output 
             exception = exc;
@@ -467,4 +470,6 @@ internal class RmqcCore : IRmqcCore
 
         return res;
     }
+    
+    #endregion
 }

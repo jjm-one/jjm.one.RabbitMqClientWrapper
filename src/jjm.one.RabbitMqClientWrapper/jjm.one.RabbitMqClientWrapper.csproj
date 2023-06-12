@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1;net6;net7.0</TargetFrameworks>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>1.0.0-alpha.1</Version>
+    <Version>1.0.0-alpha.2</Version>
     <Authors>Jonas Merkle [JJM] </Authors>
     <Copyright>© by Jonas Merkle [JJM], 2023.</Copyright>
     <RootNamespace>jjm.one.RabbitMqClientWrapper</RootNamespace>
@@ -51,5 +51,6 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="jjm.one.RabbitMqClientWrapper.Tests" PublicKey="0024000004800000940000000602000000240000525341310004000001000100019bb0bd8148a25eaf627965aae79a68ea3495cb9512227b0a607007034de8e73e8a60c55a29699ebe5b77610415edbc6d9a94333f0773c54c433b09f6b5c03046818787a82e38b16fd99d386996f0fa11079769b6a903b13b8e460f96d9b7aea0ba19a21e8c4a323bed8da420464573454b97f7d5a3c02474725577869e9ea1" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" PublicKey="0024000004800000940000000602000000240000525341310004000001000100c547cac37abd99c8db225ef2f6c8a3602f3b3606cc9891605d02baa56104f4cfc0734aa39b93bf7852f7d9266654753cc297e7d2edfe0bac1cdcf9f717241550e0a7b191195b7667bb4f64bcb8e2121380fd1d9d46ad2d92d2d15605093924cceaf74c4861eff62abf69b9291ed0a340e113be11e6a7d3113e92484cf7045cc7" />
   </ItemGroup>
 </Project>
