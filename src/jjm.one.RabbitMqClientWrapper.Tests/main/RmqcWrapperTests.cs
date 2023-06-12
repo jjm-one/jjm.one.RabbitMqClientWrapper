@@ -20,6 +20,8 @@ public class RmqcWrapperTests
     private readonly Mock<ILogger<RmqcWrapper>> _rmqcWrapperLoggingMock;
 
     #endregion
+    
+    
     /// <summary>
     /// The default constructor of the <see cref="RmqcWrapperTests"/> class.
     /// </summary>
@@ -27,6 +29,7 @@ public class RmqcWrapperTests
     {
         _rmqcCoreMock = new Mock<IRmqcCore>();
         _rmqcWrapperLoggingMock = new Mock<ILogger<RmqcWrapper>>();
+        
         _sut = new RmqcWrapper(_rmqcCoreMock.Object, _rmqcWrapperLoggingMock.Object);
     }
 
@@ -60,20 +63,11 @@ public class RmqcWrapperTests
         // arrange
         var sTest = new Settings("test");
         _rmqcCoreMock.Setup(x => x.Settings).Returns(sTest);
-        Settings s = null!;
-
-        try
-        {
-            // act
-            s = _sut.Settings;
-        }
-        catch (Exception exc)
-        {
-            // assert 1
-            Assert.Fail(exc.Message);
-        }
         
-        // assert 2
+        // act
+        var s = _sut.Settings;
+
+        // assert
         _rmqcCoreMock.Verify(x => x.Settings, Times.Once);
         s.Should().Be(sTest);
     }
@@ -87,19 +81,11 @@ public class RmqcWrapperTests
         // arrange
         var sTest = new Settings("test");
         _rmqcCoreMock.SetupSet(x => x.Settings=It.IsAny<Settings>()).Verifiable();
-
-        try
-        {
-            // act
-            _sut.Settings = sTest;
-        }
-        catch (Exception exc)
-        {
-            // assert 1
-            Assert.Fail(exc.Message);
-        }
         
-        // assert 2
+        // act
+        _sut.Settings = sTest;
+
+        // assert
         _rmqcCoreMock.VerifySet(x => x.Settings=It.IsAny<Settings>(), Times.Once);
     }
     
@@ -111,20 +97,11 @@ public class RmqcWrapperTests
     {
         // arrange
         _rmqcCoreMock.Setup(x => x.Connected).Returns(true);
-        var b = false;
 
-        try
-        {
-            // act
-            b = _sut.Connected;
-        }
-        catch (Exception exc)
-        {
-            // assert 1
-            Assert.Fail(exc.Message);
-        }
-        
-        // assert 2
+        // act
+        var b = _sut.Connected;
+
+        // assert
         _rmqcCoreMock.Verify(x => x.Connected, Times.Once);
         b.Should().BeTrue();
     }
@@ -141,19 +118,11 @@ public class RmqcWrapperTests
     {
         // arrange
         _rmqcCoreMock.Setup(x => x.Init());
-
-        try
-        {
-            // act
-            _sut.Init();
-        }
-        catch (Exception exc)
-        {
-            // assert 1
-            Assert.Fail(exc.Message);
-        }
         
-        // assert 2
+        // act
+        _sut.Init();
+
+        // assert
         _rmqcCoreMock.Verify(x => x.Init(), Times.Once);
     }
     
@@ -165,19 +134,11 @@ public class RmqcWrapperTests
     {
         // arrange
         _rmqcCoreMock.Setup(x => x.DeInit());
-
-        try
-        {
-            // act
-            _sut.DeInit();
-        }
-        catch (Exception exc)
-        {
-            // assert 1
-            Assert.Fail(exc.Message);
-        }
         
-        // asser 2
+        // act
+        _sut.DeInit();
+
+        // assert
         _rmqcCoreMock.Verify(x => x.DeInit(), Times.Once);
     }
     
@@ -227,18 +188,10 @@ public class RmqcWrapperTests
         // arrange
         _rmqcCoreMock.Setup(x => x.Disconnect());
 
-        try
-        {
-            // act
-            _sut.Disconnect();
-        }
-        catch (Exception exc)
-        {
-            // assert 1
-            Assert.Fail(exc.Message);
-        }
-        
-        // assert 2
+        // act
+        _sut.Disconnect();
+            
+        // assert
         _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
     }
     
