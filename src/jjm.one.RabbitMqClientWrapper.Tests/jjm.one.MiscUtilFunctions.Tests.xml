@@ -124,34 +124,64 @@
             Testes the Disconnect method.
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_WriteMsgTest">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_WriteMsgTest1">
             <summary>
-            Testes the WriteMsg method. 
+            Testes the WriteMsg method. (Test 1)
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ReadMsgTest">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_WriteMsgTest2">
             <summary>
-            Testes the ReadMsg method. 
+            Testes the WriteMsg method. (Test 2)
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_AckMsgTest">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ReadMsgTest1">
             <summary>
-            Testes the AckMsg method. 
+            Testes the ReadMsg method. (Test 1)
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_NackMsgTest">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ReadMsgTest2">
             <summary>
-            Testes the NackMsg method. 
+            Testes the ReadMsg method. (Test 2)
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_WaitForWriteConfirmTest">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_AckMsgTest1">
             <summary>
-            Testes the WaitForWriteConfirm method. 
+            Testes the AckMsg method. (Test 1)
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_QueuedMsgsTest">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_AckMsgTest2">
             <summary>
-            Testes the QueuedMsgs method. 
+            Testes the AckMsg method. (Test 2)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_NackMsgTest1">
+            <summary>
+            Testes the NackMsg method. (Test 1)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_NackMsgTest2">
+            <summary>
+            Testes the NackMsg method. (Test 2)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_WaitForWriteConfirmTest1">
+            <summary>
+            Testes the WaitForWriteConfirm method. (Test 1)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_WaitForWriteConfirmTest2">
+            <summary>
+            Testes the WaitForWriteConfirm method. (Test 2)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_QueuedMsgsTest1">
+            <summary>
+            Testes the QueuedMsgs method. (Test 1)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_QueuedMsgsTest2">
+            <summary>
+            Testes the QueuedMsgs method. (Test 2)
             </summary>
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests">

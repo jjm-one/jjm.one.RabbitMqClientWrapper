@@ -380,10 +380,10 @@ public class RmqcCoreTests
     }
 
     /// <summary>
-    /// Testes the WriteMsg method. 
+    /// Testes the WriteMsg method. (Test 1)
     /// </summary>
     [Fact]
-    public void RmqcWrapperTest_WriteMsgTest()
+    public void RmqcWrapperTest_WriteMsgTest1()
     {
         // arrange
         var m = new Message();
@@ -407,10 +407,37 @@ public class RmqcCoreTests
     }
 
     /// <summary>
-    /// Testes the ReadMsg method. 
+    /// Testes the WriteMsg method. (Test 2)
     /// </summary>
     [Fact]
-    public void RmqcWrapperTest_ReadMsgTest()
+    public void RmqcWrapperTest_WriteMsgTest2()
+    {
+        // arrange
+        var m = new Message();
+        _connectionMock.Setup(x => x.IsOpen).Returns(false);
+        _channelMock.Setup(x => x.IsOpen).Returns(false);
+        _channelMock.Setup(x => x.BasicPublish(
+            It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(),
+            It.IsAny<IBasicProperties>(), It.IsAny<ReadOnlyMemory<byte>>()));
+
+        // act
+        var res = _sut.WriteMsg(m, out var resExc); 
+        
+        // assert
+        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.BasicPublish(
+            It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(),
+            It.IsAny<IBasicProperties>(), It.IsAny<ReadOnlyMemory<byte>>()), Times.Never);
+        res.Should().BeFalse();
+        resExc.Should().BeOfType<InvalidOperationException>();
+    }
+    
+    /// <summary>
+    /// Testes the ReadMsg method. (Test 1)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_ReadMsgTest1()
     {
         // arrange
         var bgr = new BasicGetResult(42, false, "TEST-EX", "TEST-RK", 69, null, null);
@@ -432,10 +459,35 @@ public class RmqcCoreTests
     }
 
     /// <summary>
-    /// Testes the AckMsg method. 
+    /// Testes the ReadMsg method. (Test 2)
     /// </summary>
     [Fact]
-    public void RmqcWrapperTest_AckMsgTest()
+    public void RmqcWrapperTest_ReadMsgTest2()
+    {
+        // arrange
+        var bgr = new BasicGetResult(42, false, "TEST-EX", "TEST-RK", 69, null, null);
+        var m = new Message(bgr);
+        _connectionMock.Setup(x => x.IsOpen).Returns(false);
+        _channelMock.Setup(x => x.IsOpen).Returns(false);
+        _channelMock.Setup(x => x.BasicGet(It.IsAny<string>(), It.IsAny<bool>())).Returns(bgr);
+
+        // act
+        var res = _sut.ReadMsg(out var resMsg, false, out var resExc); 
+        
+        // assert
+        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.BasicGet(It.IsAny<string>(), It.IsAny<bool>()), Times.Never());
+        res.Should().BeFalse();
+        resMsg.Should().BeNull();
+        resExc.Should().BeOfType<InvalidOperationException>();
+    }
+
+    /// <summary>
+    /// Testes the AckMsg method. (Test 1)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_AckMsgTest1()
     {
         // arrange
         var m = new Message();
@@ -455,10 +507,33 @@ public class RmqcCoreTests
     }
 
     /// <summary>
-    /// Testes the NackMsg method. 
+    /// Testes the AckMsg method. (Test 2)
     /// </summary>
     [Fact]
-    public void RmqcWrapperTest_NackMsgTest()
+    public void RmqcWrapperTest_AckMsgTest2()
+    {
+        // arrange
+        var m = new Message();
+        _connectionMock.Setup(x => x.IsOpen).Returns(false);
+        _channelMock.Setup(x => x.IsOpen).Returns(false);
+        _channelMock.Setup(x => x.BasicAck(It.IsAny<ulong>(), It.IsAny<bool>()));
+
+        // act
+        var res = _sut.AckMsg(m, out var resExc); 
+        
+        // assert
+        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.BasicAck(It.IsAny<ulong>(), It.IsAny<bool>()), Times.Never());
+        res.Should().BeFalse();
+        resExc.Should().BeOfType<InvalidOperationException>();
+    }
+
+    /// <summary>
+    /// Testes the NackMsg method. (Test 1)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_NackMsgTest1()
     {
         // arrange
         var m = new Message();
@@ -478,10 +553,33 @@ public class RmqcCoreTests
     }
 
     /// <summary>
-    /// Testes the WaitForWriteConfirm method. 
+    /// Testes the NackMsg method. (Test 2)
     /// </summary>
     [Fact]
-    public void RmqcWrapperTest_WaitForWriteConfirmTest()
+    public void RmqcWrapperTest_NackMsgTest2()
+    {
+        // arrange
+        var m = new Message();
+        _connectionMock.Setup(x => x.IsOpen).Returns(false);
+        _channelMock.Setup(x => x.IsOpen).Returns(false);
+        _channelMock.Setup(x => x.BasicNack(It.IsAny<ulong>(), It.IsAny<bool>(),It.IsAny<bool>()));
+
+        // act
+        var res = _sut.NackMsg(m, false, out var resExc); 
+        
+        // assert
+        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.BasicNack(It.IsAny<ulong>(), It.IsAny<bool>(),It.IsAny<bool>()), Times.Never());
+        res.Should().BeFalse();
+        resExc.Should().BeOfType<InvalidOperationException>();
+    }
+    
+    /// <summary>
+    /// Testes the WaitForWriteConfirm method. (Test 1)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_WaitForWriteConfirmTest1()
     {
         // arrange
         var t = new TimeSpan();
@@ -501,10 +599,33 @@ public class RmqcCoreTests
     }
 
     /// <summary>
-    /// Testes the QueuedMsgs method. 
+    /// Testes the WaitForWriteConfirm method. (Test 2)
     /// </summary>
     [Fact]
-    public void RmqcWrapperTest_QueuedMsgsTest()
+    public void RmqcWrapperTest_WaitForWriteConfirmTest2()
+    {
+        // arrange
+        var t = new TimeSpan();
+        _connectionMock.Setup(x => x.IsOpen).Returns(false);
+        _channelMock.Setup(x => x.IsOpen).Returns(false);
+        _channelMock.Setup(x => x.WaitForConfirms(It.IsAny<TimeSpan>())).Returns(true);
+
+        // act
+        var res = _sut.WaitForWriteConfirm(t, out var resExc); 
+        
+        // assert
+        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.WaitForConfirms(It.IsAny<TimeSpan>()), Times.Never());
+        res.Should().BeFalse();
+        resExc.Should().BeOfType<InvalidOperationException>();
+    }
+    
+    /// <summary>
+    /// Testes the QueuedMsgs method. (Test 1)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_QueuedMsgsTest1()
     {
         // arrange
         uint? a = 0;
@@ -522,6 +643,30 @@ public class RmqcCoreTests
         res.Should().BeTrue();
         a.Should().Be(42);
         resExc.Should().BeNull();
+    }
+    
+    /// <summary>
+    /// Testes the QueuedMsgs method. (Test 2)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_QueuedMsgsTest2()
+    {
+        // arrange
+        uint? a = 0;
+        _connectionMock.Setup(x => x.IsOpen).Returns(false);
+        _channelMock.Setup(x => x.IsOpen).Returns(false);
+        _channelMock.Setup(x => x.MessageCount(It.IsAny<string>())).Returns(42);
+
+        // act
+        var res = _sut.QueuedMsgs(out a, out var resExc); 
+        
+        // assert
+        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.MessageCount(It.IsAny<string>()), Times.Never());
+        res.Should().BeFalse();
+        a.Should().BeNull();
+        resExc.Should().BeOfType<InvalidOperationException>();
     }
     
     #endregion
