@@ -1,4 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$interfaceIRmqcCore.html" title="This interface defines the core functionality to connect and communicate with a RabbitMQ server." alt="" coords="5,5,99,32"/>
-<area shape="rect" id="node2" href="$classRmqcCore.html" title="This class implements the IRmqcCore interface for a RabbitMQ server." alt="" coords="147,5,236,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,81,92,108"/>
+<area shape="rect" id="node2" href="$classNoChannelException.html" title="This class represents an exception which gets thrown if the IModel in a RmqcCore object is null or no..." alt="" coords="173,5,331,32"/>
+<area shape="rect" id="node3" href="$classNoConnectionException.html" title="This class represents an exception which gets thrown if the IConnection in a RmqcCore object is null ..." alt="" coords="163,56,341,83"/>
+<area shape="rect" id="node4" href="$classNoConnectionFactoryException.html" title="This class represents an exception which gets thrown if the IConnectionFactory in a RmqcCore object i..." alt="" coords="140,107,364,133"/>
+<area shape="rect" id="node5" href="$classUnInitializedClientException.html" title="This class represents an exception which gets thrown if the client is not initialized properly before..." alt="" coords="149,157,355,184"/>
 </map>

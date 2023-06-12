@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['disimpletypewrappersenablecorelogging_71',['DiSimpleTypeWrappersEnableCoreLogging',['../classDiSimpleTypeWrappersEnableCoreLogging.html',1,'']]],
-  ['disimpletypewrappersenablewrapperlogging_72',['DiSimpleTypeWrappersEnableWrapperLogging',['../classDiSimpleTypeWrappersEnableWrapperLogging.html',1,'']]]
+  ['irmqccore_69',['IRmqcCore',['../interfaceIRmqcCore.html',1,'']]],
+  ['irmqcwrapper_70',['IRmqcWrapper',['../interfaceIRmqcWrapper.html',1,'']]]
 ];
