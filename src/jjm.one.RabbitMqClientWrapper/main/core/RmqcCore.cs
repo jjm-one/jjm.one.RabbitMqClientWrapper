@@ -92,7 +92,7 @@ internal class RmqcCore : IRmqcCore
     #region ctor's
 
     /// <summary>
-    /// This is a parameterised constructor of the <see cref="RmqcCore"/> class.
+    /// A parameterised constructor of the <see cref="RmqcCore"/> class.
     /// </summary>
     /// <param name="settings"></param>
     /// <param name="logger"></param>
@@ -108,7 +108,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    /// This is a parameterised constructor of the <see cref="RmqcCore"/> class.
+    /// A parameterised constructor of the <see cref="RmqcCore"/> class.
     /// For unit-tests only!
     /// </summary>
     /// <param name="settings"></param>
@@ -268,7 +268,7 @@ internal class RmqcCore : IRmqcCore
             // check connection to server
             if (!Connected)
             {
-                throw new InvalidOperationException("Client must be initialized and connected to perform this operation!");
+                throw new InvalidOperationException(nameof(WriteMsg));
             }
 
             // write message
@@ -303,7 +303,7 @@ internal class RmqcCore : IRmqcCore
             // check connection to server
             if (!Connected)
             {
-                throw new InvalidOperationException("Client must be initialized and connected to perform this operation!");
+                throw new InvalidOperationException(nameof(ReadMsg));
             }
 
             // read message
@@ -347,7 +347,7 @@ internal class RmqcCore : IRmqcCore
             // check connection to server
             if (!Connected)
             {
-                throw new InvalidOperationException("Client must be initialized and connected to perform this operation!");
+                throw new InvalidOperationException(nameof(AckMsg));
             }
 
             // send ack
@@ -381,7 +381,7 @@ internal class RmqcCore : IRmqcCore
             // check connection to server
             if (!Connected)
             {
-                throw new InvalidOperationException("Client must be initialized and connected to perform this operation!");
+                throw new InvalidOperationException(nameof(NackMsg));
             }
 
             // send nack
@@ -415,7 +415,7 @@ internal class RmqcCore : IRmqcCore
             // check connection to server
             if (!Connected)
             {
-                throw new InvalidOperationException("Client must be initialized and connected to perform this operation!");
+                throw new InvalidOperationException(nameof(WaitForWriteConfirm));
             }
 
             // send nack
@@ -450,7 +450,7 @@ internal class RmqcCore : IRmqcCore
             // check connection to server
             if (!Connected)
             {
-                throw new InvalidOperationException("Client must be initialized and connected to perform this operation!");
+                throw new InvalidOperationException(nameof(QueuedMsgs));
             }
 
             // get number of messages in queue

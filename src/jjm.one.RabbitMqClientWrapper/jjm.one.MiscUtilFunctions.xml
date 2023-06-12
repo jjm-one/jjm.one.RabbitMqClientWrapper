@@ -134,14 +134,14 @@
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.#ctor(jjm.one.RabbitMqClientWrapper.types.Settings,Microsoft.Extensions.Logging.ILogger{jjm.one.RabbitMqClientWrapper.main.core.RmqcCore})">
             <summary>
-            This is a parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class.
+            A parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class.
             </summary>
             <param name="settings"></param>
             <param name="logger"></param>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.#ctor(jjm.one.RabbitMqClientWrapper.types.Settings,Microsoft.Extensions.Logging.ILogger{jjm.one.RabbitMqClientWrapper.main.core.RmqcCore},RabbitMQ.Client.IConnectionFactory,RabbitMQ.Client.IConnection,RabbitMQ.Client.IModel)">
             <summary>
-            This is a parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class.
+            A parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class.
             For unit-tests only!
             </summary>
             <param name="settings"></param>
@@ -265,14 +265,14 @@
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.#ctor(jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore,Microsoft.Extensions.Logging.ILogger{jjm.one.RabbitMqClientWrapper.main.RmqcWrapper})">
             <summary>
-            A additional parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class.
+            A parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class.
             </summary>
             <param name="core"></param>
             <param name="logger"></param>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.#ctor(jjm.one.RabbitMqClientWrapper.types.Settings,Microsoft.Extensions.Logging.ILogger{jjm.one.RabbitMqClientWrapper.main.RmqcWrapper})">
             <summary>
-            A additional parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class.
+            A parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class.
             </summary>
             <param name="settings"></param>
             <param name="logger"></param>
@@ -381,6 +381,33 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.types.exceptions.NoConnectionFactoryException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
             <see cref="T:System.Runtime.Serialization.ISerializable"/> compliant constructor for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.exceptions.NoConnectionFactoryException"/> class.
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.types.exceptions.UnInitializedClientException">
+            <summary>
+            This class represents an exception which gets thrown if the client is not initialized properly before performing an action.
+            </summary>
+        </member>
+        <member name="F:jjm.one.RabbitMqClientWrapper.types.exceptions.UnInitializedClientException.Operation">
+            <summary>
+            The name of the operation which causes the exception.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.exceptions.UnInitializedClientException.#ctor">
+            <summary>
+            The default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.exceptions.UnInitializedClientException"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.exceptions.UnInitializedClientException.#ctor(System.String)">
+            <summary>
+            A parameterised constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.exceptions.UnInitializedClientException"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.exceptions.UnInitializedClientException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            <see cref="T:System.Runtime.Serialization.ISerializable"/> compliant constructor for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.exceptions.UnInitializedClientException"/> class.
             </summary>
             <param name="info"></param>
             <param name="context"></param>

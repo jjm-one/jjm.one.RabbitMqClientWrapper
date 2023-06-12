@@ -62,7 +62,7 @@ public class RmqcWrapper : IRmqcWrapper
     #region ctor's
 
     /// <summary>
-    /// A additional parameterised constructor of the <see cref="RmqcWrapper"/> class.
+    /// A parameterised constructor of the <see cref="RmqcWrapper"/> class.
     /// </summary>
     /// <param name="core"></param>
     /// <param name="logger"></param>
@@ -77,7 +77,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    /// A additional parameterised constructor of the <see cref="RmqcWrapper"/> class.
+    /// A parameterised constructor of the <see cref="RmqcWrapper"/> class.
     /// </summary>
     /// <param name="settings"></param>
     /// <param name="logger"></param>
