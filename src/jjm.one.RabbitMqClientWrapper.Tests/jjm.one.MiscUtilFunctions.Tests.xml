@@ -34,6 +34,56 @@
             Tests the static AddRmqcCore function.
             </summary>
         </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests">
+            <summary>
+            This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.#ctor">
+            <summary>
+            The default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_CtorTest">
+            <summary>
+            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_SettingsGetTest1">
+            <summary>
+            Tests the getter of the Settings member. (Test 1)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_SettingsGetTest2">
+            <summary>
+            Tests the getter of the Settings member. (Test 2)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_SettingsSetTest1">
+            <summary>
+            Tests the setter of the Settings member. (Test 1)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_SettingsSetTest2">
+            <summary>
+            Tests the setter of the Settings member. (Test 2)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ConnectedGetTest1">
+            <summary>
+            Tests the getter of the Connected member. (Test 1)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ConnectedGetTest2">
+            <summary>
+            Tests the getter of the Connected member. (Test 2)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ConnectedGetTest3">
+            <summary>
+            Tests the getter of the Connected member. (Test 3)
+            </summary>
+        </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests">
             <summary>
             This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper"/> class.
