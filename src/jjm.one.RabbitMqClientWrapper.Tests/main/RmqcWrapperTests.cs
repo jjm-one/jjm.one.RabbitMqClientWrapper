@@ -3,7 +3,6 @@ using FluentAssertions;
 using jjm.one.RabbitMqClientWrapper.main;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
-using jjm.one.RabbitMqClientWrapper.types.di;
 using Microsoft.Extensions.Logging;
 using Moq;
 
@@ -28,8 +27,7 @@ public class RmqcWrapperTests
     {
         _rmqcCoreMock = new Mock<IRmqcCore>();
         _rmqcWrapperLoggingMock = new Mock<ILogger<RmqcWrapper>>();
-        _sut = new RmqcWrapper(_rmqcCoreMock.Object, _rmqcWrapperLoggingMock.Object, 
-            new DiSimpleTypeWrappersEnableWrapperLogging());
+        _sut = new RmqcWrapper(_rmqcCoreMock.Object, _rmqcWrapperLoggingMock.Object);
     }
 
     #region tests

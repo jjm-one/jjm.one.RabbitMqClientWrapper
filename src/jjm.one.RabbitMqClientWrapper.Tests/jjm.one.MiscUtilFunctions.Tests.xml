@@ -159,23 +159,6 @@
             Testes the QueuedMsgs method. (Test 2)
             </summary>
         </member>
-        <member name="T:jjm.one.RabbitMqClientWrapper.Tests.types.di.DiSimpleTypeWrappersTests">
-            <summary>
-            This class contains the unit tests for the following classes:
-            - <see cref="T:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging"/>
-            - <see cref="T:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableWrapperLogging"/>
-            </summary>
-        </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.di.DiSimpleTypeWrappersTests.DiSimpleTypeWrappersEnableCoreLogging_CtorTest">
-            <summary>
-            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableCoreLogging"/> class.
-            </summary>
-        </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.di.DiSimpleTypeWrappersTests.DiSimpleTypeWrappersEnableWrapperLogging_CtorTest">
-            <summary>
-            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.di.DiSimpleTypeWrappersEnableWrapperLogging"/> class.
-            </summary>
-        </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.Tests.types.exceptions.NoChannelExceptionTests">
             <summary>
             This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.exceptions.NoChannelException"/> class.
