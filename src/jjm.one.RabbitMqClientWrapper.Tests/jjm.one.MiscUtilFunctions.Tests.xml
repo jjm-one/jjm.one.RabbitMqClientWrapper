@@ -501,7 +501,7 @@
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanConverterTests">
             <summary>
-            This class contains the unit tests for the <see cref="T:System.ComponentModel.TimeSpanConverter"/> class.
+            This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.util.TimeSpanConverter"/> class.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanConverterTests.MillisecondsToTimeSpanTestData">

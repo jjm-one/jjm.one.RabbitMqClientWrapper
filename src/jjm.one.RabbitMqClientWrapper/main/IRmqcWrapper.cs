@@ -82,7 +82,7 @@ public interface IRmqcWrapper : IRmqcCore
     public bool WaitForWriteConfirm(TimeSpan timeout);
 
     /// <summary>
-    /// Get the amount of <see cref="Message"/> stored in the RabbitMQ server queue which are ready get read.
+    /// Get the amount of <see cref="Message"/> queued in the RabbitMQ server queue which are ready get read.
     /// </summary>
     /// <param name="amount"></param>
     /// <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>

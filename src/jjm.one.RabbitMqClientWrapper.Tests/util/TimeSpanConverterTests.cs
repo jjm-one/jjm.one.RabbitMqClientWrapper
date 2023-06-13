@@ -7,7 +7,7 @@ using jjm.one.RabbitMqClientWrapper.util;
 namespace jjm.one.RabbitMqClientWrapper.Tests.util;
 
 /// <summary>
-/// This class contains the unit tests for the <see cref="TimeSpanConverter"/> class.
+/// This class contains the unit tests for the <see cref="RabbitMqClientWrapper.util.TimeSpanConverter"/> class.
 /// </summary>
 public class TimeSpanConverterTests
 {
