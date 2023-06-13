@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['rawbasicgetresult_176',['RawBasicGetResult',['../classMessage.html#a3cacae77caaae3593f95ef628af3142e',1,'Message']]],
-  ['routingkey_177',['RoutingKey',['../classMessage.html#ae2931f48cc2d33e45202660cfcfdbfcb',1,'Message']]]
+  ['password_201',['Password',['../classSettings.html#a62619748f181d68c6a92e894fb7a2c6d',1,'Settings']]],
+  ['port_202',['Port',['../classSettings.html#afde0fb2d25427daf075cd88f657bf99e',1,'Settings']]]
 ];

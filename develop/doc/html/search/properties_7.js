@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['queue_175',['Queue',['../classSettings.html#ad30acff0cedd4c08f841beb066d9265e',1,'Settings']]]
+  ['operation_200',['Operation',['../classUnInitializedClientException.html#a01a327d581c3cc1cf7cb5cae68e9aa84',1,'UnInitializedClientException']]]
 ];

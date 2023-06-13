@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['message_2ecs_107',['Message.cs',['../Message_8cs.html',1,'']]]
+  ['irmqccore_2ecs_122',['IRmqcCore.cs',['../IRmqcCore_8cs.html',1,'']]],
+  ['irmqcwrapper_2ecs_123',['IRmqcWrapper.cs',['../IRmqcWrapper_8cs.html',1,'']]]
 ];

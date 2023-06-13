@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['settings_100',['Settings',['../classSettings.html',1,'']]]
+  ['queuedmsgscompletedeventargs_108',['QueuedMsgsCompletedEventArgs',['../classQueuedMsgsCompletedEventArgs.html',1,'']]]
 ];

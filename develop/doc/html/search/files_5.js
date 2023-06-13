@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['readme_2emd_111',['README.md',['../README_8md.html',1,'']]],
-  ['reconnectcompletedeventargs_2ecs_112',['ReConnectCompletedEventArgs.cs',['../ReConnectCompletedEventArgs_8cs.html',1,'']]],
-  ['rmqccore_2ecs_113',['RmqcCore.cs',['../RmqcCore_8cs.html',1,'']]],
-  ['rmqccoredi_2ecs_114',['RmqcCoreDi.cs',['../RmqcCoreDi_8cs.html',1,'']]],
-  ['rmqcwrapper_2ecs_115',['RmqcWrapper.cs',['../RmqcWrapper_8cs.html',1,'']]],
-  ['rmqcwrapperdi_2ecs_116',['RmqcWrapperDi.cs',['../RmqcWrapperDi_8cs.html',1,'']]]
+  ['nackcompletedeventargs_2ecs_125',['NackCompletedEventArgs.cs',['../NackCompletedEventArgs_8cs.html',1,'']]],
+  ['nochannelexception_2ecs_126',['NoChannelException.cs',['../NoChannelException_8cs.html',1,'']]],
+  ['noconnectionexception_2ecs_127',['NoConnectionException.cs',['../NoConnectionException_8cs.html',1,'']]],
+  ['noconnectionfactoryexception_2ecs_128',['NoConnectionFactoryException.cs',['../NoConnectionFactoryException_8cs.html',1,'']]]
 ];

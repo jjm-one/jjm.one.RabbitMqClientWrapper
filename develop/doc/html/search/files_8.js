@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uninitializedclientexception_2ecs_119',['UnInitializedClientException.cs',['../UnInitializedClientException_8cs.html',1,'']]]
+  ['settings_2ecs_137',['Settings.cs',['../Settings_8cs.html',1,'']]]
 ];

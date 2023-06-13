@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['reconnectcompletedeventargs_95',['ReConnectCompletedEventArgs',['../classReConnectCompletedEventArgs.html',1,'']]],
-  ['rmqccore_96',['RmqcCore',['../classRmqcCore.html',1,'']]],
-  ['rmqccoredi_97',['RmqcCoreDi',['../classRmqcCoreDi.html',1,'']]],
-  ['rmqcwrapper_98',['RmqcWrapper',['../classRmqcWrapper.html',1,'']]],
-  ['rmqcwrapperdi_99',['RmqcWrapperDi',['../classRmqcWrapperDi.html',1,'']]]
+  ['nackcompletedeventargs_104',['NackCompletedEventArgs',['../classNackCompletedEventArgs.html',1,'']]],
+  ['nochannelexception_105',['NoChannelException',['../classNoChannelException.html',1,'']]],
+  ['noconnectionexception_106',['NoConnectionException',['../classNoConnectionException.html',1,'']]],
+  ['noconnectionfactoryexception_107',['NoConnectionFactoryException',['../classNoConnectionFactoryException.html',1,'']]]
 ];

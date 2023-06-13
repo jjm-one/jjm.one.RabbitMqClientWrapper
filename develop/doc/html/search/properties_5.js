@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operation_172',['Operation',['../classUnInitializedClientException.html#a01a327d581c3cc1cf7cb5cae68e9aa84',1,'UnInitializedClientException']]]
+  ['hostname_198',['Hostname',['../classSettings.html#a95d7251b6c728fb1c913a869d312776e',1,'Settings']]]
 ];

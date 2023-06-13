@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['disconnectcompletedeventargs_2ecs_104',['DisconnectCompletedEventArgs.cs',['../DisconnectCompletedEventArgs_8cs.html',1,'']]]
+  ['connectcompletedeventargs_2ecs_120',['ConnectCompletedEventArgs.cs',['../ConnectCompletedEventArgs_8cs.html',1,'']]]
 ];

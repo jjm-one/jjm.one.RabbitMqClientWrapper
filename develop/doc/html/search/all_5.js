@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['equals_31',['Equals',['../classSettings.html#a3722884647f6bb3470a80c7cdafb7df3',1,'Settings']]],
-  ['exception_32',['Exception',['../classConnectCompletedEventArgs.html#a0de43d7169af44da58b5fce9274b3514',1,'ConnectCompletedEventArgs.Exception()'],['../classDisconnectCompletedEventArgs.html#ad324a2a073901e6e66b9d3c4b8dda1fa',1,'DisconnectCompletedEventArgs.Exception()'],['../classReConnectCompletedEventArgs.html#a9cea120e8af81aa9a0237a25641ec264',1,'ReConnectCompletedEventArgs.Exception()']]],
-  ['exchange_33',['Exchange',['../classSettings.html#a1009bbf77eaebbac33f93ceff99bce07',1,'Settings']]]
+  ['equals_34',['Equals',['../classSettings.html#a3722884647f6bb3470a80c7cdafb7df3',1,'Settings']]],
+  ['exception_35',['Exception',['../classAckCompletedEventArgs.html#a61be9b13887edcd38340562734725201',1,'AckCompletedEventArgs.Exception()'],['../classConnectCompletedEventArgs.html#a0de43d7169af44da58b5fce9274b3514',1,'ConnectCompletedEventArgs.Exception()'],['../classDisconnectCompletedEventArgs.html#ad324a2a073901e6e66b9d3c4b8dda1fa',1,'DisconnectCompletedEventArgs.Exception()'],['../classNackCompletedEventArgs.html#ae0aca89a5e16f12cb2f32bf23df26987',1,'NackCompletedEventArgs.Exception()'],['../classQueuedMsgsCompletedEventArgs.html#af27eccec561e2739c9d6d9c522629307',1,'QueuedMsgsCompletedEventArgs.Exception()'],['../classReadCompletedEventArgs.html#a58738580a87c10ebdf189e91f5cd7c78',1,'ReadCompletedEventArgs.Exception()'],['../classReConnectCompletedEventArgs.html#a9cea120e8af81aa9a0237a25641ec264',1,'ReConnectCompletedEventArgs.Exception()'],['../classWriteCompletedEventArgs.html#a409e294866cf89dc165df8aa306ec158',1,'WriteCompletedEventArgs.Exception()']]],
+  ['exchange_36',['Exchange',['../classSettings.html#a1009bbf77eaebbac33f93ceff99bce07',1,'Settings']]]
 ];

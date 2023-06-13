@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['connectcompletedeventargs_87',['ConnectCompletedEventArgs',['../classConnectCompletedEventArgs.html',1,'']]]
+  ['ackcompletedeventargs_98',['AckCompletedEventArgs',['../classAckCompletedEventArgs.html',1,'']]]
 ];
