@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">jjm.one.RabbitMqClientWrapper
-   &#160;<span id="projectnumber">1.0.0-alpha.2</span>
+   &#160;<span id="projectnumber">1.0.0-alpha.3</span>
    </div>
    <div id="projectbrief">A C# wrapper for a RabbitMQ client.</div>
   </td>
@@ -70,7 +70,20 @@ $(function() {
 <div class="textblock">
 <p><a href="hierarchy.html">Go to the textual class hierarchy</a></p>
 </div><table border="0" cellspacing="10" cellpadding="0">
-<tr><td><img src="inherit_graph_0.png" border="0" usemap="#aIRmqcCore" alt=""/>
+<tr><td><img src="inherit_graph_0.png" border="0" usemap="#aAckMsgCompletedEventArgs" alt=""/>
+<map name="aAckMsgCompletedEventArgs" id="aAckMsgCompletedEventArgs">
+<area shape="rect" href="classAckMsgCompletedEventArgs.html" title="This class represents the event args for a ack completed event." alt="" coords="5,5,216,32"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_1.png" border="0" usemap="#aConnectCompletedEventArgs" alt=""/>
+<map name="aConnectCompletedEventArgs" id="aConnectCompletedEventArgs">
+<area shape="rect" title=" " alt="" coords="5,56,93,83"/>
+<area shape="rect" href="classConnectCompletedEventArgs.html" title="This class represents the event args for a connection completed event." alt="" coords="151,5,363,32"/>
+<area shape="rect" href="classDisconnectCompletedEventArgs.html" title="This class represents the event args for a disconnection completed event." alt="" coords="141,56,372,83"/>
+<area shape="rect" href="classReConnectCompletedEventArgs.html" title="This class represents the event args for a re&#45;connection completed event." alt="" coords="142,107,371,133"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_2.png" border="0" usemap="#aIRmqcCore" alt=""/>
 <map name="aIRmqcCore" id="aIRmqcCore">
 <area shape="rect" href="interfaceIRmqcCore.html" title="This interface defines the core functionality to connect and communicate with a RabbitMQ server." alt="" coords="5,31,99,57"/>
 <area shape="rect" href="interfaceIRmqcWrapper.html" title="This interface defines the core and additional functionality to connect and communicate with a Rabbit..." alt="" coords="147,5,265,32"/>
@@ -78,12 +91,17 @@ $(function() {
 <area shape="rect" href="classRmqcWrapper.html" title="This class implements the IRmqcWrapper interface for a RabbitMQ server." alt="" coords="313,5,428,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_1.png" border="0" usemap="#aMessage" alt=""/>
+<tr><td><img src="inherit_graph_3.png" border="0" usemap="#aMessage" alt=""/>
 <map name="aMessage" id="aMessage">
 <area shape="rect" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server." alt="" coords="5,5,85,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_2.png" border="0" usemap="#aNoChannelException" alt=""/>
+<tr><td><img src="inherit_graph_4.png" border="0" usemap="#aNackMsgCompletedEventArgs" alt=""/>
+<map name="aNackMsgCompletedEventArgs" id="aNackMsgCompletedEventArgs">
+<area shape="rect" href="classNackMsgCompletedEventArgs.html" title="This class represents the event args for a nack completed event." alt="" coords="5,5,224,32"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_5.png" border="0" usemap="#aNoChannelException" alt=""/>
 <map name="aNoChannelException" id="aNoChannelException">
 <area shape="rect" title=" " alt="" coords="5,81,92,108"/>
 <area shape="rect" href="classNoChannelException.html" title="This class represents an exception which gets thrown if the IModel in a RmqcCore object is null or no..." alt="" coords="173,5,331,32"/>
@@ -92,19 +110,39 @@ $(function() {
 <area shape="rect" href="classUnInitializedClientException.html" title="This class represents an exception which gets thrown if the client is not initialized properly before..." alt="" coords="149,157,355,184"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_3.png" border="0" usemap="#aRmqcCoreDi" alt=""/>
+<tr><td><img src="inherit_graph_6.png" border="0" usemap="#aQueuedMsgsCompletedEventArgs" alt=""/>
+<map name="aQueuedMsgsCompletedEventArgs" id="aQueuedMsgsCompletedEventArgs">
+<area shape="rect" href="classQueuedMsgsCompletedEventArgs.html" title="This class represents the event args for a queued msg&#39;s completed event." alt="" coords="5,5,248,32"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_7.png" border="0" usemap="#aReadMsgCompletedEventArgs" alt=""/>
+<map name="aReadMsgCompletedEventArgs" id="aReadMsgCompletedEventArgs">
+<area shape="rect" href="classReadMsgCompletedEventArgs.html" title="This class represents the event args for a read completed event." alt="" coords="5,5,224,32"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_8.png" border="0" usemap="#aRmqcCoreDi" alt=""/>
 <map name="aRmqcCoreDi" id="aRmqcCoreDi">
 <area shape="rect" href="classRmqcCoreDi.html" title="This class contains function for dependency injection of the RmqcCore class." alt="" coords="5,5,108,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_4.png" border="0" usemap="#aRmqcWrapperDi" alt=""/>
+<tr><td><img src="inherit_graph_9.png" border="0" usemap="#aRmqcWrapperDi" alt=""/>
 <map name="aRmqcWrapperDi" id="aRmqcWrapperDi">
 <area shape="rect" href="classRmqcWrapperDi.html" title="This class contains function for dependency injection of the RmqcWrapper class." alt="" coords="5,5,133,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_5.png" border="0" usemap="#aSettings" alt=""/>
+<tr><td><img src="inherit_graph_10.png" border="0" usemap="#aSettings" alt=""/>
 <map name="aSettings" id="aSettings">
 <area shape="rect" href="classSettings.html" title="This class defines the settings for a client connection to a RabbitMQ server." alt="" coords="5,5,80,32"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_11.png" border="0" usemap="#aTimeSpanTools" alt=""/>
+<map name="aTimeSpanTools" id="aTimeSpanTools">
+<area shape="rect" href="classTimeSpanTools.html" title="This class contains some functions to convert from/to a TimeSpan object." alt="" coords="5,5,125,32"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_12.png" border="0" usemap="#aWriteMsgCompletedEventArgs" alt=""/>
+<map name="aWriteMsgCompletedEventArgs" id="aWriteMsgCompletedEventArgs">
+<area shape="rect" href="classWriteMsgCompletedEventArgs.html" title="This class represents the event args for a write completed event." alt="" coords="5,5,227,32"/>
 </map>
 </td></tr>
 </table>

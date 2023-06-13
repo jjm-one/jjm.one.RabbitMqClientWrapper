@@ -1,6 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$interfaceIRmqcCore.html" title="This interface defines the core functionality to connect and communicate with a RabbitMQ server." alt="" coords="5,31,99,57"/>
-<area shape="rect" id="node2" href="$interfaceIRmqcWrapper.html" title="This interface defines the core and additional functionality to connect and communicate with a Rabbit..." alt="" coords="147,5,265,32"/>
-<area shape="rect" id="node4" href="$classRmqcCore.html" title="This class implements the IRmqcCore interface for a RabbitMQ server." alt="" coords="161,56,251,83"/>
-<area shape="rect" id="node3" href="$classRmqcWrapper.html" title="This class implements the IRmqcWrapper interface for a RabbitMQ server." alt="" coords="313,5,428,32"/>
+<area shape="rect" id="node1" href="$classAckMsgCompletedEventArgs.html" title="This class represents the event args for a ack completed event." alt="" coords="5,5,216,32"/>
 </map>

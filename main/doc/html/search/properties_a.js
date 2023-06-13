@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['username_144',['Username',['../classSettings.html#a1db355b409499948044520bdf197163b',1,'Settings']]]
+  ['rawbasicgetresult_219',['RawBasicGetResult',['../classMessage.html#a3cacae77caaae3593f95ef628af3142e',1,'Message']]],
+  ['routingkey_220',['RoutingKey',['../classMessage.html#ae2931f48cc2d33e45202660cfcfdbfcb',1,'Message']]]
 ];

@@ -1,4 +1,11 @@
 var searchData=
 [
-  ['queuedmsgs_108',['QueuedMsgs',['../interfaceIRmqcCore.html#af74d3e6843f979ecf58f4518443fba55',1,'IRmqcCore.QueuedMsgs()'],['../classRmqcCore.html#a66de01037250130773c2b732c7515e82',1,'RmqcCore.QueuedMsgs()'],['../interfaceIRmqcWrapper.html#adfe075d06343e6247c6cea855f3a3a7e',1,'IRmqcWrapper.QueuedMsgs()'],['../classRmqcWrapper.html#a9eb27f72f6e35d0b58fd05a326b5e8b3',1,'RmqcWrapper.QueuedMsgs(out uint? amount)'],['../classRmqcWrapper.html#ada128d854bcdce3842d26ec49e30880d',1,'RmqcWrapper.QueuedMsgs(out uint? amount, out Exception? exception)']]]
+  ['onackmsgcompleted_170',['OnAckMsgCompleted',['../classRmqcWrapper.html#a1c93bc264ae41c21b4ad19ff8a5d9a8e',1,'RmqcWrapper']]],
+  ['onconnectcompleted_171',['OnConnectCompleted',['../classRmqcWrapper.html#a877a1a371135ddff355dfdebc3f62751',1,'RmqcWrapper']]],
+  ['ondisconnectcompleted_172',['OnDisconnectCompleted',['../classRmqcWrapper.html#a3dd5a47f36ec3c0fc2652a14205dafa8',1,'RmqcWrapper']]],
+  ['onnackmsgcomplete_173',['OnNackMsgComplete',['../classRmqcWrapper.html#a1461487da6b8a18de51c3d1b8d0b3e41',1,'RmqcWrapper']]],
+  ['onqueuedmsgscompleted_174',['OnQueuedMsgsCompleted',['../classRmqcWrapper.html#ae9983b4b444ead0564f89d605e5ee578',1,'RmqcWrapper']]],
+  ['onreadmsgcompleted_175',['OnReadMsgCompleted',['../classRmqcWrapper.html#af0c5f1a650e31aa419bada1770c72c6a',1,'RmqcWrapper']]],
+  ['onreconnectcompleted_176',['OnReConnectCompleted',['../classRmqcWrapper.html#a47eca6059bc809cd8e20f2958fb1241d',1,'RmqcWrapper']]],
+  ['onwritemsgcompleted_177',['OnWriteMsgCompleted',['../classRmqcWrapper.html#aa9702e100fa307ada1ffa6997578fa6c',1,'RmqcWrapper']]]
 ];

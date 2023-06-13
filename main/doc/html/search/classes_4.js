@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['settings_79',['Settings',['../classSettings.html',1,'']]]
+  ['message_113',['Message',['../classMessage.html',1,'']]]
 ];

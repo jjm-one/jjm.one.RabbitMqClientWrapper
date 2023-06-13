@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['message_71',['Message',['../classMessage.html',1,'']]]
+  ['connectcompletedeventargs_109',['ConnectCompletedEventArgs',['../classConnectCompletedEventArgs.html',1,'']]]
 ];

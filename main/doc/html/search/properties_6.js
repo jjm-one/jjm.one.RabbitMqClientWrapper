@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['password_138',['Password',['../classSettings.html#a62619748f181d68c6a92e894fb7a2c6d',1,'Settings']]],
-  ['port_139',['Port',['../classSettings.html#afde0fb2d25427daf075cd88f657bf99e',1,'Settings']]]
+  ['message_214',['Message',['../classReadMsgCompletedEventArgs.html#a22b043f0c384de2cd11123c5d3d34e4d',1,'ReadMsgCompletedEventArgs']]]
 ];

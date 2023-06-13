@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['connected_133',['Connected',['../interfaceIRmqcCore.html#abc07c6d24a6a53c8b83dd1800c486771',1,'IRmqcCore.Connected()'],['../classRmqcCore.html#aa9cf65f2b0adc636e02ff2b8d7e27374',1,'RmqcCore.Connected()'],['../classRmqcWrapper.html#a5319982b40c8ee2c803e07353ee9f676',1,'RmqcWrapper.Connected()']]]
+  ['basicproperties_206',['BasicProperties',['../classMessage.html#a082cd91a6525ac430ad6b8bda22abe55',1,'Message']]],
+  ['body_207',['Body',['../classMessage.html#abaf1a4a3679d41ecd53c10dcf05b37a6',1,'Message']]]
 ];
