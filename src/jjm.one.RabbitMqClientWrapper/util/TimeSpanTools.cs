@@ -5,7 +5,7 @@ namespace jjm.one.RabbitMqClientWrapper.util;
 /// <summary>
 /// This class contains some functions to convert from/to a <see cref="TimeSpan"/> object.
 /// </summary>
-internal static class TimeSpanConverter
+internal static class TimeSpanTools
 {
     #region internal static extension functions
 

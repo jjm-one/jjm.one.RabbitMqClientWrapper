@@ -499,20 +499,20 @@
             Tests the GetHashCode method of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
             </summary>
         </member>
-        <member name="T:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanConverterTests">
+        <member name="T:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanToolsTests">
             <summary>
-            This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.util.TimeSpanConverter"/> class.
+            This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.util.TimeSpanTools"/> class.
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanConverterTests.MillisecondsToTimeSpanTestData">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanToolsTests.MillisecondsToTimeSpanTestData">
             <summary>
-            Test Data for the <see cref="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanConverterTests.TimeSpanConverterTest_MillisecondsToTimeSpanTest(System.Int32,System.TimeSpan)"/> test.
+            Test Data for the <see cref="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanToolsTests.TimeSpanToolsTest_MillisecondsToTimeSpanTest(System.Int32,System.TimeSpan)"/> test.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanConverterTests.TimeSpanConverterTest_MillisecondsToTimeSpanTest(System.Int32,System.TimeSpan)">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanToolsTests.TimeSpanToolsTest_MillisecondsToTimeSpanTest(System.Int32,System.TimeSpan)">
             <summary>
-            Tests the MillisecondsToTimeSpan method of the <see cref="T:System.ComponentModel.TimeSpanConverter"/> class.
+            Tests the MillisecondsToTimeSpan method of the <see cref="T:jjm.one.RabbitMqClientWrapper.util.TimeSpanTools"/> class.
             </summary>
         </member>
     </members>

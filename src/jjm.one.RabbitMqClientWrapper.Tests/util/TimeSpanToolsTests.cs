@@ -7,14 +7,14 @@ using jjm.one.RabbitMqClientWrapper.util;
 namespace jjm.one.RabbitMqClientWrapper.Tests.util;
 
 /// <summary>
-/// This class contains the unit tests for the <see cref="RabbitMqClientWrapper.util.TimeSpanConverter"/> class.
+/// This class contains the unit tests for the <see cref="TimeSpanTools"/> class.
 /// </summary>
-public class TimeSpanConverterTests
+public class TimeSpanToolsTests
 {
     #region test data
 
     /// <summary>
-    /// Test Data for the <see cref="TimeSpanConverterTest_MillisecondsToTimeSpanTest"/> test.
+    /// Test Data for the <see cref="TimeSpanToolsTest_MillisecondsToTimeSpanTest"/> test.
     /// </summary>
     /// <returns></returns>
     public static IEnumerable<object[]> MillisecondsToTimeSpanTestData()
@@ -32,11 +32,11 @@ public class TimeSpanConverterTests
     #region tests
 
     /// <summary>
-    /// Tests the MillisecondsToTimeSpan method of the <see cref="TimeSpanConverter"/> class.
+    /// Tests the MillisecondsToTimeSpan method of the <see cref="TimeSpanTools"/> class.
     /// </summary>
     [Theory]
     [MemberData(nameof(MillisecondsToTimeSpanTestData))]
-    public void TimeSpanConverterTest_MillisecondsToTimeSpanTest(int a, TimeSpan expected)
+    public void TimeSpanToolsTest_MillisecondsToTimeSpanTest(int a, TimeSpan expected)
     {
         // arrange
 

@@ -841,12 +841,12 @@
             </summary>
             <returns>A hash code for the current <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> object.</returns>
         </member>
-        <member name="T:jjm.one.RabbitMqClientWrapper.util.TimeSpanConverter">
+        <member name="T:jjm.one.RabbitMqClientWrapper.util.TimeSpanTools">
             <summary>
             This class contains some functions to convert from/to a <see cref="T:System.TimeSpan"/> object.
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.util.TimeSpanConverter.MillisecondsToTimeSpan(System.Int32)">
+        <member name="M:jjm.one.RabbitMqClientWrapper.util.TimeSpanTools.MillisecondsToTimeSpan(System.Int32)">
             <summary>
             Converts an <see cref="T:System.Int32"/> object to a <see cref="T:System.TimeSpan"/>.
             </summary>
