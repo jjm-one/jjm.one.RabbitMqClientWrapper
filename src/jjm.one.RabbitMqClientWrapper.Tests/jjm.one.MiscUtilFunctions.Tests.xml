@@ -244,9 +244,29 @@
             Testes the Connect method. (Test 2)
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_DisconnectTest">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_ConnectTest3">
             <summary>
-            Testes the Disconnect method.
+            Testes the Connect method. (Test 3)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_DisconnectTest1">
+            <summary>
+            Testes the Disconnect method. (Test 1)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_DisconnectTest2">
+            <summary>
+            Testes the Disconnect method. (Test 2)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_DisconnectTest3">
+            <summary>
+            Testes the Disconnect method. (Test 3)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_DisconnectTest4">
+            <summary>
+            Testes the Disconnect method. (Test 4)
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_ReConnectTest1">
@@ -259,6 +279,11 @@
             Testes the ReConnect method. (Test 2)
             </summary>
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_ReConnectTest3">
+            <summary>
+            Testes the ReConnect method. (Test 3)
+            </summary>
+        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_WriteMsgTest1">
             <summary>
             Testes the WriteMsg method. (Test 1)
@@ -267,6 +292,11 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_WriteMsgTest2">
             <summary>
             Testes the WriteMsg method. (Test 2)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_WriteMsgTest3">
+            <summary>
+            Testes the WriteMsg method. (Test 3)
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_ReadMsgTest1">
@@ -279,6 +309,11 @@
             Testes the ReadMsg method. (Test 2)
             </summary>
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_ReadMsgTest3">
+            <summary>
+            Testes the ReadMsg method. (Test 3)
+            </summary>
+        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_AckMsgTest1">
             <summary>
             Testes the AckMsg method. (Test 1)
@@ -289,6 +324,11 @@
             Testes the AckMsg method. (Test 2)
             </summary>
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_AckMsgTest3">
+            <summary>
+            Testes the AckMsg method. (Test 3)
+            </summary>
+        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_NackMsgTest1">
             <summary>
             Testes the NackMsg method. (Test 1)
@@ -297,6 +337,11 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_NackMsgTest2">
             <summary>
             Testes the NackMsg method. (Test 2)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_NackMsgTest3">
+            <summary>
+            Testes the NackMsg method. (Test 3)
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_WaitForWriteConfirmTest1">
@@ -317,6 +362,11 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_QueuedMsgsTest2">
             <summary>
             Testes the QueuedMsgs method. (Test 2)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_QueuedMsgsTest3">
+            <summary>
+            Testes the QueuedMsgs method. (Test 3)
             </summary>
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.Tests.types.exceptions.NoChannelExceptionTests">
@@ -472,6 +522,22 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests.SettingsTest_Hash">
             <summary>
             Tests the GetHashCode method of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
+            </summary>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanToolsTests">
+            <summary>
+            This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.util.TimeSpanTools"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanToolsTests.MillisecondsToTimeSpanTestData">
+            <summary>
+            Test Data for the <see cref="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanToolsTests.TimeSpanToolsTest_MillisecondsToTimeSpanTest(System.Int32,System.TimeSpan)"/> test.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanToolsTests.TimeSpanToolsTest_MillisecondsToTimeSpanTest(System.Int32,System.TimeSpan)">
+            <summary>
+            Tests the MillisecondsToTimeSpan method of the <see cref="T:jjm.one.RabbitMqClientWrapper.util.TimeSpanTools"/> class.
             </summary>
         </member>
     </members>
