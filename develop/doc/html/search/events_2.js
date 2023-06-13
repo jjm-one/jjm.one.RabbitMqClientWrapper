@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['reconnectcompleted_212',['ReConnectCompleted',['../interfaceIRmqcWrapper.html#a7ca7536b3ab5086e1eda1844321d1dc3',1,'IRmqcWrapper.ReConnectCompleted()'],['../classRmqcWrapper.html#a071d19bb76bfd1b6bf28e9aed0215a49',1,'RmqcWrapper.ReConnectCompleted()']]]
+  ['disconnectcompleted_227',['DisconnectCompleted',['../interfaceIRmqcWrapper.html#a96b6b317ccb22a83f6c2e23222476a03',1,'IRmqcWrapper.DisconnectCompleted()'],['../classRmqcWrapper.html#aa5a4f858141365dcab551cf40177cbd3',1,'RmqcWrapper.DisconnectCompleted()']]]
 ];

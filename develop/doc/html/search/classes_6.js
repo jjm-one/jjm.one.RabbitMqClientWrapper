@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['queuedmsgscompletedeventargs_108',['QueuedMsgsCompletedEventArgs',['../classQueuedMsgsCompletedEventArgs.html',1,'']]]
+  ['queuedmsgscompletedeventargs_118',['QueuedMsgsCompletedEventArgs',['../classQueuedMsgsCompletedEventArgs.html',1,'']]]
 ];
