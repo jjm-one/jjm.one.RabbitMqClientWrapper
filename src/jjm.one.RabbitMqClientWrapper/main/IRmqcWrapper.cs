@@ -110,22 +110,22 @@ public interface IRmqcWrapper : IRmqcCore
     /// <summary>
     /// This events gets invoked when the write msg function finishes.
     /// </summary>
-    public event EventHandler<WriteCompletedEventArgs> WriteCompleted;
+    public event EventHandler<WriteMsgCompletedEventArgs> WriteMsgCompleted;
     
     /// <summary>
     /// This events gets invoked when the read msg function finishes.
     /// </summary>
-    public event EventHandler<ReadCompletedEventArgs> ReadCompleted;
+    public event EventHandler<ReadMsgCompletedEventArgs> ReadMsgCompleted;
     
     /// <summary>
     /// This events gets invoked when the ack msg function finishes.
     /// </summary>
-    public event EventHandler<AckCompletedEventArgs> AckCompleted;
+    public event EventHandler<AckMsgCompletedEventArgs> AckMsgCompleted;
     
     /// <summary>
     /// This events gets invoked when the nack msg function finishes.
     /// </summary>
-    public event EventHandler<NackCompletedEventArgs> NackComplete;
+    public event EventHandler<NackMsgCompletedEventArgs> NackMsgComplete;
     
     /// <summary>
     /// This events gets invoked when the queued msg's function finishes.

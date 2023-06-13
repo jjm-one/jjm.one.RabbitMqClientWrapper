@@ -7,7 +7,7 @@ namespace jjm.one.RabbitMqClientWrapper.types.events;
 /// This class represents the event args for a write completed event.
 /// </summary>
 [ExcludeFromCodeCoverage]
-public class WriteCompletedEventArgs
+public class WriteMsgCompletedEventArgs
 {
     #region public members
 
@@ -31,12 +31,12 @@ public class WriteCompletedEventArgs
     #region ctor
 
     /// <summary>
-    /// The default constructor of the <see cref="WriteCompletedEventArgs"/> class.
+    /// The default constructor of the <see cref="WriteMsgCompletedEventArgs"/> class.
     /// </summary>
     /// <param name="successful"></param>
     /// <param name="exception"></param>
     /// <param name="completionTime"></param>
-    public WriteCompletedEventArgs(bool successful = false, Exception? exception = null,
+    public WriteMsgCompletedEventArgs(bool successful = false, Exception? exception = null,
         TimeSpan? completionTime = null)
     {
         Successful = successful;

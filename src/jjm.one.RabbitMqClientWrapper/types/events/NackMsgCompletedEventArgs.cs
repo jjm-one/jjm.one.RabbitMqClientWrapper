@@ -7,7 +7,7 @@ namespace jjm.one.RabbitMqClientWrapper.types.events;
 /// This class represents the event args for a nack completed event.
 /// </summary>
 [ExcludeFromCodeCoverage]
-public class NackCompletedEventArgs
+public class NackMsgCompletedEventArgs
 {
     #region public members
 
@@ -36,13 +36,13 @@ public class NackCompletedEventArgs
     #region ctor
 
     /// <summary>
-    /// The default constructor of the <see cref="NackCompletedEventArgs"/> class.
+    /// The default constructor of the <see cref="NackMsgCompletedEventArgs"/> class.
     /// </summary>
     /// <param name="successful"></param>
     /// <param name="exception"></param>
     /// <param name="completionTime"></param>
     /// <param name="deliveryTag"></param>
-    public NackCompletedEventArgs(bool successful = false, Exception? exception = null,
+    public NackMsgCompletedEventArgs(bool successful = false, Exception? exception = null,
         TimeSpan? completionTime = null, ulong? deliveryTag = null)
     {
         Successful = successful;

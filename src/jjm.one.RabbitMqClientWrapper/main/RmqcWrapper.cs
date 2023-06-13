@@ -108,16 +108,16 @@ public class RmqcWrapper : IRmqcWrapper
     public event EventHandler<ReConnectCompletedEventArgs>? ReConnectCompleted;
 
     /// <inheritdoc />
-    public event EventHandler<WriteCompletedEventArgs>? WriteCompleted;
+    public event EventHandler<WriteMsgCompletedEventArgs>? WriteMsgCompleted;
     
     /// <inheritdoc />
-    public event EventHandler<ReadCompletedEventArgs>? ReadCompleted;
+    public event EventHandler<ReadMsgCompletedEventArgs>? ReadMsgCompleted;
     
     /// <inheritdoc />
-    public event EventHandler<AckCompletedEventArgs>? AckCompleted;
+    public event EventHandler<AckMsgCompletedEventArgs>? AckMsgCompleted;
     
     /// <inheritdoc />
-    public event EventHandler<NackCompletedEventArgs>? NackComplete;
+    public event EventHandler<NackMsgCompletedEventArgs>? NackMsgComplete;
     
     /// <inheritdoc />
     public event EventHandler<QueuedMsgsCompletedEventArgs>? QueuedMsgsCompleted;
@@ -295,7 +295,7 @@ public class RmqcWrapper : IRmqcWrapper
         sw.Stop();
 
         // invoke events
-        OnWriteCompleted(new WriteCompletedEventArgs(res, exception, 
+        OnWriteMsgCompleted(new WriteMsgCompletedEventArgs(res, exception, 
             ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
         
         return res;
@@ -327,7 +327,7 @@ public class RmqcWrapper : IRmqcWrapper
         sw.Stop();
 
         // invoke events
-        OnReadCompleted(new ReadCompletedEventArgs(res, exception, 
+        OnReadMsgCompleted(new ReadMsgCompletedEventArgs(res, exception, 
             ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan(),
             message));
         
@@ -360,7 +360,7 @@ public class RmqcWrapper : IRmqcWrapper
         sw.Stop();
 
         // invoke events
-        OnAckCompleted(new AckCompletedEventArgs(res, exception, 
+        OnAckMsgCompleted(new AckMsgCompletedEventArgs(res, exception, 
             ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan(),
             message.DeliveryTag));
         
@@ -393,7 +393,7 @@ public class RmqcWrapper : IRmqcWrapper
         sw.Stop();
 
         // invoke events
-        OnNackComplete(new NackCompletedEventArgs(res, exception, 
+        OnNackMsgComplete(new NackMsgCompletedEventArgs(res, exception, 
             ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan(),
             message.DeliveryTag));
         
@@ -495,55 +495,55 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    /// This method invokes the <see cref="WriteCompleted"/> envent handlers.
+    /// This method invokes the <see cref="WriteMsgCompleted"/> envent handlers.
     /// </summary>
     /// <param name="e"></param>
-    protected virtual void OnWriteCompleted(WriteCompletedEventArgs e)
+    protected virtual void OnWriteMsgCompleted(WriteMsgCompletedEventArgs e)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
         
         // invoke event handlers
-        WriteCompleted?.Invoke(this, e);
+        WriteMsgCompleted?.Invoke(this, e);
     }
 
     /// <summary>
-    /// This method invokes the <see cref="ReadCompleted"/> envent handlers.
+    /// This method invokes the <see cref="ReadMsgCompleted"/> envent handlers.
     /// </summary>
     /// <param name="e"></param>
-    protected virtual void OnReadCompleted(ReadCompletedEventArgs e)
+    protected virtual void OnReadMsgCompleted(ReadMsgCompletedEventArgs e)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
         
         // invoke event handlers
-        ReadCompleted?.Invoke(this, e);
+        ReadMsgCompleted?.Invoke(this, e);
     }
 
     /// <summary>
-    /// This method invokes the <see cref="AckCompleted"/> envent handlers.
+    /// This method invokes the <see cref="AckMsgCompleted"/> envent handlers.
     /// </summary>
     /// <param name="e"></param>
-    protected virtual void OnAckCompleted(AckCompletedEventArgs e)
+    protected virtual void OnAckMsgCompleted(AckMsgCompletedEventArgs e)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
         
         // invoke event handlers
-        AckCompleted?.Invoke(this, e);
+        AckMsgCompleted?.Invoke(this, e);
     }
 
     /// <summary>
-    /// This method invokes the <see cref="NackComplete"/> envent handlers.
+    /// This method invokes the <see cref="NackMsgComplete"/> envent handlers.
     /// </summary>
     /// <param name="e"></param>
-    protected virtual void OnNackComplete(NackCompletedEventArgs e)
+    protected virtual void OnNackMsgComplete(NackMsgCompletedEventArgs e)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
         
         // invoke event handlers
-        NackComplete?.Invoke(this, e);
+        NackMsgComplete?.Invoke(this, e);
     }
 
     /// <summary>
