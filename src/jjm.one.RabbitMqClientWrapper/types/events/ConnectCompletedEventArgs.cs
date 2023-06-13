@@ -1,10 +1,12 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace jjm.one.RabbitMqClientWrapper.types.events;
 
 /// <summary>
 /// This class represents the event args for a connection completed event.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class ConnectCompletedEventArgs : EventArgs
 {
     #region public members

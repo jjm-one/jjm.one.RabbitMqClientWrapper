@@ -1,10 +1,12 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace jjm.one.RabbitMqClientWrapper.types.events;
 
 /// <summary>
 /// This class represents the event args for a disconnection completed event.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class DisconnectCompletedEventArgs : EventArgs
 {
     #region public members
