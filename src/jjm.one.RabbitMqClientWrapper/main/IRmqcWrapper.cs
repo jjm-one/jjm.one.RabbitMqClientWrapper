@@ -106,6 +106,31 @@ public interface IRmqcWrapper : IRmqcCore
     /// This events gets invoked when the re-connect function finishes.
     /// </summary>
     public event EventHandler<ReConnectCompletedEventArgs> ReConnectCompleted;
+    
+    /// <summary>
+    /// This events gets invoked when the write msg function finishes.
+    /// </summary>
+    public event EventHandler<WriteCompletedEventArgs> WriteCompleted;
+    
+    /// <summary>
+    /// This events gets invoked when the read msg function finishes.
+    /// </summary>
+    public event EventHandler<ReadCompletedEventArgs> ReadCompleted;
+    
+    /// <summary>
+    /// This events gets invoked when the ack msg function finishes.
+    /// </summary>
+    public event EventHandler<AckCompletedEventArgs> AckCompleted;
+    
+    /// <summary>
+    /// This events gets invoked when the nack msg function finishes.
+    /// </summary>
+    public event EventHandler<NackCompletedEventArgs> NackComplete;
+    
+    /// <summary>
+    /// This events gets invoked when the queued msg's function finishes.
+    /// </summary>
+    public event EventHandler<QueuedMsgsCompletedEventArgs> QueuedMsgsCompleted;
 
     #endregion
 }

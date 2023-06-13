@@ -276,6 +276,31 @@
             This events gets invoked when the re-connect function finishes.
             </summary>
         </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.WriteCompleted">
+            <summary>
+            This events gets invoked when the write msg function finishes.
+            </summary>
+        </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.ReadCompleted">
+            <summary>
+            This events gets invoked when the read msg function finishes.
+            </summary>
+        </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.AckCompleted">
+            <summary>
+            This events gets invoked when the ack msg function finishes.
+            </summary>
+        </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.NackComplete">
+            <summary>
+            This events gets invoked when the nack msg function finishes.
+            </summary>
+        </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.QueuedMsgsCompleted">
+            <summary>
+            This events gets invoked when the queued msg's function finishes.
+            </summary>
+        </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper">
             <summary>
             This class implements the <see cref="T:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper"/> interface for a RabbitMQ server.
@@ -312,6 +337,21 @@
             <inheritdoc />
         </member>
         <member name="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.ReConnectCompleted">
+            <inheritdoc />
+        </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.WriteCompleted">
+            <inheritdoc />
+        </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.ReadCompleted">
+            <inheritdoc />
+        </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.AckCompleted">
+            <inheritdoc />
+        </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.NackComplete">
+            <inheritdoc />
+        </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.QueuedMsgsCompleted">
             <inheritdoc />
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.Init">
@@ -392,6 +432,36 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.OnReConnectCompleted(jjm.one.RabbitMqClientWrapper.types.events.ReConnectCompletedEventArgs)">
             <summary>
             This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.ReConnectCompleted"/> envent handlers.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.OnWriteCompleted(jjm.one.RabbitMqClientWrapper.types.events.WriteCompletedEventArgs)">
+            <summary>
+            This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.WriteCompleted"/> envent handlers.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.OnReadCompleted(jjm.one.RabbitMqClientWrapper.types.events.ReadCompletedEventArgs)">
+            <summary>
+            This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.ReadCompleted"/> envent handlers.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.OnAckCompleted(jjm.one.RabbitMqClientWrapper.types.events.AckCompletedEventArgs)">
+            <summary>
+            This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.AckCompleted"/> envent handlers.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.OnNackComplete(jjm.one.RabbitMqClientWrapper.types.events.NackCompletedEventArgs)">
+            <summary>
+            This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.NackComplete"/> envent handlers.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.OnQueuedMsgsCompleted(jjm.one.RabbitMqClientWrapper.types.events.QueuedMsgsCompletedEventArgs)">
+            <summary>
+            This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.QueuedMsgsCompleted"/> envent handlers.
             </summary>
             <param name="e"></param>
         </member>
