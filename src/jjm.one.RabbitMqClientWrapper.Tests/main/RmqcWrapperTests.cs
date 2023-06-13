@@ -209,12 +209,15 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_DisconnectTest1()
     {
         // arrange
-        _rmqcCoreMock.Setup(x => x.Disconnect());
+        _rmqcCoreMock.Setup(x => x.Disconnect()).Throws<Exception>();
 
         // act
-        _sut.Disconnect();
+        var res = _sut.Disconnect(out Exception? resExc);
             
         // assert
+        res.Should().BeFalse();
+        resExc.Should().NotBeNull();
+        resExc.Should().BeOfType<Exception>();
         _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
     }
     

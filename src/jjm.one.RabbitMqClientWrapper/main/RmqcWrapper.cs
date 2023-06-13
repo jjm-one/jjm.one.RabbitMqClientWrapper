@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using jjm.one.Microsoft.Extensions.Logging.Helpers;
 using jjm.one.RabbitMqClientWrapper.main.core;
@@ -177,6 +178,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <inheritdoc />
+    [ExcludeFromCodeCoverage]
     void IRmqcCore.Disconnect()
     {
         // log fct call
