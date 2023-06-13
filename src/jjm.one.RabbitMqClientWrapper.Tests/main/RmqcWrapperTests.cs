@@ -191,7 +191,7 @@ public class RmqcWrapperTests
         var evt = Assert.Raises<ConnectCompletedEventArgs>(
             h => _sut.ConnectCompleted += h,
             h => _sut.ConnectCompleted -= h,
-            () => _sut.Connect(out var resExc));
+            () => _sut.Connect());
 
         // assert
         evt.Should().NotBeNull();
@@ -203,10 +203,10 @@ public class RmqcWrapperTests
     }
     
     /// <summary>
-    /// Testes the Disconnect method.
+    /// Testes the Disconnect method. (Test 1)
     /// </summary>
     [Fact]
-    public void RmqcWrapperTest_DisconnectTest()
+    public void RmqcWrapperTest_DisconnectTest1()
     {
         // arrange
         _rmqcCoreMock.Setup(x => x.Disconnect());
@@ -215,6 +215,65 @@ public class RmqcWrapperTests
         _sut.Disconnect();
             
         // assert
+        _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
+    }
+    
+    /// <summary>
+    /// Testes the Disconnect method. (Test 2)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_DisconnectTest2()
+    {
+        // arrange
+        _rmqcCoreMock.Setup(x => x.Disconnect());
+
+        // act
+        var res = _sut.Disconnect();
+            
+        // assert
+        res.Should().BeTrue();
+        _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
+    }
+    
+    /// <summary>
+    /// Testes the Disconnect method. (Test 3)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_DisconnectTest3()
+    {
+        // arrange
+        _rmqcCoreMock.Setup(x => x.Disconnect());
+
+        // act
+        var res = _sut.Disconnect(out var resExc);
+            
+        // assert
+        res.Should().BeTrue();
+        resExc.Should().BeNull();
+        _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
+    }
+    
+    /// <summary>
+    /// Testes the Disconnect method. (Test 4)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_DisconnectTest4()
+    {
+        // arrange
+        _rmqcCoreMock.Setup(x => x.Disconnect());
+
+        // act
+        var evt = Assert.Raises<DisconnectCompletedEventArgs>(
+            h => _sut.DisconnectCompleted += h,
+            h => _sut.DisconnectCompleted -= h,
+            () => _sut.Disconnect());
+
+        // assert
+        evt.Should().NotBeNull();
+        evt.Arguments.Should().NotBeNull();
+        evt.Arguments.Successful.Should().BeTrue();
+        evt.Arguments.Exception.Should().BeNull();
+        evt.Arguments.CompletionTime.Should().NotBeNull();
         _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
     }
     
@@ -253,6 +312,32 @@ public class RmqcWrapperTests
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
+        _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
+        _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
+    }
+    
+    /// <summary>
+    /// Testes the ReConnect method. (Test 3)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_ReConnectTest3()
+    {
+        // arrange
+        _rmqcCoreMock.Setup(x => x.Disconnect());
+        _rmqcCoreMock.Setup(x => x.Connect(out It.Ref<Exception?>.IsAny)).Returns(true);
+        
+        // act
+        var evt = Assert.Raises<ReConnectCompletedEventArgs>(
+            h => _sut.ReConnectCompleted += h,
+            h => _sut.ReConnectCompleted -= h,
+            () => _sut.ReConnect());
+
+        // assert
+        evt.Should().NotBeNull();
+        evt.Arguments.Should().NotBeNull();
+        evt.Arguments.Successful.Should().BeTrue();
+        evt.Arguments.Exception.Should().BeNull();
+        evt.Arguments.CompletionTime.Should().NotBeNull();
         _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
         _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
     }

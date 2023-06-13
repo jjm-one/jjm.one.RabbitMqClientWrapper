@@ -249,9 +249,24 @@
             Testes the Connect method. (Test 3)
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_DisconnectTest">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_DisconnectTest1">
             <summary>
-            Testes the Disconnect method.
+            Testes the Disconnect method. (Test 1)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_DisconnectTest2">
+            <summary>
+            Testes the Disconnect method. (Test 2)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_DisconnectTest3">
+            <summary>
+            Testes the Disconnect method. (Test 3)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_DisconnectTest4">
+            <summary>
+            Testes the Disconnect method. (Test 4)
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_ReConnectTest1">
@@ -262,6 +277,11 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_ReConnectTest2">
             <summary>
             Testes the ReConnect method. (Test 2)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_ReConnectTest3">
+            <summary>
+            Testes the ReConnect method. (Test 3)
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.RmqcWrapperTests.RmqcWrapperTest_WriteMsgTest1">
@@ -477,6 +497,22 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests.SettingsTest_Hash">
             <summary>
             Tests the GetHashCode method of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
+            </summary>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanConverterTests">
+            <summary>
+            This class contains the unit tests for the <see cref="T:System.ComponentModel.TimeSpanConverter"/> class.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanConverterTests.MillisecondsToTimeSpanTestData">
+            <summary>
+            Test Data for the <see cref="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanConverterTests.TimeSpanConverterTest_MillisecondsToTimeSpanTest(System.Int32,System.TimeSpan)"/> test.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanConverterTests.TimeSpanConverterTest_MillisecondsToTimeSpanTest(System.Int32,System.TimeSpan)">
+            <summary>
+            Tests the MillisecondsToTimeSpan method of the <see cref="T:System.ComponentModel.TimeSpanConverter"/> class.
             </summary>
         </member>
     </members>
