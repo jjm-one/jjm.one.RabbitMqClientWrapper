@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using jjm.one.Microsoft.Extensions.Logging.Helpers;
 using jjm.one.RabbitMqClientWrapper.types;
+using jjm.one.RabbitMqClientWrapper.types.events;
 using jjm.one.RabbitMqClientWrapper.types.exceptions;
+using jjm.one.RabbitMqClientWrapper.util;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
@@ -16,12 +19,13 @@ internal class RmqcCore : IRmqcCore
 {
     #region private members
 
-    private Settings _settings;
+    private RmqcSettings _settings;
     private readonly ILogger<RmqcCore>? _logger;
 
     private IConnectionFactory? _connectionFactory;
     private IConnection? _connection;
     private IModel? _channel;
+    private bool _connected;
 
     #endregion
 
@@ -32,7 +36,7 @@ internal class RmqcCore : IRmqcCore
     /// Note:
     /// Changing the <see cref="Settings"/> object of a connected client will result in the disconnection from the server.
     /// </summary>
-    public Settings Settings
+    public RmqcSettings Settings
     {
         get
         {
@@ -53,7 +57,7 @@ internal class RmqcCore : IRmqcCore
             }
             
             // disconnect & re-init the connection
-            Disconnect();
+            Disconnect(out _);
             _settings = value;
             Init();
         }
@@ -67,23 +71,63 @@ internal class RmqcCore : IRmqcCore
             // check connection factory
             if (_connectionFactory is null)
             {
+                // update the internal value in necessary
+                if (_connected)
+                {
+                    Connected = false;
+                }
+
                 return false;
             }
 
             // check connection
             if (_connection is null || !_connection.IsOpen)
             {
+                // update the internal value in necessary
+                if (_connected)
+                {
+                    Connected = false;
+                }
+
                 return false;
             }
 
             // check channel
             if (_channel is null || !_channel.IsOpen)
             {
+                // update the internal value in necessary
+                if (_connected)
+                {
+                    Connected = false;
+                }
+
                 return false;
+            }
+
+            // update the internal value in necessary
+            if (!_connected)
+            {
+                Connected = true;
             }
 
             // connected!
             return true;
+        }
+
+        private set
+        {
+            // check if the new value is equal to the old value
+            if (_connected == value)
+            {
+                // nothing to do
+                return;
+            }
+
+            // set the value
+            _connected = value;
+
+            // invoke the associated event
+            OnConnectionStateChanged(new ConnectionStatusChangedEventArgs(value));
         }
     }
 
@@ -92,23 +136,24 @@ internal class RmqcCore : IRmqcCore
     #region ctors
 
     /// <summary>
-    /// A parameterised constructor of the <see cref="RmqcCore"/> class.
+    /// A parameterized constructor of the <see cref="RmqcCore"/> class.
     /// </summary>
     /// <param name="settings"></param>
     /// <param name="logger"></param>
     [ActivatorUtilitiesConstructor]
-    public RmqcCore(Settings settings, ILogger<RmqcCore>? logger = null)
+    public RmqcCore(RmqcSettings settings, ILogger<RmqcCore>? logger = null)
     {
         // init global vars
         _settings = settings;
         _logger = logger;
+        _connected = false;
 
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
     }
 
     /// <summary>
-    /// A parameterised constructor of the <see cref="RmqcCore"/> class.
+    /// A parameterized constructor of the <see cref="RmqcCore"/> class.
     /// For unit-tests only!
     /// </summary>
     /// <param name="settings"></param>
@@ -116,7 +161,7 @@ internal class RmqcCore : IRmqcCore
     /// <param name="connectionFactory"></param>
     /// <param name="connection"></param>
     /// <param name="channel"></param>
-    internal RmqcCore(Settings settings, ILogger<RmqcCore> logger,
+    internal RmqcCore(RmqcSettings settings, ILogger<RmqcCore> logger,
         IConnectionFactory? connectionFactory, IConnection? connection, IModel? channel)
     {
         // init global vars
@@ -125,10 +170,42 @@ internal class RmqcCore : IRmqcCore
         _connectionFactory = connectionFactory;
         _connection = connection;
         _channel = channel;
+        _connected = false;
 
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
     }
+
+    #endregion
+
+    #region public events
+
+    /// <inheritdoc />
+    public event EventHandler<ConnectCompletedEventArgs>? ConnectCompleted;
+
+    /// <inheritdoc />
+    public event EventHandler<DisconnectCompletedEventArgs>? DisconnectCompleted;
+
+    /// <inheritdoc />
+    public event EventHandler<WriteMsgCompletedEventArgs>? WriteMsgCompleted;
+
+    /// <inheritdoc />
+    public event EventHandler<ReadMsgCompletedEventArgs>? ReadMsgCompleted;
+
+    /// <inheritdoc />
+    public event EventHandler<AckMsgCompletedEventArgs>? AckMsgCompleted;
+
+    /// <inheritdoc />
+    public event EventHandler<NackMsgCompletedEventArgs>? NackMsgComplete;
+
+    /// <inheritdoc />
+    public event EventHandler<QueuedMsgsCompletedEventArgs>? QueuedMsgsCompleted;
+
+    /// <inheritdoc />
+    public event EventHandler<ConnectionStatusChangedEventArgs>? ConnectionStateChanged;
+
+    /// <inheritdoc />
+    public event EventHandler<ErrorOccurredEventArgs>? ErrorOccurred;
 
     #endregion
 
@@ -147,7 +224,7 @@ internal class RmqcCore : IRmqcCore
             Port = Settings.Port,
             UserName = Settings.Username,
             Password = Settings.Password,
-            VirtualHost = Settings.VHost
+            VirtualHost = Settings.VirtualHost
         };
     }
 
@@ -166,6 +243,10 @@ internal class RmqcCore : IRmqcCore
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // init performance measurement
+        var sw = new Stopwatch();
+        sw.Start();
 
         // init output
         var res = true;
@@ -203,21 +284,42 @@ internal class RmqcCore : IRmqcCore
             _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
             // disconnect
-            Disconnect();
+            Disconnect(out _);
+
+            // invoke associated event
+            OnErrorOccurred(new ErrorOccurredEventArgs(exc));
 
             // set output 
             exception = exc;
             res = false;
         }
 
+        // set connected state
+        Connected = res;
+
+        // end performance measurement
+        sw.Stop();
+
+        // invoke associated event
+        OnConnectCompleted(new ConnectCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
+
+        // return the result
         return res;
     }
 
     /// <inheritdoc />
-    public void Disconnect()
+    public bool Disconnect(out Exception? exception)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // init performance measurement
+        var sw = new Stopwatch();
+        sw.Start();
+
+        // init output
+        var res = true;
+        exception = null;
 
         try
         {
@@ -250,16 +352,37 @@ internal class RmqcCore : IRmqcCore
             // log exception
             _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
-            // re-throw exception
-            throw;
+            // invoke associated event
+            OnErrorOccurred(new ErrorOccurredEventArgs(exc));
+
+            // set output 
+            exception = exc;
+            res = false;
         }
+
+        // set connected state
+        Connected = false;
+
+        // end performance measurement
+        sw.Stop();
+
+        // invoke associated event
+        OnDisconnectCompleted(new DisconnectCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
+
+        // return the result
+        // return the result
+        return res;
     }
 
     /// <inheritdoc />
-    public bool WriteMsg(Message message, out Exception? exception)
+    public bool WriteMsg(ref RmqcMessage message, out Exception? exception)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // init performance measurement
+        var sw = new Stopwatch();
+        sw.Start();
 
         // init output
         var res = true;
@@ -275,25 +398,40 @@ internal class RmqcCore : IRmqcCore
 
             // write message
             _channel?.BasicPublish(Settings.Exchange, message.RoutingKey, message.BasicProperties ?? null, message.Body ?? null);
+            message.TimestampWhenSend = DateTime.Now;
         }
         catch (Exception exc)
         {
             // log exception
             _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
+            // invoke associated event
+            OnErrorOccurred(new ErrorOccurredEventArgs(exc));
+
             // set output 
             exception = exc;
             res = false;
         }
 
+        // end performance measurement
+        sw.Stop();
+
+        // invoke associated event
+        OnWriteMsgCompleted(new WriteMsgCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
+
+        // return the result
         return res;
     }
 
     /// <inheritdoc />
-    public bool ReadMsg(out Message? message, bool autoAck, out Exception? exception)
+    public bool ReadMsg(out RmqcMessage? message, bool autoAck, out Exception? exception)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // init performance measurement
+        var sw = new Stopwatch();
+        sw.Start();
 
         // init output
         var res = true;
@@ -318,7 +456,15 @@ internal class RmqcCore : IRmqcCore
             }
             else
             {
-                message = new Message(msg);
+                message = new RmqcMessage(msg)
+                {
+                    TimestampWhenReceived = DateTime.Now
+                };
+
+                if (autoAck)
+                {
+                    message.TimestampWhenAcked = message.TimestampWhenReceived;
+                }
             }
         }
         catch (Exception exc)
@@ -326,19 +472,33 @@ internal class RmqcCore : IRmqcCore
             // log exception
             _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
+            // invoke associated event
+            OnErrorOccurred(new ErrorOccurredEventArgs(exc));
+
             // set output 
             exception = exc;
             res = false;
         }
 
+        // end performance measurement
+        sw.Stop();
+
+        // invoke associated event
+        OnReadMsgCompleted(new ReadMsgCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan(), message));
+
+        // return the result
         return res;
     }
 
     /// <inheritdoc />
-    public bool AckMsg(Message message, out Exception? exception)
+    public bool AckMsg(ref RmqcMessage message, out Exception? exception)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // init performance measurement
+        var sw = new Stopwatch();
+        sw.Start();
 
         // init output
         var res = true;
@@ -354,25 +514,40 @@ internal class RmqcCore : IRmqcCore
 
             // send ack
             _channel?.BasicAck(message.DeliveryTag, false);
+            message.TimestampWhenAcked = DateTime.Now;
         }
         catch (Exception exc)
         {
             // log exception
             _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
+            // invoke associated event
+            OnErrorOccurred(new ErrorOccurredEventArgs(exc));
+
             // set output 
             exception = exc;
             res = false;
         }
 
+        // end performance measurement
+        sw.Stop();
+
+        // invoke associated event
+        OnAckMsgCompleted(new AckMsgCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan(), message.DeliveryTag));
+
+        // return the result
         return res;
     }
 
     /// <inheritdoc />
-    public bool NackMsg(Message message, bool requeue, out Exception? exception)
+    public bool NackMsg(ref RmqcMessage message, bool requeue, out Exception? exception)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // init performance measurement
+        var sw = new Stopwatch();
+        sw.Start();
 
         // init output
         var res = true;
@@ -388,17 +563,29 @@ internal class RmqcCore : IRmqcCore
 
             // send nack
             _channel?.BasicNack(message.DeliveryTag, false, requeue);
+            message.TimestampWhenNacked = DateTime.Now;
+            message.WasNackedWithRequeue = requeue;
         }
         catch (Exception exc)
         {
             // log exception
             _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
+            // invoke associated event
+            OnErrorOccurred(new ErrorOccurredEventArgs(exc));
+
             // set output 
             exception = exc;
             res = false;
         }
 
+        // end performance measurement
+        sw.Stop();
+
+        // invoke associated event
+        OnNackMsgComplete(new NackMsgCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan(), message.DeliveryTag));
+
+        // return the result
         return res;
     }
 
@@ -407,6 +594,10 @@ internal class RmqcCore : IRmqcCore
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // init performance measurement
+        var sw = new Stopwatch();
+        sw.Start();
 
         // init output
         var res = true;
@@ -428,11 +619,21 @@ internal class RmqcCore : IRmqcCore
             // log exception
             _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
+            // invoke associated event
+            OnErrorOccurred(new ErrorOccurredEventArgs(exc));
+
             // set output 
             exception = exc;
             res = false;
         }
 
+        // end performance measurement
+        sw.Stop();
+
+        // invoke associated event
+        // OnConnectCompleted(new ConnectCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
+
+        // return the result
         return res;
     }
 
@@ -441,6 +642,10 @@ internal class RmqcCore : IRmqcCore
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // init performance measurement
+        var sw = new Stopwatch();
+        sw.Start();
 
         // init output
         var res = true;
@@ -463,13 +668,144 @@ internal class RmqcCore : IRmqcCore
             // log exception
             _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
 
+            // invoke associated event
+            OnErrorOccurred(new ErrorOccurredEventArgs(exc));
+
             // set output 
             exception = exc;
             res = false;
         }
 
+        // end performance measurement
+        sw.Stop();
+
+        // invoke associated event
+        OnQueuedMsgsCompleted(new QueuedMsgsCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan(), amount));
+
+        // return the result
         return res;
     }
-    
+
+    #endregion
+
+    #region private event invokation
+
+    /// <summary>
+    /// This method invokes the <see cref="ConnectCompleted"/> envent handlers.
+    /// </summary>
+    /// <param name="e"></param>
+    private void OnConnectCompleted(ConnectCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        ConnectCompleted?.Invoke(this, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="DisconnectCompleted"/> envent handlers.
+    /// </summary>
+    /// <param name="e"></param>
+    private void OnDisconnectCompleted(DisconnectCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        DisconnectCompleted?.Invoke(this, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="WriteMsgCompleted"/> envent handlers.
+    /// </summary>
+    /// <param name="e"></param>
+    private void OnWriteMsgCompleted(WriteMsgCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        WriteMsgCompleted?.Invoke(this, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="ReadMsgCompleted"/> envent handlers.
+    /// </summary>
+    /// <param name="e"></param>
+    private void OnReadMsgCompleted(ReadMsgCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        ReadMsgCompleted?.Invoke(this, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="AckMsgCompleted"/> envent handlers.
+    /// </summary>
+    /// <param name="e"></param>
+    private void OnAckMsgCompleted(AckMsgCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        AckMsgCompleted?.Invoke(this, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="NackMsgComplete"/> envent handlers.
+    /// </summary>
+    /// <param name="e"></param>
+    private void OnNackMsgComplete(NackMsgCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        NackMsgComplete?.Invoke(this, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="QueuedMsgsCompleted"/> envent handlers.
+    /// </summary>
+    /// <param name="e"></param>
+    private void OnQueuedMsgsCompleted(QueuedMsgsCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        QueuedMsgsCompleted?.Invoke(this, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="ConnectionStateChanged"/> envent handlers.
+    /// </summary>
+    /// <param name="e"></param>
+    private void OnConnectionStateChanged(ConnectionStatusChangedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        ConnectionStateChanged?.Invoke(this, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="ErrorOccurred"/> envent handlers.
+    /// </summary>
+    /// <param name="e"></param>
+    private void OnErrorOccurred(ErrorOccurredEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        ErrorOccurred?.Invoke(this, e);
+    }
+
     #endregion
 }

@@ -7,7 +7,7 @@ namespace jjm.one.RabbitMqClientWrapper.types.events;
 /// This class represents the event args for a queued msg's completed event.
 /// </summary>
 [ExcludeFromCodeCoverage]
-public class QueuedMsgsCompletedEventArgs
+public class QueuedMsgsCompletedEventArgs : EventArgs
 {
     #region public members
 
@@ -17,7 +17,7 @@ public class QueuedMsgsCompletedEventArgs
     public bool Successful { get; set; }
     
     /// <summary>
-    /// The exception which may have occured during getting the amount of queued msg's from the RabbitMQ server.
+    /// The exception which may have occurred during getting the amount of queued msg's from the RabbitMQ server.
     /// </summary>
     public Exception? Exception { get; set; }
     

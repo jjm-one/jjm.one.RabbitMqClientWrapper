@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using jjm.one.Microsoft.Extensions.Logging.Helpers;
 using jjm.one.RabbitMqClientWrapper.main.core;
@@ -31,7 +30,7 @@ public class RmqcWrapper : IRmqcWrapper
     /// Note:
     /// Changing the <see cref="Settings"/> object of a connected client will result in the disconnection from the server.
     /// </summary>
-    public Settings Settings
+    public RmqcSettings Settings
     {
         get
         {
@@ -66,7 +65,7 @@ public class RmqcWrapper : IRmqcWrapper
     #region ctors
 
     /// <summary>
-    /// A parameterised constructor of the <see cref="RmqcWrapper"/> class.
+    /// A parameterized constructor of the <see cref="RmqcWrapper"/> class.
     /// </summary>
     /// <param name="core"></param>
     /// <param name="logger"></param>
@@ -76,16 +75,27 @@ public class RmqcWrapper : IRmqcWrapper
         _core = core;
         _logger = logger;
 
+        // register event callbacks
+        _core.ConnectCompleted += OnConnectCompleted;
+        _core.DisconnectCompleted += OnDisconnectCompleted;
+        _core.WriteMsgCompleted += OnWriteMsgCompleted;
+        _core.ReadMsgCompleted += OnReadMsgCompleted;
+        _core.AckMsgCompleted += OnAckMsgCompleted;
+        _core.NackMsgComplete += OnNackMsgComplete;
+        _core.QueuedMsgsCompleted += OnQueuedMsgsCompleted;
+        _core.ConnectionStateChanged += OnConnectionStateChanged;
+        _core.ErrorOccurred += OnErrorOccurred;
+
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
     }
 
     /// <summary>
-    /// A parameterised constructor of the <see cref="RmqcWrapper"/> class.
+    /// A parameterized constructor of the <see cref="RmqcWrapper"/> class.
     /// </summary>
     /// <param name="settings"></param>
     /// <param name="logger"></param>
-    public RmqcWrapper(Settings settings, 
+    public RmqcWrapper(RmqcSettings settings, 
         ILogger<RmqcWrapper>? logger = null)
     {
         _core = new RmqcCore(settings);
@@ -123,6 +133,12 @@ public class RmqcWrapper : IRmqcWrapper
     /// <inheritdoc />
     public event EventHandler<QueuedMsgsCompletedEventArgs>? QueuedMsgsCompleted;
 
+    /// <inheritdoc />
+    public event EventHandler<ConnectionStatusChangedEventArgs>? ConnectionStateChanged;
+
+    /// <inheritdoc />
+    public event EventHandler<ErrorOccurredEventArgs>? ErrorOccurred;
+
     #endregion
     
     #region public methods
@@ -159,32 +175,9 @@ public class RmqcWrapper : IRmqcWrapper
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-        
-        // init measure completion time
-        var sw = new Stopwatch();
-        sw.Start();
 
         // call the core functions
-        var res = _core.Connect(out exception);
-
-        // measure completion time
-        sw.Stop();
-
-        // invoke events
-        OnConnectCompleted(new ConnectCompletedEventArgs(res, exception, 
-            ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
-        
-        return res;
-    }
-
-    /// <inheritdoc />
-    [ExcludeFromCodeCoverage]
-    void IRmqcCore.Disconnect()
-    {
-        // log fct call
-        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-
-        Disconnect(out _);
+        return _core.Connect(out exception);
     }
 
     /// <inheritdoc />
@@ -202,37 +195,8 @@ public class RmqcWrapper : IRmqcWrapper
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
-        // init measure completion time
-        var sw = new Stopwatch();
-        sw.Start();
-
-        // init local vars
-        exception = null;
-        var res = true;
-
-        try
-        {
-            // call the core functions
-            _core.Disconnect();
-        }
-        catch (Exception exc)
-        {
-            // log exception
-            _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
-
-            
-            exception = exc;
-            res = false;
-        }
-        
-        // measure completion time
-        sw.Stop();
-
-        // invoke events
-        OnDisconnectCompleted(new DisconnectCompletedEventArgs(res, exception, 
-            ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
-        
-        return res;
+        // call the core functions
+        return _core.Disconnect(out exception);
     }
 
     /// <inheritdoc />
@@ -254,57 +218,56 @@ public class RmqcWrapper : IRmqcWrapper
         var sw = new Stopwatch();
         sw.Start();
 
-        // call the core functions
-        var res = Disconnect(out exception);
+        // init output
+        var res = true;
+
+        // disconnect
+        res = Disconnect(out exception);
+
         if (res)
         {
-            Connect(out exception);
+            // de-init
+            DeInit();
+
+            // init
+            Init();
+
+            // connect
+            res = Connect(out exception);
         }
 
         // measure completion time
         sw.Stop();
 
         // invoke events
-        OnReConnectCompleted(new ReConnectCompletedEventArgs(res, exception, 
+        OnReConnectCompleted(new ReConnectCompletedEventArgs(res, exception,
             ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
-        
+
+        // return the result
         return res;
     }
 
     /// <inheritdoc />
-    public bool WriteMsg(Message message)
+    public bool WriteMsg(ref RmqcMessage message)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
-        return WriteMsg(message, out _);
+        return WriteMsg(ref message, out _);
     }
 
     /// <inheritdoc />
-    public bool WriteMsg(Message message, out Exception? exception)
+    public bool WriteMsg(ref RmqcMessage message, out Exception? exception)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-
-        // init measure completion time
-        var sw = new Stopwatch();
-        sw.Start();
 
         // call the core functions
-        var res = _core.WriteMsg(message, out exception);
-
-        // measure completion time
-        sw.Stop();
-
-        // invoke events
-        OnWriteMsgCompleted(new WriteMsgCompletedEventArgs(res, exception, 
-            ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
-        
-        return res;
+        return _core.WriteMsg(ref message, out exception);
     }
 
     /// <inheritdoc />
-    public bool ReadMsg(out Message? message, bool autoAck)
+    public bool ReadMsg(out RmqcMessage? message, bool autoAck)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
@@ -313,93 +276,51 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <inheritdoc />
-    public bool ReadMsg(out Message? message, bool autoAck, out Exception? exception)
+    public bool ReadMsg(out RmqcMessage? message, bool autoAck, out Exception? exception)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-
-        // init measure completion time
-        var sw = new Stopwatch();
-        sw.Start();
 
         // call the core functions
-        var res = _core.ReadMsg(out message, autoAck, out exception);
+        return _core.ReadMsg(out message, autoAck, out exception);
+    }
 
-        // measure completion time
-        sw.Stop();
+    /// <inheritdoc />
+    public bool AckMsg(ref RmqcMessage message)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
-        // invoke events
-        OnReadMsgCompleted(new ReadMsgCompletedEventArgs(res, exception, 
-            ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan(),
-            message));
+        return AckMsg(ref message, out _);
+    }
+
+    /// <inheritdoc />
+    public bool AckMsg(ref RmqcMessage message, out Exception? exception)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
         
-        return res;
+        // call the core functions
+        return _core.AckMsg(ref message, out exception);
     }
 
     /// <inheritdoc />
-    public bool AckMsg(Message message)
+    public bool NackMsg(ref RmqcMessage message, bool requeue)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-
-        return AckMsg(message, out _);
+        
+        return NackMsg(ref message, requeue, out _);
     }
 
     /// <inheritdoc />
-    public bool AckMsg(Message message, out Exception? exception)
+    public bool NackMsg(ref RmqcMessage message, bool requeue, out Exception? exception)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-
-        // init measure completion time
-        var sw = new Stopwatch();
-        sw.Start();
 
         // call the core functions
-        var res = _core.AckMsg(message, out exception);
-
-        // measure completion time
-        sw.Stop();
-
-        // invoke events
-        OnAckMsgCompleted(new AckMsgCompletedEventArgs(res, exception, 
-            ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan(),
-            message.DeliveryTag));
-        
-        return res;
-    }
-
-    /// <inheritdoc />
-    public bool NackMsg(Message message, bool requeue)
-    {
-        // log fct call
-        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-        
-        return NackMsg(message, requeue, out _);
-    }
-
-    /// <inheritdoc />
-    public bool NackMsg(Message message, bool requeue, out Exception? exception)
-    {
-        // log fct call
-        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-
-        // init measure completion time
-        var sw = new Stopwatch();
-        sw.Start();
-
-        // call the core functions
-        var res = _core.NackMsg(message, requeue, out exception);
-
-        // measure completion time
-        sw.Stop();
-
-        // invoke events
-        OnNackMsgComplete(new NackMsgCompletedEventArgs(res, exception, 
-            ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan(),
-            message.DeliveryTag));
-        
-        return res;
+        return _core.NackMsg(ref message, requeue, out exception);
     }
 
     /// <inheritdoc />
@@ -417,6 +338,7 @@ public class RmqcWrapper : IRmqcWrapper
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
+        // return the result
         return _core.WaitForWriteConfirm(timeout, out exception);
     }
 
@@ -435,130 +357,155 @@ public class RmqcWrapper : IRmqcWrapper
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
-        // init measure completion time
-        var sw = new Stopwatch();
-        sw.Start();
-
         // call the core functions
-        var res = _core.QueuedMsgs(out amount, out exception);
-
-        // measure completion time
-        sw.Stop();
-
-        // invoke events
-        OnQueuedMsgsCompleted(new QueuedMsgsCompletedEventArgs(res, exception, 
-            ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan(),
-            amount));
-        
-        return res;
+        return _core.QueuedMsgs(out amount, out exception);
     }
 
     #endregion
 
-    #region protected event invokation
+    #region private event callbacks
 
     /// <summary>
     /// This method invokes the <see cref="ConnectCompleted"/> envent handlers.
     /// </summary>
+    /// <param name="o"></param>
     /// <param name="e"></param>
-    protected virtual void OnConnectCompleted(ConnectCompletedEventArgs e)
+    private void OnConnectCompleted(object? o, ConnectCompletedEventArgs e)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-        
+
         // invoke event handlers
-        ConnectCompleted?.Invoke(this, e);
+        ConnectCompleted?.Invoke(o, e);
     }
 
     /// <summary>
     /// This method invokes the <see cref="DisconnectCompleted"/> envent handlers.
     /// </summary>
+    /// <param name="o"></param>
     /// <param name="e"></param>
-    protected virtual void OnDisconnectCompleted(DisconnectCompletedEventArgs e)
+    private void OnDisconnectCompleted(object? o, DisconnectCompletedEventArgs e)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-        
+
         // invoke event handlers
-        DisconnectCompleted?.Invoke(this, e);
+        DisconnectCompleted?.Invoke(o, e);
     }
+
+    /// <summary>
+    /// This method invokes the <see cref="WriteMsgCompleted"/> envent handlers.
+    /// </summary>
+    /// <param name="o"></param>
+    /// <param name="e"></param>
+    private void OnWriteMsgCompleted(object? o, WriteMsgCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        WriteMsgCompleted?.Invoke(o, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="ReadMsgCompleted"/> envent handlers.
+    /// </summary>
+    /// <param name="o"></param>
+    /// <param name="e"></param>
+    private void OnReadMsgCompleted(object? o, ReadMsgCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        ReadMsgCompleted?.Invoke(o, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="AckMsgCompleted"/> envent handlers.
+    /// </summary>
+    /// <param name="o"></param>
+    /// <param name="e"></param>
+    private void OnAckMsgCompleted(object? o, AckMsgCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        AckMsgCompleted?.Invoke(o, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="NackMsgComplete"/> envent handlers.
+    /// </summary>
+    /// <param name="o"></param>
+    /// <param name="e"></param>
+    private void OnNackMsgComplete(object? o, NackMsgCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        NackMsgComplete?.Invoke(o, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="QueuedMsgsCompleted"/> envent handlers.
+    /// </summary>
+    /// <param name="o"></param>
+    /// <param name="e"></param>
+    private void OnQueuedMsgsCompleted(object? o, QueuedMsgsCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        QueuedMsgsCompleted?.Invoke(o, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="ConnectionStateChanged"/> envent handlers.
+    /// </summary>
+    /// <param name="o"></param>
+    /// <param name="e"></param>
+    private void OnConnectionStateChanged(object? o, ConnectionStatusChangedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        ConnectionStateChanged?.Invoke(o, e);
+    }
+
+    /// <summary>
+    /// This method invokes the <see cref="ErrorOccurred"/> envent handlers.
+    /// </summary>
+    /// <param name="o"></param>
+    /// <param name="e"></param>
+    private void OnErrorOccurred(object? o, ErrorOccurredEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        ErrorOccurred?.Invoke(o, e);
+    }
+
+    #endregion
+
+    #region private event invokation
 
     /// <summary>
     /// This method invokes the <see cref="ReConnectCompleted"/> envent handlers.
     /// </summary>
     /// <param name="e"></param>
-    protected virtual void OnReConnectCompleted(ReConnectCompletedEventArgs e)
+    private void OnReConnectCompleted(ReConnectCompletedEventArgs e)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
         
         // invoke event handlers
         ReConnectCompleted?.Invoke(this, e);
-    }
-
-    /// <summary>
-    /// This method invokes the <see cref="WriteMsgCompleted"/> envent handlers.
-    /// </summary>
-    /// <param name="e"></param>
-    protected virtual void OnWriteMsgCompleted(WriteMsgCompletedEventArgs e)
-    {
-        // log fct call
-        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-        
-        // invoke event handlers
-        WriteMsgCompleted?.Invoke(this, e);
-    }
-
-    /// <summary>
-    /// This method invokes the <see cref="ReadMsgCompleted"/> envent handlers.
-    /// </summary>
-    /// <param name="e"></param>
-    protected virtual void OnReadMsgCompleted(ReadMsgCompletedEventArgs e)
-    {
-        // log fct call
-        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-        
-        // invoke event handlers
-        ReadMsgCompleted?.Invoke(this, e);
-    }
-
-    /// <summary>
-    /// This method invokes the <see cref="AckMsgCompleted"/> envent handlers.
-    /// </summary>
-    /// <param name="e"></param>
-    protected virtual void OnAckMsgCompleted(AckMsgCompletedEventArgs e)
-    {
-        // log fct call
-        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-        
-        // invoke event handlers
-        AckMsgCompleted?.Invoke(this, e);
-    }
-
-    /// <summary>
-    /// This method invokes the <see cref="NackMsgComplete"/> envent handlers.
-    /// </summary>
-    /// <param name="e"></param>
-    protected virtual void OnNackMsgComplete(NackMsgCompletedEventArgs e)
-    {
-        // log fct call
-        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-        
-        // invoke event handlers
-        NackMsgComplete?.Invoke(this, e);
-    }
-
-    /// <summary>
-    /// This method invokes the <see cref="QueuedMsgsCompleted"/> envent handlers.
-    /// </summary>
-    /// <param name="e"></param>
-    protected virtual void OnQueuedMsgsCompleted(QueuedMsgsCompletedEventArgs e)
-    {
-        // log fct call
-        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-        
-        // invoke event handlers
-        QueuedMsgsCompleted?.Invoke(this, e);
     }
 
     #endregion

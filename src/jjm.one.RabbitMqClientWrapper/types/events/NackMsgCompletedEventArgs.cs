@@ -7,7 +7,7 @@ namespace jjm.one.RabbitMqClientWrapper.types.events;
 /// This class represents the event args for a nack completed event.
 /// </summary>
 [ExcludeFromCodeCoverage]
-public class NackMsgCompletedEventArgs
+public class NackMsgCompletedEventArgs : EventArgs
 {
     #region public members
 
@@ -17,7 +17,7 @@ public class NackMsgCompletedEventArgs
     public bool Successful { get; set; }
     
     /// <summary>
-    /// The exception which may have occured during sending the nack to the RabbitMQ server.
+    /// The exception which may have occurred during sending the nack to the RabbitMQ server.
     /// </summary>
     public Exception? Exception { get; set; }
     

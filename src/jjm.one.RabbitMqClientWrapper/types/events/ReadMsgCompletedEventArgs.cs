@@ -7,7 +7,7 @@ namespace jjm.one.RabbitMqClientWrapper.types.events;
 /// This class represents the event args for a read completed event.
 /// </summary>
 [ExcludeFromCodeCoverage]
-public class ReadMsgCompletedEventArgs
+public class ReadMsgCompletedEventArgs : EventArgs
 {
     #region public members
 
@@ -17,7 +17,7 @@ public class ReadMsgCompletedEventArgs
     public bool Successful { get; set; }
     
     /// <summary>
-    /// The exception which may have occured during reading a messages from the RabbitMQ server.
+    /// The exception which may have occurred during reading a messages from the RabbitMQ server.
     /// </summary>
     public Exception? Exception { get; set; }
     
@@ -29,7 +29,7 @@ public class ReadMsgCompletedEventArgs
     /// <summary>
     /// The read message.
     /// </summary>
-    public Message? Message { get; set; }
+    public RmqcMessage? Message { get; set; }
 
     #endregion
 
@@ -43,7 +43,7 @@ public class ReadMsgCompletedEventArgs
     /// <param name="completionTime"></param>
     /// <param name="message"></param>
     public ReadMsgCompletedEventArgs(bool successful = false, Exception? exception = null,
-        TimeSpan? completionTime = null, Message? message = null)
+        TimeSpan? completionTime = null, RmqcMessage? message = null)
     {
         Successful = successful;
         Exception = exception;

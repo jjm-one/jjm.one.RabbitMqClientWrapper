@@ -17,7 +17,7 @@ public class ReConnectCompletedEventArgs : EventArgs
     public bool Successful { get; set; }
     
     /// <summary>
-    /// The exception which may have occured during re-connecting to the RabbitMQ server.
+    /// The exception which may have occurred during re-connecting to the RabbitMQ server.
     /// </summary>
     public Exception? Exception { get; set; }
     
