@@ -416,22 +416,22 @@
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests">
             <summary>
-            This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> class.
+            This class contains the unit tests for the <see cref="!:Message"/> class.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_DefaultCtorTest">
             <summary>
-            Tests the default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> class.
+            Tests the default constructor of the <see cref="!:Message"/> class.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_CtorNullTest">
             <summary>
-            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> class with <see langword="null"/> as inputs.
+            Tests the constructor of the <see cref="!:Message"/> class with <see langword="null"/> as inputs.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_CtorTest">
             <summary>
-            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Message"/> class.
+            Tests the constructor of the <see cref="!:Message"/> class.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_RawBasicGetResultGetTest">
@@ -496,32 +496,32 @@
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests">
             <summary>
-            This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
+            This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcSettings"/> class.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests.SettingsTest_DefaultCtorTest">
             <summary>
-            Tests the default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
+            Tests the default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcSettings"/> class.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests.SettingsTest_CtorNullTest">
             <summary>
-            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class with <see langword="null"/> as inputs.
+            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcSettings"/> class with <see langword="null"/> as inputs.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests.SettingsTest_CtorTest">
             <summary>
-            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
+            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcSettings"/> class.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests.SettingsTest_Equals">
             <summary>
-            Tests the Equals method of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
+            Tests the Equals method of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcSettings"/> class.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests.SettingsTest_Hash">
             <summary>
-            Tests the GetHashCode method of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.Settings"/> class.
+            Tests the GetHashCode method of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcSettings"/> class.
             </summary>
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanToolsTests">

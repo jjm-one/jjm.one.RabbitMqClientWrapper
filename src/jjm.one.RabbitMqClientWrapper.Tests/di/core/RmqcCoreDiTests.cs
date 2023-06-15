@@ -40,7 +40,7 @@ public class RmqcCoreDiTests
     {
         // arrange + act
         _hostBuilder.ConfigureServices(services =>
-            services.AddRmqcCore(new Settings()));
+            services.AddRmqcCore(new RmqcSettings()));
         var host = _hostBuilder.Build();
 
         host.Services.GetService<IRmqcCore>().Should().NotBeNull();

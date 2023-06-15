@@ -36,7 +36,7 @@ public class RmqcCoreTests
         _channelMock = new Mock<IModel>();
         _rmqcCoreLoggingMock = new Mock<ILogger<RmqcCore>>();
 
-        _sut = new RmqcCore(new Settings(), _rmqcCoreLoggingMock.Object,
+        _sut = new RmqcCore(new RmqcSettings(), _rmqcCoreLoggingMock.Object,
             _connectionFactoryMock.Object, _connectionMock.Object, _channelMock.Object);
     }
 
@@ -53,7 +53,7 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_CtorTest()
     {
         // arrange + act
-        var res = new RmqcCore(new Settings("Test"));
+        var res = new RmqcCore(new RmqcSettings("Test"));
         
         // assert
         res.Settings.Hostname.Should().Be("Test");
@@ -70,7 +70,7 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_SettingsGetTest1()
     {
         // arrange
-        var sTest = new Settings();
+        var sTest = new RmqcSettings();
 
         // act
         var s = _sut.Settings;
@@ -86,7 +86,7 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_SettingsGetTest2()
     {
         // arrange
-        var sTest = new Settings("Test");
+        var sTest = new RmqcSettings("Test");
 
         // act
         _sut.Settings = sTest;
@@ -103,7 +103,7 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_SettingsSetTest1()
     {
         // arrange
-        var sTest = new Settings();
+        var sTest = new RmqcSettings();
 
         // act
         _sut.Settings = sTest;
@@ -126,7 +126,7 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_SettingsSetTest2()
     {
         // arrange
-        var sTest = new Settings("Test");
+        var sTest = new RmqcSettings("Test");
         _channelMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.Close());
         _channelMock.Setup(x => x.Dispose());
@@ -212,7 +212,7 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_ConnectedGetTest4()
     {
         // arrange
-        _sut = new RmqcCore(new Settings(), _rmqcCoreLoggingMock.Object,
+        _sut = new RmqcCore(new RmqcSettings(), _rmqcCoreLoggingMock.Object,
             null, _connectionMock.Object, _channelMock.Object);
         _connectionMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.IsOpen).Returns(true);
@@ -338,7 +338,7 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_ConnectTest4()
     {
         // arrange
-        _sut = new RmqcCore(new Settings(), _rmqcCoreLoggingMock.Object,
+        _sut = new RmqcCore(new RmqcSettings(), _rmqcCoreLoggingMock.Object,
             null, _connectionMock.Object, _channelMock.Object);
         _connectionFactoryMock.Setup(x => x.CreateConnection()).Returns(_connectionMock.Object);
         _connectionMock.Setup(x => x.CreateModel()).Returns(value: null!);
@@ -368,9 +368,11 @@ public class RmqcCoreTests
         _connectionMock.Setup(x => x.Dispose());
 
         // act
-        _sut.Disconnect();
+        var res = _sut.Disconnect(out var resExc);
             
-        // assert
+        // assert+
+        res.Should().BeTrue();
+        resExc.Should().BeNull();
         _channelMock.Verify(x => x.IsOpen, Times.Once);
         _channelMock.Verify(x => x.Close(), Times.Once);
         _channelMock.Verify(x => x.Dispose(), Times.Once);
@@ -392,26 +394,19 @@ public class RmqcCoreTests
         _connectionMock.Setup(x => x.IsOpen).Returns(true);
         _connectionMock.Setup(x => x.Close());
         _connectionMock.Setup(x => x.Dispose());
-        Exception? res = null;
-        
-        try
-        {
-            // act
-            _sut.Disconnect();
-        }
-        catch (Exception exc)
-        {
-            res = exc;
-        }
 
+        // act
+        var res = _sut.Disconnect(out var resExc);
+        
         // assert
+        res.Should().BeFalse();
+        resExc.Should().NotBeNull();
         _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
         _channelMock.Verify(x => x.Close(), Times.AtMostOnce);
         _channelMock.Verify(x => x.Dispose(), Times.AtMostOnce);
         _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
         _connectionMock.Verify(x => x.Close(), Times.AtMostOnce);
         _connectionMock.Verify(x => x.Dispose(), Times.AtMostOnce);
-        res.Should().BeOfType<Exception>();
     }
     
     /// <summary>
@@ -421,7 +416,7 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_WriteMsgTest1()
     {
         // arrange
-        var m = new Message();
+        var m = new RmqcMessage();
         _connectionMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.BasicPublish(
@@ -429,7 +424,7 @@ public class RmqcCoreTests
             It.IsAny<IBasicProperties>(), It.IsAny<ReadOnlyMemory<byte>>()));
 
         // act
-        var res = _sut.WriteMsg(m, out var resExc); 
+        var res = _sut.WriteMsg(ref m, out var resExc); 
         
         // assert
         _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
@@ -448,7 +443,7 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_WriteMsgTest2()
     {
         // arrange
-        var m = new Message();
+        var m = new RmqcMessage();
         _connectionMock.Setup(x => x.IsOpen).Returns(false);
         _channelMock.Setup(x => x.IsOpen).Returns(false);
         _channelMock.Setup(x => x.BasicPublish(
@@ -456,7 +451,7 @@ public class RmqcCoreTests
             It.IsAny<IBasicProperties>(), It.IsAny<ReadOnlyMemory<byte>>()));
 
         // act
-        var res = _sut.WriteMsg(m, out var resExc); 
+        var res = _sut.WriteMsg(ref m, out var resExc); 
         
         // assert
         _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
@@ -476,7 +471,7 @@ public class RmqcCoreTests
     {
         // arrange
         var bgr = new BasicGetResult(42, false, "TEST-EX", "TEST-RK", 69, null, null);
-        var m = new Message(bgr);
+        var m = new RmqcMessage(bgr);
         _connectionMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.BasicGet(It.IsAny<string>(), It.IsAny<bool>())).Returns(bgr);
@@ -501,7 +496,7 @@ public class RmqcCoreTests
     {
         // arrange
         var bgr = new BasicGetResult(42, false, "TEST-EX", "TEST-RK", 69, null, null);
-        var m = new Message(bgr);
+        var m = new RmqcMessage(bgr);
         _connectionMock.Setup(x => x.IsOpen).Returns(false);
         _channelMock.Setup(x => x.IsOpen).Returns(false);
         _channelMock.Setup(x => x.BasicGet(It.IsAny<string>(), It.IsAny<bool>())).Returns(bgr);
@@ -526,7 +521,7 @@ public class RmqcCoreTests
     {
         // arrange
         var bgr = new BasicGetResult(42, false, "TEST-EX", "TEST-RK", 69, null, null);
-        var m = new Message(bgr);
+        var m = new RmqcMessage(bgr);
         _connectionMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.BasicGet(It.IsAny<string>(), It.IsAny<bool>())).Returns(value: null!);
@@ -550,13 +545,13 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_AckMsgTest1()
     {
         // arrange
-        var m = new Message();
+        var m = new RmqcMessage();
         _connectionMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.BasicAck(It.IsAny<ulong>(), It.IsAny<bool>()));
 
         // act
-        var res = _sut.AckMsg(m, out var resExc); 
+        var res = _sut.AckMsg(ref m, out var resExc); 
         
         // assert
         _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
@@ -573,13 +568,13 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_AckMsgTest2()
     {
         // arrange
-        var m = new Message();
+        var m = new RmqcMessage();
         _connectionMock.Setup(x => x.IsOpen).Returns(false);
         _channelMock.Setup(x => x.IsOpen).Returns(false);
         _channelMock.Setup(x => x.BasicAck(It.IsAny<ulong>(), It.IsAny<bool>()));
 
         // act
-        var res = _sut.AckMsg(m, out var resExc); 
+        var res = _sut.AckMsg(ref m, out var resExc); 
         
         // assert
         _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
@@ -596,13 +591,13 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_NackMsgTest1()
     {
         // arrange
-        var m = new Message();
+        var m = new RmqcMessage();
         _connectionMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.BasicNack(It.IsAny<ulong>(), It.IsAny<bool>(),It.IsAny<bool>()));
 
         // act
-        var res = _sut.NackMsg(m, false, out var resExc); 
+        var res = _sut.NackMsg(ref m, false, out var resExc); 
         
         // assert
         _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
@@ -619,13 +614,13 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_NackMsgTest2()
     {
         // arrange
-        var m = new Message();
+        var m = new RmqcMessage();
         _connectionMock.Setup(x => x.IsOpen).Returns(false);
         _channelMock.Setup(x => x.IsOpen).Returns(false);
         _channelMock.Setup(x => x.BasicNack(It.IsAny<ulong>(), It.IsAny<bool>(),It.IsAny<bool>()));
 
         // act
-        var res = _sut.NackMsg(m, false, out var resExc); 
+        var res = _sut.NackMsg(ref m, false, out var resExc); 
         
         // assert
         _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);

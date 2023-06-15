@@ -40,7 +40,7 @@ public class RmqcWrapperDiTests
     {
         // arrange + act
         _hostBuilder.ConfigureServices(services =>
-            services.AddRmqcWrapper(new Settings()));
+            services.AddRmqcWrapper(new RmqcSettings()));
         var host = _hostBuilder.Build();
 
         host.Services.GetService<IRmqcWrapper>().Should().NotBeNull();

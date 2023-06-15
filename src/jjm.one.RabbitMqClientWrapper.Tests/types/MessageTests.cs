@@ -21,12 +21,12 @@ public class MessageTests
     public void MessageTest_DefaultCtorTest()
     {
         // arrange
-        Message m = null!;
+        RmqcMessage m = null!;
         
         try
         {
             // act
-            m = new Message();
+            m = new RmqcMessage();
         }
         catch (Exception exc)
         {
@@ -45,12 +45,12 @@ public class MessageTests
     public void MessageTest_CtorNullTest()
     {
         // arrange
-        Message m = null!;
+        RmqcMessage m = null!;
         
         try
         {
             // act
-            m = new Message(null);
+            m = new RmqcMessage(null);
         }
         catch (Exception exc)
         {
@@ -69,14 +69,14 @@ public class MessageTests
     public void MessageTest_CtorTest()
     {
         // arrange
-        Message m = null!;
+        RmqcMessage m = null!;
         var r = 
             new BasicGetResult(0, false, "", "", 0, null, null);
         
         try
         {
             // act
-            m = new Message(r);
+            m = new RmqcMessage(r);
         }
         catch (Exception exc)
         {
@@ -101,7 +101,7 @@ public class MessageTests
         // arrange
         var bgr = new BasicGetResult(42, true, "TEST-EX", "TEST-RK", 69,
             null, new ReadOnlyMemory<byte>());
-        var m = new Message(bgr);
+        var m = new RmqcMessage(bgr);
 
         // act
         var res = m.RawBasicGetResult;
@@ -117,7 +117,7 @@ public class MessageTests
     public void MessageTest_DeliveryTagGetTest()
     {
         // arrange
-        var m = new Message(
+        var m = new RmqcMessage(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, new ReadOnlyMemory<byte>()));
 
@@ -135,7 +135,7 @@ public class MessageTests
     public void MessageTest_RoutingKeyGetTest()
     {
         // arrange
-        var m = new Message(
+        var m = new RmqcMessage(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, new ReadOnlyMemory<byte>()));
 
@@ -153,7 +153,7 @@ public class MessageTests
     public void MessageTest_RoutingKeySetTest1()
     {
         // arrange
-        var m = new Message(
+        var m = new RmqcMessage(
             new BasicGetResult(42, true, "TEST-EX",string.Empty, 69,
                 null, new ReadOnlyMemory<byte>()))
         {
@@ -174,7 +174,7 @@ public class MessageTests
     public void MessageTest_RoutingKeySetTest2()
     {
         // arrange
-        var m = new Message
+        var m = new RmqcMessage
         {
             // act
             RoutingKey = "TEST-RK"
@@ -193,7 +193,7 @@ public class MessageTests
     public void MessageTest_BasicPropertiesGetTest()
     {
         // arrange
-        var m = new Message(
+        var m = new RmqcMessage(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, new ReadOnlyMemory<byte>()));
 
@@ -212,7 +212,7 @@ public class MessageTests
     {
         // arrange
         IBasicProperties? bP = null;
-        var m = new Message(
+        var m = new RmqcMessage(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, new ReadOnlyMemory<byte>()))
         {
@@ -234,7 +234,7 @@ public class MessageTests
     {
         // arrange
         var b = new ReadOnlyMemory<byte>();
-        var m = new Message(
+        var m = new RmqcMessage(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, b));
         // act
@@ -252,7 +252,7 @@ public class MessageTests
     {
         // arrange
         var b = new ReadOnlyMemory<byte>();
-        var m = new Message(
+        var m = new RmqcMessage(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, null))
         {
@@ -274,7 +274,7 @@ public class MessageTests
     {
         // arrange
         var b = new ReadOnlyMemory<byte>();
-        var m = new Message
+        var m = new RmqcMessage
         {
             // act
             Body = b
@@ -293,7 +293,7 @@ public class MessageTests
     public void MessageTest_BodySetTest3()
     {
         // arrange
-        var m = new Message(
+        var m = new RmqcMessage(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, null))
         {
@@ -314,7 +314,7 @@ public class MessageTests
     public void MessageTest_BodySetTest4()
     {
         // arrange
-        var m = new Message
+        var m = new RmqcMessage
         {
             // act
             Body = null

@@ -45,7 +45,7 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_CtorTest()
     {
         // arrange + act
-        var res = new RmqcWrapper(new Settings("Test"));
+        var res = new RmqcWrapper(new RmqcSettings("Test"));
         
         // assert
         res.Settings.Hostname.Should().Be("Test");
@@ -62,7 +62,7 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_SettingsGetTest()
     {
         // arrange
-        var sTest = new Settings("test");
+        var sTest = new RmqcSettings("test");
         _rmqcCoreMock.Setup(x => x.Settings).Returns(sTest);
         
         // act
@@ -80,14 +80,14 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_SettingsSetTest()
     {
         // arrange
-        var sTest = new Settings("test");
-        _rmqcCoreMock.SetupSet(x => x.Settings=It.IsAny<Settings>()).Verifiable();
+        var sTest = new RmqcSettings("test");
+        _rmqcCoreMock.SetupSet(x => x.Settings=It.IsAny<RmqcSettings>()).Verifiable();
         
         // act
         _sut.Settings = sTest;
 
         // assert
-        _rmqcCoreMock.VerifySet(x => x.Settings=It.IsAny<Settings>(), Times.Once);
+        _rmqcCoreMock.VerifySet(x => x.Settings=It.IsAny<RmqcSettings>(), Times.Once);
     }
     
     /// <summary>
@@ -209,7 +209,7 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_DisconnectTest1()
     {
         // arrange
-        _rmqcCoreMock.Setup(x => x.Disconnect()).Throws<Exception>();
+        _rmqcCoreMock.Setup(x => x.Disconnect(out It.Ref<Exception?>.IsAny)).Throws<Exception>();
 
         // act
         var res = _sut.Disconnect(out Exception? resExc);
@@ -218,7 +218,7 @@ public class RmqcWrapperTests
         res.Should().BeFalse();
         resExc.Should().NotBeNull();
         resExc.Should().BeOfType<Exception>();
-        _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
+        _rmqcCoreMock.Verify(x => x.Disconnect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
@@ -228,14 +228,14 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_DisconnectTest2()
     {
         // arrange
-        _rmqcCoreMock.Setup(x => x.Disconnect());
+        _rmqcCoreMock.Setup(x => x.Disconnect(out It.Ref<Exception?>.IsAny));
 
         // act
         var res = _sut.Disconnect();
             
         // assert
         res.Should().BeTrue();
-        _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
+        _rmqcCoreMock.Verify(x => x.Disconnect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
@@ -245,7 +245,7 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_DisconnectTest3()
     {
         // arrange
-        _rmqcCoreMock.Setup(x => x.Disconnect());
+        _rmqcCoreMock.Setup(x => x.Disconnect(out It.Ref<Exception?>.IsAny));
 
         // act
         var res = _sut.Disconnect(out var resExc);
@@ -253,7 +253,7 @@ public class RmqcWrapperTests
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
-        _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
+        _rmqcCoreMock.Verify(x => x.Disconnect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
@@ -263,7 +263,7 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_DisconnectTest4()
     {
         // arrange
-        _rmqcCoreMock.Setup(x => x.Disconnect());
+        _rmqcCoreMock.Setup(x => x.Disconnect(out It.Ref<Exception?>.IsAny));
 
         // act
         var evt = Assert.Raises<DisconnectCompletedEventArgs>(
@@ -277,7 +277,7 @@ public class RmqcWrapperTests
         evt.Arguments.Successful.Should().BeTrue();
         evt.Arguments.Exception.Should().BeNull();
         evt.Arguments.CompletionTime.Should().NotBeNull();
-        _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
+        _rmqcCoreMock.Verify(x => x.Disconnect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
@@ -287,7 +287,7 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_ReConnectTest1()
     {
         // arrange
-        _rmqcCoreMock.Setup(x => x.Disconnect());
+        _rmqcCoreMock.Setup(x => x.Disconnect(out It.Ref<Exception?>.IsAny));
         _rmqcCoreMock.Setup(x => x.Connect(out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
@@ -295,7 +295,7 @@ public class RmqcWrapperTests
         
         // assert
         res.Should().BeTrue();
-        _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
+        _rmqcCoreMock.Verify(x => x.Disconnect(out It.Ref<Exception?>.IsAny), Times.Once);
         _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
@@ -306,7 +306,7 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_ReConnectTest2()
     {
         // arrange
-        _rmqcCoreMock.Setup(x => x.Disconnect());
+        _rmqcCoreMock.Setup(x => x.Disconnect(out It.Ref<Exception?>.IsAny));
         _rmqcCoreMock.Setup(x => x.Connect(out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
@@ -315,7 +315,7 @@ public class RmqcWrapperTests
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
-        _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
+        _rmqcCoreMock.Verify(x => x.Disconnect(out It.Ref<Exception?>.IsAny), Times.Once);
         _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
@@ -326,7 +326,7 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_ReConnectTest3()
     {
         // arrange
-        _rmqcCoreMock.Setup(x => x.Disconnect());
+        _rmqcCoreMock.Setup(x => x.Disconnect(out It.Ref<Exception?>.IsAny));
         _rmqcCoreMock.Setup(x => x.Connect(out It.Ref<Exception?>.IsAny)).Returns(true);
         
         // act
@@ -341,7 +341,7 @@ public class RmqcWrapperTests
         evt.Arguments.Successful.Should().BeTrue();
         evt.Arguments.Exception.Should().BeNull();
         evt.Arguments.CompletionTime.Should().NotBeNull();
-        _rmqcCoreMock.Verify(x => x.Disconnect(), Times.Once);
+        _rmqcCoreMock.Verify(x => x.Disconnect(out It.Ref<Exception?>.IsAny), Times.Once);
         _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
@@ -352,16 +352,16 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_WriteMsgTest1()
     {
         // arrange
-        var m = new Message();
-        _rmqcCoreMock.Setup(x => x.WriteMsg(m, out It.Ref<Exception?>.IsAny)).Returns(true);
+        var m = new RmqcMessage();
+        _rmqcCoreMock.Setup(x => x.WriteMsg(ref m, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.WriteMsg(m); 
+        var res = _sut.WriteMsg(ref m); 
         
         // assert
         res.Should().BeTrue();
         _rmqcCoreMock.Verify(x => 
-            x.WriteMsg(It.IsAny<Message>(), out It.Ref<Exception?>.IsAny), Times.Once);
+            x.WriteMsg(ref It.Ref<RmqcMessage>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
@@ -371,17 +371,17 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_WriteMsgTest2()
     {
         // arrange
-        var m = new Message();
-        _rmqcCoreMock.Setup(x => x.WriteMsg(m, out It.Ref<Exception?>.IsAny)).Returns(true);
+        var m = new RmqcMessage();
+        _rmqcCoreMock.Setup(x => x.WriteMsg(ref m, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.WriteMsg(m, out var resExc); 
+        var res = _sut.WriteMsg(ref m, out var resExc); 
         
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
         _rmqcCoreMock.Verify(x => 
-            x.WriteMsg(It.IsAny<Message>(), out It.Ref<Exception?>.IsAny), Times.Once);
+            x.WriteMsg(ref It.Ref<RmqcMessage>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
@@ -391,14 +391,14 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_WriteMsgTest3()
     {
         // arrange
-        var m = new Message();
-        _rmqcCoreMock.Setup(x => x.WriteMsg(m, out It.Ref<Exception?>.IsAny)).Returns(true);
+        var m = new RmqcMessage();
+        _rmqcCoreMock.Setup(x => x.WriteMsg(ref m, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
         var evt = Assert.Raises<WriteMsgCompletedEventArgs>(
             h => _sut.WriteMsgCompleted += h,
             h => _sut.WriteMsgCompleted -= h,
-            () => _sut.WriteMsg(m));
+            () => _sut.WriteMsg(ref m));
 
         // assert
         evt.Should().NotBeNull();
@@ -407,7 +407,7 @@ public class RmqcWrapperTests
         evt.Arguments.Exception.Should().BeNull();
         evt.Arguments.CompletionTime.Should().NotBeNull();
         _rmqcCoreMock.Verify(x => 
-            x.WriteMsg(It.IsAny<Message>(), out It.Ref<Exception?>.IsAny), Times.Once);
+            x.WriteMsg(ref It.Ref<RmqcMessage>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
@@ -417,7 +417,7 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_ReadMsgTest1()
     {
         // arrange
-        var m = new Message();
+        var m = new RmqcMessage();
         _rmqcCoreMock.Setup(x => x.ReadMsg(out m, false, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
@@ -426,7 +426,7 @@ public class RmqcWrapperTests
         // assert
         res.Should().BeTrue();
         _rmqcCoreMock.Verify(x => 
-            x.ReadMsg(out It.Ref<Message?>.IsAny!, false, out It.Ref<Exception?>.IsAny), Times.Once);
+            x.ReadMsg(out It.Ref<RmqcMessage?>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
@@ -436,7 +436,7 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_ReadMsgTest2()
     {
         // arrange
-        var m = new Message();
+        var m = new RmqcMessage();
         _rmqcCoreMock.Setup(x => x.ReadMsg(out m, false, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
@@ -446,7 +446,7 @@ public class RmqcWrapperTests
         res.Should().BeTrue();
         resExc.Should().BeNull();
         _rmqcCoreMock.Verify(x => 
-            x.ReadMsg(out It.Ref<Message?>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
+            x.ReadMsg(out It.Ref<RmqcMessage?>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
@@ -456,7 +456,7 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_ReadMsgTest3()
     {
         // arrange
-        var m = new Message();
+        var m = new RmqcMessage();
         _rmqcCoreMock.Setup(x => x.ReadMsg(out m, false, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
@@ -473,7 +473,7 @@ public class RmqcWrapperTests
         evt.Arguments.CompletionTime.Should().NotBeNull();
         evt.Arguments.Message.Should().Be(m);
         _rmqcCoreMock.Verify(x => 
-            x.ReadMsg(out It.Ref<Message?>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
+            x.ReadMsg(out It.Ref<RmqcMessage?>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
@@ -483,16 +483,16 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_AckMsgTest1()
     {
         // arrange
-        var m = new Message();
-        _rmqcCoreMock.Setup(x => x.AckMsg(m, out It.Ref<Exception?>.IsAny)).Returns(true);
+        var m = new RmqcMessage();
+        _rmqcCoreMock.Setup(x => x.AckMsg(ref m, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.AckMsg(m); 
+        var res = _sut.AckMsg(ref m); 
         
         // assert
         res.Should().BeTrue();
         _rmqcCoreMock.Verify(x => 
-            x.AckMsg(It.IsAny<Message>(), out It.Ref<Exception?>.IsAny), Times.Once);
+            x.AckMsg(ref It.Ref<RmqcMessage>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
@@ -502,17 +502,17 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_AckMsgTest2()
     {
         // arrange
-        var m = new Message();
-        _rmqcCoreMock.Setup(x => x.AckMsg(m, out It.Ref<Exception?>.IsAny)).Returns(true);
+        var m = new RmqcMessage();
+        _rmqcCoreMock.Setup(x => x.AckMsg(ref m, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.AckMsg(m, out var resExc); 
+        var res = _sut.AckMsg(ref m, out var resExc); 
         
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
         _rmqcCoreMock.Verify(x => 
-            x.AckMsg(It.IsAny<Message>(), out It.Ref<Exception?>.IsAny), Times.Once);
+            x.AckMsg(ref It.Ref<RmqcMessage>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
@@ -522,14 +522,14 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_AckMsgTest3()
     {
         // arrange
-        var m = new Message();
-        _rmqcCoreMock.Setup(x => x.AckMsg(m, out It.Ref<Exception?>.IsAny)).Returns(true);
+        var m = new RmqcMessage();
+        _rmqcCoreMock.Setup(x => x.AckMsg(ref m, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
         var evt = Assert.Raises<AckMsgCompletedEventArgs>(
             h => _sut.AckMsgCompleted += h,
             h => _sut.AckMsgCompleted -= h,
-            () => _sut.AckMsg(m));
+            () => _sut.AckMsg(ref m));
 
         // assert
         evt.Should().NotBeNull();
@@ -539,7 +539,7 @@ public class RmqcWrapperTests
         evt.Arguments.CompletionTime.Should().NotBeNull();
         evt.Arguments.DeliveryTag.Should().Be(m.DeliveryTag);
         _rmqcCoreMock.Verify(x => 
-            x.AckMsg(It.IsAny<Message>(), out It.Ref<Exception?>.IsAny), Times.Once);
+            x.AckMsg(ref It.Ref<RmqcMessage>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
@@ -549,16 +549,16 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_NackMsgTest1()
     {
         // arrange
-        var m = new Message();
-        _rmqcCoreMock.Setup(x => x.NackMsg(m, false, out It.Ref<Exception?>.IsAny)).Returns(true);
+        var m = new RmqcMessage();
+        _rmqcCoreMock.Setup(x => x.NackMsg(ref m, false, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.NackMsg(m, false); 
+        var res = _sut.NackMsg(ref m, false); 
         
         // assert
         res.Should().BeTrue();
         _rmqcCoreMock.Verify(x => 
-            x.NackMsg(It.IsAny<Message>(), false, out It.Ref<Exception?>.IsAny), Times.Once);
+            x.NackMsg(ref It.Ref<RmqcMessage>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
@@ -568,17 +568,17 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_NackMsgTest2()
     {
         // arrange
-        var m = new Message();
-        _rmqcCoreMock.Setup(x => x.NackMsg(m, false, out It.Ref<Exception?>.IsAny)).Returns(true);
+        var m = new RmqcMessage();
+        _rmqcCoreMock.Setup(x => x.NackMsg(ref m, false, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.NackMsg(m, false, out var resExc); 
+        var res = _sut.NackMsg(ref m, false, out var resExc); 
         
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
         _rmqcCoreMock.Verify(x => 
-            x.NackMsg(It.IsAny<Message>(), false, out It.Ref<Exception?>.IsAny), Times.Once);
+            x.NackMsg(ref It.Ref<RmqcMessage>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
@@ -588,14 +588,14 @@ public class RmqcWrapperTests
     public void RmqcWrapperTest_NackMsgTest3()
     {
         // arrange
-        var m = new Message();
-        _rmqcCoreMock.Setup(x => x.NackMsg(m, false, out It.Ref<Exception?>.IsAny)).Returns(true);
+        var m = new RmqcMessage();
+        _rmqcCoreMock.Setup(x => x.NackMsg(ref m, false, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
         var evt = Assert.Raises<NackMsgCompletedEventArgs>(
             h => _sut.NackMsgComplete += h,
             h => _sut.NackMsgComplete -= h,
-            () => _sut.NackMsg(m, false));
+            () => _sut.NackMsg(ref m, false));
 
         // assert
         evt.Should().NotBeNull();
@@ -605,7 +605,7 @@ public class RmqcWrapperTests
         evt.Arguments.CompletionTime.Should().NotBeNull();
         evt.Arguments.DeliveryTag.Should().Be(m.DeliveryTag);
         _rmqcCoreMock.Verify(x => 
-            x.NackMsg(It.IsAny<Message>(), false, out It.Ref<Exception?>.IsAny), Times.Once);
+            x.NackMsg(ref It.Ref<RmqcMessage>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
     }
     
     /// <summary>
