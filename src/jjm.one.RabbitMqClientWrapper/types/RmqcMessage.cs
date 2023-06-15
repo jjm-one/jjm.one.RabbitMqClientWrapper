@@ -1,9 +1,7 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
+using System.Text;
 using RabbitMQ.Client;
 
 namespace jjm.one.RabbitMqClientWrapper.types;
@@ -11,7 +9,8 @@ namespace jjm.one.RabbitMqClientWrapper.types;
 /// <summary>
 /// This class represents a message which gets send an received to or from the RabbitMQ server.
 /// </summary>
-public class RmqcMessage
+[Serializable]
+public class RmqcMessage : ISerializable
 {
     #region private members
 
@@ -282,6 +281,91 @@ public class RmqcMessage
     public RmqcMessage(BasicGetResult? rawMessage)
     {
         _rawBasicGetResult = rawMessage;
+    }
+
+    /// <summary>
+    /// The special constructor of the <see cref="RmqcMessage"/> class is used to deserialize values.
+    /// </summary>
+    /// <param name="info"></param>
+    /// <param name="context"></param>
+    public RmqcMessage(SerializationInfo info, StreamingContext context)
+    {
+        // Reset the property value using the GetValue method.
+        
+        // this
+        TimestampWhenReceived = (DateTime?)info.GetValue("this.TimestampWhenReceived", typeof(DateTime?));
+        TimestampWhenSend = (DateTime?)info.GetValue("this.TimestampWhenSend", typeof(DateTime?));
+        TimestampWhenAcked = (DateTime?)info.GetValue("this.TimestampWhenAcked", typeof(DateTime?));
+        TimestampWhenNacked = (DateTime?)info.GetValue("this.TimestampWhenNacked", typeof(DateTime?));
+        WasNackedWithRequeue = (bool?)info.GetValue("this.WasNackedWithRequeue", typeof(bool?)) ?? false;
+        WasModified = (bool?)info.GetValue("this.WasModified", typeof(bool?)) ?? false;
+        WasSaved = (bool?)info.GetValue("this.WasSaved", typeof(bool?)) ?? false;
+        
+        // BasicGetResult
+
+        _rawBasicGetResult = new BasicGetResult(
+            deliveryTag: (ulong?)info.GetValue("this.BasicGetResult.DeliveryTag", typeof(ulong?)) ?? 0,
+            routingKey: (string)info.GetValue("this.BasicGetResult.RoutingKey", typeof(string)),
+            redelivered: (bool?)info.GetValue("this.BasicGetResult.Redelivered", typeof(bool?)) ?? false,
+            exchange: (string)info.GetValue("this.BasicGetResult.Exchange", typeof(string)),
+            messageCount: (uint?)info.GetValue("this.BasicGetResult.MessageCount", typeof(uint?)) ?? 0,
+            basicProperties: (IBasicProperties?)info.GetValue("this.BasicGetResult.BasicProperties", typeof(IBasicProperties)),
+            body: new ReadOnlyMemory<byte>(Encoding.UTF8.GetBytes((string)info.GetValue("this.BasicGetResult.Body", typeof(string))))
+        );
+    }
+    
+    #endregion
+
+    #region ISerializable impl.
+
+    /// <inheritdoc />
+    public void GetObjectData(SerializationInfo info, StreamingContext context)
+    {
+        // Use the AddValue method to specify serialized values.
+        
+        // this
+        info.AddValue("this.TimestampWhenReceived", TimestampWhenReceived ?? null, typeof(DateTime?));
+        info.AddValue("this.TimestampWhenSend", TimestampWhenSend ?? null, typeof(DateTime?));
+        info.AddValue("this.TimestampWhenAcked", TimestampWhenAcked ?? null, typeof(DateTime?));
+        info.AddValue("this.TimestampWhenNacked", TimestampWhenNacked ?? null, typeof(DateTime?));
+        info.AddValue("this.WasNackedWithRequeue", WasNackedWithRequeue, typeof(bool));
+        info.AddValue("this.WasModified", WasModified, typeof(bool));
+        info.AddValue("this.WasSaved", WasSaved, typeof(bool));
+
+        // BasicGetResult 
+        info.AddValue("this.BasicGetResult.DeliveryTag", _rawBasicGetResult?.DeliveryTag ?? null, typeof(ulong?));
+        info.AddValue("this.BasicGetResult.RoutingKey", _rawBasicGetResult?.RoutingKey ?? null, typeof(string));
+        info.AddValue("this.BasicGetResult.Redelivered", _rawBasicGetResult?.Redelivered ?? null, typeof(bool?));
+        info.AddValue("this.BasicGetResult.Exchange", _rawBasicGetResult?.Exchange ?? null, typeof(string));
+        info.AddValue("this.BasicGetResult.MessageCount", _rawBasicGetResult?.MessageCount ?? null, typeof(uint?));
+        info.AddValue("this.BasicGetResult.BasicProperties", _rawBasicGetResult?.BasicProperties ?? null, typeof(IBasicProperties));
+        info.AddValue("this.BasicGetResult.Body", Encoding.UTF8.GetString(_rawBasicGetResult?.Body.ToArray() ?? Array.Empty<byte>()), typeof(string));
+        
+        // BasicProperties= Encoding.UTF8.GetString(_message.Body.Value.ToArray())
+        /*
+        info.AddValue("BasicProperties.Expiration", _rawBasicGetResult?.BasicProperties.Expiration ?? null, typeof(string));
+        info.AddValue("BasicProperties.Persistent", _rawBasicGetResult?.BasicProperties.Persistent ?? null, typeof(bool?));
+        info.AddValue("BasicProperties.Type", _rawBasicGetResult?.BasicProperties.Type ?? null, typeof(string));
+        info.AddValue("BasicProperties.Priority", _rawBasicGetResult?.BasicProperties.Priority ?? null, typeof(byte?));
+        info.AddValue("BasicProperties.Timestamp", _rawBasicGetResult?.BasicProperties.Timestamp ?? null, typeof(AmqpTimestamp?));
+        info.AddValue("BasicProperties.AppId", _rawBasicGetResult?.BasicProperties.AppId ?? null, typeof(string));
+        info.AddValue("BasicProperties.ClusterId", _rawBasicGetResult?.BasicProperties.ClusterId ?? null, typeof(string));
+        info.AddValue("BasicProperties.ContentEncoding", _rawBasicGetResult?.BasicProperties.ContentEncoding ?? null, typeof(string));
+        info.AddValue("BasicProperties.ContentType", _rawBasicGetResult?.BasicProperties.ContentType ?? null, typeof(string));
+        info.AddValue("BasicProperties.CorrelationId", _rawBasicGetResult?.BasicProperties.CorrelationId ?? null, typeof(string));
+        info.AddValue("BasicProperties.DeliveryMode", _rawBasicGetResult?.BasicProperties.DeliveryMode ?? null, typeof(byte?));
+        info.AddValue("BasicProperties.MessageId", _rawBasicGetResult?.BasicProperties.MessageId ?? null, typeof(string));
+        info.AddValue("BasicProperties.ReplyTo", _rawBasicGetResult?.BasicProperties.ReplyTo ?? null, typeof(string));
+        info.AddValue("BasicProperties.UserId", _rawBasicGetResult?.BasicProperties.UserId ?? null, typeof(string));
+        info.AddValue("BasicProperties.ReplyToAddress", _rawBasicGetResult?.BasicProperties.ReplyToAddress ?? null, typeof(PublicationAddress));
+        info.AddValue("BasicProperties.ProtocolClassId", _rawBasicGetResult?.BasicProperties.ProtocolClassId ?? null, typeof(ushort?));
+        info.AddValue("BasicProperties.", _rawBasicGetResult?.BasicProperties. ?? null, typeof(?));
+        info.AddValue("BasicProperties.", _rawBasicGetResult?.BasicProperties. ?? null, typeof(?));
+        info.AddValue("BasicProperties.", _rawBasicGetResult?.BasicProperties. ?? null, typeof(?));
+        info.AddValue("BasicProperties.", _rawBasicGetResult?.BasicProperties. ?? null, typeof(?));
+        info.AddValue("BasicProperties.", _rawBasicGetResult?.BasicProperties. ?? null, typeof(?));
+        */
+        
     }
 
     #endregion
