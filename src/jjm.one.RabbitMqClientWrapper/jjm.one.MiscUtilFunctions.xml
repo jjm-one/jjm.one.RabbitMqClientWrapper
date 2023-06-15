@@ -1039,11 +1039,6 @@
             </summary>
             <param name="rawMessage"></param>
         </member>
-        <member name="T:jjm.one.RabbitMqClientWrapper.types.RmqcPropertyValueDataTable">
-            <summary>
-            see https://www.codeproject.com/Articles/30490/How-to-Manually-Create-a-Typed-DataTable
-            </summary>
-        </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.types.RmqcSettings">
             <summary>
             This class defines the settings for a client connection to a RabbitMQ server.
