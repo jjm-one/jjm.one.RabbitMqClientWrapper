@@ -370,7 +370,6 @@ internal class RmqcCore : IRmqcCore
         OnDisconnectCompleted(new DisconnectCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
 
         // return the result
-        // return the result
         return res;
     }
 
@@ -396,8 +395,15 @@ internal class RmqcCore : IRmqcCore
                 throw new InvalidOperationException(nameof(WriteMsg));
             }
 
+            // crate basic properties
+            var props = _channel?.CreateBasicProperties();
+            if (message.Headers is not null && props is not null)
+            {
+                props.Headers = message.Headers;
+            } 
+            
             // write message
-            _channel?.BasicPublish(Settings.Exchange, message.RoutingKey, message.BasicProperties ?? null, message.Body ?? null);
+            _channel?.BasicPublish(Settings.Exchange, message.RoutingKey, props, message.BodyArray ?? null);
             message.TimestampWhenSend = DateTime.Now;
         }
         catch (Exception exc)
@@ -686,8 +692,47 @@ internal class RmqcCore : IRmqcCore
         return res;
     }
 
-    #endregion
+    /// <inheritdoc />
+    public bool CreateBasicProperties(out IBasicProperties? basicProperties, out Exception? exception)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
+        // init output
+        var res = true;
+        exception = null;
+        basicProperties = null;
+        
+        try
+        {
+            // check connection to server
+            if (!Connected)
+            {
+                throw new InvalidOperationException(nameof(CreateBasicProperties));
+            }
+
+            // create basic properties for the channel
+            basicProperties = _channel?.CreateBasicProperties();
+        }
+        catch (Exception exc)
+        {
+            // log exception
+            _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
+
+            // invoke associated event
+            OnErrorOccurred(new ErrorOccurredEventArgs(exc));
+
+            // set output 
+            exception = exc;
+            res = false;
+        }
+        
+        // return the result
+        return res;
+    }
+    
+    #endregion
+    
     #region private event invokation
 
     /// <summary>

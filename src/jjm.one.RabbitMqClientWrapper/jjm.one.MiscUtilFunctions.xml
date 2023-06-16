@@ -254,6 +254,9 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.QueuedMsgs(System.Nullable{System.UInt32}@,System.Exception@)">
             <inheritdoc />
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.CreateBasicProperties(RabbitMQ.Client.IBasicProperties@,System.Exception@)">
+            <inheritdoc />
+        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.OnConnectCompleted(jjm.one.RabbitMqClientWrapper.types.events.ConnectCompletedEventArgs)">
             <summary>
             This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.ConnectCompleted"/> envent handlers.
@@ -938,11 +941,6 @@
             This class represents a message which gets send an received to or from the RabbitMQ server.
             </summary>
         </member>
-        <member name="P:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.RawBasicGetResult">
-            <summary>
-            The raw <see cref="T:RabbitMQ.Client.BasicGetResult"/> contained in this <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcMessage"/> object.
-            </summary>
-        </member>
         <member name="P:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.DeliveryTag">
             <summary>
             The delivery tag of this message.
@@ -958,6 +956,11 @@
             The exchange to which the message was published to.
             </summary>
         </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.MessageCount">
+            <summary>
+            The number of message in the queue.
+            </summary>
+        </member>
         <member name="P:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.RoutingKey">
             <summary>
             The routing key of this message.
@@ -968,9 +971,19 @@
             The basic properties of the message.
             </summary>
         </member>
-        <member name="P:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.Body">
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.Headers">
+            <summary>
+            The header entries of the message.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.BodyArray">
             <summary>
             The body containing the payload of the message. 
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.BodyString">
+            <summary>
+            The body containing the payload of the message.‚
             </summary>
         </member>
         <member name="P:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.WasReceived">
