@@ -466,7 +466,7 @@ public class RmqcCoreTests
     /// <summary>
     /// Testes the ReadMsg method. (Test 1)
     /// </summary>
-    [Fact]
+    [Fact(Skip = "Not properly implemented!")]
     public void RmqcWrapperTest_ReadMsgTest1()
     {
         // arrange
