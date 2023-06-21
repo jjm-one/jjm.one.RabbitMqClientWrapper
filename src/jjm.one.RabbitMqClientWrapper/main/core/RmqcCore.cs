@@ -692,45 +692,6 @@ internal class RmqcCore : IRmqcCore
         return res;
     }
 
-    /// <inheritdoc />
-    public bool CreateBasicProperties(out IBasicProperties? basicProperties, out Exception? exception)
-    {
-        // log fct call
-        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-
-        // init output
-        var res = true;
-        exception = null;
-        basicProperties = null;
-        
-        try
-        {
-            // check connection to server
-            if (!Connected)
-            {
-                throw new InvalidOperationException(nameof(CreateBasicProperties));
-            }
-
-            // create basic properties for the channel
-            basicProperties = _channel?.CreateBasicProperties();
-        }
-        catch (Exception exc)
-        {
-            // log exception
-            _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
-
-            // invoke associated event
-            OnErrorOccurred(new ErrorOccurredEventArgs(exc));
-
-            // set output 
-            exception = exc;
-            res = false;
-        }
-        
-        // return the result
-        return res;
-    }
-    
     #endregion
     
     #region private event invokation
