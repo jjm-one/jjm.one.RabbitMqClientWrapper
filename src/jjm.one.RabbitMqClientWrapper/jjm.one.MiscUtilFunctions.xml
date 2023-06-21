@@ -254,9 +254,6 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.QueuedMsgs(System.Nullable{System.UInt32}@,System.Exception@)">
             <inheritdoc />
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.CreateBasicProperties(RabbitMQ.Client.IBasicProperties@,System.Exception@)">
-            <inheritdoc />
-        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.OnConnectCompleted(jjm.one.RabbitMqClientWrapper.types.events.ConnectCompletedEventArgs)">
             <summary>
             This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.ConnectCompleted"/> envent handlers.

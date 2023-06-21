@@ -87,9 +87,15 @@ public class RmqcMessage
             {
                 return;
             }
-            
+
             // set basic properties
             _basicProperties = value;
+
+            // copy headers
+            if (BasicProperties is not null)
+            {
+                Headers = BasicProperties.Headers;
+            }
 
             // reset additional fields
             TimestampWhenReceived = null;
@@ -117,11 +123,13 @@ public class RmqcMessage
             
             // set headers
             _headers = value;
-            if (_basicProperties is not null)
+
+            // copy headers
+            if (BasicProperties is not null && Headers is not null)
             {
-                _basicProperties.Headers = _headers;
+                BasicProperties.Headers = Headers;
             }
-            
+
             // reset additional fields
             TimestampWhenReceived = null;
             TimestampWhenSend = null;
@@ -222,7 +230,18 @@ public class RmqcMessage
     /// <summary>
     /// This flag indicates whether the message was saved. (must be set by user!)
     /// </summary>
-    public bool WasSaved { get; set; }
+    public bool WasSaved
+    {
+        get => WasSaved;
+        set
+        {
+            if (value is true)
+            {
+                WasModified = false;
+            }
+        }
+
+    }
 
     #endregion
 
