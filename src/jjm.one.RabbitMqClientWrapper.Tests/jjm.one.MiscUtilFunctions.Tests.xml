@@ -416,27 +416,22 @@
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests">
             <summary>
-            This class contains the unit tests for the <see cref="!:Message"/> class.
+            This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcMessage"/> class.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_DefaultCtorTest">
             <summary>
-            Tests the default constructor of the <see cref="!:Message"/> class.
+            Tests the default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcMessage"/> class.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_CtorNullTest">
             <summary>
-            Tests the constructor of the <see cref="!:Message"/> class with <see langword="null"/> as inputs.
+            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcMessage"/> class with <see langword="null"/> as inputs.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_CtorTest">
             <summary>
-            Tests the constructor of the <see cref="!:Message"/> class.
-            </summary>
-        </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_RawBasicGetResultGetTest">
-            <summary>
-            Tests the getter of the RawBasicGetResult member.
+            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcMessage"/> class.
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.MessageTests.MessageTest_DeliveryTagGetTest">

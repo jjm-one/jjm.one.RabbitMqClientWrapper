@@ -6,7 +6,7 @@ using RabbitMQ.Client;
 namespace jjm.one.RabbitMqClientWrapper.Tests.types;
 
 /// <summary>
-/// This class contains the unit tests for the <see cref="Message"/> class.
+/// This class contains the unit tests for the <see cref="RmqcMessage"/> class.
 /// </summary>
 public class MessageTests
 {
@@ -15,7 +15,7 @@ public class MessageTests
     #region ctor tests
 
     /// <summary>
-    /// Tests the default constructor of the <see cref="Message"/> class.
+    /// Tests the default constructor of the <see cref="RmqcMessage"/> class.
     /// </summary>
     [Fact]
     public void MessageTest_DefaultCtorTest()
@@ -39,7 +39,7 @@ public class MessageTests
     }
     
     /// <summary>
-    /// Tests the constructor of the <see cref="Message"/> class with <see langword="null"/> as inputs.
+    /// Tests the constructor of the <see cref="RmqcMessage"/> class with <see langword="null"/> as inputs.
     /// </summary>
     [Fact]
     public void MessageTest_CtorNullTest()
@@ -63,7 +63,7 @@ public class MessageTests
     }
     
     /// <summary>
-    /// Tests the constructor of the <see cref="Message"/> class.
+    /// Tests the constructor of the <see cref="RmqcMessage"/> class.
     /// </summary>
     [Fact]
     public void MessageTest_CtorTest()
@@ -92,24 +92,6 @@ public class MessageTests
 
     #region public members tests
 
-    /// <summary>
-    /// Tests the getter of the RawBasicGetResult member.
-    /// </summary>
-    [Fact]
-    public void MessageTest_RawBasicGetResultGetTest()
-    {
-        // arrange
-        var bgr = new BasicGetResult(42, true, "TEST-EX", "TEST-RK", 69,
-            null, new ReadOnlyMemory<byte>());
-        var m = new RmqcMessage(bgr);
-
-        // act
-        var res = m.RawBasicGetResult;
-
-        // assert
-        res.Should().BeEquivalentTo(bgr);
-    }
-    
     /// <summary>
     /// Tests the getter of the DeliveryTag member.
     /// </summary>
@@ -233,15 +215,15 @@ public class MessageTests
     public void MessageTest_BodyGetSetTest()
     {
         // arrange
-        var b = new ReadOnlyMemory<byte>();
+        var b = Array.Empty<byte>();
         var m = new RmqcMessage(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, b));
         // act
-        var res = m.Body;
+        var res = m.BodyArray;
         
         // assert
-        res.Should().Be(b);
+        res.Should().BeEquivalentTo(b);
     }
     
     /// <summary>
@@ -251,19 +233,19 @@ public class MessageTests
     public void MessageTest_BodySetTest1()
     {
         // arrange
-        var b = new ReadOnlyMemory<byte>();
+        var b = Array.Empty<byte>();;
         var m = new RmqcMessage(
             new BasicGetResult(42, true, "TEST-EX","TEST-RK", 69,
                 null, null))
         {
             // act
-            Body = b
+            BodyArray = b
         };
 
-        var res = m.Body;
+        var res = m.BodyArray;
         // assert
-        
-        res.Should().Be(b);
+        res.Should().NotBeNull();
+        res.Should().BeEquivalentTo(b);
     }
 
     /// <summary>
@@ -273,17 +255,18 @@ public class MessageTests
     public void MessageTest_BodySetTest2()
     {
         // arrange
-        var b = new ReadOnlyMemory<byte>();
+        var b = Array.Empty<byte>();
         var m = new RmqcMessage
         {
             // act
-            Body = b
+            BodyArray = b
         };
 
-        var res = m.Body;
+        var res = m.BodyArray;
 
         // assert
-        res.Should().Be(b);
+        res.Should().NotBeNull();
+        res.Should().BeEquivalentTo(b);
     }
     
     /// <summary>
@@ -298,13 +281,13 @@ public class MessageTests
                 null, null))
         {
             // act
-            Body = null
+            BodyArray = null
         };
 
-        var res = m.Body;
+        var res = m.BodyArray;
         
         // assert
-        res.Should().NotBeNull();
+        res.Should().BeNull();
     }
     
     /// <summary>
@@ -317,13 +300,13 @@ public class MessageTests
         var m = new RmqcMessage
         {
             // act
-            Body = null
+            BodyArray = null
         };
 
-        var res = m.Body;
+        var res = m.BodyArray;
 
         // assert
-        res.Should().NotBeNull();
+        res.Should().BeNull();
     }
     
     #endregion
