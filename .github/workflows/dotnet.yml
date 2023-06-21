@@ -56,13 +56,6 @@ jobs:
       run: dotnet build --no-restore -c Release
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    #- name: Upload artifact
-    #  uses: actions/upload-artifact@v3
-    #  with:
-    #    name: release-buid
-    #    path: |
-    #      ./jjm-one_jjm.one.Microsoft.Extensions.Logging.Helpers/bin/Release/*.nupkg
-    #    retention-days: 1
   
   sonarcloud:
     name: Build and analyze with SonarCloud
@@ -125,27 +118,6 @@ jobs:
           .\..\.dotnet-coverage\dotnet-coverage\dotnet-coverage collect "dotnet test --no-build --verbosity normal" -f xml -o "coverage.xml"
           cat coverage.xml
           .\..\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-
-  #publish-nuget:
-  #  name: Publish the NuGet package
-  #  needs: [build-and-test-debug, build-and-test-release, sonarcloud, publish-doc]
-  #  if: github.ref_type == 'tag' && startsWith(github.event.ref, 'refs/tags/version-')
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #    - name: Download a single artifact
-  #      uses: actions/download-artifact@v3
-  #      with:
-  #        name: release-buid
-  #    - name: Setup dotNET
-  #      uses: actions/setup-dotnet@v3
-  #      with:
-  #        dotnet-version: 7.x
-  #    - name: Publish the package to nuget.org
-  #      run: |
-  #        ls -la
-  #    #run: dotnet nuget push */bin/Release/*.nupkg -k $NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
-  #    #env:
-  #    #  NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
 
   publish-doc:
     name: Publish Documentation
