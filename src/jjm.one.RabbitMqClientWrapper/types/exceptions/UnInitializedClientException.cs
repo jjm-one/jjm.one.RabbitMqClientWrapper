@@ -30,7 +30,7 @@ public class UnInitializedClientException : Exception
     }
     
     /// <summary>
-    /// A parameterised constructor of the <see cref="UnInitializedClientException"/> class.
+    /// A parameterized constructor of the <see cref="UnInitializedClientException"/> class.
     /// </summary>
     public UnInitializedClientException(string operation) : 
         base($"Client must be initialized and connected to perform the {operation} operation!")

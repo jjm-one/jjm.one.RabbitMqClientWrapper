@@ -5,7 +5,7 @@ namespace jjm.one.RabbitMqClientWrapper.types;
 /// <summary>
 /// This class defines the settings for a client connection to a RabbitMQ server.
 /// </summary>
-public class Settings
+public class RmqcSettings
 {
     #region private members
 
@@ -13,7 +13,7 @@ public class Settings
     private int? _port;
     private string? _username;
     private string? _password;
-    private string? _vHost;
+    private string? _virtualHost;
     private string? _exchange;
     private string? _queue;
 
@@ -66,14 +66,14 @@ public class Settings
     }
 
     /// <summary>
-    /// The vhost at the RabbitMQ server.
+    /// The virtual host at the RabbitMQ server.
     ///
     /// default value: /
     /// </summary>
-    public string VHost
+    public string VirtualHost
     {
-        get => _vHost ?? "/";
-        set => _vHost = value;
+        get => _virtualHost ?? "/";
+        set => _virtualHost = value;
     }
 
     /// <summary>
@@ -100,26 +100,40 @@ public class Settings
 
     #endregion
 
-    #region ctor
+    #region ctor's
 
     /// <summary>
-    /// The parameterised constructor of the <see cref="Settings"/> class.
+    /// The default constructor of the <see cref="RmqcSettings"/> class.
+    /// </summary>
+    public RmqcSettings()
+    {
+        _hostname = null;
+        _port = null;
+        _username = null;
+        _password = null;
+        _virtualHost = null;
+        _exchange = null;
+        _queue = null;
+    }
+
+    /// <summary>
+    /// The parameterized constructor of the <see cref="RmqcSettings"/> class.
     /// </summary>
     /// <param name="hostname">The hostname of the RabbitMQ server.</param>
     /// <param name="port">The port of the RabbitMQ server.</param>
     /// <param name="username">The username of a RabbitMQ server user.</param>
     /// <param name="password">The password of a RabbitMQ server user.</param>
-    /// <param name="vHost">The vhost at the RabbitMQ server.</param>
+    /// <param name="virtualHost">The virtual host at the RabbitMQ server.</param>
     /// <param name="exchange">The exchange at the RabbitMQ server.</param>
     /// <param name="queue">The queue at the RabbitMQ server.</param>
-    public Settings(string? hostname = null , int? port = null, string? username = null, string? password = null,
-        string? vHost = null, string? exchange = null, string? queue = null)
+    public RmqcSettings(string? hostname = null , int? port = null, string? username = null, string? password = null,
+        string? virtualHost = null, string? exchange = null, string? queue = null)
     {
         _hostname = hostname;
         _port = port;
         _username = username;
         _password = password;
-        _vHost = vHost;
+        _virtualHost = virtualHost;
         _exchange = exchange;
         _queue = queue;
     }
@@ -129,7 +143,7 @@ public class Settings
     #region public overide
 
     /// <summary>
-    /// Determines whether the specified object is equal to the current <see cref="Settings"/> object.
+    /// Determines whether the specified object is equal to the current <see cref="RmqcSettings"/> object.
     /// </summary>
     /// <param name="obj">The specified object.</param>
     /// <returns><see langword="true"/> if the specified object is equal to the current object, otherwise, <see langword="false"/>.</returns>
@@ -142,7 +156,7 @@ public class Settings
         }
         else
         {
-            var s = (Settings)obj;
+            var s = (RmqcSettings)obj;
 
             var res = true;
 
@@ -150,7 +164,7 @@ public class Settings
             res &= Port.Equals(s.Port);
             res &= Username.Equals(s.Username);
             res &= Password.Equals(s.Password);
-            res &= VHost.Equals(s.VHost);
+            res &= VirtualHost.Equals(s.VirtualHost);
             res &= Exchange.Equals(s.Exchange);
             res &= Queue.Equals(s.Queue);
             
@@ -159,9 +173,9 @@ public class Settings
     }
 
     /// <summary>
-    /// Serves as the default hash function for the <see cref="Settings"/> class.
+    /// Serves as the default hash function for the <see cref="RmqcSettings"/> class.
     /// </summary>
-    /// <returns>A hash code for the current <see cref="Settings"/> object.</returns>
+    /// <returns>A hash code for the current <see cref="RmqcSettings"/> object.</returns>
     public override int GetHashCode()
     {
         var hashCode = 655511358;
@@ -169,7 +183,7 @@ public class Settings
         hashCode = hashCode * -1521134295 + Port.GetHashCode();
         hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Username);
         hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Password);
-        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(VHost);
+        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(VirtualHost);
         hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Exchange);
         hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Queue);
         return hashCode;

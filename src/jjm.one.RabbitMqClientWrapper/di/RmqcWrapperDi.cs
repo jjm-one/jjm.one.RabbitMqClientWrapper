@@ -16,7 +16,7 @@ public static class RmqcWrapperDi
     /// <param name="services"></param>
     /// <param name="settings"></param>
     /// <returns></returns>
-    public static IServiceCollection AddRmqcWrapper(this IServiceCollection services, Settings settings)
+    public static IServiceCollection AddRmqcWrapper(this IServiceCollection services, RmqcSettings settings)
     {
         services.AddRmqcCore(settings);
         services.AddScoped<IRmqcWrapper>(sp => ActivatorUtilities.CreateInstance<RmqcWrapper>(sp));

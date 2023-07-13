@@ -15,7 +15,7 @@ internal static class RmqcCoreDi
     /// <param name="services"></param>
     /// <param name="settings"></param>
     /// <returns></returns>
-	public static IServiceCollection AddRmqcCore(this IServiceCollection services, Settings settings)
+	public static IServiceCollection AddRmqcCore(this IServiceCollection services, RmqcSettings settings)
 	{
 		services.AddSingleton(settings);
 		services.AddScoped<IRmqcCore>(sp => ActivatorUtilities.CreateInstance<RmqcCore>(sp));
