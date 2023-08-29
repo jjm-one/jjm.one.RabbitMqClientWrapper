@@ -81,7 +81,7 @@ public class RmqcWrapper : IRmqcWrapper
         _core.WriteMsgCompleted += OnWriteMsgCompleted;
         _core.ReadMsgCompleted += OnReadMsgCompleted;
         _core.AckMsgCompleted += OnAckMsgCompleted;
-        _core.NackMsgComplete += OnNackMsgComplete;
+        _core.NAckMsgComplete += OnNAckMsgComplete;
         _core.QueuedMsgsCompleted += OnQueuedMsgsCompleted;
         _core.ConnectionStateChanged += OnConnectionStateChanged;
         _core.ErrorOccurred += OnErrorOccurred;
@@ -128,7 +128,7 @@ public class RmqcWrapper : IRmqcWrapper
     public event EventHandler<AckMsgCompletedEventArgs>? AckMsgCompleted;
     
     /// <inheritdoc />
-    public event EventHandler<NackMsgCompletedEventArgs>? NackMsgComplete;
+    public event EventHandler<NackMsgCompletedEventArgs>? NAckMsgComplete;
     
     /// <inheritdoc />
     public event EventHandler<QueuedMsgsCompletedEventArgs>? QueuedMsgsCompleted;
@@ -436,17 +436,17 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    /// This method invokes the <see cref="NackMsgComplete"/> envent handlers.
+    /// This method invokes the <see cref="NAckMsgComplete"/> envent handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
-    private void OnNackMsgComplete(object? o, NackMsgCompletedEventArgs e)
+    private void OnNAckMsgComplete(object? o, NackMsgCompletedEventArgs e)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         // invoke event handlers
-        NackMsgComplete?.Invoke(o, e);
+        NAckMsgComplete?.Invoke(o, e);
     }
 
     /// <summary>

@@ -196,7 +196,7 @@ internal class RmqcCore : IRmqcCore
     public event EventHandler<AckMsgCompletedEventArgs>? AckMsgCompleted;
 
     /// <inheritdoc />
-    public event EventHandler<NackMsgCompletedEventArgs>? NackMsgComplete;
+    public event EventHandler<NackMsgCompletedEventArgs>? NAckMsgComplete;
 
     /// <inheritdoc />
     public event EventHandler<QueuedMsgsCompletedEventArgs>? QueuedMsgsCompleted;
@@ -762,7 +762,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    /// This method invokes the <see cref="NackMsgComplete"/> envent handlers.
+    /// This method invokes the <see cref="NAckMsgComplete"/> envent handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnNackMsgComplete(NackMsgCompletedEventArgs e)
@@ -771,7 +771,7 @@ internal class RmqcCore : IRmqcCore
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
         // invoke event handlers
-        NackMsgComplete?.Invoke(this, e);
+        NAckMsgComplete?.Invoke(this, e);
     }
 
     /// <summary>

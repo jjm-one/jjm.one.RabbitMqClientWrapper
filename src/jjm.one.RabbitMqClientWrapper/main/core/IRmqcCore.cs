@@ -131,7 +131,7 @@ public interface IRmqcCore
     /// <summary>
     /// This events gets invoked when the nack msg function finishes.
     /// </summary>
-    public event EventHandler<NackMsgCompletedEventArgs> NackMsgComplete;
+    public event EventHandler<NackMsgCompletedEventArgs> NAckMsgComplete;
 
     /// <summary>
     /// This events gets invoked when the queued msg's function finishes.
