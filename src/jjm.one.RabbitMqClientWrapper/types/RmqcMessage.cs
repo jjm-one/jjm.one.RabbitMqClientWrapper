@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
+using jjm.one.RabbitMqClientWrapper.types.events;
 using RabbitMQ.Client;
 
 namespace jjm.one.RabbitMqClientWrapper.types;
@@ -22,8 +23,8 @@ public class RmqcMessage
     private IBasicProperties? _basicProperties;
     private IDictionary<string, object>? _headers;
     private byte[]? _body;
-    private bool _wasModified = false;
-    private bool _wasSaved = true;
+    private bool _wasModified;
+    private bool _wasSaved;
 
     #endregion
 
@@ -72,7 +73,6 @@ public class RmqcMessage
             TimestampWhenNAcked = null;
             WasNAckedWithRequeue = false;
             WasModified = true;
-            WasSaved = false;
         }
     }
 
@@ -106,7 +106,6 @@ public class RmqcMessage
             TimestampWhenNAcked = null;
             WasNAckedWithRequeue = false;
             WasModified = true;
-            WasSaved = false;
         }
     }
 
@@ -139,7 +138,6 @@ public class RmqcMessage
             TimestampWhenNAcked = null;
             WasNAckedWithRequeue = false;
             WasModified = true;
-            WasSaved = false;
         }
     }
 
@@ -166,7 +164,6 @@ public class RmqcMessage
             TimestampWhenNAcked = null;
             WasNAckedWithRequeue = false;
             WasModified = true;
-            WasSaved = false;
         }
     }
 
@@ -231,12 +228,14 @@ public class RmqcMessage
         get => _wasModified;
         internal set
         {
-            if (value is true)
+            if (value)
             {
                 WasSaved = false;
             }
 
             _wasModified = value;
+
+            OnChanged(new List<string>{"This information is currently not supported!"});
         }
     }
 
@@ -248,7 +247,7 @@ public class RmqcMessage
         get => _wasSaved;
         set
         {
-            if (value is true)
+            if (value)
             {
                 WasModified = false;
             }
@@ -282,6 +281,32 @@ public class RmqcMessage
         _basicProperties = rawMessage?.BasicProperties;
         _headers = rawMessage?.BasicProperties?.Headers;
         _body = rawMessage?.Body.ToArray();
+        //TimestampWhenReceived = rawMessage.BasicProperties.Timestamp.UnixTime @ToDo: fix timestamp
+        _wasModified = false;
+        _wasSaved = false;
+    }
+
+    #endregion
+
+    #region public events
+
+    /// <summary>
+    /// This events gets invoked when the message got changed.
+    /// </summary>
+    public event EventHandler<MsgChangedEventArgs>? Changed;
+
+    #endregion
+
+    #region private event invokation
+
+    /// <summary>
+    /// This method invokes the <see cref="Changed"/> envent handlers.
+    /// </summary>
+    /// <param name="changedMembers"></param>
+    private void OnChanged(List<string> changedMembers)
+    {
+        // invoke event handlers
+        Changed?.Invoke(this, new MsgChangedEventArgs(changedMembers));
     }
 
     #endregion

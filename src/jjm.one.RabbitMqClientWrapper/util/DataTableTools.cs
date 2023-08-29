@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
+using System.Reflection.Emit;
 using RabbitMQ.Client;
 using System.Text;
 
@@ -50,7 +52,7 @@ namespace jjm.one.RabbitMqClientWrapper.util
                 var newRow = res.NewRow();
                 newRow["Property"] = propertyInfo.Name;
                 newRow["Value"] = propertyInfo.GetValue(message);
-                newRow["ReadOnly"] = propertyInfos.IsReadOnly;
+                newRow["ReadOnly"] = !propertyInfo.CanWrite;
                 newRow["Type"] = ogType;
                 res.Rows.Add(newRow);
             }
@@ -69,6 +71,7 @@ namespace jjm.one.RabbitMqClientWrapper.util
 
             res.Columns.Add("Property", typeof(string));
             res.Columns.Add("Value", typeof(string));
+            res.Columns.Add("ReadOnly", typeof(bool));
             res.Columns.Add("Type", typeof(Type));
 
             var propertyInfos = basicProperties.GetType().GetProperties();
@@ -90,6 +93,7 @@ namespace jjm.one.RabbitMqClientWrapper.util
                 var newRow = res.NewRow();
                 newRow["Property"] = propertyInfo.Name;
                 newRow["Value"] = propertyInfo.GetValue(basicProperties);
+                newRow["ReadOnly"] = !propertyInfo.CanWrite;
                 newRow["Type"] = ogType;
                 res.Rows.Add(newRow);
             }
@@ -299,7 +303,26 @@ namespace jjm.one.RabbitMqClientWrapper.util
                 {
                     if (row["Property"].Equals(propertyInfo.Name))
                     {
-                        propertyInfo.SetValue(message, row["Value"]);
+                        if (propertyInfo.CanWrite)
+                        {
+                            if (type != row["Value"].GetType() && row["Value"] is string)
+                            {
+                                if (type == typeof(bool))
+                                {
+                                    var res = bool.TryParse((string)row["Value"], out var value);
+                                    if (res) propertyInfo.SetValue(message, value);
+                                }
+                                else if (type == typeof(ulong))
+                                {
+                                    var res = ulong.TryParse((string)row["Value"], out var value);
+                                    if (res) propertyInfo.SetValue(message, value);
+                                }
+                            }
+                            else {
+                                propertyInfo.SetValue(message, row["Value"] is DBNull ? null : row["Value"]);
+                            }
+                        }
+                        break;
                     }
                 }
             }
@@ -332,7 +355,10 @@ namespace jjm.one.RabbitMqClientWrapper.util
                     type = Nullable.GetUnderlyingType(type);
                 }
 
-                if (type == typeof(IDictionary<string, object>))
+                if (type != typeof(bool) &&
+                    type != typeof(ushort) &&
+                    type != typeof(string) &&
+                    type != typeof(AmqpTimestamp))
                 {
                     continue;
                 }
@@ -341,7 +367,27 @@ namespace jjm.one.RabbitMqClientWrapper.util
                 {
                     if (row["Property"].Equals(propertyInfo.Name))
                     {
-                        propertyInfo.SetValue(message.BasicProperties, row["Value"]);
+                        if (propertyInfo.CanWrite)
+                        {
+                            if (type != row["Value"].GetType() && row["Value"] is string)
+                            {
+                                if (type == typeof(bool))
+                                {
+                                    var res = bool.TryParse((string)row["Value"], out var value);
+                                    if (res) propertyInfo.SetValue(message.BasicProperties, value);
+                                }
+                                else if (type == typeof(ushort))
+                                {
+                                    var res = ushort.TryParse((string)row["Value"], out var value);
+                                    if (res) propertyInfo.SetValue(message.BasicProperties, value);
+                                }
+                            }
+                            else
+                            {
+                                propertyInfo.SetValue(message.BasicProperties, row["Value"] is DBNull ? null : row["Value"]);
+                            }
+                        }
+                        break;
                     }
                 }
             }
@@ -353,7 +399,8 @@ namespace jjm.one.RabbitMqClientWrapper.util
         {
             // data table check
             if (!headers.Columns.Contains("Property") ||
-                !headers.Columns.Contains("Value"))
+                !headers.Columns.Contains("Value") ||
+                !headers.Columns.Contains("Type") )
             {
                 return false;
             }
@@ -364,7 +411,14 @@ namespace jjm.one.RabbitMqClientWrapper.util
             }
             foreach (DataRow row in headers.Rows)
             {
-                message.Headers.Add(row["Property"].ToString() ?? string.Empty, row["Value"]);
+                var p = row["Property"].ToString();
+                var v = row["Value"];
+                if (string.IsNullOrEmpty(p) || v is DBNull)
+                {
+                    continue;
+                }
+
+                message.Headers[p] = v;
             }
 
             return true;

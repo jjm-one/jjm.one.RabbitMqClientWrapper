@@ -144,7 +144,7 @@
             This events gets invoked when the ack msg function finishes.
             </summary>
         </member>
-        <member name="E:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore.NackMsgComplete">
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.core.IRmqcCore.NAckMsgComplete">
             <summary>
             This events gets invoked when the nack msg function finishes.
             </summary>
@@ -212,7 +212,7 @@
         <member name="E:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.AckMsgCompleted">
             <inheritdoc />
         </member>
-        <member name="E:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.NackMsgComplete">
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.NAckMsgComplete">
             <inheritdoc />
         </member>
         <member name="E:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.QueuedMsgsCompleted">
@@ -286,7 +286,7 @@
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.OnNackMsgComplete(jjm.one.RabbitMqClientWrapper.types.events.NackMsgCompletedEventArgs)">
             <summary>
-            This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.NackMsgComplete"/> envent handlers.
+            This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore.NAckMsgComplete"/> envent handlers.
             </summary>
             <param name="e"></param>
         </member>
@@ -434,7 +434,7 @@
         <member name="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.AckMsgCompleted">
             <inheritdoc />
         </member>
-        <member name="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.NackMsgComplete">
+        <member name="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.NAckMsgComplete">
             <inheritdoc />
         </member>
         <member name="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.QueuedMsgsCompleted">
@@ -541,9 +541,9 @@
             <param name="o"></param>
             <param name="e"></param>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.OnNackMsgComplete(System.Object,jjm.one.RabbitMqClientWrapper.types.events.NackMsgCompletedEventArgs)">
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.OnNAckMsgComplete(System.Object,jjm.one.RabbitMqClientWrapper.types.events.NackMsgCompletedEventArgs)">
             <summary>
-            This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.NackMsgComplete"/> envent handlers.
+            This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.NAckMsgComplete"/> envent handlers.
             </summary>
             <param name="o"></param>
             <param name="e"></param>
@@ -696,6 +696,22 @@
             The default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.events.ErrorOccurredEventArgs"/> class.
             </summary>
             <param name="exception"></param>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.types.events.MsgChangedEventArgs">
+            <summary>
+            This class represents the event args for a message changed event.
+            </summary>
+        </member>
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.events.MsgChangedEventArgs.ChangedMembers">
+            <summary>
+            The list of the names of all changed members.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.events.MsgChangedEventArgs.#ctor(System.Collections.Generic.List{System.String})">
+            <summary>
+            The default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.events.MsgChangedEventArgs"/> class.
+            </summary>
+            <param name="changedMembers"></param>
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.types.events.NackMsgCompletedEventArgs">
             <summary>
@@ -1048,6 +1064,17 @@
             The additional parameterized constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcMessage"/> class.
             </summary>
             <param name="rawMessage"></param>
+        </member>
+        <member name="E:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.Changed">
+            <summary>
+            This events gets invoked when the message got changed.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.OnChanged(System.Collections.Generic.List{System.String})">
+            <summary>
+            This method invokes the <see cref="E:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.Changed"/> envent handlers.
+            </summary>
+            <param name="changedMembers"></param>
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.types.RmqcSettings">
             <summary>
