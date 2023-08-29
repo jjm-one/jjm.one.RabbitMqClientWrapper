@@ -360,9 +360,9 @@
             <param name="message"></param>
             <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.NackMsg(jjm.one.RabbitMqClientWrapper.types.RmqcMessage@,System.Boolean)">
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.IRmqcWrapper.NAckMsg(jjm.one.RabbitMqClientWrapper.types.RmqcMessage@,System.Boolean)">
             <summary>
-            Nack a received <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcMessage"/>.
+            NAck a received <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcMessage"/>.
             </summary>
             <param name="message"></param>
             <param name="requeue"></param>
@@ -488,7 +488,7 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.AckMsg(jjm.one.RabbitMqClientWrapper.types.RmqcMessage@,System.Exception@)">
             <inheritdoc />
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.NackMsg(jjm.one.RabbitMqClientWrapper.types.RmqcMessage@,System.Boolean)">
+        <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.NAckMsg(jjm.one.RabbitMqClientWrapper.types.RmqcMessage@,System.Boolean)">
             <inheritdoc />
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.main.RmqcWrapper.NackMsg(jjm.one.RabbitMqClientWrapper.types.RmqcMessage@,System.Boolean,System.Exception@)">
@@ -1013,17 +1013,17 @@
             The Timestamp when the message was send.
             </summary>
         </member>
-        <member name="P:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.WasNacked">
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.WasNAcked">
             <summary>
             This flag indicates whether the message was nacked via the client or not.
             </summary>
         </member>
-        <member name="P:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.WasNackedWithRequeue">
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.WasNAckedWithRequeue">
             <summary>
             This flag indicates whether the message was nacked  with or without requeue via the client or not.
             </summary>
         </member>
-        <member name="P:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.TimestampWhenNacked">
+        <member name="P:jjm.one.RabbitMqClientWrapper.types.RmqcMessage.TimestampWhenNAcked">
             <summary>
             The Timestamp when the message was send.
             </summary>
@@ -1132,6 +1132,94 @@
             Serves as the default hash function for the <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcSettings"/> class.
             </summary>
             <returns>A hash code for the current <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcSettings"/> object.</returns>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.util.DataTableTools">
+            <summary>
+            This static class contains functions and extensions to convert a <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcMessage"/> and it's elements to a <see cref="T:System.Data.DataTable"/> and wise versa.
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.util.DataTableTools.ToDataTable(jjm.one.RabbitMqClientWrapper.types.RmqcMessage)">
+            <summary>
+            This extension converts a <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcMessage"/> into a <see cref="T:System.Data.DataTable"/>.
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.util.DataTableTools.ToDataTable(RabbitMQ.Client.IBasicProperties)">
+            <summary>
+            This extension converts a <see cref="T:RabbitMQ.Client.IBasicProperties"/> into a <see cref="T:System.Data.DataTable"/>.
+            </summary>
+            <param name="basicProperties"></param>
+            <returns></returns>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.util.DataTableTools.ToDataTable(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            This extension converts a <see cref="T:System.Collections.Generic.IDictionary`2"/> into a <see cref="T:System.Data.DataTable"/>.
+            </summary>
+            <param name="dict"></param>
+            <returns></returns>
+        </member>
+        <member name="T:jjm.one.RabbitMqClientWrapper.util.DataTableTools.DataTablesToMessageConversionStatus">
+            <summary>
+            This enum represents the conversion status when converting <see cref="T:System.Data.DataTable"/> to <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcMessage"/>.
+            </summary>
+        </member>
+        <member name="F:jjm.one.RabbitMqClientWrapper.util.DataTableTools.DataTablesToMessageConversionStatus.None">
+            <summary>
+            Status = None
+            </summary>
+        </member>
+        <member name="F:jjm.one.RabbitMqClientWrapper.util.DataTableTools.DataTablesToMessageConversionStatus.Ok">
+            <summary>
+            Status = ok
+            </summary>
+        </member>
+        <member name="F:jjm.one.RabbitMqClientWrapper.util.DataTableTools.DataTablesToMessageConversionStatus.OgMsgNull">
+            <summary>
+            Status = origin message is null
+            </summary>
+        </member>
+        <member name="F:jjm.one.RabbitMqClientWrapper.util.DataTableTools.DataTablesToMessageConversionStatus.OgBasicPropNull">
+            <summary>
+            Status = origin basic properties are null
+            </summary>
+        </member>
+        <member name="F:jjm.one.RabbitMqClientWrapper.util.DataTableTools.DataTablesToMessageConversionStatus.OgHeadersNull">
+            <summary>
+            Status = origin headers are null
+            </summary>
+        </member>
+        <member name="F:jjm.one.RabbitMqClientWrapper.util.DataTableTools.DataTablesToMessageConversionStatus.Error">
+            <summary>
+            Status = error
+            </summary>
+        </member>
+        <member name="F:jjm.one.RabbitMqClientWrapper.util.DataTableTools.DataTablesToMessageConversionStatus.Warning">
+            <summary>
+            status = warning
+            </summary>
+        </member>
+        <member name="F:jjm.one.RabbitMqClientWrapper.util.DataTableTools.DataTablesToMessageConversionStatus.MissFormattedMetaData">
+            <summary>
+            Status = miss formatted meta data
+            </summary>
+        </member>
+        <member name="F:jjm.one.RabbitMqClientWrapper.util.DataTableTools.DataTablesToMessageConversionStatus.MissFormattedBasicProps">
+            <summary>
+            Status = miss formatted basic properties
+            </summary>
+        </member>
+        <member name="F:jjm.one.RabbitMqClientWrapper.util.DataTableTools.DataTablesToMessageConversionStatus.MissFormattedHeaders">
+            <summary>
+            Status = miss formatted headers
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.util.DataTableTools.Failed(jjm.one.RabbitMqClientWrapper.util.DataTableTools.DataTablesToMessageConversionStatus)">
+            <summary>
+            This function checks whether the conversion failed or not based on the <see cref="T:jjm.one.RabbitMqClientWrapper.util.DataTableTools.DataTablesToMessageConversionStatus"/>.
+            </summary>
+            <param name="state"></param>
+            <returns></returns>
         </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.util.TimeSpanTools">
             <summary>

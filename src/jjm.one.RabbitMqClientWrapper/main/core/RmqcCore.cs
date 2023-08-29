@@ -569,8 +569,8 @@ internal class RmqcCore : IRmqcCore
 
             // send nack
             _channel?.BasicNack(message.DeliveryTag, false, requeue);
-            message.TimestampWhenNacked = DateTime.Now;
-            message.WasNackedWithRequeue = requeue;
+            message.TimestampWhenNAcked = DateTime.Now;
+            message.WasNAckedWithRequeue = requeue;
         }
         catch (Exception exc)
         {

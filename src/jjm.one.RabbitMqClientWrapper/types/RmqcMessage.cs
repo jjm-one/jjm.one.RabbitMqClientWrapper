@@ -69,8 +69,8 @@ public class RmqcMessage
             TimestampWhenReceived = null;
             TimestampWhenSend = null;
             TimestampWhenAcked = null;
-            TimestampWhenNacked = null;
-            WasNackedWithRequeue = false;
+            TimestampWhenNAcked = null;
+            WasNAckedWithRequeue = false;
             WasModified = true;
             WasSaved = false;
         }
@@ -103,8 +103,8 @@ public class RmqcMessage
             TimestampWhenReceived = null;
             TimestampWhenSend = null;
             TimestampWhenAcked = null;
-            TimestampWhenNacked = null;
-            WasNackedWithRequeue = false;
+            TimestampWhenNAcked = null;
+            WasNAckedWithRequeue = false;
             WasModified = true;
             WasSaved = false;
         }
@@ -136,8 +136,8 @@ public class RmqcMessage
             TimestampWhenReceived = null;
             TimestampWhenSend = null;
             TimestampWhenAcked = null;
-            TimestampWhenNacked = null;
-            WasNackedWithRequeue = false;
+            TimestampWhenNAcked = null;
+            WasNAckedWithRequeue = false;
             WasModified = true;
             WasSaved = false;
         }
@@ -163,8 +163,8 @@ public class RmqcMessage
             TimestampWhenReceived = null;
             TimestampWhenSend = null;
             TimestampWhenAcked = null;
-            TimestampWhenNacked = null;
-            WasNackedWithRequeue = false;
+            TimestampWhenNAcked = null;
+            WasNAckedWithRequeue = false;
             WasModified = true;
             WasSaved = false;
         }
@@ -212,17 +212,17 @@ public class RmqcMessage
     /// <summary>
     /// This flag indicates whether the message was nacked via the client or not.
     /// </summary>
-    public bool WasNacked => TimestampWhenNacked.HasValue;
+    public bool WasNAcked => TimestampWhenNAcked.HasValue;
 
     /// <summary>
     /// This flag indicates whether the message was nacked  with or without requeue via the client or not.
     /// </summary>
-    public bool WasNackedWithRequeue { get; internal set; }
+    public bool WasNAckedWithRequeue { get; internal set; }
 
     /// <summary>
     /// The Timestamp when the message was send.
     /// </summary>
-    public DateTime? TimestampWhenNacked { get; internal set; }
+    public DateTime? TimestampWhenNAcked { get; internal set; }
 
     /// <summary>
     /// This flag indicates whether the message was modified.
