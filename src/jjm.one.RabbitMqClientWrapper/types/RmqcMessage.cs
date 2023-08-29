@@ -14,14 +14,16 @@ public class RmqcMessage
 {
     #region private members
 
-    private ulong? _deliveryTag;
-    private bool? _redelivered;
-    private string? _exchange;
+    private readonly ulong? _deliveryTag;
+    private readonly bool? _redelivered;
+    private readonly string? _exchange;
     private string? _routingKey;
-    private uint? _messageCount;
+    private readonly uint? _messageCount;
     private IBasicProperties? _basicProperties;
     private IDictionary<string, object>? _headers;
     private byte[]? _body;
+    private bool _wasModified = false;
+    private bool _wasSaved = true;
 
     #endregion
 
@@ -225,22 +227,34 @@ public class RmqcMessage
     /// <summary>
     /// This flag indicates whether the message was modified.
     /// </summary>
-    public bool WasModified { get; internal set; }
+    public bool WasModified {
+        get => _wasModified;
+        internal set
+        {
+            if (value is true)
+            {
+                WasSaved = false;
+            }
+
+            _wasModified = value;
+        }
+    }
 
     /// <summary>
     /// This flag indicates whether the message was saved. (must be set by user!)
     /// </summary>
     public bool WasSaved
     {
-        get => WasSaved;
+        get => _wasSaved;
         set
         {
             if (value is true)
             {
                 WasModified = false;
             }
-        }
 
+            _wasSaved = value;
+        }
     }
 
     #endregion
@@ -269,12 +283,6 @@ public class RmqcMessage
         _headers = rawMessage?.BasicProperties?.Headers;
         _body = rawMessage?.Body.ToArray();
     }
-
-    #endregion
-
-    #region public methods
-
-    
 
     #endregion
 }
