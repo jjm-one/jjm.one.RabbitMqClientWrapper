@@ -3,13 +3,22 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using RabbitMQ.Client;
+using System.Text;
 
 namespace jjm.one.RabbitMqClientWrapper.util
 {
+    /// <summary>
+    /// This static class contains functions and extensions to convert a <see cref="RmqcMessage"/> and it's elements to a <see cref="DataTable"/> and wise versa.
+    /// </summary>
     public static class DataTableTools
     {
         #region public extension functions
 
+        /// <summary>
+        /// This extension converts a <see cref="RmqcMessage"/> into a <see cref="DataTable"/>.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public static DataTable ToDataTable(this RmqcMessage message)
         {
             var res = new DataTable();
@@ -49,6 +58,11 @@ namespace jjm.one.RabbitMqClientWrapper.util
             return res;
         }
 
+        /// <summary>
+        /// This extension converts a <see cref="IBasicProperties"/> into a <see cref="DataTable"/>.
+        /// </summary>
+        /// <param name="basicProperties"></param>
+        /// <returns></returns>
         public static DataTable ToDataTable(this IBasicProperties basicProperties)
         {
             var res = new DataTable();
@@ -83,18 +97,44 @@ namespace jjm.one.RabbitMqClientWrapper.util
             return res;
         }
 
+        /// <summary>
+        /// This extension converts a <see cref="IDictionary{TKey,TValue}"/> into a <see cref="DataTable"/>.
+        /// </summary>
+        /// <param name="dict"></param>
+        /// <returns></returns>
         public static DataTable ToDataTable(this IDictionary<string, object> dict)
         {
             var res = new DataTable();
 
             res.Columns.Add("Property", typeof(string));
             res.Columns.Add("Value", typeof(string));
+            res.Columns.Add("Type", typeof(Type));
 
             foreach (var entry in dict)
             {
                 var newRow = res.NewRow();
                 newRow["Property"] = entry.Key;
-                newRow["Value"] = entry.Value;
+
+                switch (entry.Value)
+                {
+                    case bool b:
+                        newRow["Value"] = b;
+                        newRow["Type"] = typeof(bool);
+                        break;
+                    case long l:
+                        newRow["Value"] = l;
+                        newRow["Type"] = typeof(long);
+                        break;
+                    case byte[] bytes:
+                        newRow["Value"] = Encoding.UTF8.GetString(bytes);
+                        newRow["Type"] = typeof(string);
+                        break;
+                    default:
+                        newRow["Value"] = "NOT SUPPORTED TYPE!";
+                        newRow["Type"] = entry.Value.GetType();
+                        break;
+                }
+
                 res.Rows.Add(newRow);
             }
 
@@ -136,19 +176,19 @@ namespace jjm.one.RabbitMqClientWrapper.util
             if (!UpdateMetaDataInMessage(ref message, metadata))
             {
                 res |= DataTablesToMessageConversionStatus.Error;
-                res |= DataTablesToMessageConversionStatus.MissformedMetaData;
+                res |= DataTablesToMessageConversionStatus.MissFormattedMetaData;
             }
 
             if (message.BasicProperties is not null && !UpdateBasicPropsInMessage(ref message, basicProperties))
             {
                 res |= DataTablesToMessageConversionStatus.Warning;
-                res |= DataTablesToMessageConversionStatus.MissformedBasicProps;
+                res |= DataTablesToMessageConversionStatus.MissFormattedBasicProps;
             }
 
             if (!UpdateHeadersInMessage(ref message, headers))
             {
                 res |= DataTablesToMessageConversionStatus.Error;
-                res |= DataTablesToMessageConversionStatus.MissformedHeaders;
+                res |= DataTablesToMessageConversionStatus.MissFormattedHeaders;
             }
             
             // fill data end ------------------------------------------------------
@@ -160,28 +200,66 @@ namespace jjm.one.RabbitMqClientWrapper.util
 
         #region public enunms
 
+        /// <summary>
+        /// This enum represents the conversion status when converting <see cref="DataTable"/> to <see cref="RmqcMessage"/>.
+        /// </summary>
         [Flags]
         public enum DataTablesToMessageConversionStatus : ushort
         {
+            /// <summary>
+            /// Status = None
+            /// </summary>
             None = 0,
+            /// <summary>
+            /// Status = ok
+            /// </summary>
             Ok = 1 << 0,
+            /// <summary>
+            /// Status = origin message is null
+            /// </summary>
             OgMsgNull = 1 << 1,
+            /// <summary>
+            /// Status = origin basic properties are null
+            /// </summary>
             OgBasicPropNull = 1 << 2,
+            /// <summary>
+            /// Status = origin headers are null
+            /// </summary>
             OgHeadersNull = 1 << 3,
+            /// <summary>
+            /// Status = error
+            /// </summary>
             Error = 1 << 4,
+            /// <summary>
+            /// status = warning
+            /// </summary>
             Warning = 1 << 5,
-            MissformedMetaData = 1 << 6,
-            MissformedBasicProps = 1 << 7,
-            MissformedHeaders = 1 << 8,
+            /// <summary>
+            /// Status = miss formatted meta data
+            /// </summary>
+            MissFormattedMetaData = 1 << 6,
+            /// <summary>
+            /// Status = miss formatted basic properties
+            /// </summary>
+            MissFormattedBasicProps = 1 << 7,
+            /// <summary>
+            /// Status = miss formatted headers
+            /// </summary>
+            MissFormattedHeaders = 1 << 8,
 
         }
 
+        /// <summary>
+        /// This function checks whether the conversion failed or not based on the <see cref="DataTablesToMessageConversionStatus"/>.
+        /// </summary>
+        /// <param name="state"></param>
+        /// <returns></returns>
         public static bool Failed(this DataTablesToMessageConversionStatus state)
         {
             return (state & DataTablesToMessageConversionStatus.Error) > 0 ||
-                   (state & DataTablesToMessageConversionStatus.MissformedMetaData) > 0 ||
-                   (state & DataTablesToMessageConversionStatus.MissformedBasicProps) > 0 ||
-                   (state & DataTablesToMessageConversionStatus.MissformedHeaders) > 0;
+                   (state & DataTablesToMessageConversionStatus.MissFormattedMetaData) > 0 ||
+                   (state & DataTablesToMessageConversionStatus.MissFormattedBasicProps) > 0 ||
+                   (state & DataTablesToMessageConversionStatus.MissFormattedHeaders) > 0;
         }
 
         #endregion
@@ -286,7 +364,7 @@ namespace jjm.one.RabbitMqClientWrapper.util
             }
             foreach (DataRow row in headers.Rows)
             {
-                message.Headers.Add(row["Property"].ToString(), row["Value"]);
+                message.Headers.Add(row["Property"].ToString() ?? string.Empty, row["Value"]);
             }
 
             return true;
