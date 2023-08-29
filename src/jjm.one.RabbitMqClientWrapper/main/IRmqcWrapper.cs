@@ -60,12 +60,12 @@ public interface IRmqcWrapper : IRmqcCore
     public bool AckMsg(ref RmqcMessage message);
 
     /// <summary>
-    /// Nack a received <see cref="RmqcMessage"/>.
+    /// NAck a received <see cref="RmqcMessage"/>.
     /// </summary>
     /// <param name="message"></param>
     /// <param name="requeue"></param>
     /// <returns><see langword="true"/> on success, else <see langword="false"/>.</returns>
-    public bool NackMsg(ref RmqcMessage message, bool requeue);
+    public bool NAckMsg(ref RmqcMessage message, bool requeue);
 
     /// <summary>
     /// Wait until the server confirms the written <see cref="RmqcMessage"/>.

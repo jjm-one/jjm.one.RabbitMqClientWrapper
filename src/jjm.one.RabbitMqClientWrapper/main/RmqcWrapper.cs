@@ -305,7 +305,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <inheritdoc />
-    public bool NackMsg(ref RmqcMessage message, bool requeue)
+    public bool NAckMsg(ref RmqcMessage message, bool requeue)
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
