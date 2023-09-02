@@ -1,4 +1,5 @@
 ﻿using System;
+using Castle.Core.Resource;
 using FluentAssertions;
 using jjm.one.RabbitMqClientWrapper.main;
 using jjm.one.RabbitMqClientWrapper.main.core;
@@ -553,10 +554,11 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.NackMsg(ref m, false, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.NackMsg(ref m, false); 
+        var res = _sut.NackMsg(ref m, false, out var resExc); 
         
         // assert
         res.Should().BeTrue();
+        resExc.Should().BeNull();
         _rmqcCoreMock.Verify(x => 
             x.NackMsg(ref It.Ref<RmqcMessage>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
     }
@@ -592,13 +594,15 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.NackMsg(ref m, false, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
+        Exception? resExc = null;
         var evt = Assert.Raises<NackMsgCompletedEventArgs>(
-            h => _sut.NackMsgComplete += h,
-            h => _sut.NackMsgComplete -= h,
-            () => _sut.NackMsg(ref m, false));
+            h => _sut.NAckMsgComplete += h,
+            h => _sut.NAckMsgComplete -= h,
+            () => _sut.NackMsg(ref m, false, out resExc));
 
         // assert
         evt.Should().NotBeNull();
+        resExc.Should().BeNull();
         evt.Arguments.Should().NotBeNull();
         evt.Arguments.Successful.Should().BeTrue();
         evt.Arguments.Exception.Should().BeNull();
