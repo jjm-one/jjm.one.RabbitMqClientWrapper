@@ -43,6 +43,8 @@ public class RmqcCoreDiTests
             services.AddRmqcCore(new RmqcSettings()));
         var host = _hostBuilder.Build();
 
+        // assert
+        host.Services.GetService<RmqcSettings>().Should().NotBeNull();
         host.Services.GetService<IRmqcCore>().Should().NotBeNull();
     }
 
