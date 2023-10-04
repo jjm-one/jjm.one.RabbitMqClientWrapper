@@ -23,7 +23,6 @@ public class RmqcWrapperTests
 
     #endregion
     
-    
     /// <summary>
     /// The default constructor of the <see cref="RmqcWrapperTests"/> class.
     /// </summary>

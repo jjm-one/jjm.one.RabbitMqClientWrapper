@@ -1,5 +1,7 @@
 using System;
+using System.Reflection;
 using FluentAssertions;
+using jjm.one.Microsoft.Extensions.Logging.Helpers;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
 using jjm.one.RabbitMqClientWrapper.types.exceptions;
@@ -21,6 +23,7 @@ public class RmqcCoreTests
     private readonly Mock<IConnection> _connectionMock;
     private readonly Mock<IModel> _channelMock;
     private readonly Mock<ILogger<RmqcCore>> _rmqcCoreLoggingMock;
+    private readonly Mock<RmqcSettings> _settingsMock;
 
     #endregion
 
@@ -35,8 +38,9 @@ public class RmqcCoreTests
         _connectionMock = new Mock<IConnection>();
         _channelMock = new Mock<IModel>();
         _rmqcCoreLoggingMock = new Mock<ILogger<RmqcCore>>();
+        _settingsMock = new Mock<RmqcSettings>();
 
-        _sut = new RmqcCore(new RmqcSettings(), _rmqcCoreLoggingMock.Object,
+        _sut = new RmqcCore(_settingsMock.Object, _rmqcCoreLoggingMock.Object,
             _connectionFactoryMock.Object, _connectionMock.Object, _channelMock.Object);
     }
 
@@ -47,16 +51,35 @@ public class RmqcCoreTests
     #region ctor tests
 
     /// <summary>
-    /// Tests the constructor of the <see cref="RmqcCore"/> class.
+    /// Tests the constructor of the <see cref="RmqcCore"/> class. (Test 1)
     /// </summary>
     [Fact]
-    public void RmqcWrapperTest_CtorTest()
+    public void RmqcWrapperTest_CtorTest1()
     {
-        // arrange + act
-        var res = new RmqcCore(new RmqcSettings("Test"));
+        // arrange
+        
+        // act
+        _sut = new RmqcCore(_settingsMock.Object);
         
         // assert
-        res.Settings.Hostname.Should().Be("Test");
+        _sut.Should().NotBeNull();
+        _sut.Settings.Should().NotBeNull();
+    }
+    
+    /// <summary>
+    /// Tests the constructor of the <see cref="RmqcCore"/> class. (Test 2)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_CtorTest2()
+    {
+        // arrange
+        
+        // act
+        _sut = new RmqcCore(_settingsMock.Object, _rmqcCoreLoggingMock.Object);
+        
+        // assert
+        _sut.Should().NotBeNull();
+        _sut.Settings.Should().NotBeNull();
     }
 
     #endregion
@@ -70,30 +93,26 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_SettingsGetTest1()
     {
         // arrange
-        var sTest = new RmqcSettings();
+        _settingsMock.SetupGet(x => x.Hostname).Returns("Test");
+        _settingsMock.SetupGet(x => x.Port).Returns(42);
+        _settingsMock.SetupGet(x => x.Username).Returns("Test");
+        _settingsMock.SetupGet(x => x.Password).Returns("Test");
+        _settingsMock.SetupGet(x => x.VirtualHost).Returns("Test");
+        _settingsMock.SetupGet(x => x.Exchange).Returns("Test");
+        _settingsMock.SetupGet(x => x.Queue).Returns("Test");
 
         // act
-        var s = _sut.Settings;
-
+        _sut = new RmqcCore(_settingsMock.Object);
+        
         // assert
-        s.Should().Be(sTest);
-    }
-    
-    /// <summary>
-    /// Tests the getter of the Settings member. (Test 2)
-    /// </summary>
-    [Fact]
-    public void RmqcWrapperTest_SettingsGetTest2()
-    {
-        // arrange
-        var sTest = new RmqcSettings("Test");
-
-        // act
-        _sut.Settings = sTest;
-        var s = _sut.Settings;
-
-        // assert
-        s.Should().Be(sTest);
+        _sut.Settings.Should().NotBeNull();
+        _sut.Settings.Hostname.Should().Be("Test");
+        _sut.Settings.Port.Should().Be(42);
+        _sut.Settings.Username.Should().Be("Test");
+        _sut.Settings.Password.Should().Be("Test");
+        _sut.Settings.VirtualHost.Should().Be("Test");
+        _sut.Settings.Exchange.Should().Be("Test");
+        _sut.Settings.Queue.Should().Be("Test");
     }
     
     /// <summary>
@@ -103,20 +122,28 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_SettingsSetTest1()
     {
         // arrange
-        var sTest = new RmqcSettings();
+        var settingsMockTemp = new Mock<RmqcSettings>();
+        settingsMockTemp.SetupGet(x => x.Hostname).Returns("Test2");
+        settingsMockTemp.SetupGet(x => x.Port).Returns(69);
+        settingsMockTemp.SetupGet(x => x.Username).Returns("Test2");
+        settingsMockTemp.SetupGet(x => x.Password).Returns("Test2");
+        settingsMockTemp.SetupGet(x => x.VirtualHost).Returns("Test2");
+        settingsMockTemp.SetupGet(x => x.Exchange).Returns("Test2");
+        settingsMockTemp.SetupGet(x => x.Queue).Returns("Test2");
+
 
         // act
-        _sut.Settings = sTest;
+        _sut.Settings = settingsMockTemp.Object;
 
         // assert
-        _channelMock.Verify(x => x.IsOpen, Times.Never);
-        _channelMock.Verify(x => x.Close(), Times.Never);
-        _channelMock.Verify(x => x.Dispose(), Times.Never);
-        _connectionMock.Verify(x => x.IsOpen, Times.Never);
-        _connectionMock.Verify(x => x.Close(), Times.Never);
-        _connectionMock.Verify(x => x.Dispose(), Times.Never);
-
-        _sut.Settings.Should().Be(sTest);
+        _sut.Settings.Should().NotBeNull();
+        _sut.Settings.Hostname.Should().Be("Test2");
+        _sut.Settings.Port.Should().Be(69);
+        _sut.Settings.Username.Should().Be("Test2");
+        _sut.Settings.Password.Should().Be("Test2");
+        _sut.Settings.VirtualHost.Should().Be("Test2");
+        _sut.Settings.Exchange.Should().Be("Test2");
+        _sut.Settings.Queue.Should().Be("Test2");
     }
     
     /// <summary>
@@ -126,7 +153,7 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_SettingsSetTest2()
     {
         // arrange
-        var sTest = new RmqcSettings("Test");
+        var settingsMockTemp = new Mock<RmqcSettings>();
         _channelMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.Close());
         _channelMock.Setup(x => x.Dispose());
@@ -135,17 +162,16 @@ public class RmqcCoreTests
         _connectionMock.Setup(x => x.Dispose());
         
         // act
-        _sut.Settings = sTest;
+        _sut.Settings = settingsMockTemp.Object;
 
         // assert
+        _sut.Settings.Should().NotBeNull();
         _channelMock.Verify(x => x.IsOpen, Times.Once);
         _channelMock.Verify(x => x.Close(), Times.Once);
         _channelMock.Verify(x => x.Dispose(), Times.Once);
         _connectionMock.Verify(x => x.IsOpen, Times.Once);
         _connectionMock.Verify(x => x.Close(), Times.Once);
         _connectionMock.Verify(x => x.Dispose(), Times.Once);
-
-        _sut.Settings.Should().Be(sTest);
     }
     
     /// <summary>
@@ -182,7 +208,7 @@ public class RmqcCoreTests
 
         // assert
         _connectionMock.Verify(x => x.IsOpen, Times.Once);
-        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _channelMock.Verify(x => x.IsOpen, Times.Never);
         b.Should().BeFalse();
     }
     
@@ -200,7 +226,7 @@ public class RmqcCoreTests
         var b = _sut.Connected;
 
         // assert
-        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _connectionMock.Verify(x => x.IsOpen, Times.Once);
         _channelMock.Verify(x => x.IsOpen, Times.Once);
         b.Should().BeFalse();
     }
@@ -212,7 +238,7 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_ConnectedGetTest4()
     {
         // arrange
-        _sut = new RmqcCore(new RmqcSettings(), _rmqcCoreLoggingMock.Object,
+        _sut = new RmqcCore(_settingsMock.Object, _rmqcCoreLoggingMock.Object,
             null, _connectionMock.Object, _channelMock.Object);
         _connectionMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.IsOpen).Returns(true);
@@ -221,11 +247,53 @@ public class RmqcCoreTests
         var b = _sut.Connected;
 
         // assert
-        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
-        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
+        _connectionMock.Verify(x => x.IsOpen, Times.Never);
+        _channelMock.Verify(x => x.IsOpen, Times.Never);
         b.Should().BeFalse();
     }
 
+    /// <summary>
+    /// Tests the getter of the Connected member. (Test 5)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_ConnectedGetTest5()
+    {
+        // arrange
+        _sut = new RmqcCore(_settingsMock.Object, _rmqcCoreLoggingMock.Object,
+            _connectionFactoryMock.Object, null, _channelMock.Object);
+        _connectionMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.IsOpen).Returns(true);
+
+        // act
+        var b = _sut.Connected;
+
+        // assert
+        _connectionMock.Verify(x => x.IsOpen, Times.Never);
+        _channelMock.Verify(x => x.IsOpen, Times.Never);
+        b.Should().BeFalse();
+    }
+    
+    /// <summary>
+    /// Tests the getter of the Connected member. (Test 6)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_ConnectedGetTest6()
+    {
+        // arrange
+        _sut = new RmqcCore(_settingsMock.Object, _rmqcCoreLoggingMock.Object,
+            _connectionFactoryMock.Object, _connectionMock.Object, null);
+        _connectionMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.IsOpen).Returns(true);
+
+        // act
+        var b = _sut.Connected;
+
+        // assert
+        _connectionMock.Verify(x => x.IsOpen, Times.Once);
+        _channelMock.Verify(x => x.IsOpen, Times.Never);
+        b.Should().BeFalse();
+    }
+    
     
     #endregion
     
