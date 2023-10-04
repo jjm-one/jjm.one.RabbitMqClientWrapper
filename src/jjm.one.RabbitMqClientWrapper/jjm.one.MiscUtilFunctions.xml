@@ -1248,17 +1248,5 @@
             <param name="state"></param>
             <returns></returns>
         </member>
-        <member name="T:jjm.one.RabbitMqClientWrapper.util.TimeSpanTools">
-            <summary>
-            This class contains some functions to convert from/to a <see cref="T:System.TimeSpan"/> object.
-            </summary>
-        </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.util.TimeSpanTools.MillisecondsToTimeSpan(System.Int32)">
-            <summary>
-            Converts an <see cref="T:System.Int32"/> object to a <see cref="T:System.TimeSpan"/>.
-            </summary>
-            <param name="milliseconds"></param>
-            <returns></returns>
-        </member>
     </members>
 </doc>

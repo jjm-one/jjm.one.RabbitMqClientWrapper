@@ -241,7 +241,7 @@ public class RmqcWrapper : IRmqcWrapper
 
         // invoke events
         OnReConnectCompleted(new ReConnectCompletedEventArgs(res, exception,
-            ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
+            TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)));
 
         // return the result
         return res;
