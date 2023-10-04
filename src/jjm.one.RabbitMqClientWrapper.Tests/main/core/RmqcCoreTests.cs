@@ -1,7 +1,5 @@
 using System;
-using System.Reflection;
 using FluentAssertions;
-using jjm.one.Microsoft.Extensions.Logging.Helpers;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
 using jjm.one.RabbitMqClientWrapper.types.exceptions;

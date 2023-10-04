@@ -1,5 +1,4 @@
 ﻿using System;
-using Castle.Core.Resource;
 using FluentAssertions;
 using jjm.one.RabbitMqClientWrapper.main;
 using jjm.one.RabbitMqClientWrapper.main.core;
