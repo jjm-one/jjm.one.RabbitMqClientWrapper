@@ -1186,6 +1186,16 @@
             <param name="dict"></param>
             <returns></returns>
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.util.DataTableTools.DataTablesToMessage(jjm.one.RabbitMqClientWrapper.types.RmqcMessage@,System.Data.DataTable,System.Data.DataTable,System.Data.DataTable)">
+            <summary>
+            This extension converts a <see cref="T:System.Data.DataTable"/> into a <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcMessage"/>.
+            </summary>
+            <param name="message"></param>
+            <param name="metadata"></param>
+            <param name="basicProperties"></param>
+            <param name="headers"></param>
+            <returns></returns>
+        </member>
         <member name="T:jjm.one.RabbitMqClientWrapper.util.DataTableTools.DataTablesToMessageConversionStatus">
             <summary>
             This enum represents the conversion status when converting <see cref="T:System.Data.DataTable"/> to <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcMessage"/>.
