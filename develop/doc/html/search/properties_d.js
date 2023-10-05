@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vhost_224',['VHost',['../classSettings.html#a22b03e48cf5819aeacec87582f0a0220',1,'Settings']]]
+  ['username_328',['Username',['../classRmqcSettings.html#aafa065f79feb7b30c4ed86f1a5bd60c9',1,'RmqcSettings']]]
 ];

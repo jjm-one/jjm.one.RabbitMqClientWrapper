@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['disconnectcompletedeventargs_110',['DisconnectCompletedEventArgs',['../classDisconnectCompletedEventArgs.html',1,'']]]
+  ['datatabletools_168',['DataTableTools',['../classDataTableTools.html',1,'']]],
+  ['disconnectcompletedeventargs_169',['DisconnectCompletedEventArgs',['../classDisconnectCompletedEventArgs.html',1,'']]]
 ];

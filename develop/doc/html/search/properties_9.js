@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['queue_218',['Queue',['../classSettings.html#ad30acff0cedd4c08f841beb066d9265e',1,'Settings']]]
+  ['queue_318',['Queue',['../classRmqcSettings.html#a0dd837bd58d535822bacb4f2348e9da6',1,'RmqcSettings']]]
 ];
