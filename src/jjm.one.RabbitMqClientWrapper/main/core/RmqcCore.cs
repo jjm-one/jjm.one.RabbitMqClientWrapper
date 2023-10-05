@@ -5,7 +5,6 @@ using jjm.one.Microsoft.Extensions.Logging.Helpers;
 using jjm.one.RabbitMqClientWrapper.types;
 using jjm.one.RabbitMqClientWrapper.types.events;
 using jjm.one.RabbitMqClientWrapper.types.exceptions;
-using jjm.one.RabbitMqClientWrapper.util;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;

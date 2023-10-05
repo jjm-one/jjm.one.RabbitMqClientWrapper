@@ -1,13 +1,11 @@
-﻿using jjm.one.RabbitMqClientWrapper.types;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Reflection;
-using System.Reflection.Emit;
-using RabbitMQ.Client;
 using System.Text;
+using jjm.one.RabbitMqClientWrapper.types;
+using RabbitMQ.Client;
 
-namespace jjm.one.RabbitMqClientWrapper.util;
+namespace jjm.one.RabbitMqClientWrapper.Utils.DataRepresentation;
 
 /// <summary>
 /// This static class contains functions and extensions to convert a <see cref="RmqcMessage"/> and it's elements to a <see cref="DataTable"/> and wise versa.

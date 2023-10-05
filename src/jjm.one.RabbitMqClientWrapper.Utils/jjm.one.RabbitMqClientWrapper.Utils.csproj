@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;netstandard2.1;net6;net7.0</TargetFrameworks>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Version>1.0.0-alpha.4</Version>
+        <Authors>Jonas Merkle [JJM] </Authors>
+        <Copyright>© by Jonas Merkle [JJM], 2023.</Copyright>
+        <RootNamespace>jjm.one.RabbitMqClientWrapper.Utils</RootNamespace>
+        <PackageId>jjm.one.RabbitMqClientWrapper.Utils</PackageId>
+        <Title>jjm.one.RabbitMqClientWrapper.Utils</Title>
+        <Description>A csharp wrapper for a RabbitMQ client.</Description>
+        <PackageTags>utility, helper, wrapper, rabbitmq, client, csharp</PackageTags>
+        <PackageProjectUrl>https://github.com/jjm-one/jjm.one.RabbitMqClientWrapper</PackageProjectUrl>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/jjm-one/jjm.one.RabbitMqClientWrapper.git</RepositoryUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <SignAssembly>True</SignAssembly>
+        <AssemblyOriginatorKeyFile>jjm.one.RabbitMqClientWrapper.Utils.SignKey.snk</AssemblyOriginatorKeyFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <LangVersion>latestmajor</LangVersion>
+        <DocumentationFile>./jjm.one.MiscUtilFunctions.Utils.xml</DocumentationFile>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <LangVersion>latestmajor</LangVersion>
+        <DocumentationFile>./jjm.one.MiscUtilFunctions.Utils.xml</DocumentationFile>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <None Include="..\..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="..\..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\jjm.one.RabbitMqClientWrapper\jjm.one.RabbitMqClientWrapper.csproj" />
+    </ItemGroup>
+
+</Project>
