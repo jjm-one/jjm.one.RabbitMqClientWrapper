@@ -5,7 +5,6 @@ using jjm.one.Microsoft.Extensions.Logging.Helpers;
 using jjm.one.RabbitMqClientWrapper.types;
 using jjm.one.RabbitMqClientWrapper.types.events;
 using jjm.one.RabbitMqClientWrapper.types.exceptions;
-using jjm.one.RabbitMqClientWrapper.util;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
@@ -301,7 +300,7 @@ internal class RmqcCore : IRmqcCore
         sw.Stop();
 
         // invoke associated event
-        OnConnectCompleted(new ConnectCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
+        OnConnectCompleted(new ConnectCompletedEventArgs(res, exception, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)));
 
         // return the result
         return res;
@@ -367,7 +366,7 @@ internal class RmqcCore : IRmqcCore
         sw.Stop();
 
         // invoke associated event
-        OnDisconnectCompleted(new DisconnectCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
+        OnDisconnectCompleted(new DisconnectCompletedEventArgs(res, exception, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)));
 
         // return the result
         return res;
@@ -423,7 +422,7 @@ internal class RmqcCore : IRmqcCore
         sw.Stop();
 
         // invoke associated event
-        OnWriteMsgCompleted(new WriteMsgCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
+        OnWriteMsgCompleted(new WriteMsgCompletedEventArgs(res, exception, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)));
 
         // return the result
         return res;
@@ -490,7 +489,7 @@ internal class RmqcCore : IRmqcCore
         sw.Stop();
 
         // invoke associated event
-        OnReadMsgCompleted(new ReadMsgCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan(), message));
+        OnReadMsgCompleted(new ReadMsgCompletedEventArgs(res, exception, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds), message));
 
         // return the result
         return res;
@@ -539,7 +538,7 @@ internal class RmqcCore : IRmqcCore
         sw.Stop();
 
         // invoke associated event
-        OnAckMsgCompleted(new AckMsgCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan(), message.DeliveryTag));
+        OnAckMsgCompleted(new AckMsgCompletedEventArgs(res, exception, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds), message.DeliveryTag));
 
         // return the result
         return res;
@@ -589,7 +588,7 @@ internal class RmqcCore : IRmqcCore
         sw.Stop();
 
         // invoke associated event
-        OnNackMsgComplete(new NackMsgCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan(), message.DeliveryTag));
+        OnNackMsgComplete(new NackMsgCompletedEventArgs(res, exception, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds), message.DeliveryTag));
 
         // return the result
         return res;
@@ -686,7 +685,7 @@ internal class RmqcCore : IRmqcCore
         sw.Stop();
 
         // invoke associated event
-        OnQueuedMsgsCompleted(new QueuedMsgsCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan(), amount));
+        OnQueuedMsgsCompleted(new QueuedMsgsCompletedEventArgs(res, exception, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds), amount));
 
         // return the result
         return res;
