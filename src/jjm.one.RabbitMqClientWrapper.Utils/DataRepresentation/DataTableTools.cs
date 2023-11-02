@@ -4,7 +4,6 @@ using System.Data;
 using RabbitMQ.Client;
 using System.Text;
 using jjm.one.RabbitMqClientWrapper.types;
-using RabbitMQ.Client;
 
 namespace jjm.one.RabbitMqClientWrapper.Utils.DataRepresentation;
 
