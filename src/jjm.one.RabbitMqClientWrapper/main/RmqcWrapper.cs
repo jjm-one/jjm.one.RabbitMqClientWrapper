@@ -5,7 +5,6 @@ using jjm.one.Microsoft.Extensions.Logging.Helpers;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
 using jjm.one.RabbitMqClientWrapper.types.events;
-using jjm.one.RabbitMqClientWrapper.util;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -101,6 +100,17 @@ public class RmqcWrapper : IRmqcWrapper
         _core = new RmqcCore(settings);
         _logger = logger;
 
+        // register event callbacks
+        _core.ConnectCompleted += OnConnectCompleted;
+        _core.DisconnectCompleted += OnDisconnectCompleted;
+        _core.WriteMsgCompleted += OnWriteMsgCompleted;
+        _core.ReadMsgCompleted += OnReadMsgCompleted;
+        _core.AckMsgCompleted += OnAckMsgCompleted;
+        _core.NAckMsgComplete += OnNAckMsgComplete;
+        _core.QueuedMsgsCompleted += OnQueuedMsgsCompleted;
+        _core.ConnectionStateChanged += OnConnectionStateChanged;
+        _core.ErrorOccurred += OnErrorOccurred;
+        
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
     }
@@ -241,7 +251,7 @@ public class RmqcWrapper : IRmqcWrapper
 
         // invoke events
         OnReConnectCompleted(new ReConnectCompletedEventArgs(res, exception,
-            ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
+            TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)));
 
         // return the result
         return res;

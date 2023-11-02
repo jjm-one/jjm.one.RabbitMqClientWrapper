@@ -44,19 +44,19 @@
             The default constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests"/> class.
             </summary>
         </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_CtorTest">
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_CtorTest1">
             <summary>
-            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class.
+            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class. (Test 1)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_CtorTest2">
+            <summary>
+            Tests the constructor of the <see cref="T:jjm.one.RabbitMqClientWrapper.main.core.RmqcCore"/> class. (Test 2)
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_SettingsGetTest1">
             <summary>
             Tests the getter of the Settings member. (Test 1)
-            </summary>
-        </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_SettingsGetTest2">
-            <summary>
-            Tests the getter of the Settings member. (Test 2)
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_SettingsSetTest1">
@@ -89,6 +89,16 @@
             Tests the getter of the Connected member. (Test 4)
             </summary>
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ConnectedGetTest5">
+            <summary>
+            Tests the getter of the Connected member. (Test 5)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ConnectedGetTest6">
+            <summary>
+            Tests the getter of the Connected member. (Test 6)
+            </summary>
+        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_InitTest">
             <summary>
             Testes the Init method.
@@ -119,6 +129,41 @@
             Testes the Connect method. (Test 4)
             </summary>
         </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ConnectTest5">
+            <summary>
+            Testes the Connect method. (Test 5)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ConnectTest6">
+            <summary>
+            Testes the Connect method. (Test 6)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ConnectTest7">
+            <summary>
+            Testes the Connect method. (Test 7)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ConnectTest8">
+            <summary>
+            Testes the Connect method. (Test 8)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ConnectTest9">
+            <summary>
+            Testes the Connect method. (Test 9)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ConnectTest10">
+            <summary>
+            Testes the Connect method. (Test 10)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_ConnectTest11">
+            <summary>
+            Testes the Connect method. (Test 11)
+            </summary>
+        </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_DisconnectTest1">
             <summary>
             Testes the Disconnect method. (Test 1)
@@ -127,6 +172,26 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_DisconnectTest2">
             <summary>
             Testes the Disconnect method. (Test 2)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_DisconnectTest3">
+            <summary>
+            Testes the Disconnect method. (Test 3)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_DisconnectTest4">
+            <summary>
+            Testes the Disconnect method. (Test 4)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_DisconnectTest5">
+            <summary>
+            Testes the Disconnect method. (Test 5)
+            </summary>
+        </member>
+        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_DisconnectTest6">
+            <summary>
+            Testes the Disconnect method. (Test 6)
             </summary>
         </member>
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.main.core.RmqcCoreTests.RmqcWrapperTest_WriteMsgTest1">
@@ -517,22 +582,6 @@
         <member name="M:jjm.one.RabbitMqClientWrapper.Tests.types.SettingsTests.SettingsTest_Hash">
             <summary>
             Tests the GetHashCode method of the <see cref="T:jjm.one.RabbitMqClientWrapper.types.RmqcSettings"/> class.
-            </summary>
-        </member>
-        <member name="T:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanToolsTests">
-            <summary>
-            This class contains the unit tests for the <see cref="T:jjm.one.RabbitMqClientWrapper.util.TimeSpanTools"/> class.
-            </summary>
-        </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanToolsTests.MillisecondsToTimeSpanTestData">
-            <summary>
-            Test Data for the <see cref="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanToolsTests.TimeSpanToolsTest_MillisecondsToTimeSpanTest(System.Int32,System.TimeSpan)"/> test.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:jjm.one.RabbitMqClientWrapper.Tests.util.TimeSpanToolsTests.TimeSpanToolsTest_MillisecondsToTimeSpanTest(System.Int32,System.TimeSpan)">
-            <summary>
-            Tests the MillisecondsToTimeSpan method of the <see cref="T:jjm.one.RabbitMqClientWrapper.util.TimeSpanTools"/> class.
             </summary>
         </member>
     </members>

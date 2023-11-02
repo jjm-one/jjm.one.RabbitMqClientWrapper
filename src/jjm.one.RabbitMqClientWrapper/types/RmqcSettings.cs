@@ -26,7 +26,7 @@ public class RmqcSettings
     ///
     /// default value: localhost
     /// </summary>
-    public string Hostname
+    public virtual string Hostname
     {
         get => _hostname ?? "localhost";
         set => _hostname = value;
@@ -37,7 +37,7 @@ public class RmqcSettings
     ///
     /// default value: 5672
     /// </summary>
-    public int Port
+    public virtual int Port
     {
         get => _port ?? 5672;
         set => _port = value;
@@ -48,7 +48,7 @@ public class RmqcSettings
     ///
     /// default value: guest
     /// </summary>
-    public string Username
+    public virtual string Username
     {
         get => _username ?? "guest";
         set => _username = value;
@@ -59,7 +59,7 @@ public class RmqcSettings
     ///
     /// default value: guest
     /// </summary>
-    public string Password
+    public virtual string Password
     {
         get => _password ?? "guest";
         set => _password = value;
@@ -70,7 +70,7 @@ public class RmqcSettings
     ///
     /// default value: /
     /// </summary>
-    public string VirtualHost
+    public virtual string VirtualHost
     {
         get => _virtualHost ?? "/";
         set => _virtualHost = value;
@@ -81,7 +81,7 @@ public class RmqcSettings
     ///
     /// default value: amq.direct
     /// </summary>
-    public string Exchange
+    public virtual string Exchange
     {
         get => _exchange ?? "amq.direct";
         set => _exchange = value;
@@ -92,7 +92,7 @@ public class RmqcSettings
     /// 
     /// default value: ""
     /// </summary>
-    public string Queue
+    public virtual string Queue
     {
         get => _queue ?? "";
         set => _queue = value;
