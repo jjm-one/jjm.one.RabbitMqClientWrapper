@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['ackmsg_151',['AckMsg',['../interfaceIRmqcCore.html#aba970a55824bb76afa053ec87aba4433',1,'IRmqcCore.AckMsg()'],['../classRmqcCore.html#a94a35fe151dcef85e0c1e723870a9ef3',1,'RmqcCore.AckMsg()'],['../interfaceIRmqcWrapper.html#a6e27cb5cbc29709dcf8f0387f3dc31cf',1,'IRmqcWrapper.AckMsg()'],['../classRmqcWrapper.html#aa5db6b688ddeb4586fc26d5e5522c2be',1,'RmqcWrapper.AckMsg(Message message)'],['../classRmqcWrapper.html#acdb81c7a8860cb453e65749a39d57d75',1,'RmqcWrapper.AckMsg(Message message, out Exception? exception)']]],
-  ['ackmsgcompletedeventargs_152',['AckMsgCompletedEventArgs',['../classAckMsgCompletedEventArgs.html#a1ca21da6aaece5aabac4c8b48c4826ef',1,'AckMsgCompletedEventArgs']]],
-  ['addrmqccore_153',['AddRmqcCore',['../classRmqcCoreDi.html#a94f9a6b3b33928f19465fbbae841abc2',1,'RmqcCoreDi']]],
-  ['addrmqcwrapper_154',['AddRmqcWrapper',['../classRmqcWrapperDi.html#a1014f456881dc715c481e63e54907d71',1,'RmqcWrapperDi']]]
+  ['ackmsg_214',['AckMsg',['../interfaceIRmqcCore.html#ad263fa7736244f0e88e237fe5dbd7fad',1,'IRmqcCore.AckMsg()'],['../classRmqcCore.html#a1b548cc413f97f5b7764e973e6b0bfbd',1,'RmqcCore.AckMsg()'],['../interfaceIRmqcWrapper.html#a08f03350e8e4b2b91ffdd183fc5e931c',1,'IRmqcWrapper.AckMsg()'],['../classRmqcWrapper.html#a1d5fc0ef6d9f0051a03448a858219973',1,'RmqcWrapper.AckMsg(ref RmqcMessage message)'],['../classRmqcWrapper.html#a63a167dbfcf3889716a39c1a6da113c8',1,'RmqcWrapper.AckMsg(ref RmqcMessage message, out Exception? exception)']]],
+  ['ackmsgcompletedeventargs_215',['AckMsgCompletedEventArgs',['../classAckMsgCompletedEventArgs.html#a1ca21da6aaece5aabac4c8b48c4826ef',1,'AckMsgCompletedEventArgs']]],
+  ['addrmqccore_216',['AddRmqcCore',['../classRmqcCoreDi.html#a584e77853c589c894ccedc4a52f6e525',1,'RmqcCoreDi']]],
+  ['addrmqcwrapper_217',['AddRmqcWrapper',['../classRmqcWrapperDi.html#a01917062105ae263cb57e8d9426bad00',1,'RmqcWrapperDi']]]
 ];

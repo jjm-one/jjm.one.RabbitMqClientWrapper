@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['password_216',['Password',['../classSettings.html#a62619748f181d68c6a92e894fb7a2c6d',1,'Settings']]],
-  ['port_217',['Port',['../classSettings.html#afde0fb2d25427daf075cd88f657bf99e',1,'Settings']]]
+  ['password_316',['Password',['../classRmqcSettings.html#a683d555a45fbe6c7ecf354f8dcd15cff',1,'RmqcSettings']]],
+  ['port_317',['Port',['../classRmqcSettings.html#a125b1ac354e6ea64fbbfb7d9c8073cc7',1,'RmqcSettings']]]
 ];

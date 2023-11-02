@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['timespantools_97',['TimeSpanTools',['../classTimeSpanTools.html',1,'']]],
-  ['timespantools_2ecs_98',['TimeSpanTools.cs',['../TimeSpanTools_8cs.html',1,'']]]
+  ['settings_137',['Settings',['../interfaceIRmqcCore.html#a52a4c03065b461c79eebd86f6a332ca9',1,'IRmqcCore.Settings()'],['../classRmqcCore.html#ab9817b51bb9d88462e724d37c205a7d5',1,'RmqcCore.Settings()'],['../classRmqcWrapper.html#afc8910ad21022cc7356bb3ff6f9c3ad3',1,'RmqcWrapper.Settings()']]],
+  ['status_138',['Status',['../classConnectionStatusChangedEventArgs.html#a9ad3f5d3cba2afb1c18f356fe761cb95',1,'ConnectionStatusChangedEventArgs']]],
+  ['successful_139',['Successful',['../classAckMsgCompletedEventArgs.html#a8db7c9f1156353560de0a26d6aca3455',1,'AckMsgCompletedEventArgs.Successful()'],['../classConnectCompletedEventArgs.html#adfe0a016382aad51f7afc4c36f496b54',1,'ConnectCompletedEventArgs.Successful()'],['../classDisconnectCompletedEventArgs.html#a1a716ac6f4edef4efbcb54c518400bdd',1,'DisconnectCompletedEventArgs.Successful()'],['../classNackMsgCompletedEventArgs.html#a029004c30530cb5d8d30cc5eb042801b',1,'NackMsgCompletedEventArgs.Successful()'],['../classQueuedMsgsCompletedEventArgs.html#aca836bec54241e928619b541ef127e7d',1,'QueuedMsgsCompletedEventArgs.Successful()'],['../classReadMsgCompletedEventArgs.html#a75064e14ac15a2bc7f21c6b0c8b7893d',1,'ReadMsgCompletedEventArgs.Successful()'],['../classReConnectCompletedEventArgs.html#aff03ed34ffe06a04bb9f659890b7a107',1,'ReConnectCompletedEventArgs.Successful()'],['../classWriteMsgCompletedEventArgs.html#aaf849f6520031ac12fb9c639be56b17f',1,'WriteMsgCompletedEventArgs.Successful()']]]
 ];

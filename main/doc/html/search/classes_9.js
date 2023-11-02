@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['timespantools_126',['TimeSpanTools',['../classTimeSpanTools.html',1,'']]]
+  ['uninitializedclientexception_187',['UnInitializedClientException',['../classUnInitializedClientException.html',1,'']]]
 ];

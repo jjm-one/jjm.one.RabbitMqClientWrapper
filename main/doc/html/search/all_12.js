@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['uninitializedclientexception_99',['UnInitializedClientException',['../classUnInitializedClientException.html',1,'UnInitializedClientException'],['../classUnInitializedClientException.html#a702c0b0ea1ab11fef3c63f27fd2210ef',1,'UnInitializedClientException.UnInitializedClientException()'],['../classUnInitializedClientException.html#a0c3e4c0052fcc2c5bb7546139180ab13',1,'UnInitializedClientException.UnInitializedClientException(string operation)'],['../classUnInitializedClientException.html#ad665477b0ee9b58ee15bf47e659cc5c2',1,'UnInitializedClientException.UnInitializedClientException(SerializationInfo info, StreamingContext context)']]],
-  ['uninitializedclientexception_2ecs_100',['UnInitializedClientException.cs',['../UnInitializedClientException_8cs.html',1,'']]],
-  ['username_101',['Username',['../classSettings.html#a1db355b409499948044520bdf197163b',1,'Settings']]]
+  ['timestampwhenacked_140',['TimestampWhenAcked',['../classRmqcMessage.html#a67aaca774a68b9963f295c1f984a1d88',1,'RmqcMessage']]],
+  ['timestampwhennacked_141',['TimestampWhenNAcked',['../classRmqcMessage.html#a877f6d64116d48c8f18f6a2ee849e797',1,'RmqcMessage']]],
+  ['timestampwhenreceived_142',['TimestampWhenReceived',['../classRmqcMessage.html#a39bda26ea88d51f38358701c6443c977',1,'RmqcMessage']]],
+  ['timestampwhensend_143',['TimestampWhenSend',['../classRmqcMessage.html#a4e40e0abc4268eca845ebba0755d46b5',1,'RmqcMessage']]],
+  ['todatatable_144',['ToDataTable',['../classDataTableTools.html#a81ee569fbe931b4bfc55f934fae835c1',1,'DataTableTools.ToDataTable(this RmqcMessage message)'],['../classDataTableTools.html#aa6b26357b0cfb4d8df77d5b9f3f9e9ad',1,'DataTableTools.ToDataTable(this IBasicProperties basicProperties)'],['../classDataTableTools.html#aeeaeeb2eaae1ddce860b10a58f7e12be',1,'DataTableTools.ToDataTable(this IDictionary&lt; string, object &gt; dict)']]]
 ];

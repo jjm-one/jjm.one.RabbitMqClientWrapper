@@ -1,13 +1,10 @@
 var searchData=
 [
-  ['nackmsg_49',['NackMsg',['../interfaceIRmqcCore.html#af965fab34dfa0d7e27eeba8cd1d57e8b',1,'IRmqcCore.NackMsg()'],['../classRmqcCore.html#a587167aa92a39e187dda604f13a22e1e',1,'RmqcCore.NackMsg()'],['../interfaceIRmqcWrapper.html#af68b8c41bc10e6881a92ed2a8730b884',1,'IRmqcWrapper.NackMsg()'],['../classRmqcWrapper.html#a052abb8cbfc8a03219b1a0af73fa0de2',1,'RmqcWrapper.NackMsg(Message message, bool requeue)'],['../classRmqcWrapper.html#a8be32a561c40a3570527855cd0a457c6',1,'RmqcWrapper.NackMsg(Message message, bool requeue, out Exception? exception)']]],
-  ['nackmsgcomplete_50',['NackMsgComplete',['../classRmqcWrapper.html#aa16554efbd3d564711b639bb16212775',1,'RmqcWrapper.NackMsgComplete()'],['../interfaceIRmqcWrapper.html#ad54d4a49e9c77c4181692932518b8118',1,'IRmqcWrapper.NackMsgComplete()']]],
-  ['nackmsgcompletedeventargs_51',['NackMsgCompletedEventArgs',['../classNackMsgCompletedEventArgs.html',1,'NackMsgCompletedEventArgs'],['../classNackMsgCompletedEventArgs.html#a077639e8b95f7486a95187f11e6876f6',1,'NackMsgCompletedEventArgs.NackMsgCompletedEventArgs()']]],
-  ['nackmsgcompletedeventargs_2ecs_52',['NackMsgCompletedEventArgs.cs',['../NackMsgCompletedEventArgs_8cs.html',1,'']]],
-  ['nochannelexception_53',['NoChannelException',['../classNoChannelException.html',1,'NoChannelException'],['../classNoChannelException.html#aca7ceec493455ab6682ab8281a5cfb4c',1,'NoChannelException.NoChannelException(SerializationInfo info, StreamingContext context)'],['../classNoChannelException.html#a734035dda5294201d701c507e706403b',1,'NoChannelException.NoChannelException()']]],
-  ['nochannelexception_2ecs_54',['NoChannelException.cs',['../NoChannelException_8cs.html',1,'']]],
-  ['noconnectionexception_55',['NoConnectionException',['../classNoConnectionException.html',1,'NoConnectionException'],['../classNoConnectionException.html#a3a48cba4faa553414945774145506e0f',1,'NoConnectionException.NoConnectionException()'],['../classNoConnectionException.html#ab4df1622249a96196e1473e0e3261333',1,'NoConnectionException.NoConnectionException(SerializationInfo info, StreamingContext context)']]],
-  ['noconnectionexception_2ecs_56',['NoConnectionException.cs',['../NoConnectionException_8cs.html',1,'']]],
-  ['noconnectionfactoryexception_57',['NoConnectionFactoryException',['../classNoConnectionFactoryException.html',1,'NoConnectionFactoryException'],['../classNoConnectionFactoryException.html#a71097d129aaed4e856fe3e25059d05f2',1,'NoConnectionFactoryException.NoConnectionFactoryException()'],['../classNoConnectionFactoryException.html#a19d2fd4545cc1001e4e13b05a30678ac',1,'NoConnectionFactoryException.NoConnectionFactoryException(SerializationInfo info, StreamingContext context)']]],
-  ['noconnectionfactoryexception_2ecs_58',['NoConnectionFactoryException.cs',['../NoConnectionFactoryException_8cs.html',1,'']]]
+  ['message_71',['Message',['../classReadMsgCompletedEventArgs.html#abdcf5fa6a771d4aa3e4cd4418d008f3b',1,'ReadMsgCompletedEventArgs']]],
+  ['messagecount_72',['MessageCount',['../classRmqcMessage.html#a8bdb3e4919ae8efda67a49ad1e4b0123',1,'RmqcMessage']]],
+  ['missformattedbasicprops_73',['MissFormattedBasicProps',['../classDataTableTools.html#a2654de73cb0015d71b48aba0e547a61ea3cb0529e67d915d52bcac5ee00cc72d2',1,'DataTableTools']]],
+  ['missformattedheaders_74',['MissFormattedHeaders',['../classDataTableTools.html#a2654de73cb0015d71b48aba0e547a61ea2548b307a8aa7fa8e9223e9857d00b14',1,'DataTableTools']]],
+  ['missformattedmetadata_75',['MissFormattedMetaData',['../classDataTableTools.html#a2654de73cb0015d71b48aba0e547a61ea6bb1d56f713f32eefe147188ca08d1c1',1,'DataTableTools']]],
+  ['msgchangedeventargs_76',['MsgChangedEventArgs',['../classMsgChangedEventArgs.html',1,'MsgChangedEventArgs'],['../classMsgChangedEventArgs.html#ab49a7a9632ed7ded8c58b6515da86ddd',1,'MsgChangedEventArgs.MsgChangedEventArgs()']]],
+  ['msgchangedeventargs_2ecs_77',['MsgChangedEventArgs.cs',['../MsgChangedEventArgs_8cs.html',1,'']]]
 ];

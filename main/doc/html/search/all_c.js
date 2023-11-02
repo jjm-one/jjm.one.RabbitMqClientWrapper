@@ -1,12 +1,15 @@
 var searchData=
 [
-  ['onackmsgcompleted_59',['OnAckMsgCompleted',['../classRmqcWrapper.html#a1c93bc264ae41c21b4ad19ff8a5d9a8e',1,'RmqcWrapper']]],
-  ['onconnectcompleted_60',['OnConnectCompleted',['../classRmqcWrapper.html#a877a1a371135ddff355dfdebc3f62751',1,'RmqcWrapper']]],
-  ['ondisconnectcompleted_61',['OnDisconnectCompleted',['../classRmqcWrapper.html#a3dd5a47f36ec3c0fc2652a14205dafa8',1,'RmqcWrapper']]],
-  ['onnackmsgcomplete_62',['OnNackMsgComplete',['../classRmqcWrapper.html#a1461487da6b8a18de51c3d1b8d0b3e41',1,'RmqcWrapper']]],
-  ['onqueuedmsgscompleted_63',['OnQueuedMsgsCompleted',['../classRmqcWrapper.html#ae9983b4b444ead0564f89d605e5ee578',1,'RmqcWrapper']]],
-  ['onreadmsgcompleted_64',['OnReadMsgCompleted',['../classRmqcWrapper.html#af0c5f1a650e31aa419bada1770c72c6a',1,'RmqcWrapper']]],
-  ['onreconnectcompleted_65',['OnReConnectCompleted',['../classRmqcWrapper.html#a47eca6059bc809cd8e20f2958fb1241d',1,'RmqcWrapper']]],
-  ['onwritemsgcompleted_66',['OnWriteMsgCompleted',['../classRmqcWrapper.html#aa9702e100fa307ada1ffa6997578fa6c',1,'RmqcWrapper']]],
-  ['operation_67',['Operation',['../classUnInitializedClientException.html#a01a327d581c3cc1cf7cb5cae68e9aa84',1,'UnInitializedClientException']]]
+  ['nackmsg_78',['NackMsg',['../interfaceIRmqcCore.html#ae27118bbe3d2dffa67e103b3fcb9a87e',1,'IRmqcCore.NackMsg()'],['../classRmqcCore.html#ad29676cb4099b5d190334884fbc33791',1,'RmqcCore.NackMsg()'],['../classRmqcWrapper.html#a233779da8f1916fd52f56d585b69ed54',1,'RmqcWrapper.NackMsg()']]],
+  ['nackmsg_79',['NAckMsg',['../interfaceIRmqcWrapper.html#a33c858d29d90ea52957de04661615f38',1,'IRmqcWrapper.NAckMsg()'],['../classRmqcWrapper.html#aec4f171b59a64b33ba63f2480d0ba335',1,'RmqcWrapper.NAckMsg(ref RmqcMessage message, bool requeue)']]],
+  ['nackmsgcomplete_80',['NAckMsgComplete',['../classRmqcWrapper.html#a252ee01d5c0649e944087b789dd5b737',1,'RmqcWrapper.NAckMsgComplete()'],['../classRmqcCore.html#ae1683ef9d4340046d7de5370eecf5b9b',1,'RmqcCore.NAckMsgComplete()'],['../interfaceIRmqcCore.html#abb08e04cf4b8c8d2195fb9ddd8eabb2e',1,'IRmqcCore.NAckMsgComplete()']]],
+  ['nackmsgcompletedeventargs_81',['NackMsgCompletedEventArgs',['../classNackMsgCompletedEventArgs.html',1,'NackMsgCompletedEventArgs'],['../classNackMsgCompletedEventArgs.html#a077639e8b95f7486a95187f11e6876f6',1,'NackMsgCompletedEventArgs.NackMsgCompletedEventArgs()']]],
+  ['nackmsgcompletedeventargs_2ecs_82',['NackMsgCompletedEventArgs.cs',['../NackMsgCompletedEventArgs_8cs.html',1,'']]],
+  ['nochannelexception_83',['NoChannelException',['../classNoChannelException.html',1,'NoChannelException'],['../classNoChannelException.html#aca7ceec493455ab6682ab8281a5cfb4c',1,'NoChannelException.NoChannelException(SerializationInfo info, StreamingContext context)'],['../classNoChannelException.html#a734035dda5294201d701c507e706403b',1,'NoChannelException.NoChannelException()']]],
+  ['nochannelexception_2ecs_84',['NoChannelException.cs',['../NoChannelException_8cs.html',1,'']]],
+  ['noconnectionexception_85',['NoConnectionException',['../classNoConnectionException.html',1,'NoConnectionException'],['../classNoConnectionException.html#a3a48cba4faa553414945774145506e0f',1,'NoConnectionException.NoConnectionException()'],['../classNoConnectionException.html#ab4df1622249a96196e1473e0e3261333',1,'NoConnectionException.NoConnectionException(SerializationInfo info, StreamingContext context)']]],
+  ['noconnectionexception_2ecs_86',['NoConnectionException.cs',['../NoConnectionException_8cs.html',1,'']]],
+  ['noconnectionfactoryexception_87',['NoConnectionFactoryException',['../classNoConnectionFactoryException.html',1,'NoConnectionFactoryException'],['../classNoConnectionFactoryException.html#a71097d129aaed4e856fe3e25059d05f2',1,'NoConnectionFactoryException.NoConnectionFactoryException()'],['../classNoConnectionFactoryException.html#a19d2fd4545cc1001e4e13b05a30678ac',1,'NoConnectionFactoryException.NoConnectionFactoryException(SerializationInfo info, StreamingContext context)']]],
+  ['noconnectionfactoryexception_2ecs_88',['NoConnectionFactoryException.cs',['../NoConnectionFactoryException_8cs.html',1,'']]],
+  ['none_89',['None',['../classDataTableTools.html#a2654de73cb0015d71b48aba0e547a61ea6adf97f83acf6453d4a6a4b1070f3754',1,'DataTableTools']]]
 ];

@@ -66,6 +66,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#properties">Properties</a> &#124;
+<a href="#events">Events</a> &#124;
 <a href="interfaceIRmqcCore-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">IRmqcCore Interface Reference</div>  </div>
@@ -97,42 +98,72 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2aab677ea34abb07a3c16a3c25f94d44"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a2aab677ea34abb07a3c16a3c25f94d44">Connect</a> (out Exception? exception)</td></tr>
 <tr class="memdesc:a2aab677ea34abb07a3c16a3c25f94d44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect to the RabbitMQ server.  <a href="interfaceIRmqcCore.html#a2aab677ea34abb07a3c16a3c25f94d44">More...</a><br /></td></tr>
 <tr class="separator:a2aab677ea34abb07a3c16a3c25f94d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a722470d1d6b6cbc1ed65d521ccb65f4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a722470d1d6b6cbc1ed65d521ccb65f4f">Disconnect</a> ()</td></tr>
-<tr class="memdesc:a722470d1d6b6cbc1ed65d521ccb65f4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnect form the RabbitMQ server.  <a href="interfaceIRmqcCore.html#a722470d1d6b6cbc1ed65d521ccb65f4f">More...</a><br /></td></tr>
-<tr class="separator:a722470d1d6b6cbc1ed65d521ccb65f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a018847e1171d30a77e99454f79b0802c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a018847e1171d30a77e99454f79b0802c">WriteMsg</a> (<a class="el" href="classMessage.html">Message</a> message, out Exception? exception)</td></tr>
-<tr class="memdesc:a018847e1171d30a77e99454f79b0802c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a <a class="el" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">Message</a> to the RabbitMQ server  <a href="interfaceIRmqcCore.html#a018847e1171d30a77e99454f79b0802c">More...</a><br /></td></tr>
-<tr class="separator:a018847e1171d30a77e99454f79b0802c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefbb4353d40985cbd18e7d366a7ce117"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#aefbb4353d40985cbd18e7d366a7ce117">ReadMsg</a> (out <a class="el" href="classMessage.html">Message</a>? message, bool autoAck, out Exception? exception)</td></tr>
-<tr class="memdesc:aefbb4353d40985cbd18e7d366a7ce117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a <a class="el" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">Message</a> to the RabbitMQ server.  <a href="interfaceIRmqcCore.html#aefbb4353d40985cbd18e7d366a7ce117">More...</a><br /></td></tr>
-<tr class="separator:aefbb4353d40985cbd18e7d366a7ce117"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba970a55824bb76afa053ec87aba4433"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#aba970a55824bb76afa053ec87aba4433">AckMsg</a> (<a class="el" href="classMessage.html">Message</a> message, out Exception? exception)</td></tr>
-<tr class="memdesc:aba970a55824bb76afa053ec87aba4433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ack a received <a class="el" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">Message</a>.  <a href="interfaceIRmqcCore.html#aba970a55824bb76afa053ec87aba4433">More...</a><br /></td></tr>
-<tr class="separator:aba970a55824bb76afa053ec87aba4433"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af965fab34dfa0d7e27eeba8cd1d57e8b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#af965fab34dfa0d7e27eeba8cd1d57e8b">NackMsg</a> (<a class="el" href="classMessage.html">Message</a> message, bool requeue, out Exception? exception)</td></tr>
-<tr class="memdesc:af965fab34dfa0d7e27eeba8cd1d57e8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nack a received <a class="el" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">Message</a>.  <a href="interfaceIRmqcCore.html#af965fab34dfa0d7e27eeba8cd1d57e8b">More...</a><br /></td></tr>
-<tr class="separator:af965fab34dfa0d7e27eeba8cd1d57e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6ea5a8ecd43051e8816b8d2b0e4be60"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#ae6ea5a8ecd43051e8816b8d2b0e4be60">Disconnect</a> (out Exception? exception)</td></tr>
+<tr class="memdesc:ae6ea5a8ecd43051e8816b8d2b0e4be60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnect form the RabbitMQ server.  <a href="interfaceIRmqcCore.html#ae6ea5a8ecd43051e8816b8d2b0e4be60">More...</a><br /></td></tr>
+<tr class="separator:ae6ea5a8ecd43051e8816b8d2b0e4be60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fc028053db91d5f3523fdb188d38cc8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a3fc028053db91d5f3523fdb188d38cc8">WriteMsg</a> (ref <a class="el" href="classRmqcMessage.html">RmqcMessage</a> message, out Exception? exception)</td></tr>
+<tr class="memdesc:a3fc028053db91d5f3523fdb188d38cc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a <a class="el" href="classRmqcMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">RmqcMessage</a> to the RabbitMQ server  <a href="interfaceIRmqcCore.html#a3fc028053db91d5f3523fdb188d38cc8">More...</a><br /></td></tr>
+<tr class="separator:a3fc028053db91d5f3523fdb188d38cc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78b9a75d26781c67262e597befb04f21"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a78b9a75d26781c67262e597befb04f21">ReadMsg</a> (out <a class="el" href="classRmqcMessage.html">RmqcMessage</a>? message, bool autoAck, out Exception? exception)</td></tr>
+<tr class="memdesc:a78b9a75d26781c67262e597befb04f21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a <a class="el" href="classRmqcMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">RmqcMessage</a> to the RabbitMQ server.  <a href="interfaceIRmqcCore.html#a78b9a75d26781c67262e597befb04f21">More...</a><br /></td></tr>
+<tr class="separator:a78b9a75d26781c67262e597befb04f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad263fa7736244f0e88e237fe5dbd7fad"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#ad263fa7736244f0e88e237fe5dbd7fad">AckMsg</a> (ref <a class="el" href="classRmqcMessage.html">RmqcMessage</a> message, out Exception? exception)</td></tr>
+<tr class="memdesc:ad263fa7736244f0e88e237fe5dbd7fad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ack a received <a class="el" href="classRmqcMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">RmqcMessage</a>.  <a href="interfaceIRmqcCore.html#ad263fa7736244f0e88e237fe5dbd7fad">More...</a><br /></td></tr>
+<tr class="separator:ad263fa7736244f0e88e237fe5dbd7fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae27118bbe3d2dffa67e103b3fcb9a87e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#ae27118bbe3d2dffa67e103b3fcb9a87e">NackMsg</a> (ref <a class="el" href="classRmqcMessage.html">RmqcMessage</a> message, bool requeue, out Exception? exception)</td></tr>
+<tr class="memdesc:ae27118bbe3d2dffa67e103b3fcb9a87e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nack a received <a class="el" href="classRmqcMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">RmqcMessage</a>.  <a href="interfaceIRmqcCore.html#ae27118bbe3d2dffa67e103b3fcb9a87e">More...</a><br /></td></tr>
+<tr class="separator:ae27118bbe3d2dffa67e103b3fcb9a87e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16931541827b1755cf6cba1c2d05970a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a16931541827b1755cf6cba1c2d05970a">WaitForWriteConfirm</a> (TimeSpan timeout, out Exception? exception)</td></tr>
-<tr class="memdesc:a16931541827b1755cf6cba1c2d05970a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait until the server confirms the written <a class="el" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">Message</a>.  <a href="interfaceIRmqcCore.html#a16931541827b1755cf6cba1c2d05970a">More...</a><br /></td></tr>
+<tr class="memdesc:a16931541827b1755cf6cba1c2d05970a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait until the server confirms the written <a class="el" href="classRmqcMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">RmqcMessage</a>.  <a href="interfaceIRmqcCore.html#a16931541827b1755cf6cba1c2d05970a">More...</a><br /></td></tr>
 <tr class="separator:a16931541827b1755cf6cba1c2d05970a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af74d3e6843f979ecf58f4518443fba55"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#af74d3e6843f979ecf58f4518443fba55">QueuedMsgs</a> (out uint? amount, out Exception? exception)</td></tr>
-<tr class="memdesc:af74d3e6843f979ecf58f4518443fba55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the amount of <a class="el" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">Message</a> stored in the RabbitMQ server queue which are ready get read.  <a href="interfaceIRmqcCore.html#af74d3e6843f979ecf58f4518443fba55">More...</a><br /></td></tr>
+<tr class="memdesc:af74d3e6843f979ecf58f4518443fba55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the amount of <a class="el" href="classRmqcMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">RmqcMessage</a> stored in the RabbitMQ server queue which are ready get read.  <a href="interfaceIRmqcCore.html#af74d3e6843f979ecf58f4518443fba55">More...</a><br /></td></tr>
 <tr class="separator:af74d3e6843f979ecf58f4518443fba55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:a3414fc41cd8609bf9b4bd6a010a30647"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSettings.html">Settings</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a3414fc41cd8609bf9b4bd6a010a30647">Settings</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a3414fc41cd8609bf9b4bd6a010a30647"><td class="mdescLeft">&#160;</td><td class="mdescRight">This object contains the settings for the RabbitMQ client.  <a href="interfaceIRmqcCore.html#a3414fc41cd8609bf9b4bd6a010a30647">More...</a><br /></td></tr>
-<tr class="separator:a3414fc41cd8609bf9b4bd6a010a30647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52a4c03065b461c79eebd86f6a332ca9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRmqcSettings.html">RmqcSettings</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a52a4c03065b461c79eebd86f6a332ca9">Settings</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a52a4c03065b461c79eebd86f6a332ca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This object contains the settings for the RabbitMQ client.  <a href="interfaceIRmqcCore.html#a52a4c03065b461c79eebd86f6a332ca9">More...</a><br /></td></tr>
+<tr class="separator:a52a4c03065b461c79eebd86f6a332ca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc07c6d24a6a53c8b83dd1800c486771"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#abc07c6d24a6a53c8b83dd1800c486771">Connected</a><code> [get]</code></td></tr>
 <tr class="memdesc:abc07c6d24a6a53c8b83dd1800c486771"><td class="mdescLeft">&#160;</td><td class="mdescRight">This flag indicates whether the client is connected the the RabbitMQ server or not.  <a href="interfaceIRmqcCore.html#abc07c6d24a6a53c8b83dd1800c486771">More...</a><br /></td></tr>
 <tr class="separator:abc07c6d24a6a53c8b83dd1800c486771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="events"></a>
+Events</h2></td></tr>
+<tr class="memitem:a60a31bda685c5c310cb57bcff39e4ec3"><td class="memItemLeft" align="right" valign="top">EventHandler&lt; <a class="el" href="classConnectCompletedEventArgs.html">ConnectCompletedEventArgs</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a60a31bda685c5c310cb57bcff39e4ec3">ConnectCompleted</a></td></tr>
+<tr class="memdesc:a60a31bda685c5c310cb57bcff39e4ec3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This events gets invoked when the connect function finishes.  <a href="interfaceIRmqcCore.html#a60a31bda685c5c310cb57bcff39e4ec3">More...</a><br /></td></tr>
+<tr class="separator:a60a31bda685c5c310cb57bcff39e4ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63c39ebe994d8a777de4d013ac7343be"><td class="memItemLeft" align="right" valign="top">EventHandler&lt; <a class="el" href="classDisconnectCompletedEventArgs.html">DisconnectCompletedEventArgs</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a63c39ebe994d8a777de4d013ac7343be">DisconnectCompleted</a></td></tr>
+<tr class="memdesc:a63c39ebe994d8a777de4d013ac7343be"><td class="mdescLeft">&#160;</td><td class="mdescRight">This events gets invoked when the disconnect function finishes.  <a href="interfaceIRmqcCore.html#a63c39ebe994d8a777de4d013ac7343be">More...</a><br /></td></tr>
+<tr class="separator:a63c39ebe994d8a777de4d013ac7343be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a082b376cdb622d0bebe21612fea940e4"><td class="memItemLeft" align="right" valign="top">EventHandler&lt; <a class="el" href="classWriteMsgCompletedEventArgs.html">WriteMsgCompletedEventArgs</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a082b376cdb622d0bebe21612fea940e4">WriteMsgCompleted</a></td></tr>
+<tr class="memdesc:a082b376cdb622d0bebe21612fea940e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This events gets invoked when the write msg function finishes.  <a href="interfaceIRmqcCore.html#a082b376cdb622d0bebe21612fea940e4">More...</a><br /></td></tr>
+<tr class="separator:a082b376cdb622d0bebe21612fea940e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b09c4e1911506f3fd4279e26adbb479"><td class="memItemLeft" align="right" valign="top">EventHandler&lt; <a class="el" href="classReadMsgCompletedEventArgs.html">ReadMsgCompletedEventArgs</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a2b09c4e1911506f3fd4279e26adbb479">ReadMsgCompleted</a></td></tr>
+<tr class="memdesc:a2b09c4e1911506f3fd4279e26adbb479"><td class="mdescLeft">&#160;</td><td class="mdescRight">This events gets invoked when the read msg function finishes.  <a href="interfaceIRmqcCore.html#a2b09c4e1911506f3fd4279e26adbb479">More...</a><br /></td></tr>
+<tr class="separator:a2b09c4e1911506f3fd4279e26adbb479"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0213ae5881c662d751366395f5a15c78"><td class="memItemLeft" align="right" valign="top">EventHandler&lt; <a class="el" href="classAckMsgCompletedEventArgs.html">AckMsgCompletedEventArgs</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a0213ae5881c662d751366395f5a15c78">AckMsgCompleted</a></td></tr>
+<tr class="memdesc:a0213ae5881c662d751366395f5a15c78"><td class="mdescLeft">&#160;</td><td class="mdescRight">This events gets invoked when the ack msg function finishes.  <a href="interfaceIRmqcCore.html#a0213ae5881c662d751366395f5a15c78">More...</a><br /></td></tr>
+<tr class="separator:a0213ae5881c662d751366395f5a15c78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb08e04cf4b8c8d2195fb9ddd8eabb2e"><td class="memItemLeft" align="right" valign="top">EventHandler&lt; <a class="el" href="classNackMsgCompletedEventArgs.html">NackMsgCompletedEventArgs</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#abb08e04cf4b8c8d2195fb9ddd8eabb2e">NAckMsgComplete</a></td></tr>
+<tr class="memdesc:abb08e04cf4b8c8d2195fb9ddd8eabb2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This events gets invoked when the nack msg function finishes.  <a href="interfaceIRmqcCore.html#abb08e04cf4b8c8d2195fb9ddd8eabb2e">More...</a><br /></td></tr>
+<tr class="separator:abb08e04cf4b8c8d2195fb9ddd8eabb2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e4914fa7b5329cf634866b42e97361c"><td class="memItemLeft" align="right" valign="top">EventHandler&lt; <a class="el" href="classQueuedMsgsCompletedEventArgs.html">QueuedMsgsCompletedEventArgs</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a2e4914fa7b5329cf634866b42e97361c">QueuedMsgsCompleted</a></td></tr>
+<tr class="memdesc:a2e4914fa7b5329cf634866b42e97361c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This events gets invoked when the queued msg's function finishes.  <a href="interfaceIRmqcCore.html#a2e4914fa7b5329cf634866b42e97361c">More...</a><br /></td></tr>
+<tr class="separator:a2e4914fa7b5329cf634866b42e97361c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a344891e24d9c03c0a40062c8ebf26453"><td class="memItemLeft" align="right" valign="top">EventHandler&lt; <a class="el" href="classConnectionStatusChangedEventArgs.html">ConnectionStatusChangedEventArgs</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#a344891e24d9c03c0a40062c8ebf26453">ConnectionStateChanged</a></td></tr>
+<tr class="memdesc:a344891e24d9c03c0a40062c8ebf26453"><td class="mdescLeft">&#160;</td><td class="mdescRight">This events gets invoked when the connection status changes.  <a href="interfaceIRmqcCore.html#a344891e24d9c03c0a40062c8ebf26453">More...</a><br /></td></tr>
+<tr class="separator:a344891e24d9c03c0a40062c8ebf26453"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3f7074d9d863c18e43d5c8ac3eff1ed"><td class="memItemLeft" align="right" valign="top">EventHandler&lt; <a class="el" href="classErrorOccurredEventArgs.html">ErrorOccurredEventArgs</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceIRmqcCore.html#ad3f7074d9d863c18e43d5c8ac3eff1ed">ErrorOccurred</a></td></tr>
+<tr class="memdesc:ad3f7074d9d863c18e43d5c8ac3eff1ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">This events gets invoked when an error occurred.  <a href="interfaceIRmqcCore.html#ad3f7074d9d863c18e43d5c8ac3eff1ed">More...</a><br /></td></tr>
+<tr class="separator:ad3f7074d9d863c18e43d5c8ac3eff1ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This interface defines the core functionality to connect and communicate with a RabbitMQ server. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aba970a55824bb76afa053ec87aba4433"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba970a55824bb76afa053ec87aba4433">&#9670;&nbsp;</a></span>AckMsg()</h2>
+<a id="ad263fa7736244f0e88e237fe5dbd7fad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad263fa7736244f0e88e237fe5dbd7fad">&#9670;&nbsp;</a></span>AckMsg()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -140,7 +171,7 @@ Properties</h2></td></tr>
         <tr>
           <td class="memname">bool IRmqcCore.AckMsg </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classMessage.html">Message</a>&#160;</td>
+          <td class="paramtype">ref <a class="el" href="classRmqcMessage.html">RmqcMessage</a>&#160;</td>
           <td class="paramname"><em>message</em>, </td>
         </tr>
         <tr>
@@ -157,7 +188,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Ack a received <a class="el" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">Message</a>. </p>
+<p>Ack a received <a class="el" href="classRmqcMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">RmqcMessage</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">message</td><td></td></tr>
@@ -167,7 +198,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> on success, else <code>false</code>.</dd></dl>
 
-<p>Implemented in <a class="el" href="classRmqcWrapper.html#acdb81c7a8860cb453e65749a39d57d75">RmqcWrapper</a>, and <a class="el" href="classRmqcCore.html#a94a35fe151dcef85e0c1e723870a9ef3">RmqcCore</a>.</p>
+<p>Implemented in <a class="el" href="classRmqcWrapper.html#a63a167dbfcf3889716a39c1a6da113c8">RmqcWrapper</a>, and <a class="el" href="classRmqcCore.html#a1b548cc413f97f5b7764e973e6b0bfbd">RmqcCore</a>.</p>
 
 </div>
 </div>
@@ -221,24 +252,32 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a722470d1d6b6cbc1ed65d521ccb65f4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a722470d1d6b6cbc1ed65d521ccb65f4f">&#9670;&nbsp;</a></span>Disconnect()</h2>
+<a id="ae6ea5a8ecd43051e8816b8d2b0e4be60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6ea5a8ecd43051e8816b8d2b0e4be60">&#9670;&nbsp;</a></span>Disconnect()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void IRmqcCore.Disconnect </td>
+          <td class="memname">bool IRmqcCore.Disconnect </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">out Exception?&#160;</td>
+          <td class="paramname"><em>exception</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Disconnect form the RabbitMQ server. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">exception</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> on success, else <code>false</code>.</dd></dl>
 
-<p>Implemented in <a class="el" href="classRmqcWrapper.html#a6924e23e3605d3e3b200952c4c708d7e">RmqcWrapper</a>, <a class="el" href="classRmqcWrapper.html#a7129c11b9e4c0019603dcc0a9e8874bb">RmqcWrapper</a>, <a class="el" href="interfaceIRmqcWrapper.html#ab8568ed0e1a67c99c5e56bed12e71531">IRmqcWrapper</a>, and <a class="el" href="classRmqcCore.html#aca9f6671c825660368c3e5cb419aa3ac">RmqcCore</a>.</p>
+<p>Implemented in <a class="el" href="classRmqcWrapper.html#ad47159ac7642dfb9754d661bac341042">RmqcWrapper</a>, and <a class="el" href="classRmqcCore.html#a0d6211798a815377dbfa315a036bcebf">RmqcCore</a>.</p>
 
 </div>
 </div>
@@ -263,8 +302,8 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="af965fab34dfa0d7e27eeba8cd1d57e8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af965fab34dfa0d7e27eeba8cd1d57e8b">&#9670;&nbsp;</a></span>NackMsg()</h2>
+<a id="ae27118bbe3d2dffa67e103b3fcb9a87e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae27118bbe3d2dffa67e103b3fcb9a87e">&#9670;&nbsp;</a></span>NackMsg()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -272,7 +311,7 @@ Properties</h2></td></tr>
         <tr>
           <td class="memname">bool IRmqcCore.NackMsg </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classMessage.html">Message</a>&#160;</td>
+          <td class="paramtype">ref <a class="el" href="classRmqcMessage.html">RmqcMessage</a>&#160;</td>
           <td class="paramname"><em>message</em>, </td>
         </tr>
         <tr>
@@ -295,7 +334,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Nack a received <a class="el" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">Message</a>. </p>
+<p>Nack a received <a class="el" href="classRmqcMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">RmqcMessage</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">message</td><td></td></tr>
@@ -306,7 +345,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> on success, else <code>false</code>.</dd></dl>
 
-<p>Implemented in <a class="el" href="classRmqcWrapper.html#a8be32a561c40a3570527855cd0a457c6">RmqcWrapper</a>, and <a class="el" href="classRmqcCore.html#a587167aa92a39e187dda604f13a22e1e">RmqcCore</a>.</p>
+<p>Implemented in <a class="el" href="classRmqcWrapper.html#a233779da8f1916fd52f56d585b69ed54">RmqcWrapper</a>, and <a class="el" href="classRmqcCore.html#ad29676cb4099b5d190334884fbc33791">RmqcCore</a>.</p>
 
 </div>
 </div>
@@ -336,7 +375,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get the amount of <a class="el" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">Message</a> stored in the RabbitMQ server queue which are ready get read. </p>
+<p>Get the amount of <a class="el" href="classRmqcMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">RmqcMessage</a> stored in the RabbitMQ server queue which are ready get read. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">amount</td><td></td></tr>
@@ -350,8 +389,8 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="aefbb4353d40985cbd18e7d366a7ce117"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aefbb4353d40985cbd18e7d366a7ce117">&#9670;&nbsp;</a></span>ReadMsg()</h2>
+<a id="a78b9a75d26781c67262e597befb04f21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78b9a75d26781c67262e597befb04f21">&#9670;&nbsp;</a></span>ReadMsg()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -359,7 +398,7 @@ Properties</h2></td></tr>
         <tr>
           <td class="memname">bool IRmqcCore.ReadMsg </td>
           <td>(</td>
-          <td class="paramtype">out <a class="el" href="classMessage.html">Message</a>?&#160;</td>
+          <td class="paramtype">out <a class="el" href="classRmqcMessage.html">RmqcMessage</a>?&#160;</td>
           <td class="paramname"><em>message</em>, </td>
         </tr>
         <tr>
@@ -382,7 +421,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Read a <a class="el" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">Message</a> to the RabbitMQ server. </p>
+<p>Read a <a class="el" href="classRmqcMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">RmqcMessage</a> to the RabbitMQ server. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">message</td><td></td></tr>
@@ -393,7 +432,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> on success, else <code>false</code>.</dd></dl>
 
-<p>Implemented in <a class="el" href="classRmqcWrapper.html#a7dd24c6ca827e27b225cc3d784bdafd6">RmqcWrapper</a>, and <a class="el" href="classRmqcCore.html#aa7b3f418c031765f89a4e5a8bc060b34">RmqcCore</a>.</p>
+<p>Implemented in <a class="el" href="classRmqcWrapper.html#a2e0961173227e3b34fa46cb489db45b8">RmqcWrapper</a>, and <a class="el" href="classRmqcCore.html#a89050a3f0ab48b2f0a0dcdd6f8826a19">RmqcCore</a>.</p>
 
 </div>
 </div>
@@ -423,7 +462,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Wait until the server confirms the written <a class="el" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">Message</a>. </p>
+<p>Wait until the server confirms the written <a class="el" href="classRmqcMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">RmqcMessage</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">timeout</td><td></td></tr>
@@ -437,8 +476,8 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a018847e1171d30a77e99454f79b0802c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a018847e1171d30a77e99454f79b0802c">&#9670;&nbsp;</a></span>WriteMsg()</h2>
+<a id="a3fc028053db91d5f3523fdb188d38cc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fc028053db91d5f3523fdb188d38cc8">&#9670;&nbsp;</a></span>WriteMsg()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -446,7 +485,7 @@ Properties</h2></td></tr>
         <tr>
           <td class="memname">bool IRmqcCore.WriteMsg </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classMessage.html">Message</a>&#160;</td>
+          <td class="paramtype">ref <a class="el" href="classRmqcMessage.html">RmqcMessage</a>&#160;</td>
           <td class="paramname"><em>message</em>, </td>
         </tr>
         <tr>
@@ -463,7 +502,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Write a <a class="el" href="classMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">Message</a> to the RabbitMQ server </p>
+<p>Write a <a class="el" href="classRmqcMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">RmqcMessage</a> to the RabbitMQ server </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">message</td><td></td></tr>
@@ -473,7 +512,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> on success, else <code>false</code>.</dd></dl>
 
-<p>Implemented in <a class="el" href="classRmqcWrapper.html#a6cbb6947aeb073ac18437775dc8bd406">RmqcWrapper</a>, and <a class="el" href="classRmqcCore.html#a0a0e5bd98b7eec0f124d13136520b0ec">RmqcCore</a>.</p>
+<p>Implemented in <a class="el" href="classRmqcWrapper.html#ac7da2806678bf92717129ba6189ab400">RmqcWrapper</a>, and <a class="el" href="classRmqcCore.html#ad172143b56ccad251356120c54720bad">RmqcCore</a>.</p>
 
 </div>
 </div>
@@ -502,8 +541,8 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a3414fc41cd8609bf9b4bd6a010a30647"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3414fc41cd8609bf9b4bd6a010a30647">&#9670;&nbsp;</a></span>Settings</h2>
+<a id="a52a4c03065b461c79eebd86f6a332ca9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52a4c03065b461c79eebd86f6a332ca9">&#9670;&nbsp;</a></span>Settings</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -512,7 +551,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classSettings.html">Settings</a> IRmqcCore.Settings</td>
+          <td class="memname"><a class="el" href="classRmqcSettings.html">RmqcSettings</a> IRmqcCore.Settings</td>
         </tr>
       </table>
   </td>
@@ -523,6 +562,151 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This object contains the settings for the RabbitMQ client. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Event Documentation</h2>
+<a id="a0213ae5881c662d751366395f5a15c78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0213ae5881c662d751366395f5a15c78">&#9670;&nbsp;</a></span>AckMsgCompleted</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventHandler&lt;<a class="el" href="classAckMsgCompletedEventArgs.html">AckMsgCompletedEventArgs</a>&gt; IRmqcCore.AckMsgCompleted</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This events gets invoked when the ack msg function finishes. </p>
+
+</div>
+</div>
+<a id="a60a31bda685c5c310cb57bcff39e4ec3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60a31bda685c5c310cb57bcff39e4ec3">&#9670;&nbsp;</a></span>ConnectCompleted</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventHandler&lt;<a class="el" href="classConnectCompletedEventArgs.html">ConnectCompletedEventArgs</a>&gt; IRmqcCore.ConnectCompleted</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This events gets invoked when the connect function finishes. </p>
+
+</div>
+</div>
+<a id="a344891e24d9c03c0a40062c8ebf26453"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a344891e24d9c03c0a40062c8ebf26453">&#9670;&nbsp;</a></span>ConnectionStateChanged</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventHandler&lt;<a class="el" href="classConnectionStatusChangedEventArgs.html">ConnectionStatusChangedEventArgs</a>&gt; IRmqcCore.ConnectionStateChanged</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This events gets invoked when the connection status changes. </p>
+
+</div>
+</div>
+<a id="a63c39ebe994d8a777de4d013ac7343be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63c39ebe994d8a777de4d013ac7343be">&#9670;&nbsp;</a></span>DisconnectCompleted</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventHandler&lt;<a class="el" href="classDisconnectCompletedEventArgs.html">DisconnectCompletedEventArgs</a>&gt; IRmqcCore.DisconnectCompleted</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This events gets invoked when the disconnect function finishes. </p>
+
+</div>
+</div>
+<a id="ad3f7074d9d863c18e43d5c8ac3eff1ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3f7074d9d863c18e43d5c8ac3eff1ed">&#9670;&nbsp;</a></span>ErrorOccurred</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventHandler&lt;<a class="el" href="classErrorOccurredEventArgs.html">ErrorOccurredEventArgs</a>&gt; IRmqcCore.ErrorOccurred</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This events gets invoked when an error occurred. </p>
+
+</div>
+</div>
+<a id="abb08e04cf4b8c8d2195fb9ddd8eabb2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb08e04cf4b8c8d2195fb9ddd8eabb2e">&#9670;&nbsp;</a></span>NAckMsgComplete</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventHandler&lt;<a class="el" href="classNackMsgCompletedEventArgs.html">NackMsgCompletedEventArgs</a>&gt; IRmqcCore.NAckMsgComplete</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This events gets invoked when the nack msg function finishes. </p>
+
+</div>
+</div>
+<a id="a2e4914fa7b5329cf634866b42e97361c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e4914fa7b5329cf634866b42e97361c">&#9670;&nbsp;</a></span>QueuedMsgsCompleted</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventHandler&lt;<a class="el" href="classQueuedMsgsCompletedEventArgs.html">QueuedMsgsCompletedEventArgs</a>&gt; IRmqcCore.QueuedMsgsCompleted</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This events gets invoked when the queued msg's function finishes. </p>
+
+</div>
+</div>
+<a id="a2b09c4e1911506f3fd4279e26adbb479"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b09c4e1911506f3fd4279e26adbb479">&#9670;&nbsp;</a></span>ReadMsgCompleted</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventHandler&lt;<a class="el" href="classReadMsgCompletedEventArgs.html">ReadMsgCompletedEventArgs</a>&gt; IRmqcCore.ReadMsgCompleted</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This events gets invoked when the read msg function finishes. </p>
+
+</div>
+</div>
+<a id="a082b376cdb622d0bebe21612fea940e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a082b376cdb622d0bebe21612fea940e4">&#9670;&nbsp;</a></span>WriteMsgCompleted</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventHandler&lt;<a class="el" href="classWriteMsgCompletedEventArgs.html">WriteMsgCompletedEventArgs</a>&gt; IRmqcCore.WriteMsgCompleted</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This events gets invoked when the write msg function finishes. </p>
 
 </div>
 </div>

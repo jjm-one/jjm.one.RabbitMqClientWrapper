@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hostname_39',['Hostname',['../classSettings.html#a95d7251b6c728fb1c913a869d312776e',1,'Settings']]]
+  ['gethashcode_62',['GetHashCode',['../classRmqcSettings.html#ad07f8184d453ff5e931ec3a51e180b0b',1,'RmqcSettings']]]
 ];
