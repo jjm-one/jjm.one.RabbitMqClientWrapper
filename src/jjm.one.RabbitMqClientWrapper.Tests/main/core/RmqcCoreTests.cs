@@ -153,6 +153,9 @@ public class RmqcCoreTests
     {
         // arrange
         var settingsMockTemp = new Mock<RmqcSettings>();
+        settingsMockTemp.Setup(x => x.Hostname).Returns("test");
+        settingsMockTemp.Setup(x => x.Username).Returns("TestUser");
+        settingsMockTemp.Setup(x => x.Password).Returns("TestPwd");
         _channelMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.Close());
         _channelMock.Setup(x => x.Dispose());
@@ -307,6 +310,9 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_InitTest()
     {
         // arrange
+        _settingsMock.Setup(x => x.Hostname).Returns("test");
+        _settingsMock.Setup(x => x.Username).Returns("TestUser");
+        _settingsMock.Setup(x => x.Password).Returns("TestPwd");
         
         try
         {
