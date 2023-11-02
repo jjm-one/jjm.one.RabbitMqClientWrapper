@@ -100,6 +100,17 @@ public class RmqcWrapper : IRmqcWrapper
         _core = new RmqcCore(settings);
         _logger = logger;
 
+        // register event callbacks
+        _core.ConnectCompleted += OnConnectCompleted;
+        _core.DisconnectCompleted += OnDisconnectCompleted;
+        _core.WriteMsgCompleted += OnWriteMsgCompleted;
+        _core.ReadMsgCompleted += OnReadMsgCompleted;
+        _core.AckMsgCompleted += OnAckMsgCompleted;
+        _core.NAckMsgComplete += OnNAckMsgComplete;
+        _core.QueuedMsgsCompleted += OnQueuedMsgsCompleted;
+        _core.ConnectionStateChanged += OnConnectionStateChanged;
+        _core.ErrorOccurred += OnErrorOccurred;
+        
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
     }

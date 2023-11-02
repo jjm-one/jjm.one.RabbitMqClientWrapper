@@ -2,6 +2,7 @@ using System;
 using FluentAssertions;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
+using jjm.one.RabbitMqClientWrapper.types.events;
 using jjm.one.RabbitMqClientWrapper.types.exceptions;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -297,6 +298,8 @@ public class RmqcCoreTests
     
     #region public methods tests
 
+    #region init & de-init
+
     /// <summary>
     /// Testes the Init method.
     /// </summary>
@@ -304,7 +307,7 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_InitTest()
     {
         // arrange
-
+        
         try
         {
             // act
@@ -336,6 +339,10 @@ public class RmqcCoreTests
             Assert.Fail(exc.Message);
         }
     }
+
+    #endregion
+
+    #region Connect
 
     /// <summary>
     /// Testes the Connect method. (Test 1)
@@ -372,7 +379,7 @@ public class RmqcCoreTests
 
         // assert
         _connectionFactoryMock.Verify(x => x.CreateConnection(), Times.Once);
-        _connectionMock.Verify(x => x.CreateModel(), Times.AtMostOnce);
+        _connectionMock.Verify(x => x.CreateModel(), Times.Never);
         res.Should().BeFalse();
         resExc.Should().BeOfType<NoConnectionException>();
     }
@@ -391,7 +398,7 @@ public class RmqcCoreTests
         var res = _sut.Connect(out var resExc);
 
         // assert
-        _connectionFactoryMock.Verify(x => x.CreateConnection(), Times.AtMostOnce);
+        _connectionFactoryMock.Verify(x => x.CreateConnection(), Times.Once);
         _connectionMock.Verify(x => x.CreateModel(), Times.Once);
         res.Should().BeFalse();
         resExc.Should().BeOfType<NoChannelException>();
@@ -407,18 +414,192 @@ public class RmqcCoreTests
         _sut = new RmqcCore(new RmqcSettings(), _rmqcCoreLoggingMock.Object,
             null, _connectionMock.Object, _channelMock.Object);
         _connectionFactoryMock.Setup(x => x.CreateConnection()).Returns(_connectionMock.Object);
-        _connectionMock.Setup(x => x.CreateModel()).Returns(value: null!);
+        _connectionMock.Setup(x => x.CreateModel()).Returns(_channelMock.Object);
 
         // act
         var res = _sut.Connect(out var resExc);
 
         // assert
-        _connectionFactoryMock.Verify(x => x.CreateConnection(), Times.AtMostOnce);
-        _connectionMock.Verify(x => x.CreateModel(), Times.AtMostOnce);
+        _connectionFactoryMock.Verify(x => x.CreateConnection(), Times.Never);
+        _connectionMock.Verify(x => x.CreateModel(), Times.Never);
         res.Should().BeFalse();
         resExc.Should().BeOfType<NoConnectionFactoryException>();
     }
     
+    /// <summary>
+    /// Testes the Connect method. (Test 5)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_ConnectTest5()
+    {
+        // arrange
+        _connectionFactoryMock.Setup(x => x.CreateConnection()).Returns(_connectionMock.Object);
+        _connectionMock.Setup(x => x.CreateModel()).Returns(_channelMock.Object);
+
+        // act
+        var evt = Assert.RaisesAny<ConnectCompletedEventArgs>(
+            x => _sut.ConnectCompleted += x,
+            x => _sut.ConnectCompleted -= x,
+            () => _sut.Connect(out _));
+
+        // assert
+        evt.Should().NotBeNull();
+        evt.Sender.Should().Be(_sut);
+        evt.Arguments.Successful.Should().BeTrue();
+        evt.Arguments.Exception.Should().BeNull();
+        evt.Arguments.CompletionTime.Should().HaveValue();
+    }
+    
+    /// <summary>
+    /// Testes the Connect method. (Test 6)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_ConnectTest6()
+    {
+        // arrange
+        _connectionFactoryMock.Setup(x => x.CreateConnection()).Returns(value: null!);
+        _connectionMock.Setup(x => x.CreateModel()).Returns(_channelMock.Object);
+
+        // act
+        var evt = Assert.RaisesAny<ConnectCompletedEventArgs>(
+            x => _sut.ConnectCompleted += x,
+            x => _sut.ConnectCompleted -= x,
+            () => _sut.Connect(out _));
+
+        // assert
+        evt.Should().NotBeNull();
+        evt.Sender.Should().Be(_sut);
+        evt.Arguments.Successful.Should().BeFalse();
+        evt.Arguments.Exception.Should().BeOfType<NoConnectionException>();
+        evt.Arguments.CompletionTime.Should().HaveValue();
+    }
+    
+    /// <summary>
+    /// Testes the Connect method. (Test 7)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_ConnectTest7()
+    {
+        // arrange
+        _connectionFactoryMock.Setup(x => x.CreateConnection()).Returns(_connectionMock.Object);
+        _connectionMock.Setup(x => x.CreateModel()).Returns(value: null!);
+
+        // act
+        var evt = Assert.RaisesAny<ConnectCompletedEventArgs>(
+            x => _sut.ConnectCompleted += x,
+            x => _sut.ConnectCompleted -= x,
+            () => _sut.Connect(out _));
+
+        // assert
+        evt.Should().NotBeNull();
+        evt.Sender.Should().Be(_sut);
+        evt.Arguments.Successful.Should().BeFalse();
+        evt.Arguments.Exception.Should().BeOfType<NoChannelException>();
+        evt.Arguments.CompletionTime.Should().HaveValue();
+    }
+    
+    /// <summary>
+    /// Testes the Connect method. (Test 8)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_ConnectTest8()
+    {
+        // arrange
+        _sut = new RmqcCore(new RmqcSettings(), _rmqcCoreLoggingMock.Object,
+            null, _connectionMock.Object, _channelMock.Object);
+        _connectionFactoryMock.Setup(x => x.CreateConnection()).Returns(_connectionMock.Object);
+        _connectionMock.Setup(x => x.CreateModel()).Returns(_channelMock.Object);
+
+        // act
+        var evt = Assert.RaisesAny<ConnectCompletedEventArgs>(
+            x => _sut.ConnectCompleted += x,
+            x => _sut.ConnectCompleted -= x,
+            () => _sut.Connect(out _));
+
+        // assert
+        evt.Should().NotBeNull();
+        evt.Sender.Should().Be(_sut);
+        evt.Arguments.Successful.Should().BeFalse();
+        evt.Arguments.Exception.Should().BeOfType<NoConnectionFactoryException>();
+        evt.Arguments.CompletionTime.Should().HaveValue();
+    }
+
+    /// <summary>
+    /// Testes the Connect method. (Test 9)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_ConnectTest9()
+    {
+        // arrange
+        _connectionFactoryMock.Setup(x => x.CreateConnection()).Returns(_connectionMock.Object);
+        _connectionMock.Setup(x => x.CreateModel()).Returns(_channelMock.Object);
+
+        // act
+        var evt = Assert.RaisesAny<ConnectionStatusChangedEventArgs>(
+            x => _sut.ConnectionStateChanged += x,
+            x => _sut.ConnectionStateChanged -= x,
+            () => _sut.Connect(out _));
+
+        // assert
+        evt.Should().NotBeNull();
+        evt.Sender.Should().Be(_sut);
+        evt.Arguments.Status.Should().BeTrue();
+    }
+    
+    /// <summary>
+    /// Testes the Connect method. (Test 10)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_ConnectTest10()
+    {
+        // arrange
+        _connectionFactoryMock.Setup(x => x.CreateConnection()).Returns(_connectionMock.Object);
+        _connectionMock.Setup(x => x.CreateModel()).Returns(_channelMock.Object);
+        _sut.Connect(out _);
+        _connectionFactoryMock.Setup(x => x.CreateConnection()).Returns(value: null!);
+        _connectionMock.Setup(x => x.CreateModel()).Returns(_channelMock.Object);
+
+        // act
+        var evt = Assert.RaisesAny<ConnectionStatusChangedEventArgs>(
+            x => _sut.ConnectionStateChanged += x,
+            x => _sut.ConnectionStateChanged -= x,
+            () => _sut.Connect(out _));
+
+        // assert
+        evt.Should().NotBeNull();
+        evt.Sender.Should().Be(_sut);
+        evt.Arguments.Status.Should().BeFalse();
+    }
+    
+    /// <summary>
+    /// Testes the Connect method. (Test 11)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_ConnectTest11()
+    {
+        // arrange
+        _connectionFactoryMock.Setup(x => x.CreateConnection()).Returns(_connectionMock.Object);
+        _connectionMock.Setup(x => x.CreateModel()).Returns(_channelMock.Object);
+        _sut.Connect(out _);
+        _connectionFactoryMock.Setup(x => x.CreateConnection()).Returns(_connectionMock.Object);
+        _connectionMock.Setup(x => x.CreateModel()).Returns(value: null!);
+
+        // act
+        var evt = Assert.RaisesAny<ConnectionStatusChangedEventArgs>(
+            x => _sut.ConnectionStateChanged += x,
+            x => _sut.ConnectionStateChanged -= x,
+            () => _sut.Connect(out _));
+
+        // assert
+        evt.Should().NotBeNull();
+        evt.Sender.Should().Be(_sut);
+        evt.Arguments.Status.Should().BeFalse();
+    }
+    
+    #endregion
+
+    #region Disconnect
+
     /// <summary>
     /// Testes the Disconnect method. (Test 1)
     /// </summary>
@@ -436,7 +617,7 @@ public class RmqcCoreTests
         // act
         var res = _sut.Disconnect(out var resExc);
             
-        // assert+
+        // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
         _channelMock.Verify(x => x.IsOpen, Times.Once);
@@ -467,14 +648,130 @@ public class RmqcCoreTests
         // assert
         res.Should().BeFalse();
         resExc.Should().NotBeNull();
-        _channelMock.Verify(x => x.IsOpen, Times.AtMostOnce);
-        _channelMock.Verify(x => x.Close(), Times.AtMostOnce);
-        _channelMock.Verify(x => x.Dispose(), Times.AtMostOnce);
-        _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
-        _connectionMock.Verify(x => x.Close(), Times.AtMostOnce);
-        _connectionMock.Verify(x => x.Dispose(), Times.AtMostOnce);
+        _channelMock.Verify(x => x.IsOpen, Times.Once);
+        _channelMock.Verify(x => x.Close(), Times.Once);
+        _channelMock.Verify(x => x.Dispose(), Times.Never);
+        _connectionMock.Verify(x => x.IsOpen, Times.Never);
+        _connectionMock.Verify(x => x.Close(), Times.Never);
+        _connectionMock.Verify(x => x.Dispose(), Times.Never);
     }
     
+    /// <summary>
+    /// Testes the Disconnect method. (Test 3)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_DisconnectTest3()
+    {
+        // arrange
+        _channelMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.Close());
+        _channelMock.Setup(x => x.Dispose());
+        _connectionMock.Setup(x => x.IsOpen).Returns(true);
+        _connectionMock.Setup(x => x.Close()).Throws<Exception>();
+        _connectionMock.Setup(x => x.Dispose());
+
+        // act
+        var res = _sut.Disconnect(out var resExc);
+        
+        // assert
+        res.Should().BeFalse();
+        resExc.Should().NotBeNull();
+        _channelMock.Verify(x => x.IsOpen, Times.Once);
+        _channelMock.Verify(x => x.Close(), Times.Once);
+        _channelMock.Verify(x => x.Dispose(), Times.Once);
+        _connectionMock.Verify(x => x.IsOpen, Times.Once);
+        _connectionMock.Verify(x => x.Close(), Times.Once);
+        _connectionMock.Verify(x => x.Dispose(), Times.Never);
+    }
+
+    /// <summary>
+    /// Testes the Disconnect method. (Test 4)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_DisconnectTest4()
+    {
+        // arrange
+        _channelMock.Setup(x => x.IsOpen).Returns(false);
+        _channelMock.Setup(x => x.Close());
+        _channelMock.Setup(x => x.Dispose());
+        _connectionMock.Setup(x => x.IsOpen).Returns(true);
+        _connectionMock.Setup(x => x.Close());
+        _connectionMock.Setup(x => x.Dispose());
+
+        // act
+        var res = _sut.Disconnect(out var resExc);
+            
+        // assert
+        res.Should().BeTrue();
+        resExc.Should().BeNull();
+        _channelMock.Verify(x => x.IsOpen, Times.Once);
+        _channelMock.Verify(x => x.Close(), Times.Never);
+        _channelMock.Verify(x => x.Dispose(), Times.Once);
+        _connectionMock.Verify(x => x.IsOpen, Times.Once);
+        _connectionMock.Verify(x => x.Close(), Times.Once);
+        _connectionMock.Verify(x => x.Dispose(), Times.Once);
+    }
+    
+    /// <summary>
+    /// Testes the Disconnect method. (Test 5)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_DisconnectTest5()
+    {
+        // arrange
+        _channelMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.Close());
+        _channelMock.Setup(x => x.Dispose());
+        _connectionMock.Setup(x => x.IsOpen).Returns(false);
+        _connectionMock.Setup(x => x.Close());
+        _connectionMock.Setup(x => x.Dispose());
+
+        // act
+        var res = _sut.Disconnect(out var resExc);
+            
+        // assert
+        res.Should().BeTrue();
+        resExc.Should().BeNull();
+        _channelMock.Verify(x => x.IsOpen, Times.Once);
+        _channelMock.Verify(x => x.Close(), Times.Once);
+        _channelMock.Verify(x => x.Dispose(), Times.Once);
+        _connectionMock.Verify(x => x.IsOpen, Times.Once);
+        _connectionMock.Verify(x => x.Close(), Times.Never);
+        _connectionMock.Verify(x => x.Dispose(), Times.Once);
+    }
+    
+    /// <summary>
+    /// Testes the Disconnect method. (Test 6)
+    /// </summary>
+    [Fact]
+    public void RmqcWrapperTest_DisconnectTest6()
+    {
+        // arrange
+        _channelMock.Setup(x => x.IsOpen).Returns(true);
+        _channelMock.Setup(x => x.Close());
+        _channelMock.Setup(x => x.Dispose());
+        _connectionMock.Setup(x => x.IsOpen).Returns(true);
+        _connectionMock.Setup(x => x.Close());
+        _connectionMock.Setup(x => x.Dispose());
+
+        // act
+        var evt = Assert.RaisesAny<DisconnectCompletedEventArgs>(
+            x => _sut.DisconnectCompleted += x,
+            x => _sut.DisconnectCompleted -= x,
+            () => _sut.Disconnect(out _));
+
+        // assert
+        evt.Should().NotBeNull();
+        evt.Sender.Should().Be(_sut);
+        evt.Arguments.Successful.Should().BeTrue();
+        evt.Arguments.Exception.Should().BeNull();
+        evt.Arguments.CompletionTime.Should().HaveValue();
+    }
+    
+    #endregion
+
+    #region WriteMsg
+
     /// <summary>
     /// Testes the WriteMsg method. (Test 1)
     /// </summary>
@@ -528,7 +825,11 @@ public class RmqcCoreTests
         res.Should().BeFalse();
         resExc.Should().BeOfType<InvalidOperationException>();
     }
-    
+
+    #endregion
+
+    #region ReadMsg
+
     /// <summary>
     /// Testes the ReadMsg method. (Test 1)
     /// </summary>
@@ -604,6 +905,10 @@ public class RmqcCoreTests
         resExc.Should().BeNull();
     }
 
+    #endregion
+
+    #region AckMsg
+
     /// <summary>
     /// Testes the AckMsg method. (Test 1)
     /// </summary>
@@ -650,6 +955,10 @@ public class RmqcCoreTests
         resExc.Should().BeOfType<InvalidOperationException>();
     }
 
+    #endregion
+
+    #region NackMsg
+
     /// <summary>
     /// Testes the NackMsg method. (Test 1)
     /// </summary>
@@ -695,7 +1004,11 @@ public class RmqcCoreTests
         res.Should().BeFalse();
         resExc.Should().BeOfType<InvalidOperationException>();
     }
-    
+
+    #endregion
+
+    #region WaitForWriteConfirm
+
     /// <summary>
     /// Testes the WaitForWriteConfirm method. (Test 1)
     /// </summary>
@@ -741,7 +1054,11 @@ public class RmqcCoreTests
         res.Should().BeFalse();
         resExc.Should().BeOfType<InvalidOperationException>();
     }
-    
+
+    #endregion
+
+    #region QueuedMsgs
+
     /// <summary>
     /// Testes the QueuedMsgs method. (Test 1)
     /// </summary>
@@ -789,6 +1106,8 @@ public class RmqcCoreTests
         a.Should().BeNull();
         resExc.Should().BeOfType<InvalidOperationException>();
     }
+
+    #endregion
     
     #endregion
     
