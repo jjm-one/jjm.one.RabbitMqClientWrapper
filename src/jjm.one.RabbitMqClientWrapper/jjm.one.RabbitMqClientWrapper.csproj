@@ -26,7 +26,7 @@
   <ItemGroup>
     <PackageReference Include="jjm.one.Microsoft.Extensions.Logging.Helpers" Version="1.2.3" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
-    <PackageReference Include="RabbitMQ.Client" Version="6.6.0" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.7.0" />
   </ItemGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
