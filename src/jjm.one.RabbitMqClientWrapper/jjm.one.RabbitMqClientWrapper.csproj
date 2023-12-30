@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net6;net7.0</TargetFrameworks>
+    <TargetFrameworks>net7.0;net8.0;netstandard2.0;netstandard2.1;net6.0</TargetFrameworks>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>1.0.0-alpha.6</Version>
+    <Version>1.0.0-alpha.7</Version>
     <Authors>Jonas Merkle [JJM] </Authors>
     <Copyright>© by Jonas Merkle [JJM], 2023.</Copyright>
     <RootNamespace>jjm.one.RabbitMqClientWrapper</RootNamespace>
