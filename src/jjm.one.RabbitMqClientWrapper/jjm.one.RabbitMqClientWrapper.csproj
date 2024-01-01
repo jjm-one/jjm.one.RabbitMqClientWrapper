@@ -24,7 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="jjm.one.Microsoft.Extensions.Logging.Helpers" Version="1.2.3" />
+    <PackageReference Include="jjm.one.Microsoft.Extensions.Logging.Helpers" Version="1.2.4" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
     <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
   </ItemGroup>
