@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        version: [8.x, 6.x, netstandard2.0, netstandard2.1]
+        version: [8.x, 6.x]
     defaults:
       run:
         working-directory: ./src
