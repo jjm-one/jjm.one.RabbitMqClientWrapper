@@ -1,5 +1,12 @@
-# Ignore localy generated doc files
-doc
+###########################
+# Custom Ignore Settings: #
+###########################
+
+## Ignore Doxygen generated files
+doc/html
+doc/latex
+doc/man
+
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,windows,linux,visualstudiocode,visualstudio,jetbrains+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,windows,linux,visualstudiocode,visualstudio,jetbrains+all

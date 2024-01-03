@@ -18,16 +18,16 @@ jobs:
     name: Build and test in Debug configuration
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        version: [6.x, 7.x]
+        os: [ubuntu-latest]
+        version: [8.x, 6.x, netstandard2.0, netstandard2.1]
     defaults:
       run:
         working-directory: ./src
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup dotNET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ matrix.version }}
     - name: Restore dependencies
@@ -40,23 +40,27 @@ jobs:
   build-and-test-release:
     name: Build and test in Release configuration
     needs: build-and-test-debug
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        version: [8.x]
     defaults:
       run:
         working-directory: ./src
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup dotNET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 7.x
+        dotnet-version: ${{ matrix.version }}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore -c Release
     - name: Test
       run: dotnet test --no-build -c Release --verbosity normal
-  
+
   sonarcloud:
     name: Build and analyze with SonarCloud
     needs: build-and-test-release
@@ -67,7 +71,7 @@ jobs:
         with:
           java-version: 17
           distribution: 'zulu' # Alternative distribution options are available.
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Cache SonarCloud packages
@@ -91,9 +95,9 @@ jobs:
           key: ${{ runner.os }}-dotnet-coverage
           restore-keys: ${{ runner.os }}-dotnet-coverage
       - name: Setup dotNET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 7.x
+          dotnet-version: 8.x
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
@@ -113,7 +117,7 @@ jobs:
         shell: powershell
         run: |
           cd .\src
-          .\..\.sonar\scanner\dotnet-sonarscanner begin /k:"jjm-one_jjm.one.RabbitMqClientWrapper" /o:"jjm-one" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+          .\..\.sonar\scanner\dotnet-sonarscanner begin /k:"jjm-one_jjm.one.RabbitMqClientWrapper" /o:"jjm-one" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
           dotnet restore
           dotnet build --no-restore -c Debug
           .\..\.dotnet-coverage\dotnet-coverage\dotnet-coverage collect "dotnet test --no-build --verbosity normal" -f xml -o "coverage.xml"
