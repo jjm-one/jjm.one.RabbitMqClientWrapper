@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">jjm.one.RabbitMqClientWrapper
-   &#160;<span id="projectnumber">1.0.0-alpha.4</span>
+   &#160;<span id="projectnumber">1.0.0-alpha.7</span>
    </div>
    <div id="projectbrief">A C# wrapper for a RabbitMQ client.</div>
   </td>
@@ -98,6 +98,9 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a12029000cc3c52684fe3f9e8c5d1da6f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classDataTableTools.html#a2654de73cb0015d71b48aba0e547a61e">DataTablesToMessageConversionStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataTableTools.html#a12029000cc3c52684fe3f9e8c5d1da6f">DataTablesToMessage</a> (ref <a class="el" href="classRmqcMessage.html">RmqcMessage</a>? message, DataTable metadata, DataTable basicProperties, DataTable headers)</td></tr>
+<tr class="memdesc:a12029000cc3c52684fe3f9e8c5d1da6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This extension converts a DataTable into a <a class="el" href="classRmqcMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">RmqcMessage</a>.  <a href="classDataTableTools.html#a12029000cc3c52684fe3f9e8c5d1da6f">More...</a><br /></td></tr>
+<tr class="separator:a12029000cc3c52684fe3f9e8c5d1da6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81ee569fbe931b4bfc55f934fae835c1"><td class="memItemLeft" align="right" valign="top">static DataTable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataTableTools.html#a81ee569fbe931b4bfc55f934fae835c1">ToDataTable</a> (this <a class="el" href="classRmqcMessage.html">RmqcMessage</a> message)</td></tr>
 <tr class="memdesc:a81ee569fbe931b4bfc55f934fae835c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This extension converts a <a class="el" href="classRmqcMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">RmqcMessage</a> into a DataTable.  <a href="classDataTableTools.html#a81ee569fbe931b4bfc55f934fae835c1">More...</a><br /></td></tr>
 <tr class="separator:a81ee569fbe931b4bfc55f934fae835c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,9 +110,6 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aeeaeeb2eaae1ddce860b10a58f7e12be"><td class="memItemLeft" align="right" valign="top">static DataTable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataTableTools.html#aeeaeeb2eaae1ddce860b10a58f7e12be">ToDataTable</a> (this IDictionary&lt; string, object &gt; dict)</td></tr>
 <tr class="memdesc:aeeaeeb2eaae1ddce860b10a58f7e12be"><td class="mdescLeft">&#160;</td><td class="mdescRight">This extension converts a IDictionary&lt;TKey,TValue&gt; into a DataTable.  <a href="classDataTableTools.html#aeeaeeb2eaae1ddce860b10a58f7e12be">More...</a><br /></td></tr>
 <tr class="separator:aeeaeeb2eaae1ddce860b10a58f7e12be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12029000cc3c52684fe3f9e8c5d1da6f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classDataTableTools.html#a2654de73cb0015d71b48aba0e547a61e">DataTablesToMessageConversionStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataTableTools.html#a12029000cc3c52684fe3f9e8c5d1da6f">DataTablesToMessage</a> (ref <a class="el" href="classRmqcMessage.html">RmqcMessage</a>? message, DataTable metadata, DataTable basicProperties, DataTable headers)</td></tr>
-<tr class="memdesc:a12029000cc3c52684fe3f9e8c5d1da6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This extension converts a DataTable into a <a class="el" href="classRmqcMessage.html" title="This class represents a message which gets send an received to or from the RabbitMQ server.">RmqcMessage</a>.  <a href="classDataTableTools.html#a12029000cc3c52684fe3f9e8c5d1da6f">More...</a><br /></td></tr>
-<tr class="separator:a12029000cc3c52684fe3f9e8c5d1da6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d8d4f5c69f5326f0653a32e91fae2e1"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataTableTools.html#a1d8d4f5c69f5326f0653a32e91fae2e1">Failed</a> (this <a class="el" href="classDataTableTools.html#a2654de73cb0015d71b48aba0e547a61e">DataTablesToMessageConversionStatus</a> state)</td></tr>
 <tr class="memdesc:a1d8d4f5c69f5326f0653a32e91fae2e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function checks whether the conversion failed or not based on the <a class="el" href="classDataTableTools.html#a2654de73cb0015d71b48aba0e547a61e" title="This enum represents the conversion status when converting DataTable to RmqcMessage.">DataTablesToMessageConversionStatus</a>.  <a href="classDataTableTools.html#a1d8d4f5c69f5326f0653a32e91fae2e1">More...</a><br /></td></tr>
 <tr class="separator:a1d8d4f5c69f5326f0653a32e91fae2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
