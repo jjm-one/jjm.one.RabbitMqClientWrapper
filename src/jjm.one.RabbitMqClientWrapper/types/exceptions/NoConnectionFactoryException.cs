@@ -22,17 +22,6 @@ public class NoConnectionFactoryException : Exception
              $"Maybe the {nameof(RmqcCore)} was not initialized properly.")
     {
     }
-    
-    /// <summary>
-    /// <see cref="ISerializable"/> compliant constructor for the <see cref="NoConnectionFactoryException"/> class.
-    /// </summary>
-    /// <param name="info"></param>
-    /// <param name="context"></param>
-    [ExcludeFromCodeCoverage]
-    protected NoConnectionFactoryException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-    {
-    }
 
     #endregion
 }

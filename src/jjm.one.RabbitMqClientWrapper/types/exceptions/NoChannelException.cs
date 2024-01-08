@@ -22,17 +22,6 @@ public class NoChannelException : Exception
              $"Maybe the {nameof(RmqcCore)} was not initialized properly.")
     {
     }
-    
-    /// <summary>
-    /// <see cref="ISerializable"/> compliant constructor for the <see cref="NoChannelException"/> class.
-    /// </summary>
-    /// <param name="info"></param>
-    /// <param name="context"></param>
-    [ExcludeFromCodeCoverage]
-    protected NoChannelException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-    {
-    }
 
     #endregion
 }

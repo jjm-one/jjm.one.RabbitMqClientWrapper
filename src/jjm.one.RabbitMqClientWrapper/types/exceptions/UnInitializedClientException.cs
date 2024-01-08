@@ -37,17 +37,6 @@ public class UnInitializedClientException : Exception
     {
         Operation = operation;
     }
-    
-    /// <summary>
-    /// <see cref="ISerializable"/> compliant constructor for the <see cref="UnInitializedClientException"/> class.
-    /// </summary>
-    /// <param name="info"></param>
-    /// <param name="context"></param>
-    [ExcludeFromCodeCoverage]
-    protected UnInitializedClientException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-    {
-    }
 
     #endregion
 }
