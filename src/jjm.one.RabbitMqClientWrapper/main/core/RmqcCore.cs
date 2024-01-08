@@ -12,7 +12,7 @@ using RabbitMQ.Client;
 namespace jjm.one.RabbitMqClientWrapper.main.core;
 
 /// <summary>
-/// This class implements the <see cref="IRmqcCore"/> interface for a RabbitMQ server.
+///     This class implements the <see cref="IRmqcCore" /> interface for a RabbitMQ server.
 /// </summary>
 internal class RmqcCore : IRmqcCore
 {
@@ -31,9 +31,9 @@ internal class RmqcCore : IRmqcCore
     #region public members
 
     /// <summary>
-    /// This object contains the settings for the RabbitMQ client.
-    /// Note:
-    /// Changing the <see cref="Settings"/> object of a connected client will result in the disconnection from the server.
+    ///     This object contains the settings for the RabbitMQ client.
+    ///     Note:
+    ///     Changing the <see cref="Settings" /> object of a connected client will result in the disconnection from the server.
     /// </summary>
     public RmqcSettings Settings
     {
@@ -50,11 +50,8 @@ internal class RmqcCore : IRmqcCore
             _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
 
             // check im nothing changed
-            if (_settings.Equals(value))
-            {
-                return;
-            }
-            
+            if (_settings.Equals(value)) return;
+
             // disconnect & re-init the connection
             Disconnect(out _);
             _settings = value;
@@ -71,10 +68,7 @@ internal class RmqcCore : IRmqcCore
             if (_connectionFactory is null)
             {
                 // update the internal value in necessary
-                if (_connected)
-                {
-                    Connected = false;
-                }
+                if (_connected) Connected = false;
 
                 return false;
             }
@@ -83,10 +77,7 @@ internal class RmqcCore : IRmqcCore
             if (_connection is null || !_connection.IsOpen)
             {
                 // update the internal value in necessary
-                if (_connected)
-                {
-                    Connected = false;
-                }
+                if (_connected) Connected = false;
 
                 return false;
             }
@@ -95,19 +86,13 @@ internal class RmqcCore : IRmqcCore
             if (_channel is null || !_channel.IsOpen)
             {
                 // update the internal value in necessary
-                if (_connected)
-                {
-                    Connected = false;
-                }
+                if (_connected) Connected = false;
 
                 return false;
             }
 
             // update the internal value in necessary
-            if (!_connected)
-            {
-                Connected = true;
-            }
+            if (!_connected) Connected = true;
 
             // connected!
             return true;
@@ -117,10 +102,8 @@ internal class RmqcCore : IRmqcCore
         {
             // check if the new value is equal to the old value
             if (_connected == value)
-            {
                 // nothing to do
                 return;
-            }
 
             // set the value
             _connected = value;
@@ -135,7 +118,7 @@ internal class RmqcCore : IRmqcCore
     #region ctors
 
     /// <summary>
-    /// A parameterized constructor of the <see cref="RmqcCore"/> class.
+    ///     A parameterized constructor of the <see cref="RmqcCore" /> class.
     /// </summary>
     /// <param name="settings"></param>
     /// <param name="logger"></param>
@@ -152,8 +135,8 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    /// A parameterized constructor of the <see cref="RmqcCore"/> class.
-    /// For unit-tests only!
+    ///     A parameterized constructor of the <see cref="RmqcCore" /> class.
+    ///     For unit-tests only!
     /// </summary>
     /// <param name="settings"></param>
     /// <param name="logger"></param>
@@ -254,30 +237,21 @@ internal class RmqcCore : IRmqcCore
         try
         {
             // check connection factory
-            if (_connectionFactory is null)
-            {
-                throw new NoConnectionFactoryException();
-            }
+            if (_connectionFactory is null) throw new NoConnectionFactoryException();
 
             // create the connection
             _connection = _connectionFactory.CreateConnection();
 
             // check connection
-            if (_connection is null)
-            {
-                throw new NoConnectionException();
-            }
+            if (_connection is null) throw new NoConnectionException();
 
             // create the channel
             _channel = _connection.CreateModel();
 
             // check channel
-            if (_channel is null)
-            {
-                throw new NoChannelException();
-            }
+            if (_channel is null) throw new NoChannelException();
         }
-        catch(Exception exc)
+        catch (Exception exc)
         {
             // log exception
             _logger?.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), exc.Message, LogLevel.Warning);
@@ -300,7 +274,8 @@ internal class RmqcCore : IRmqcCore
         sw.Stop();
 
         // invoke associated event
-        OnConnectCompleted(new ConnectCompletedEventArgs(res, exception, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)));
+        OnConnectCompleted(new ConnectCompletedEventArgs(res, exception,
+            TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)));
 
         // return the result
         return res;
@@ -325,10 +300,7 @@ internal class RmqcCore : IRmqcCore
             // disconnect channel
             if (_channel is not null)
             {
-                if (_channel.IsOpen)
-                {
-                    _channel.Close();
-                }
+                if (_channel.IsOpen) _channel.Close();
 
                 _channel.Dispose();
                 _channel = null;
@@ -337,10 +309,7 @@ internal class RmqcCore : IRmqcCore
             // disconnect connection
             if (_connection is not null)
             {
-                if (_connection.IsOpen)
-                {
-                    _connection.Close();
-                }
+                if (_connection.IsOpen) _connection.Close();
 
                 _connection.Dispose();
                 _connection = null;
@@ -366,7 +335,8 @@ internal class RmqcCore : IRmqcCore
         sw.Stop();
 
         // invoke associated event
-        OnDisconnectCompleted(new DisconnectCompletedEventArgs(res, exception, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)));
+        OnDisconnectCompleted(new DisconnectCompletedEventArgs(res, exception,
+            TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)));
 
         // return the result
         return res;
@@ -389,18 +359,12 @@ internal class RmqcCore : IRmqcCore
         try
         {
             // check connection to server
-            if (!Connected)
-            {
-                throw new InvalidOperationException(nameof(WriteMsg));
-            }
+            if (!Connected) throw new InvalidOperationException(nameof(WriteMsg));
 
             // crate basic properties
             var props = _channel?.CreateBasicProperties();
-            if (message.Headers is not null && props is not null)
-            {
-                props.Headers = message.Headers;
-            } 
-            
+            if (message.Headers is not null && props is not null) props.Headers = message.Headers;
+
             // write message
             _channel?.BasicPublish(Settings.Exchange, message.RoutingKey, props, message.BodyArray ?? null);
             message.TimestampWhenSend = DateTime.Now;
@@ -422,7 +386,8 @@ internal class RmqcCore : IRmqcCore
         sw.Stop();
 
         // invoke associated event
-        OnWriteMsgCompleted(new WriteMsgCompletedEventArgs(res, exception, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)));
+        OnWriteMsgCompleted(new WriteMsgCompletedEventArgs(res, exception,
+            TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)));
 
         // return the result
         return res;
@@ -446,10 +411,7 @@ internal class RmqcCore : IRmqcCore
         try
         {
             // check connection to server
-            if (!Connected)
-            {
-                throw new InvalidOperationException(nameof(ReadMsg));
-            }
+            if (!Connected) throw new InvalidOperationException(nameof(ReadMsg));
 
             // read message
             var msg = _channel?.BasicGet(Settings.Queue, autoAck);
@@ -466,10 +428,7 @@ internal class RmqcCore : IRmqcCore
                     TimestampWhenReceived = DateTime.Now
                 };
 
-                if (autoAck)
-                {
-                    message.TimestampWhenAcked = message.TimestampWhenReceived;
-                }
+                if (autoAck) message.TimestampWhenAcked = message.TimestampWhenReceived;
             }
         }
         catch (Exception exc)
@@ -489,7 +448,8 @@ internal class RmqcCore : IRmqcCore
         sw.Stop();
 
         // invoke associated event
-        OnReadMsgCompleted(new ReadMsgCompletedEventArgs(res, exception, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds), message));
+        OnReadMsgCompleted(new ReadMsgCompletedEventArgs(res, exception,
+            TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds), message));
 
         // return the result
         return res;
@@ -512,10 +472,7 @@ internal class RmqcCore : IRmqcCore
         try
         {
             // check connection to server
-            if (!Connected)
-            {
-                throw new InvalidOperationException(nameof(AckMsg));
-            }
+            if (!Connected) throw new InvalidOperationException(nameof(AckMsg));
 
             // send ack
             _channel?.BasicAck(message.DeliveryTag, false);
@@ -538,7 +495,8 @@ internal class RmqcCore : IRmqcCore
         sw.Stop();
 
         // invoke associated event
-        OnAckMsgCompleted(new AckMsgCompletedEventArgs(res, exception, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds), message.DeliveryTag));
+        OnAckMsgCompleted(new AckMsgCompletedEventArgs(res, exception,
+            TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds), message.DeliveryTag));
 
         // return the result
         return res;
@@ -561,10 +519,7 @@ internal class RmqcCore : IRmqcCore
         try
         {
             // check connection to server
-            if (!Connected)
-            {
-                throw new InvalidOperationException(nameof(NackMsg));
-            }
+            if (!Connected) throw new InvalidOperationException(nameof(NackMsg));
 
             // send nack
             _channel?.BasicNack(message.DeliveryTag, false, requeue);
@@ -588,7 +543,8 @@ internal class RmqcCore : IRmqcCore
         sw.Stop();
 
         // invoke associated event
-        OnNackMsgComplete(new NackMsgCompletedEventArgs(res, exception, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds), message.DeliveryTag));
+        OnNackMsgComplete(new NackMsgCompletedEventArgs(res, exception,
+            TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds), message.DeliveryTag));
 
         // return the result
         return res;
@@ -611,10 +567,7 @@ internal class RmqcCore : IRmqcCore
         try
         {
             // check connection to server
-            if (!Connected)
-            {
-                throw new InvalidOperationException(nameof(WaitForWriteConfirm));
-            }
+            if (!Connected) throw new InvalidOperationException(nameof(WaitForWriteConfirm));
 
             // send nack
             res &= _channel?.WaitForConfirms(timeout) ?? false;
@@ -660,10 +613,7 @@ internal class RmqcCore : IRmqcCore
         try
         {
             // check connection to server
-            if (!Connected)
-            {
-                throw new InvalidOperationException(nameof(QueuedMsgs));
-            }
+            if (!Connected) throw new InvalidOperationException(nameof(QueuedMsgs));
 
             // get number of messages in queue
             amount = _channel?.MessageCount(Settings.Queue);
@@ -685,18 +635,19 @@ internal class RmqcCore : IRmqcCore
         sw.Stop();
 
         // invoke associated event
-        OnQueuedMsgsCompleted(new QueuedMsgsCompletedEventArgs(res, exception, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds), amount));
+        OnQueuedMsgsCompleted(new QueuedMsgsCompletedEventArgs(res, exception,
+            TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds), amount));
 
         // return the result
         return res;
     }
 
     #endregion
-    
+
     #region private event invokation
 
     /// <summary>
-    /// This method invokes the <see cref="ConnectCompleted"/> envent handlers.
+    ///     This method invokes the <see cref="ConnectCompleted" /> envent handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnConnectCompleted(ConnectCompletedEventArgs e)
@@ -709,7 +660,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    /// This method invokes the <see cref="DisconnectCompleted"/> envent handlers.
+    ///     This method invokes the <see cref="DisconnectCompleted" /> envent handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnDisconnectCompleted(DisconnectCompletedEventArgs e)
@@ -722,7 +673,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    /// This method invokes the <see cref="WriteMsgCompleted"/> envent handlers.
+    ///     This method invokes the <see cref="WriteMsgCompleted" /> envent handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnWriteMsgCompleted(WriteMsgCompletedEventArgs e)
@@ -735,7 +686,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    /// This method invokes the <see cref="ReadMsgCompleted"/> envent handlers.
+    ///     This method invokes the <see cref="ReadMsgCompleted" /> envent handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnReadMsgCompleted(ReadMsgCompletedEventArgs e)
@@ -748,7 +699,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    /// This method invokes the <see cref="AckMsgCompleted"/> envent handlers.
+    ///     This method invokes the <see cref="AckMsgCompleted" /> envent handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnAckMsgCompleted(AckMsgCompletedEventArgs e)
@@ -761,7 +712,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    /// This method invokes the <see cref="NAckMsgComplete"/> envent handlers.
+    ///     This method invokes the <see cref="NAckMsgComplete" /> envent handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnNackMsgComplete(NackMsgCompletedEventArgs e)
@@ -774,7 +725,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    /// This method invokes the <see cref="QueuedMsgsCompleted"/> envent handlers.
+    ///     This method invokes the <see cref="QueuedMsgsCompleted" /> envent handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnQueuedMsgsCompleted(QueuedMsgsCompletedEventArgs e)
@@ -787,7 +738,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    /// This method invokes the <see cref="ConnectionStateChanged"/> envent handlers.
+    ///     This method invokes the <see cref="ConnectionStateChanged" /> envent handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnConnectionStateChanged(ConnectionStatusChangedEventArgs e)
@@ -800,7 +751,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    /// This method invokes the <see cref="ErrorOccurred"/> envent handlers.
+    ///     This method invokes the <see cref="ErrorOccurred" /> envent handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnErrorOccurred(ErrorOccurredEventArgs e)

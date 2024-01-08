@@ -8,11 +8,34 @@ using RabbitMQ.Client;
 namespace jjm.one.RabbitMqClientWrapper.types;
 
 /// <summary>
-/// This class represents a message which gets send an received to or from the RabbitMQ server.
+///     This class represents a message which gets send an received to or from the RabbitMQ server.
 /// </summary>
 [Serializable]
 public class RmqcMessage
 {
+    #region public events
+
+    /// <summary>
+    ///     This events gets invoked when the message got changed.
+    /// </summary>
+    public event EventHandler<MsgChangedEventArgs>? Changed;
+
+    #endregion
+
+    #region private event invokation
+
+    /// <summary>
+    ///     This method invokes the <see cref="Changed" /> envent handlers.
+    /// </summary>
+    /// <param name="changedMembers"></param>
+    private void OnChanged(List<string> changedMembers)
+    {
+        // invoke event handlers
+        Changed?.Invoke(this, new MsgChangedEventArgs(changedMembers));
+    }
+
+    #endregion
+
     #region private members
 
     private readonly ulong? _deliveryTag;
@@ -31,38 +54,35 @@ public class RmqcMessage
     #region public members
 
     /// <summary>
-    /// The delivery tag of this message.
+    ///     The delivery tag of this message.
     /// </summary>
     public ulong DeliveryTag => _deliveryTag ?? 0;
 
     /// <summary>
-    /// The redelivered flag of this message.
+    ///     The redelivered flag of this message.
     /// </summary>
     public bool Redelivered => _redelivered ?? false;
 
     /// <summary>
-    /// The exchange to which the message was published to.
+    ///     The exchange to which the message was published to.
     /// </summary>
     public string Exchange => _exchange ?? string.Empty;
 
     /// <summary>
-    /// The number of message in the queue.
+    ///     The number of message in the queue.
     /// </summary>
     public uint MessageCount => _messageCount ?? 0;
-    
+
     /// <summary>
-    /// The routing key of this message.
+    ///     The routing key of this message.
     /// </summary>
     public string RoutingKey
     {
         get => _routingKey ?? string.Empty;
         set
         {
-            if (_routingKey == value)
-            {
-                return;
-            }
-            
+            if (_routingKey == value) return;
+
             // set routing key
             _routingKey = value;
 
@@ -77,7 +97,7 @@ public class RmqcMessage
     }
 
     /// <summary>
-    /// The basic properties of the message.
+    ///     The basic properties of the message.
     /// </summary>
     [ExcludeFromCodeCoverage]
     public IBasicProperties? BasicProperties
@@ -85,19 +105,13 @@ public class RmqcMessage
         get => _basicProperties;
         set
         {
-            if (_basicProperties == value)
-            {
-                return;
-            }
+            if (_basicProperties == value) return;
 
             // set basic properties
             _basicProperties = value;
 
             // copy headers
-            if (BasicProperties is not null)
-            {
-                Headers = BasicProperties.Headers;
-            }
+            if (BasicProperties is not null) Headers = BasicProperties.Headers;
 
             // reset additional fields
             TimestampWhenReceived = null;
@@ -110,26 +124,20 @@ public class RmqcMessage
     }
 
     /// <summary>
-    /// The header entries of the message.
+    ///     The header entries of the message.
     /// </summary>
     public IDictionary<string, object>? Headers
     {
         get => _headers;
         set
         {
-            if (_headers == value)
-            {
-                return;
-            }
-            
+            if (_headers == value) return;
+
             // set headers
             _headers = value;
 
             // copy headers
-            if (BasicProperties is not null && Headers is not null)
-            {
-                BasicProperties.Headers = Headers;
-            }
+            if (BasicProperties is not null && Headers is not null) BasicProperties.Headers = Headers;
 
             // reset additional fields
             TimestampWhenReceived = null;
@@ -142,18 +150,15 @@ public class RmqcMessage
     }
 
     /// <summary>
-    /// The body containing the payload of the message. 
+    ///     The body containing the payload of the message.
     /// </summary>
     public byte[]? BodyArray
     {
         get => _body;
         set
         {
-            if (_body == value)
-            {
-                return;
-            }
-            
+            if (_body == value) return;
+
             // set body
             _body = value;
 
@@ -168,7 +173,7 @@ public class RmqcMessage
     }
 
     /// <summary>
-    /// The body containing the payload of the message.‚
+    ///     The body containing the payload of the message.‚
     /// </summary>
     public string BodyString
     {
@@ -177,80 +182,75 @@ public class RmqcMessage
     }
 
     /// <summary>
-    /// This flag indicates whether the message was received via the client or not.
+    ///     This flag indicates whether the message was received via the client or not.
     /// </summary>
     public bool WasReceived => TimestampWhenReceived.HasValue;
 
     /// <summary>
-    /// The Timestamp when the message was received.
+    ///     The Timestamp when the message was received.
     /// </summary>
     public DateTime? TimestampWhenReceived { get; internal set; }
 
     /// <summary>
-    /// This flag indicates whether the message was send via the client or not.
+    ///     This flag indicates whether the message was send via the client or not.
     /// </summary>
     public bool WasSend => TimestampWhenSend.HasValue;
 
     /// <summary>
-    /// The Timestamp when the message was send.
+    ///     The Timestamp when the message was send.
     /// </summary>
     public DateTime? TimestampWhenSend { get; internal set; }
 
     /// <summary>
-    /// This flag indicates whether the message was acked via the client or not.
+    ///     This flag indicates whether the message was acked via the client or not.
     /// </summary>
     public bool WasAcked => TimestampWhenAcked.HasValue;
 
     /// <summary>
-    /// The Timestamp when the message was send.
+    ///     The Timestamp when the message was send.
     /// </summary>
     public DateTime? TimestampWhenAcked { get; internal set; }
 
     /// <summary>
-    /// This flag indicates whether the message was nacked via the client or not.
+    ///     This flag indicates whether the message was nacked via the client or not.
     /// </summary>
     public bool WasNAcked => TimestampWhenNAcked.HasValue;
 
     /// <summary>
-    /// This flag indicates whether the message was nacked  with or without requeue via the client or not.
+    ///     This flag indicates whether the message was nacked  with or without requeue via the client or not.
     /// </summary>
     public bool WasNAckedWithRequeue { get; internal set; }
 
     /// <summary>
-    /// The Timestamp when the message was send.
+    ///     The Timestamp when the message was send.
     /// </summary>
     public DateTime? TimestampWhenNAcked { get; internal set; }
 
     /// <summary>
-    /// This flag indicates whether the message was modified.
+    ///     This flag indicates whether the message was modified.
     /// </summary>
-    public bool WasModified {
+    public bool WasModified
+    {
         get => _wasModified;
         internal set
         {
-            if (value)
-            {
-                WasSaved = false;
-            }
+            if (value) WasSaved = false;
 
             _wasModified = value;
 
-            OnChanged(new List<string>{"This information is currently not supported!"});
+            OnChanged(new List<string> { "This information is currently not supported!" });
         }
     }
 
     /// <summary>
-    /// This flag indicates whether the message was saved. (must be set by user!)
+    ///     This flag indicates whether the message was saved. (must be set by user!)
     /// </summary>
     public bool WasSaved
     {
         get => _wasSaved;
         set
         {
-            if (value)
-            {
-                WasModified = false;
-            }
+            if (value) WasModified = false;
 
             _wasSaved = value;
         }
@@ -261,14 +261,14 @@ public class RmqcMessage
     #region ctors
 
     /// <summary>
-    /// The default constructor of the <see cref="RmqcMessage"/> class.
+    ///     The default constructor of the <see cref="RmqcMessage" /> class.
     /// </summary>
     public RmqcMessage()
     {
     }
 
     /// <summary>
-    /// The additional parameterized constructor of the <see cref="RmqcMessage"/> class.
+    ///     The additional parameterized constructor of the <see cref="RmqcMessage" /> class.
     /// </summary>
     /// <param name="rawMessage"></param>
     public RmqcMessage(BasicGetResult? rawMessage)
@@ -284,29 +284,6 @@ public class RmqcMessage
         //TimestampWhenReceived = rawMessage.BasicProperties.Timestamp.UnixTime @ToDo: fix timestamp
         _wasModified = false;
         _wasSaved = false;
-    }
-
-    #endregion
-
-    #region public events
-
-    /// <summary>
-    /// This events gets invoked when the message got changed.
-    /// </summary>
-    public event EventHandler<MsgChangedEventArgs>? Changed;
-
-    #endregion
-
-    #region private event invokation
-
-    /// <summary>
-    /// This method invokes the <see cref="Changed"/> envent handlers.
-    /// </summary>
-    /// <param name="changedMembers"></param>
-    private void OnChanged(List<string> changedMembers)
-    {
-        // invoke event handlers
-        Changed?.Invoke(this, new MsgChangedEventArgs(changedMembers));
     }
 
     #endregion

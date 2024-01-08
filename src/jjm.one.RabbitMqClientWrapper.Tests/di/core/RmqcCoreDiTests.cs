@@ -1,4 +1,3 @@
-using FluentAssertions;
 using jjm.one.RabbitMqClientWrapper.di.core;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
@@ -8,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 namespace jjm.one.RabbitMqClientWrapper.Tests.di.core;
 
 /// <summary>
-/// This class contains the unit tests for the <see cref="RmqcCoreDi"/> class.
+///     This class contains the unit tests for the <see cref="RmqcCoreDi" /> class.
 /// </summary>
 public class RmqcCoreDiTests
 {
@@ -17,11 +16,11 @@ public class RmqcCoreDiTests
     private readonly IHostBuilder _hostBuilder;
 
     #endregion
-    
+
     #region ctor
 
     /// <summary>
-    /// The default constructor of the <see cref="RmqcCoreDiTests"/> class.
+    ///     The default constructor of the <see cref="RmqcCoreDiTests" /> class.
     /// </summary>
     public RmqcCoreDiTests()
     {
@@ -29,11 +28,11 @@ public class RmqcCoreDiTests
     }
 
     #endregion
-    
+
     #region tests
 
     /// <summary>
-    /// Tests the static AddRmqcCore function.
+    ///     Tests the static AddRmqcCore function.
     /// </summary>
     [Fact]
     public void RmqcCoreDiTest_AddRmqcCoreTest()

@@ -11,10 +11,27 @@ using Microsoft.Extensions.Logging;
 namespace jjm.one.RabbitMqClientWrapper.main;
 
 /// <summary>
-/// This class implements the <see cref="IRmqcWrapper"/> interface for a RabbitMQ server.
+///     This class implements the <see cref="IRmqcWrapper" /> interface for a RabbitMQ server.
 /// </summary>
 public class RmqcWrapper : IRmqcWrapper
 {
+    #region private event invokation
+
+    /// <summary>
+    ///     This method invokes the <see cref="ReConnectCompleted" /> envent handlers.
+    /// </summary>
+    /// <param name="e"></param>
+    private void OnReConnectCompleted(ReConnectCompletedEventArgs e)
+    {
+        // log fct call
+        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
+
+        // invoke event handlers
+        ReConnectCompleted?.Invoke(this, e);
+    }
+
+    #endregion
+
     #region private members
 
     private readonly IRmqcCore _core;
@@ -25,9 +42,9 @@ public class RmqcWrapper : IRmqcWrapper
     #region public members
 
     /// <summary>
-    /// This object contains the settings for the RabbitMQ client.
-    /// Note:
-    /// Changing the <see cref="Settings"/> object of a connected client will result in the disconnection from the server.
+    ///     This object contains the settings for the RabbitMQ client.
+    ///     Note:
+    ///     Changing the <see cref="Settings" /> object of a connected client will result in the disconnection from the server.
     /// </summary>
     public RmqcSettings Settings
     {
@@ -64,7 +81,7 @@ public class RmqcWrapper : IRmqcWrapper
     #region ctors
 
     /// <summary>
-    /// A parameterized constructor of the <see cref="RmqcWrapper"/> class.
+    ///     A parameterized constructor of the <see cref="RmqcWrapper" /> class.
     /// </summary>
     /// <param name="core"></param>
     /// <param name="logger"></param>
@@ -90,11 +107,11 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    /// A parameterized constructor of the <see cref="RmqcWrapper"/> class.
+    ///     A parameterized constructor of the <see cref="RmqcWrapper" /> class.
     /// </summary>
     /// <param name="settings"></param>
     /// <param name="logger"></param>
-    public RmqcWrapper(RmqcSettings settings, 
+    public RmqcWrapper(RmqcSettings settings,
         ILogger<RmqcWrapper>? logger = null)
     {
         _core = new RmqcCore(settings);
@@ -110,7 +127,7 @@ public class RmqcWrapper : IRmqcWrapper
         _core.QueuedMsgsCompleted += OnQueuedMsgsCompleted;
         _core.ConnectionStateChanged += OnConnectionStateChanged;
         _core.ErrorOccurred += OnErrorOccurred;
-        
+
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
     }
@@ -130,16 +147,16 @@ public class RmqcWrapper : IRmqcWrapper
 
     /// <inheritdoc />
     public event EventHandler<WriteMsgCompletedEventArgs>? WriteMsgCompleted;
-    
+
     /// <inheritdoc />
     public event EventHandler<ReadMsgCompletedEventArgs>? ReadMsgCompleted;
-    
+
     /// <inheritdoc />
     public event EventHandler<AckMsgCompletedEventArgs>? AckMsgCompleted;
-    
+
     /// <inheritdoc />
     public event EventHandler<NackMsgCompletedEventArgs>? NAckMsgComplete;
-    
+
     /// <inheritdoc />
     public event EventHandler<QueuedMsgsCompletedEventArgs>? QueuedMsgsCompleted;
 
@@ -150,7 +167,7 @@ public class RmqcWrapper : IRmqcWrapper
     public event EventHandler<ErrorOccurredEventArgs>? ErrorOccurred;
 
     #endregion
-    
+
     #region public methods
 
     /// <inheritdoc />
@@ -198,7 +215,7 @@ public class RmqcWrapper : IRmqcWrapper
 
         return Disconnect(out _);
     }
-    
+
     /// <inheritdoc />
     public bool Disconnect(out Exception? exception)
     {
@@ -309,7 +326,7 @@ public class RmqcWrapper : IRmqcWrapper
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-        
+
         // call the core functions
         return _core.AckMsg(ref message, out exception);
     }
@@ -319,7 +336,7 @@ public class RmqcWrapper : IRmqcWrapper
     {
         // log fct call
         _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-        
+
         return NackMsg(ref message, requeue, out _);
     }
 
@@ -376,7 +393,7 @@ public class RmqcWrapper : IRmqcWrapper
     #region private event callbacks
 
     /// <summary>
-    /// This method invokes the <see cref="ConnectCompleted"/> envent handlers.
+    ///     This method invokes the <see cref="ConnectCompleted" /> envent handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -390,7 +407,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    /// This method invokes the <see cref="DisconnectCompleted"/> envent handlers.
+    ///     This method invokes the <see cref="DisconnectCompleted" /> envent handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -404,7 +421,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    /// This method invokes the <see cref="WriteMsgCompleted"/> envent handlers.
+    ///     This method invokes the <see cref="WriteMsgCompleted" /> envent handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -418,7 +435,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    /// This method invokes the <see cref="ReadMsgCompleted"/> envent handlers.
+    ///     This method invokes the <see cref="ReadMsgCompleted" /> envent handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -432,7 +449,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    /// This method invokes the <see cref="AckMsgCompleted"/> envent handlers.
+    ///     This method invokes the <see cref="AckMsgCompleted" /> envent handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -446,7 +463,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    /// This method invokes the <see cref="NAckMsgComplete"/> envent handlers.
+    ///     This method invokes the <see cref="NAckMsgComplete" /> envent handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -460,7 +477,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    /// This method invokes the <see cref="QueuedMsgsCompleted"/> envent handlers.
+    ///     This method invokes the <see cref="QueuedMsgsCompleted" /> envent handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -474,7 +491,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    /// This method invokes the <see cref="ConnectionStateChanged"/> envent handlers.
+    ///     This method invokes the <see cref="ConnectionStateChanged" /> envent handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -488,7 +505,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    /// This method invokes the <see cref="ErrorOccurred"/> envent handlers.
+    ///     This method invokes the <see cref="ErrorOccurred" /> envent handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -499,23 +516,6 @@ public class RmqcWrapper : IRmqcWrapper
 
         // invoke event handlers
         ErrorOccurred?.Invoke(o, e);
-    }
-
-    #endregion
-
-    #region private event invokation
-
-    /// <summary>
-    /// This method invokes the <see cref="ReConnectCompleted"/> envent handlers.
-    /// </summary>
-    /// <param name="e"></param>
-    private void OnReConnectCompleted(ReConnectCompletedEventArgs e)
-    {
-        // log fct call
-        _logger?.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogLevel.Trace);
-        
-        // invoke event handlers
-        ReConnectCompleted?.Invoke(this, e);
     }
 
     #endregion

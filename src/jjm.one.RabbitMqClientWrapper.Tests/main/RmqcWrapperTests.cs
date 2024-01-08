@@ -1,5 +1,4 @@
 ﻿using System;
-using FluentAssertions;
 using jjm.one.RabbitMqClientWrapper.main;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
@@ -10,10 +9,21 @@ using Moq;
 namespace jjm.one.RabbitMqClientWrapper.Tests.main;
 
 /// <summary>
-/// This class contains the unit tests for the <see cref="RmqcWrapper"/> class.
+///     This class contains the unit tests for the <see cref="RmqcWrapper" /> class.
 /// </summary>
 public class RmqcWrapperTests
 {
+    /// <summary>
+    ///     The default constructor of the <see cref="RmqcWrapperTests" /> class.
+    /// </summary>
+    public RmqcWrapperTests()
+    {
+        _rmqcCoreMock = new Mock<IRmqcCore>();
+        _rmqcWrapperLoggingMock = new Mock<ILogger<RmqcWrapper>>();
+
+        _sut = new RmqcWrapper(_rmqcCoreMock.Object, _rmqcWrapperLoggingMock.Object);
+    }
+
     #region private members
 
     private readonly RmqcWrapper _sut;
@@ -21,41 +31,30 @@ public class RmqcWrapperTests
     private readonly Mock<ILogger<RmqcWrapper>> _rmqcWrapperLoggingMock;
 
     #endregion
-    
-    /// <summary>
-    /// The default constructor of the <see cref="RmqcWrapperTests"/> class.
-    /// </summary>
-    public RmqcWrapperTests()
-    {
-        _rmqcCoreMock = new Mock<IRmqcCore>();
-        _rmqcWrapperLoggingMock = new Mock<ILogger<RmqcWrapper>>();
-        
-        _sut = new RmqcWrapper(_rmqcCoreMock.Object, _rmqcWrapperLoggingMock.Object);
-    }
 
     #region tests
 
     #region ctor tests
 
     /// <summary>
-    /// Tests the constructor of the <see cref="RmqcWrapper"/> class.
+    ///     Tests the constructor of the <see cref="RmqcWrapper" /> class.
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_CtorTest()
     {
         // arrange + act
         var res = new RmqcWrapper(new RmqcSettings("Test"));
-        
+
         // assert
         res.Settings.Hostname.Should().Be("Test");
     }
 
     #endregion
-    
+
     #region public members tests
 
     /// <summary>
-    /// Tests the getter of the Settings member.
+    ///     Tests the getter of the Settings member.
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_SettingsGetTest()
@@ -63,7 +62,7 @@ public class RmqcWrapperTests
         // arrange
         var sTest = new RmqcSettings("test");
         _rmqcCoreMock.Setup(x => x.Settings).Returns(sTest);
-        
+
         // act
         var s = _sut.Settings;
 
@@ -73,24 +72,24 @@ public class RmqcWrapperTests
     }
 
     /// <summary>
-    /// Tests the setter of the Settings member.
+    ///     Tests the setter of the Settings member.
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_SettingsSetTest()
     {
         // arrange
         var sTest = new RmqcSettings("test");
-        _rmqcCoreMock.SetupSet(x => x.Settings=It.IsAny<RmqcSettings>()).Verifiable();
-        
+        _rmqcCoreMock.SetupSet(x => x.Settings = It.IsAny<RmqcSettings>()).Verifiable();
+
         // act
         _sut.Settings = sTest;
 
         // assert
-        _rmqcCoreMock.VerifySet(x => x.Settings=It.IsAny<RmqcSettings>(), Times.Once);
+        _rmqcCoreMock.VerifySet(x => x.Settings = It.IsAny<RmqcSettings>(), Times.Once);
     }
-    
+
     /// <summary>
-    /// Tests the getter of the Connected member.
+    ///     Tests the getter of the Connected member.
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_ConnectedGetTest()
@@ -107,43 +106,43 @@ public class RmqcWrapperTests
     }
 
     #endregion
-    
+
     #region public methods tests
 
     /// <summary>
-    /// Testes the Init method.
+    ///     Testes the Init method.
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_InitTest()
     {
         // arrange
         _rmqcCoreMock.Setup(x => x.Init());
-        
+
         // act
         _sut.Init();
 
         // assert
         _rmqcCoreMock.Verify(x => x.Init(), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the DeInit method.
+    ///     Testes the DeInit method.
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_DeInitTest()
     {
         // arrange
         _rmqcCoreMock.Setup(x => x.DeInit());
-        
+
         // act
         _sut.DeInit();
 
         // assert
         _rmqcCoreMock.Verify(x => x.DeInit(), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the Connect method. (Test 1)
+    ///     Testes the Connect method. (Test 1)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_ConnectTest1()
@@ -152,15 +151,15 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.Connect(out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.Connect(); 
-        
+        var res = _sut.Connect();
+
         // assert
         res.Should().BeTrue();
         _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the Connect method. (Test 2)
+    ///     Testes the Connect method. (Test 2)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_ConnectTest2()
@@ -176,9 +175,9 @@ public class RmqcWrapperTests
         resExc.Should().BeNull();
         _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the Connect method. (Test 3)
+    ///     Testes the Connect method. (Test 3)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_ConnectTest3()
@@ -202,9 +201,9 @@ public class RmqcWrapperTests
         evt.Arguments.CompletionTime.Should().NotBeNull();
         _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the Disconnect method. (Test 1)
+    ///     Testes the Disconnect method. (Test 1)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_DisconnectTest1()
@@ -214,16 +213,16 @@ public class RmqcWrapperTests
 
         // act
         var res = _sut.Disconnect(out var resExc);
-            
+
         // assert
         res.Should().BeFalse();
         //resExc.Should().NotBeNull();
         //resExc.Should().BeOfType<Exception>();
         _rmqcCoreMock.Verify(x => x.Disconnect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the Disconnect method. (Test 2)
+    ///     Testes the Disconnect method. (Test 2)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_DisconnectTest2()
@@ -233,14 +232,14 @@ public class RmqcWrapperTests
 
         // act
         var res = _sut.Disconnect();
-            
+
         // assert
         res.Should().BeTrue();
         _rmqcCoreMock.Verify(x => x.Disconnect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the Disconnect method. (Test 3)
+    ///     Testes the Disconnect method. (Test 3)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_DisconnectTest3()
@@ -250,15 +249,15 @@ public class RmqcWrapperTests
 
         // act
         var res = _sut.Disconnect(out var resExc);
-            
+
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
         _rmqcCoreMock.Verify(x => x.Disconnect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the Disconnect method. (Test 4)
+    ///     Testes the Disconnect method. (Test 4)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_DisconnectTest4()
@@ -282,9 +281,9 @@ public class RmqcWrapperTests
         evt.Arguments.CompletionTime.Should().NotBeNull();
         _rmqcCoreMock.Verify(x => x.Disconnect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the ReConnect method. (Test 1)
+    ///     Testes the ReConnect method. (Test 1)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_ReConnectTest1()
@@ -294,16 +293,16 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.Connect(out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.ReConnect(); 
-        
+        var res = _sut.ReConnect();
+
         // assert
         res.Should().BeTrue();
         _rmqcCoreMock.Verify(x => x.Disconnect(out It.Ref<Exception?>.IsAny), Times.Once);
         _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the ReConnect method. (Test 2)
+    ///     Testes the ReConnect method. (Test 2)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_ReConnectTest2()
@@ -313,17 +312,17 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.Connect(out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.ReConnect(out var resExc); 
-        
+        var res = _sut.ReConnect(out var resExc);
+
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
         _rmqcCoreMock.Verify(x => x.Disconnect(out It.Ref<Exception?>.IsAny), Times.Once);
         _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the ReConnect method. (Test 3)
+    ///     Testes the ReConnect method. (Test 3)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_ReConnectTest3()
@@ -331,7 +330,7 @@ public class RmqcWrapperTests
         // arrange
         _rmqcCoreMock.Setup(x => x.Disconnect(out It.Ref<Exception?>.IsAny)).Returns(true);
         _rmqcCoreMock.Setup(x => x.Connect(out It.Ref<Exception?>.IsAny)).Returns(true);
-        
+
         // act
         var evt = Assert.Raises<ReConnectCompletedEventArgs>(
             h => _sut.ReConnectCompleted += h,
@@ -347,9 +346,9 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Verify(x => x.Disconnect(out It.Ref<Exception?>.IsAny), Times.Once);
         _rmqcCoreMock.Verify(x => x.Connect(out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the WriteMsg method. (Test 1)
+    ///     Testes the WriteMsg method. (Test 1)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_WriteMsgTest1()
@@ -359,16 +358,16 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.WriteMsg(ref m, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.WriteMsg(ref m); 
-        
+        var res = _sut.WriteMsg(ref m);
+
         // assert
         res.Should().BeTrue();
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.WriteMsg(ref It.Ref<RmqcMessage>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the WriteMsg method. (Test 2)
+    ///     Testes the WriteMsg method. (Test 2)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_WriteMsgTest2()
@@ -378,17 +377,17 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.WriteMsg(ref m, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.WriteMsg(ref m, out var resExc); 
-        
+        var res = _sut.WriteMsg(ref m, out var resExc);
+
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.WriteMsg(ref It.Ref<RmqcMessage>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the WriteMsg method. (Test 3)
+    ///     Testes the WriteMsg method. (Test 3)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_WriteMsgTest3()
@@ -411,12 +410,12 @@ public class RmqcWrapperTests
         evt.Arguments.Successful.Should().BeTrue();
         evt.Arguments.Exception.Should().BeNull();
         evt.Arguments.CompletionTime.Should().NotBeNull();
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.WriteMsg(ref It.Ref<RmqcMessage>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the ReadMsg method. (Test 1)
+    ///     Testes the ReadMsg method. (Test 1)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_ReadMsgTest1()
@@ -426,16 +425,16 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.ReadMsg(out m, false, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.ReadMsg(out m, false); 
-        
+        var res = _sut.ReadMsg(out m, false);
+
         // assert
         res.Should().BeTrue();
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.ReadMsg(out It.Ref<RmqcMessage?>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the ReadMsg method. (Test 2)
+    ///     Testes the ReadMsg method. (Test 2)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_ReadMsgTest2()
@@ -445,17 +444,17 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.ReadMsg(out m, false, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.ReadMsg(out m, false, out var resExc); 
-        
+        var res = _sut.ReadMsg(out m, false, out var resExc);
+
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.ReadMsg(out It.Ref<RmqcMessage?>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the ReadMsg method. (Test 3)
+    ///     Testes the ReadMsg method. (Test 3)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_ReadMsgTest3()
@@ -479,12 +478,12 @@ public class RmqcWrapperTests
         evt.Arguments.Exception.Should().BeNull();
         evt.Arguments.CompletionTime.Should().NotBeNull();
         evt.Arguments.Message.Should().Be(m);
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.ReadMsg(out It.Ref<RmqcMessage?>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the AckMsg method. (Test 1)
+    ///     Testes the AckMsg method. (Test 1)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_AckMsgTest1()
@@ -494,16 +493,16 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.AckMsg(ref m, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.AckMsg(ref m); 
-        
+        var res = _sut.AckMsg(ref m);
+
         // assert
         res.Should().BeTrue();
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.AckMsg(ref It.Ref<RmqcMessage>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the AckMsg method. (Test 2)
+    ///     Testes the AckMsg method. (Test 2)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_AckMsgTest2()
@@ -513,17 +512,17 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.AckMsg(ref m, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.AckMsg(ref m, out var resExc); 
-        
+        var res = _sut.AckMsg(ref m, out var resExc);
+
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.AckMsg(ref It.Ref<RmqcMessage>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the AckMsg method. (Test 3)
+    ///     Testes the AckMsg method. (Test 3)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_AckMsgTest3()
@@ -531,7 +530,8 @@ public class RmqcWrapperTests
         // arrange
         var m = new RmqcMessage();
         _rmqcCoreMock.Setup(x => x.AckMsg(ref m, out It.Ref<Exception?>.IsAny)).Returns(true)
-            .Raises(x => x.AckMsgCompleted += null, new AckMsgCompletedEventArgs(true, null, TimeSpan.Zero, m.DeliveryTag));
+            .Raises(x => x.AckMsgCompleted += null,
+                new AckMsgCompletedEventArgs(true, null, TimeSpan.Zero, m.DeliveryTag));
 
         // act
         var evt = Assert.Raises<AckMsgCompletedEventArgs>(
@@ -546,12 +546,12 @@ public class RmqcWrapperTests
         evt.Arguments.Exception.Should().BeNull();
         evt.Arguments.CompletionTime.Should().NotBeNull();
         evt.Arguments.DeliveryTag.Should().Be(m.DeliveryTag);
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.AckMsg(ref It.Ref<RmqcMessage>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the NackMsg method. (Test 1)
+    ///     Testes the NackMsg method. (Test 1)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_NackMsgTest1()
@@ -561,17 +561,17 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.NackMsg(ref m, false, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.NackMsg(ref m, false, out var resExc); 
-        
+        var res = _sut.NackMsg(ref m, false, out var resExc);
+
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.NackMsg(ref It.Ref<RmqcMessage>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the NackMsg method. (Test 2)
+    ///     Testes the NackMsg method. (Test 2)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_NackMsgTest2()
@@ -581,17 +581,17 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.NackMsg(ref m, false, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.NackMsg(ref m, false, out var resExc); 
-        
+        var res = _sut.NackMsg(ref m, false, out var resExc);
+
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.NackMsg(ref It.Ref<RmqcMessage>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the NackMsg method. (Test 3)
+    ///     Testes the NackMsg method. (Test 3)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_NackMsgTest3()
@@ -599,7 +599,8 @@ public class RmqcWrapperTests
         // arrange
         var m = new RmqcMessage();
         _rmqcCoreMock.Setup(x => x.NackMsg(ref m, false, out It.Ref<Exception?>.IsAny)).Returns(true)
-            .Raises(x => x.NAckMsgComplete += null, new NackMsgCompletedEventArgs(true, null, TimeSpan.Zero, m.DeliveryTag));
+            .Raises(x => x.NAckMsgComplete += null,
+                new NackMsgCompletedEventArgs(true, null, TimeSpan.Zero, m.DeliveryTag));
 
 
         // act
@@ -617,12 +618,12 @@ public class RmqcWrapperTests
         evt.Arguments.Exception.Should().BeNull();
         evt.Arguments.CompletionTime.Should().NotBeNull();
         evt.Arguments.DeliveryTag.Should().Be(m.DeliveryTag);
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.NackMsg(ref It.Ref<RmqcMessage>.IsAny, false, out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the WaitForWriteConfirm method. (Test 1)
+    ///     Testes the WaitForWriteConfirm method. (Test 1)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_WaitForWriteConfirmTest1()
@@ -632,16 +633,16 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.WaitForWriteConfirm(t, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.WaitForWriteConfirm(t); 
-        
+        var res = _sut.WaitForWriteConfirm(t);
+
         // assert
         res.Should().BeTrue();
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.WaitForWriteConfirm(It.IsAny<TimeSpan>(), out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the WaitForWriteConfirm method. (Test 2)
+    ///     Testes the WaitForWriteConfirm method. (Test 2)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_WaitForWriteConfirmTest2()
@@ -651,17 +652,17 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.WaitForWriteConfirm(t, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.WaitForWriteConfirm(t, out var resExc); 
-        
+        var res = _sut.WaitForWriteConfirm(t, out var resExc);
+
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.WaitForWriteConfirm(It.IsAny<TimeSpan>(), out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the QueuedMsgs method. (Test 1)
+    ///     Testes the QueuedMsgs method. (Test 1)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_QueuedMsgsTest1()
@@ -671,36 +672,36 @@ public class RmqcWrapperTests
         _rmqcCoreMock.Setup(x => x.QueuedMsgs(out a, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.QueuedMsgs(out a); 
-        
+        var res = _sut.QueuedMsgs(out a);
+
         // assert
         res.Should().BeTrue();
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.QueuedMsgs(out It.Ref<uint?>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the QueuedMsgs method. (Test 2)
+    ///     Testes the QueuedMsgs method. (Test 2)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_QueuedMsgsTest2()
     {
         // arrange
-       uint? a = 0;
+        uint? a = 0;
         _rmqcCoreMock.Setup(x => x.QueuedMsgs(out a, out It.Ref<Exception?>.IsAny)).Returns(true);
 
         // act
-        var res = _sut.QueuedMsgs(out a, out var resExc); 
-        
+        var res = _sut.QueuedMsgs(out a, out var resExc);
+
         // assert
         res.Should().BeTrue();
         resExc.Should().BeNull();
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.QueuedMsgs(out It.Ref<uint?>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
-    
+
     /// <summary>
-    /// Testes the QueuedMsgs method. (Test 3)
+    ///     Testes the QueuedMsgs method. (Test 3)
     /// </summary>
     [Fact]
     public void RmqcWrapperTest_QueuedMsgsTest3()
@@ -708,7 +709,7 @@ public class RmqcWrapperTests
         // arrange
         uint? a = 0;
         _rmqcCoreMock.Setup(x => x.QueuedMsgs(out a, out It.Ref<Exception?>.IsAny)).Returns(true)
-            .Raises(x => x.QueuedMsgsCompleted += null, new QueuedMsgsCompletedEventArgs(true, null, TimeSpan.Zero, amount: a));
+            .Raises(x => x.QueuedMsgsCompleted += null, new QueuedMsgsCompletedEventArgs(true, null, TimeSpan.Zero, a));
 
 
         // act
@@ -724,12 +725,11 @@ public class RmqcWrapperTests
         evt.Arguments.Exception.Should().BeNull();
         evt.Arguments.CompletionTime.Should().NotBeNull();
         evt.Arguments.Amount.Should().Be(a);
-        _rmqcCoreMock.Verify(x => 
+        _rmqcCoreMock.Verify(x =>
             x.QueuedMsgs(out It.Ref<uint?>.IsAny, out It.Ref<Exception?>.IsAny), Times.Once);
     }
 
     #endregion
-    
+
     #endregion
 }
-    

@@ -3,7 +3,7 @@
 namespace jjm.one.RabbitMqClientWrapper.types;
 
 /// <summary>
-/// This class defines the settings for a client connection to a RabbitMQ server.
+///     This class defines the settings for a client connection to a RabbitMQ server.
 /// </summary>
 public class RmqcSettings
 {
@@ -22,9 +22,8 @@ public class RmqcSettings
     #region public members
 
     /// <summary>
-    /// The hostname of the RabbitMQ server.
-    ///
-    /// default value: localhost
+    ///     The hostname of the RabbitMQ server.
+    ///     default value: localhost
     /// </summary>
     public virtual string Hostname
     {
@@ -33,9 +32,8 @@ public class RmqcSettings
     }
 
     /// <summary>
-    /// The port of the RabbitMQ server.
-    ///
-    /// default value: 5672
+    ///     The port of the RabbitMQ server.
+    ///     default value: 5672
     /// </summary>
     public virtual int Port
     {
@@ -44,9 +42,8 @@ public class RmqcSettings
     }
 
     /// <summary>
-    /// The username of a RabbitMQ server user.
-    ///
-    /// default value: guest
+    ///     The username of a RabbitMQ server user.
+    ///     default value: guest
     /// </summary>
     public virtual string Username
     {
@@ -55,9 +52,8 @@ public class RmqcSettings
     }
 
     /// <summary>
-    /// The password of a RabbitMQ server user.
-    ///
-    /// default value: guest
+    ///     The password of a RabbitMQ server user.
+    ///     default value: guest
     /// </summary>
     public virtual string Password
     {
@@ -66,9 +62,8 @@ public class RmqcSettings
     }
 
     /// <summary>
-    /// The virtual host at the RabbitMQ server.
-    ///
-    /// default value: /
+    ///     The virtual host at the RabbitMQ server.
+    ///     default value: /
     /// </summary>
     public virtual string VirtualHost
     {
@@ -77,9 +72,8 @@ public class RmqcSettings
     }
 
     /// <summary>
-    /// The exchange at the RabbitMQ server.
-    ///
-    /// default value: amq.direct
+    ///     The exchange at the RabbitMQ server.
+    ///     default value: amq.direct
     /// </summary>
     public virtual string Exchange
     {
@@ -88,9 +82,8 @@ public class RmqcSettings
     }
 
     /// <summary>
-    /// The queue at the RabbitMQ server.
-    /// 
-    /// default value: ""
+    ///     The queue at the RabbitMQ server.
+    ///     default value: ""
     /// </summary>
     public virtual string Queue
     {
@@ -103,7 +96,7 @@ public class RmqcSettings
     #region ctor's
 
     /// <summary>
-    /// The default constructor of the <see cref="RmqcSettings"/> class.
+    ///     The default constructor of the <see cref="RmqcSettings" /> class.
     /// </summary>
     public RmqcSettings()
     {
@@ -117,7 +110,7 @@ public class RmqcSettings
     }
 
     /// <summary>
-    /// The parameterized constructor of the <see cref="RmqcSettings"/> class.
+    ///     The parameterized constructor of the <see cref="RmqcSettings" /> class.
     /// </summary>
     /// <param name="hostname">The hostname of the RabbitMQ server.</param>
     /// <param name="port">The port of the RabbitMQ server.</param>
@@ -126,7 +119,7 @@ public class RmqcSettings
     /// <param name="virtualHost">The virtual host at the RabbitMQ server.</param>
     /// <param name="exchange">The exchange at the RabbitMQ server.</param>
     /// <param name="queue">The queue at the RabbitMQ server.</param>
-    public RmqcSettings(string? hostname = null , int? port = null, string? username = null, string? password = null,
+    public RmqcSettings(string? hostname = null, int? port = null, string? username = null, string? password = null,
         string? virtualHost = null, string? exchange = null, string? queue = null)
     {
         _hostname = hostname;
@@ -143,10 +136,13 @@ public class RmqcSettings
     #region public overide
 
     /// <summary>
-    /// Determines whether the specified object is equal to the current <see cref="RmqcSettings"/> object.
+    ///     Determines whether the specified object is equal to the current <see cref="RmqcSettings" /> object.
     /// </summary>
     /// <param name="obj">The specified object.</param>
-    /// <returns><see langword="true"/> if the specified object is equal to the current object, otherwise, <see langword="false"/>.</returns>
+    /// <returns>
+    ///     <see langword="true" /> if the specified object is equal to the current object, otherwise,
+    ///     <see langword="false" />.
+    /// </returns>
     public override bool Equals(object? obj)
     {
         //Check for null and compare run-time types.
@@ -154,28 +150,26 @@ public class RmqcSettings
         {
             return false;
         }
-        else
-        {
-            var s = (RmqcSettings)obj;
 
-            var res = true;
+        var s = (RmqcSettings)obj;
 
-            res &= Hostname.Equals(s.Hostname);
-            res &= Port.Equals(s.Port);
-            res &= Username.Equals(s.Username);
-            res &= Password.Equals(s.Password);
-            res &= VirtualHost.Equals(s.VirtualHost);
-            res &= Exchange.Equals(s.Exchange);
-            res &= Queue.Equals(s.Queue);
-            
-            return res;
-        }
+        var res = true;
+
+        res &= Hostname.Equals(s.Hostname);
+        res &= Port.Equals(s.Port);
+        res &= Username.Equals(s.Username);
+        res &= Password.Equals(s.Password);
+        res &= VirtualHost.Equals(s.VirtualHost);
+        res &= Exchange.Equals(s.Exchange);
+        res &= Queue.Equals(s.Queue);
+
+        return res;
     }
 
     /// <summary>
-    /// Serves as the default hash function for the <see cref="RmqcSettings"/> class.
+    ///     Serves as the default hash function for the <see cref="RmqcSettings" /> class.
     /// </summary>
-    /// <returns>A hash code for the current <see cref="RmqcSettings"/> object.</returns>
+    /// <returns>A hash code for the current <see cref="RmqcSettings" /> object.</returns>
     public override int GetHashCode()
     {
         var hashCode = 655511358;

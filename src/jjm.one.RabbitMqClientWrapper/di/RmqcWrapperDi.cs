@@ -6,12 +6,12 @@ using Microsoft.Extensions.DependencyInjection;
 namespace jjm.one.RabbitMqClientWrapper.di;
 
 /// <summary>
-/// This class contains function for dependency injection of the <see cref="RmqcWrapper"/> class.
+///     This class contains function for dependency injection of the <see cref="RmqcWrapper" /> class.
 /// </summary>
 public static class RmqcWrapperDi
 {
     /// <summary>
-    /// Adds all dependencies ot the <see cref="RmqcWrapper"/> class to a <see cref="ServiceCollection"/>.
+    ///     Adds all dependencies ot the <see cref="RmqcWrapper" /> class to a <see cref="ServiceCollection" />.
     /// </summary>
     /// <param name="services"></param>
     /// <param name="settings"></param>
@@ -24,4 +24,3 @@ public static class RmqcWrapperDi
         return services;
     }
 }
-

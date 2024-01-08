@@ -3,7 +3,7 @@
 namespace jjm.one.RabbitMqClientWrapper.Tests.types;
 
 /// <summary>
-/// This class contains the unit tests for the <see cref="RmqcSettings"/> class.
+///     This class contains the unit tests for the <see cref="RmqcSettings" /> class.
 /// </summary>
 public class SettingsTests
 {
@@ -12,7 +12,7 @@ public class SettingsTests
     #region ctor tests
 
     /// <summary>
-    /// Tests the default constructor of the <see cref="RmqcSettings"/> class.
+    ///     Tests the default constructor of the <see cref="RmqcSettings" /> class.
     /// </summary>
     [Fact]
     public void SettingsTest_DefaultCtorTest()
@@ -29,12 +29,12 @@ public class SettingsTests
     }
 
     /// <summary>
-    /// Tests the constructor of the <see cref="RmqcSettings"/> class with <see langword="null"/> as inputs.
+    ///     Tests the constructor of the <see cref="RmqcSettings" /> class with <see langword="null" /> as inputs.
     /// </summary>
     [Fact]
     public void SettingsTest_CtorNullTest()
     {
-        var s = new RmqcSettings(null, null, null, null, null, null ,null);
+        var s = new RmqcSettings(null);
 
         Assert.Equal("localhost", s.Hostname);
         Assert.Equal(5672, s.Port);
@@ -46,7 +46,7 @@ public class SettingsTests
     }
 
     /// <summary>
-    /// Tests the constructor of the <see cref="RmqcSettings"/> class.
+    ///     Tests the constructor of the <see cref="RmqcSettings" /> class.
     /// </summary>
     [Fact]
     public void SettingsTest_CtorTest()
@@ -65,9 +65,9 @@ public class SettingsTests
     #endregion
 
     #region public override tests
-    
+
     /// <summary>
-    /// Tests the Equals method of the <see cref="RmqcSettings"/> class.
+    ///     Tests the Equals method of the <see cref="RmqcSettings" /> class.
     /// </summary>
     [Fact]
     public void SettingsTest_Equals()
@@ -81,7 +81,7 @@ public class SettingsTests
     }
 
     /// <summary>
-    /// Tests the GetHashCode method of the <see cref="RmqcSettings"/> class.
+    ///     Tests the GetHashCode method of the <see cref="RmqcSettings" /> class.
     /// </summary>
     [Fact]
     public void SettingsTest_Hash()
@@ -96,9 +96,8 @@ public class SettingsTests
 
         Assert.True(h1.Equals(h2));
         Assert.False(h1.Equals(h3));
-
     }
-    
+
     #endregion
 
     #endregion
