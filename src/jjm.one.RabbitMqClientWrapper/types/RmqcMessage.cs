@@ -22,10 +22,10 @@ public class RmqcMessage
 
     #endregion
 
-    #region private event invokation
+    #region private event invocation
 
     /// <summary>
-    ///     This method invokes the <see cref="Changed" /> envent handlers.
+    ///     This method invokes the <see cref="Changed" /> event handlers.
     /// </summary>
     /// <param name="changedMembers"></param>
     private void OnChanged(List<string> changedMembers)

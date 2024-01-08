@@ -589,7 +589,7 @@ internal class RmqcCore : IRmqcCore
         sw.Stop();
 
         // invoke associated event
-        // OnConnectCompleted(new ConnectCompletedEventArgs(res, exception, ((int)sw.ElapsedMilliseconds).MillisecondsToTimeSpan()));
+        OnConnectCompleted(new ConnectCompletedEventArgs(res, exception, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)));
 
         // return the result
         return res;
@@ -644,10 +644,10 @@ internal class RmqcCore : IRmqcCore
 
     #endregion
 
-    #region private event invokation
+    #region private event invocation
 
     /// <summary>
-    ///     This method invokes the <see cref="ConnectCompleted" /> envent handlers.
+    ///     This method invokes the <see cref="ConnectCompleted" /> event handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnConnectCompleted(ConnectCompletedEventArgs e)
@@ -660,7 +660,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="DisconnectCompleted" /> envent handlers.
+    ///     This method invokes the <see cref="DisconnectCompleted" /> event handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnDisconnectCompleted(DisconnectCompletedEventArgs e)
@@ -673,7 +673,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="WriteMsgCompleted" /> envent handlers.
+    ///     This method invokes the <see cref="WriteMsgCompleted" /> event handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnWriteMsgCompleted(WriteMsgCompletedEventArgs e)
@@ -686,7 +686,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="ReadMsgCompleted" /> envent handlers.
+    ///     This method invokes the <see cref="ReadMsgCompleted" /> event handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnReadMsgCompleted(ReadMsgCompletedEventArgs e)
@@ -699,7 +699,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="AckMsgCompleted" /> envent handlers.
+    ///     This method invokes the <see cref="AckMsgCompleted" /> event handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnAckMsgCompleted(AckMsgCompletedEventArgs e)
@@ -712,7 +712,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="NAckMsgComplete" /> envent handlers.
+    ///     This method invokes the <see cref="NAckMsgComplete" /> event handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnNackMsgComplete(NackMsgCompletedEventArgs e)
@@ -725,7 +725,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="QueuedMsgsCompleted" /> envent handlers.
+    ///     This method invokes the <see cref="QueuedMsgsCompleted" /> event handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnQueuedMsgsCompleted(QueuedMsgsCompletedEventArgs e)
@@ -738,7 +738,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="ConnectionStateChanged" /> envent handlers.
+    ///     This method invokes the <see cref="ConnectionStateChanged" /> event handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnConnectionStateChanged(ConnectionStatusChangedEventArgs e)
@@ -751,7 +751,7 @@ internal class RmqcCore : IRmqcCore
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="ErrorOccurred" /> envent handlers.
+    ///     This method invokes the <see cref="ErrorOccurred" /> event handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnErrorOccurred(ErrorOccurredEventArgs e)

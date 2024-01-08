@@ -15,10 +15,10 @@ namespace jjm.one.RabbitMqClientWrapper.main;
 /// </summary>
 public class RmqcWrapper : IRmqcWrapper
 {
-    #region private event invokation
+    #region private event invocation
 
     /// <summary>
-    ///     This method invokes the <see cref="ReConnectCompleted" /> envent handlers.
+    ///     This method invokes the <see cref="ReConnectCompleted" /> event handlers.
     /// </summary>
     /// <param name="e"></param>
     private void OnReConnectCompleted(ReConnectCompletedEventArgs e)
@@ -390,7 +390,7 @@ public class RmqcWrapper : IRmqcWrapper
     #region private event callbacks
 
     /// <summary>
-    ///     This method invokes the <see cref="ConnectCompleted" /> envent handlers.
+    ///     This method invokes the <see cref="ConnectCompleted" /> event handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -404,7 +404,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="DisconnectCompleted" /> envent handlers.
+    ///     This method invokes the <see cref="DisconnectCompleted" /> event handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -418,7 +418,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="WriteMsgCompleted" /> envent handlers.
+    ///     This method invokes the <see cref="WriteMsgCompleted" /> event handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -432,7 +432,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="ReadMsgCompleted" /> envent handlers.
+    ///     This method invokes the <see cref="ReadMsgCompleted" /> event handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -446,7 +446,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="AckMsgCompleted" /> envent handlers.
+    ///     This method invokes the <see cref="AckMsgCompleted" /> event handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -460,7 +460,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="NAckMsgComplete" /> envent handlers.
+    ///     This method invokes the <see cref="NAckMsgComplete" /> event handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -474,7 +474,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="QueuedMsgsCompleted" /> envent handlers.
+    ///     This method invokes the <see cref="QueuedMsgsCompleted" /> event handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -488,7 +488,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="ConnectionStateChanged" /> envent handlers.
+    ///     This method invokes the <see cref="ConnectionStateChanged" /> event handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -502,7 +502,7 @@ public class RmqcWrapper : IRmqcWrapper
     }
 
     /// <summary>
-    ///     This method invokes the <see cref="ErrorOccurred" /> envent handlers.
+    ///     This method invokes the <see cref="ErrorOccurred" /> event handlers.
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
