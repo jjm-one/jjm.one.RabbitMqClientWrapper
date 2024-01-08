@@ -2,7 +2,6 @@ using jjm.one.RabbitMqClientWrapper.di;
 using jjm.one.RabbitMqClientWrapper.main;
 using jjm.one.RabbitMqClientWrapper.types;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace jjm.one.RabbitMqClientWrapper.Tests.di;
 
@@ -11,40 +10,30 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.di;
 /// </summary>
 public class RmqcWrapperDiTests
 {
-    #region private members
-
-    private readonly IHostBuilder _hostBuilder;
-
-    #endregion
-
-    #region ctor
-
-    /// <summary>
-    ///     The default constructor of the <see cref="RmqcWrapperDiTests" /> class.
-    /// </summary>
-    public RmqcWrapperDiTests()
-    {
-        _hostBuilder = Host.CreateDefaultBuilder();
-    }
-
-    #endregion
-
     #region tests
 
     /// <summary>
-    ///     Tests the static AddRmqcCore function.
+    /// This test checks if the AddRmqcWrapper method correctly adds the IRmqcWrapper service to the service collection.
     /// </summary>
     [Fact]
-    public void RmqcWrapperDiTest_AddRmqcWrapperTest()
+    public void AddRmqcWrapper_ShouldAddServicesCorrectly()
     {
-        // arrange + act
-        _hostBuilder.ConfigureServices(services =>
-            services.AddRmqcWrapper(new RmqcSettings()));
-        var host = _hostBuilder.Build();
+        // Arrange
+        var services = new ServiceCollection();
+        var settings = new RmqcSettings();
 
-        // assert
-        host.Services.GetService<RmqcSettings>().Should().NotBeNull();
-        host.Services.GetService<IRmqcWrapper>().Should().NotBeNull();
+        // Act
+        services.AddRmqcWrapper(settings);
+        var builtServices = services.BuildServiceProvider();
+
+        // Assert
+        var scopedService = builtServices.GetService<IRmqcWrapper>();
+        scopedService.Should().NotBeNull("because IRmqcWrapper should be registered as a scoped service");
+
+        // Ensure that a new instance is created for each scope
+        using var scope = builtServices.CreateScope();
+        var serviceInNewScope = scope.ServiceProvider.GetService<IRmqcWrapper>();
+        serviceInNewScope.Should().NotBeSameAs(scopedService, "because a new instance should be created for each scope");
     }
 
     #endregion

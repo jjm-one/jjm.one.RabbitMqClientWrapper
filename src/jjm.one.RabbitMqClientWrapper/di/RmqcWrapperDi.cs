@@ -19,7 +19,7 @@ public static class RmqcWrapperDi
     public static IServiceCollection AddRmqcWrapper(this IServiceCollection services, RmqcSettings settings)
     {
         services.AddRmqcCore(settings);
-        services.AddScoped<IRmqcWrapper>(sp => ActivatorUtilities.CreateInstance<RmqcWrapper>(sp));
+        services.AddScoped<IRmqcWrapper, RmqcWrapper>();
 
         return services;
     }

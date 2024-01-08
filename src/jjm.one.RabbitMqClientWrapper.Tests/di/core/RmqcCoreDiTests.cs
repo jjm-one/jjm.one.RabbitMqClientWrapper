@@ -2,7 +2,6 @@ using jjm.one.RabbitMqClientWrapper.di.core;
 using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace jjm.one.RabbitMqClientWrapper.Tests.di.core;
 
@@ -11,40 +10,33 @@ namespace jjm.one.RabbitMqClientWrapper.Tests.di.core;
 /// </summary>
 public class RmqcCoreDiTests
 {
-    #region private members
-
-    private readonly IHostBuilder _hostBuilder;
-
-    #endregion
-
-    #region ctor
-
-    /// <summary>
-    ///     The default constructor of the <see cref="RmqcCoreDiTests" /> class.
-    /// </summary>
-    public RmqcCoreDiTests()
-    {
-        _hostBuilder = Host.CreateDefaultBuilder();
-    }
-
-    #endregion
-
     #region tests
 
     /// <summary>
-    ///     Tests the static AddRmqcCore function.
+    /// This test checks if the AddRmqcCore method correctly adds the RmqcSettings and IRmqcCore services to the service collection.
     /// </summary>
     [Fact]
-    public void RmqcCoreDiTest_AddRmqcCoreTest()
+    public void AddRmqcCore_ShouldAddServicesCorrectly()
     {
-        // arrange + act
-        _hostBuilder.ConfigureServices(services =>
-            services.AddRmqcCore(new RmqcSettings()));
-        var host = _hostBuilder.Build();
+        // Arrange
+        var services = new ServiceCollection();
+        var settings = new RmqcSettings();
 
-        // assert
-        host.Services.GetService<RmqcSettings>().Should().NotBeNull();
-        host.Services.GetService<IRmqcCore>().Should().NotBeNull();
+        // Act
+        services.AddRmqcCore(settings);
+        var builtServices = services.BuildServiceProvider();
+
+        // Assert
+        var singletonService = builtServices.GetService<RmqcSettings>();
+        singletonService.Should().BeEquivalentTo(settings, "because the settings should be registered as a singleton");
+
+        var scopedService = builtServices.GetService<IRmqcCore>();
+        scopedService.Should().NotBeNull("because IRmqcCore should be registered as a scoped service");
+
+        // Ensure that a new instance is created for each scope
+        using var scope = builtServices.CreateScope();
+        var serviceInNewScope = scope.ServiceProvider.GetService<IRmqcCore>();
+        serviceInNewScope.Should().NotBeSameAs(scopedService, "because a new instance should be created for each scope");
     }
 
     #endregion
