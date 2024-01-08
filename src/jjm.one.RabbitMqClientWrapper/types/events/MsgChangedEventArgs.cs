@@ -18,7 +18,7 @@ public class MsgChangedEventArgs : EventArgs
     /// <param name="changedMembers"></param>
     public MsgChangedEventArgs(List<string>? changedMembers)
     {
-        ChangedMembers = changedMembers ?? new List<string>();
+        ChangedMembers = changedMembers ?? [];
     }
 
     #endregion
@@ -28,6 +28,7 @@ public class MsgChangedEventArgs : EventArgs
     /// <summary>
     ///     The list of the names of all changed members.
     /// </summary>
+    // ReSharper disable once UnusedAutoPropertyAccessor.Global
     public List<string> ChangedMembers { get; set; }
 
     #endregion

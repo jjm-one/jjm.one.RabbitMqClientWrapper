@@ -238,7 +238,7 @@ public class RmqcMessage
 
             _wasModified = value;
 
-            OnChanged(new List<string> { "This information is currently not supported!" });
+            OnChanged(["This information is currently not supported!"]);
         }
     }
 

@@ -146,10 +146,7 @@ public class RmqcSettings
     public override bool Equals(object? obj)
     {
         //Check for null and compare run-time types.
-        if (obj == null || GetType() != obj.GetType())
-        {
-            return false;
-        }
+        if (obj == null || GetType() != obj.GetType()) return false;
 
         var s = (RmqcSettings)obj;
 

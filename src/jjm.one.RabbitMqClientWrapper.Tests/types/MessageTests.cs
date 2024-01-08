@@ -149,7 +149,7 @@ public class MessageTests
     }
 
     /// <summary>
-    ///     Tests the setter of the RoutingKey member. (Testm2)
+    ///     Tests the setter of the RoutingKey member. (Test 2)
     /// </summary>
     [Fact]
     public void MessageTest_RoutingKeySetTest2()
@@ -233,7 +233,7 @@ public class MessageTests
     {
         // arrange
         var b = Array.Empty<byte>();
-        ;
+
         var m = new RmqcMessage(
             new BasicGetResult(42, true, "TEST-EX", "TEST-RK", 69,
                 null, null))

@@ -4,7 +4,6 @@ using jjm.one.RabbitMqClientWrapper.main.core;
 using jjm.one.RabbitMqClientWrapper.types;
 using jjm.one.RabbitMqClientWrapper.types.events;
 using Microsoft.Extensions.Logging;
-using Moq;
 
 namespace jjm.one.RabbitMqClientWrapper.Tests.main;
 
@@ -19,16 +18,15 @@ public class RmqcWrapperTests
     public RmqcWrapperTests()
     {
         _rmqcCoreMock = new Mock<IRmqcCore>();
-        _rmqcWrapperLoggingMock = new Mock<ILogger<RmqcWrapper>>();
+        Mock<ILogger<RmqcWrapper>> rmqcWrapperLoggingMock = new();
 
-        _sut = new RmqcWrapper(_rmqcCoreMock.Object, _rmqcWrapperLoggingMock.Object);
+        _sut = new RmqcWrapper(_rmqcCoreMock.Object, rmqcWrapperLoggingMock.Object);
     }
 
     #region private members
 
     private readonly RmqcWrapper _sut;
     private readonly Mock<IRmqcCore> _rmqcCoreMock;
-    private readonly Mock<ILogger<RmqcWrapper>> _rmqcWrapperLoggingMock;
 
     #endregion
 

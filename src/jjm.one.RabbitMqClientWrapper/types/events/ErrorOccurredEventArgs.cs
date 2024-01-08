@@ -27,6 +27,7 @@ public class ErrorOccurredEventArgs : EventArgs
     /// <summary>
     ///     The exception which may have occurred.
     /// </summary>
+    // ReSharper disable once UnusedAutoPropertyAccessor.Global
     public Exception? Exception { get; set; }
 
     #endregion

@@ -9,13 +9,13 @@ namespace jjm.one.RabbitMqClientWrapper.di.core;
 /// </summary>
 internal static class RmqcCoreDi
 {
-	/// <summary>
-	///     Adds all dependencies ot the <see cref="RmqcCore" /> class to a <see cref="ServiceCollection" />.
-	/// </summary>
-	/// <param name="services"></param>
-	/// <param name="settings"></param>
-	/// <returns></returns>
-	public static IServiceCollection AddRmqcCore(this IServiceCollection services, RmqcSettings settings)
+    /// <summary>
+    ///     Adds all dependencies ot the <see cref="RmqcCore" /> class to a <see cref="ServiceCollection" />.
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="settings"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddRmqcCore(this IServiceCollection services, RmqcSettings settings)
     {
         services.AddSingleton(settings);
         services.AddScoped<IRmqcCore>(sp => ActivatorUtilities.CreateInstance<RmqcCore>(sp));

@@ -245,11 +245,8 @@ public class RmqcWrapper : IRmqcWrapper
         var sw = new Stopwatch();
         sw.Start();
 
-        // init output
-        var res = true;
-
         // disconnect
-        res = Disconnect(out exception);
+        var res = Disconnect(out exception);
 
         if (res)
         {

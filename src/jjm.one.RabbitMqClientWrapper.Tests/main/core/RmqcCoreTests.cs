@@ -4,7 +4,6 @@ using jjm.one.RabbitMqClientWrapper.types;
 using jjm.one.RabbitMqClientWrapper.types.events;
 using jjm.one.RabbitMqClientWrapper.types.exceptions;
 using Microsoft.Extensions.Logging;
-using Moq;
 using RabbitMQ.Client;
 
 namespace jjm.one.RabbitMqClientWrapper.Tests.main.core;
@@ -867,7 +866,6 @@ public class RmqcCoreTests
     {
         // arrange
         var bgr = new BasicGetResult(42, false, "TEST-EX", "TEST-RK", 69, null, null);
-        var m = new RmqcMessage(bgr);
         _connectionMock.Setup(x => x.IsOpen).Returns(false);
         _channelMock.Setup(x => x.IsOpen).Returns(false);
         _channelMock.Setup(x => x.BasicGet(It.IsAny<string>(), It.IsAny<bool>())).Returns(bgr);
@@ -891,8 +889,6 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_ReadMsgTest3()
     {
         // arrange
-        var bgr = new BasicGetResult(42, false, "TEST-EX", "TEST-RK", 69, null, null);
-        var m = new RmqcMessage(bgr);
         _connectionMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.BasicGet(It.IsAny<string>(), It.IsAny<bool>())).Returns(value: null!);
@@ -1070,13 +1066,12 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_QueuedMsgsTest1()
     {
         // arrange
-        uint? a = 0;
         _connectionMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.IsOpen).Returns(true);
         _channelMock.Setup(x => x.MessageCount(It.IsAny<string>())).Returns(42);
 
         // act
-        var res = _sut.QueuedMsgs(out a, out var resExc);
+        var res = _sut.QueuedMsgs(out var a, out var resExc);
 
         // assert
         _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
@@ -1094,13 +1089,12 @@ public class RmqcCoreTests
     public void RmqcWrapperTest_QueuedMsgsTest2()
     {
         // arrange
-        uint? a = 0;
         _connectionMock.Setup(x => x.IsOpen).Returns(false);
         _channelMock.Setup(x => x.IsOpen).Returns(false);
         _channelMock.Setup(x => x.MessageCount(It.IsAny<string>())).Returns(42);
 
         // act
-        var res = _sut.QueuedMsgs(out a, out var resExc);
+        var res = _sut.QueuedMsgs(out var a, out var resExc);
 
         // assert
         _connectionMock.Verify(x => x.IsOpen, Times.AtMostOnce);
