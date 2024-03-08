@@ -4,7 +4,7 @@
         <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version>1.0.0-alpha.8</Version>
+        <Version>2.0.0-alpha.0</Version>
         <Authors>Jonas Merkle [JJM]</Authors>
         <Copyright>© by Jonas Merkle [JJM], 2024.</Copyright>
         <RootNamespace>jjm.one.RabbitMqClientWrapper.Tests</RootNamespace>
@@ -29,18 +29,18 @@
 
     <ItemGroup>
         <PackageReference Include="FluentAssertions" Version="6.12.0"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
         <PackageReference Include="Moq" Version="4.20.70"/>
-        <PackageReference Include="xunit" Version="2.6.5"/>
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.5.6">
+        <PackageReference Include="xunit" Version="2.7.0" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.5.7">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="coverlet.collector" Version="6.0.0">
+        <PackageReference Include="coverlet.collector" Version="6.0.1">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.8.0"/>
+        <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.9.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0"/>
     </ItemGroup>
 
