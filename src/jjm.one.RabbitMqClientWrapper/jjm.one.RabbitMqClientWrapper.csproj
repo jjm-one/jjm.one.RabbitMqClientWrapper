@@ -16,15 +16,16 @@
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/jjm-one/jjm.one.RabbitMqClientWrapper.git</RepositoryUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageLicenseFile>COPYING.LESSER.txt</PackageLicenseFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <SignAssembly>True</SignAssembly>
         <AssemblyOriginatorKeyFile>jjm.one.RabbitMqClientWrapper.SignKey.snk</AssemblyOriginatorKeyFile>
+        <PackageIcon>jjm.one-logo_1024x1024.png</PackageIcon>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="jjm.one.Microsoft.Extensions.Logging.Helpers" Version="1.2.4"/>
+        <PackageReference Include="jjm.one.Microsoft.Extensions.Logging.Helpers" Version="2.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0"/>
         <PackageReference Include="RabbitMQ.Client" Version="6.8.1"/>
     </ItemGroup>
@@ -37,15 +38,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\..\COPYING.txt">
-            <Pack>True</Pack>
-            <PackagePath>\</PackagePath>
-        </None>
-        <None Include="..\..\COPYING.LESSER.txt">
+        <None Include="..\..\LICENSE">
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
         <None Include="..\..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="..\..\resources\logo\jjm.one-logo_1024x1024.png">
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
